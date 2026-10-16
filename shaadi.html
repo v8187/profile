@@ -156,6 +156,9 @@
       .grid.three {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+      .grid.four {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
       .grid > .fields-group-wrapper {
         grid-column: 1 / -1;
         margin: 0;
@@ -163,7 +166,7 @@
       .multiple-groups-row {
         grid-column: 1 / -1;
         display: grid;
-        grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
+        grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
         gap: 16px 18px;
       }
       .multiple-groups-row > .fields-group-wrapper {
@@ -190,21 +193,28 @@
       }
       .fields-group {
         display: grid;
-        grid-template-columns: 112px 150px 112px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 0;
       }
       .fields-group.date {
-        grid-template-columns: 90px 110px 90px;
+        /* grid-template-columns: 90px 110px 90px; */
+        grid-template-columns: repeat(3, minmax(0, 0.338fr));
       }
       .fields-group.time {
-        grid-template-columns: 90px 110px 110px 100px;
+        /* grid-template-columns: 90px 110px 110px 100px; */
+        grid-template-columns: repeat(4, minmax(0, 0.25fr));
       }
       .fields-group.location {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
       .fields-group.marital {
-        grid-template-columns: auto 140px 140px;
+        /* grid-template-columns: auto 140px 140px; */
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+      .fields-group.manglikZodiacSigns {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
       .fields-group .field {
         position: relative;
       }
@@ -391,6 +401,9 @@
         .profile-grid {
           grid-template-columns: 1fr;
         }
+        .grid.four {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
         .privacy {
           width: 100%;
           margin-left: 0;
@@ -542,61 +555,62 @@
                   placeholder="Enter Name"
                 />
               </div>
-              <div class="field">
-                <label for="gender" data-label="gender"
-                  >Gender <span class="req">*</span></label
-                ><select id="gender" name="gender" required></select>
-              </div>
-              <div class="field">
-                <label for="religion" data-label="religion">Religion</label
-                ><select id="religion" name="religion"></select>
-              </div>
-              <div class="multiple-groups-row">
+              <div class="grid three" style="grid-column: 1 / -1">
                 <div class="field">
-                  <label for="manglik" data-label="manglik">Manglik</label
-                  ><select id="manglik" name="manglik" required></select>
+                  <label for="gender" data-label="gender"
+                    >Gender <span class="req">*</span></label
+                  ><select id="gender" name="gender" required></select>
                 </div>
-                <fieldset class="fields-group-wrapper">
-                  <legend
-                    class="fields-group-wrapper-title"
-                    data-label="maritalAndChildren"
-                  >
-                    Marital status and children
-                  </legend>
-                  <div class="fields-group marital" id="maritalFields">
-                    <div class="field">
-                      <!-- <label for="maritalStatus" data-label="maritalStatus"
+                <div class="field">
+                  <label for="category" data-label="category">category</label
+                  ><select id="category" name="category"></select>
+                </div>
+                <div class="field">
+                  <label for="religion" data-label="religion">Religion</label
+                  ><select id="religion" name="religion"></select>
+                </div>
+              </div>
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
+                  data-label="maritalAndChildren"
+                >
+                  Marital status and children
+                </legend>
+                <div class="fields-group marital" id="maritalFields">
+                  <div class="field">
+                    <!-- <label for="maritalStatus" data-label="maritalStatus"
                         >Marital status <span class="req">*</span></label
                       > -->
-                      <select
-                        id="maritalStatus"
-                        name="maritalStatus"
-                        required
-                      ></select>
-                    </div>
-                    <div class="field" id="girlsWrap">
-                      <!-- <label for="childrenGirls" data-label="childrenGirls"
+                    <select
+                      id="maritalStatus"
+                      name="maritalStatus"
+                      required
+                    ></select>
+                  </div>
+                  <div class="field" id="girlsWrap">
+                    <!-- <label for="childrenGirls" data-label="childrenGirls"
                         >Children - Girls<span class="req">*</span></label
                       > -->
-                      <select
-                        id="childrenGirls"
-                        name="childrenGirls"
-                        required
-                      ></select>
-                    </div>
-                    <div class="field" id="boysWrap">
-                      <!-- <label for="childrenBoys" data-label="childrenBoys"
+                    <select
+                      id="childrenGirls"
+                      name="childrenGirls"
+                      required
+                    ></select>
+                  </div>
+                  <div class="field" id="boysWrap">
+                    <!-- <label for="childrenBoys" data-label="childrenBoys"
                         >Children - Boys<span class="req">*</span></label
                       > -->
-                      <select
-                        id="childrenBoys"
-                        name="childrenBoys"
-                        required
-                      ></select>
-                    </div>
+                    <select
+                      id="childrenBoys"
+                      name="childrenBoys"
+                      required
+                    ></select>
                   </div>
-                </fieldset>
-              </div>
+                </div>
+              </fieldset>
+
               <fieldset class="fields-group-wrapper">
                 <legend
                   class="fields-group-wrapper-title"
@@ -767,6 +781,25 @@
               <fieldset class="fields-group-wrapper">
                 <legend
                   class="fields-group-wrapper-title"
+                  data-label="manglikZodiacSigns"
+                >
+                  Manglik Status & Zodiac Signs
+                </legend>
+                <div class="fields-group manglikZodiacSigns">
+                  <div class="field">
+                    <select id="manglik" name="manglik" required></select>
+                  </div>
+                  <div class="field">
+                    <select id="sunSign" name="sunSign"></select>
+                  </div>
+                  <div class="field">
+                    <select id="moonSign" name="moonSign"></select>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
                   data-label="casteGotra"
                 >
                   Place of birth
@@ -841,13 +874,18 @@
             <div class="section-head">
               <div class="step">4</div>
               <div>
-                <h2 id="secFamily">Family & personal information</h2>
+                <h2 id="secFamily">Family Details</h2>
                 <!-- <p id="subFamily">
                   Share only what you feel comfortable including.
                 </p> -->
               </div>
             </div>
-            <div class="grid">
+            <div class="grid three">
+              <div class="field">
+                <label for="familyType" data-label="familyType"
+                  >Family type</label
+                ><select id="familyType" name="familyType"></select>
+              </div>
               <div class="field">
                 <label for="mother" data-label="mother">Mother</label
                 ><input
@@ -866,20 +904,35 @@
                   placeholder="Name, occupation or other details"
                 />
               </div>
-              <div class="field">
-                <label for="siblings" data-label="siblings">Siblings</label
-                ><input
-                  id="siblings"
-                  name="siblings"
-                  data-placeholder="siblings"
-                  placeholder="e.g. 1 brother, 1 sister"
-                />
+            </div>
+            <fieldset class="fields-group-wrapper">
+              <!-- <legend class="fields-group-wrapper-title" data-label="siblings">
+                Siblings
+              </legend> -->
+              <div class="grid four">
+                <div class="field">
+                  <label for="brothers" data-label="brothers"
+                    >No. of Brothers</label
+                  ><select id="brothers" name="brothers"></select>
+                </div>
+                <div class="field">
+                  <label for="marriedBrothers" data-label="marriedBrothers"
+                    >Married Brothers</label
+                  ><select id="marriedBrothers" name="marriedBrothers"></select>
+                </div>
+                <div class="field">
+                  <label for="sisters" data-label="sisters"
+                    >No. of Sisters</label
+                  ><select id="sisters" name="sisters"></select>
+                </div>
+                <div class="field">
+                  <label for="marriedSisters" data-label="marriedSisters"
+                    >Married Sisters</label
+                  ><select id="marriedSisters" name="marriedSisters"></select>
+                </div>
               </div>
-              <div class="field">
-                <label for="familyType" data-label="familyType"
-                  >Family type</label
-                ><select id="familyType" name="familyType"></select>
-              </div>
+            </fieldset>
+            <div class="grid">
               <div class="field">
                 <label for="education" data-label="education">Education</label
                 ><input
@@ -976,7 +1029,74 @@
           alert("Helo");
         });
         const $ = (id) => document.getElementById(id);
-        const translations = {
+        /**   
+Aries	मेष	ਮੇਸ਼	♈
+Taurus	वृषभ	ਵ੍ਰਿਸ਼ਭ	♉
+Gemini	मिथुन	ਮਿਥੁਨ	♊
+Cancer	कर्क	ਕਰਕ	♋
+Leo	सिंह	ਸਿੰਘ	♌
+Virgo	कन्या	ਕੰਨਿਆ	♍
+Libra	तुला	ਤੁਲਾ	♎
+Scorpio	वृश्चिक	ਵ੍ਰਿਸ਼ਚਿਕ	♏
+Sagittarius	धनु	ਧਨੁ	♐
+Capricorn	मकर	ਮਕਰ	♑
+Aquarius	कुम्भ	ਕੁੰਭ	♒
+Pisces	मीन	ਮੀਨ	♓
+    * */
+        const commonTrans = {
+          en: {
+            commonOptions: ["Others", "Prefer not to say"],
+            zodiacSigns: [
+              "Aries",
+              "Taurus",
+              "Gemini",
+              "Cancer",
+              "Leo",
+              "Virgo",
+              "Libra",
+              "Scorpio",
+              "Sagittarius",
+              "Capricorn",
+              "Aquarius",
+              "Pisces",
+            ],
+          },
+          hi: {
+            commonOptions: ["अन्य", "बताना नहीं चाहते"],
+            zodiacSigns: [
+              "मेष",
+              "वृषभ",
+              "मिथुन",
+              "कर्क",
+              "सिंह",
+              "कन्या",
+              "तुला",
+              "वृश्चिक",
+              "धनु",
+              "मकर",
+              "कुम्भ",
+              "मीन",
+            ],
+          },
+          pa: {
+            commonOptions: ["ਹੋਰ", "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ"],
+            zodiacSigns: [
+              "ਮੇਸ਼",
+              "ਵ੍ਰਿਸ਼ਭ",
+              "ਮਿਥੁਨ",
+              "ਕਰਕ",
+              "ਸਿੰਘ",
+              "ਕੰਨਿਆ",
+              "ਤੁਲਾ",
+              "ਵ੍ਰਿਸ਼ਚਿਕ",
+              "ਧਨੁ",
+              "ਮਕਰ",
+              "ਕੁੰਭ",
+              "ਮੀਨ",
+            ],
+          },
+        };
+        const trans = {
           en: {
             brandTitle: "Matrimonial Profile Maker — Free & Private",
             heroTitle: "Your story, thoughtfully presented.",
@@ -992,7 +1112,7 @@
             secPerInfo: "Personal Information",
             secLocation: "Current location",
             subLocation: "Your present city and state are required.",
-            secFamily: "Family & personal information",
+
             subFamily: "Share only what you feel comfortable including.",
             name: "Name",
             namePlaceholder: "Enter Name",
@@ -1006,21 +1126,19 @@
               "Sister",
               "Relative",
               "Friend",
-              "Others",
+              ...commonTrans.en.commonOptions,
             ],
             gender: "Gender",
             genderSelect: "Select gender",
-            genderOptions: ["Male", "Female", "Others", "Prefer not to say"],
-            manglik: "Manglik",
-            manglikSelect: "Select Manglik",
-            manglikOptions: [
-              "Non-Manglik",
-              "Manglik",
-              "Anshik Manglik",
-              "High Manglik",
-              "Don't Know",
-              "Doesn't Matter",
-              "Prefer not to say",
+            genderOptions: ["Male", "Female", ...commonTrans.en.commonOptions],
+            category: "Category",
+            categorySelect: "Select category",
+            categoryOptions: [
+              "General / Unreserved category",
+              "Other Backward Classes (OBC)",
+              "Scheduled Castes (SC)",
+              "Scheduled Tribes (ST)",
+              ...commonTrans.en.commonOptions,
             ],
             maritalStatus: "Marital status",
             maritalStatusSelect: "Select marital status",
@@ -1058,10 +1176,28 @@
             birthCityPlaceholder: "City",
             birthStatePlaceholder: "State",
             birthCountryPlaceholder: "Country",
+            manglikZodiacSigns: "Manglik Status & Zodiac Signs",
+            manglik: "Manglik status",
+            manglikSelect: "Select Manglik status",
+            manglikOptions: [
+              "Non-Manglik",
+              "Manglik",
+              "Anshik Manglik",
+              "High Manglik",
+              "Don't Know",
+              "Doesn't Matter",
+              "Prefer not to say",
+            ],
+            sunSign: "Sun Sign",
+            sunSignSelect: "Select Sun Sign",
+            sunSignOptions: [...commonTrans.en.zodiacSigns],
+            moonSign: "Moon Sign",
+            moonSignSelect: "Select Moon Sign",
+            moonSignOptions: [...commonTrans.en.zodiacSigns],
             currentCityPlaceholder: "City",
             currentStatePlaceholder: "State",
             currentCountryPlaceholder: "Country",
-            casteGotra: "Caste / Sub-Caste / Gotra",
+            casteGotra: "Caste & Gotra",
             castePlaceholder: "Caste",
             subCastePlaceholder: "Sub Caste",
             gotraPlaceholder: "Gotra",
@@ -1074,8 +1210,7 @@
               "Jain",
               "Eggetarian",
               "Non-vegetarian",
-              "Others",
-              "Prefer not to say",
+              ...commonTrans.en.commonOptions,
             ],
             smoking: "Smoking Habits",
             smokingSelect: "Select Smoking Habits",
@@ -1083,8 +1218,7 @@
               "Non-Smoker",
               "Smoker",
               "Occasional Smoker",
-              "Others",
-              "Prefer not to say",
+              ...commonTrans.en.commonOptions,
             ],
             drinking: "Drinking Habits",
             drinkingSelect: "Select Drinking Habits",
@@ -1092,8 +1226,7 @@
               "Non-Drinker",
               "Drinker",
               "Occasional Drinker",
-              "Others",
-              "Prefer not to say",
+              ...commonTrans.en.commonOptions,
             ],
             religion: "Religion",
             religionSelect: "Select Religion",
@@ -1107,8 +1240,7 @@
               "Parsi / Zoroastrianism",
               "No Religion",
               "Spiritual",
-              "Others",
-              "Prefer not to say",
+              ...commonTrans.en.commonOptions,
             ],
             skinTone: "Skin Tone",
             skinToneSelect: "Select Skin Tone",
@@ -1118,8 +1250,7 @@
               "Wheatish",
               "Wheatish Brown",
               "Dark",
-              "Others",
-              "Prefer not to say",
+              ...commonTrans.en.commonOptions,
             ],
             bloodGroup: "Blood Group",
             bloodGroupSelect: "Select Blood Group",
@@ -1154,16 +1285,27 @@
               "Sindhi",
               "Marwari",
               "Rajasthani",
-              "Others",
-              "Prefer not to say",
+              ...commonTrans.en.commonOptions,
+            ],
+            secFamily: "Family Details",
+            familyType: "Family type",
+            familyTypeSelect: "Select family type",
+            familyTypeOptions: [
+              "Nuclear",
+              "Joint",
+              "Living Alone",
+              ...commonTrans.en.commonOptions,
             ],
             mother: "Mother",
             motherPlaceholder: "Name, occupation or other details",
             father: "Father",
             fatherPlaceholder: "Name, occupation or other details",
             siblings: "Siblings",
-            siblingsPlaceholder: "e.g. 1 brother, 1 sister",
-            familyType: "Family type",
+            siblingCountSelect: "Select count",
+            brothers: "Brothers",
+            marriedBrothers: "Married Brothers",
+            sisters: "Sisters",
+            marriedSisters: "Married Sisters",
             education: "Education",
             educationPlaceholder: "Highest qualification",
             occupation: "Occupation",
@@ -1202,8 +1344,6 @@
             secondSelect: "Seconds",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            familySelect: "Select family type",
-            families: ["Nuclear", "Joint", "Others"],
             create: "Create printable profile →",
             reset: "Clear form",
             required: "* Required fields",
@@ -1239,7 +1379,6 @@
             secPerInfo: "व्यक्तिगत विवरण",
             secLocation: "वर्तमान निवास",
             subLocation: "वर्तमान शहर और राज्य भरना आवश्यक है।",
-            secFamily: "परिवार और व्यक्तिगत जानकारी",
             subFamily: "केवल वही जानकारी दें जिसे साझा करना आप उचित समझें।",
             // name:"पूरा नाम",
             name: "नाम",
@@ -1255,22 +1394,19 @@
               "बहन",
               "रिश्तेदार",
               "मित्र",
-              "अन्य",
+              ...commonTrans.hi.commonOptions,
             ],
             gender: "लिंग",
             genderSelect: "लिंग चुनें",
-            genderOptions: ["पुरुष", "महिला", "अन्य", "बताना नहीं चाहते"],
-            manglik: "मांगलिक स्थिति",
-            manglikSelect: "मांगलिक स्थिति चुनें",
-            manglikOptions: [
-              "मांगलिक नहीं",
-              "मांगलिक",
-              "आंशिक मांगलिक",
-              "पक्का मांगलिक",
-              "पता नहीं",
-              "मांगलिक मायने नहीं रखता",
-              //"कोई फ़र्क नहीं पड़ता",
-              "बताना नहीं चाहते",
+            genderOptions: ["पुरुष", "महिला", ...commonTrans.hi.commonOptions],
+            category: "श्रेणी",
+            categorySelect: "श्रेणी चुनें",
+            categoryOptions: [
+              "सामान्य",
+              "अन्य पिछड़ा वर्ग (OBC)",
+              "अनुसूचित जाति (SC)",
+              "अनुसूचित जनजाति (ST)",
+              ...commonTrans.hi.commonOptions,
             ],
             maritalStatus: "वैवाहिक स्थिति",
             maritalStatusSelect: "वैवाहिक स्थिति चुनें",
@@ -1308,10 +1444,29 @@
             birthCityPlaceholder: "शहर",
             birthStatePlaceholder: "राज्य",
             birthCountryPlaceholder: "देश",
+            manglikZodiacSigns: "मांगलिक स्थिति और राशि विवरण",
+            manglik: "मांगलिक स्थिति",
+            manglikSelect: "मांगलिक स्थिति चुनें",
+            manglikOptions: [
+              "मांगलिक नहीं",
+              "मांगलिक",
+              "आंशिक मांगलिक",
+              "पक्का मांगलिक",
+              "पता नहीं",
+              "मांगलिक मायने नहीं रखता",
+              //"कोई फ़र्क नहीं पड़ता",
+              "बताना नहीं चाहते",
+            ],
+            sunSign: "चंद्र राशि",
+            sunSignSelect: "चंद्र राशि चुनें",
+            sunSignOptions: [...commonTrans.hi.zodiacSigns],
+            moonSign: "सूर्य राशि",
+            moonSignSelect: "सूर्य राशि चुनें",
+            moonSignOptions: [...commonTrans.hi.zodiacSigns],
             currentCityPlaceholder: "शहर",
             currentStatePlaceholder: "राज्य",
             currentCountryPlaceholder: "देश",
-            casteGotra: "जाति / उप-जाति / गोत्र",
+            casteGotra: "जाति और गोत्र",
             castePlaceholder: "जाति",
             subCastePlaceholder: "उप-जाति",
             gotraPlaceholder: "गोत्र",
@@ -1324,8 +1479,7 @@
               "जैन भोजन",
               "अंडा खाते हैं",
               "मांसाहारी",
-              "अन्य",
-              "बताना नहीं चाहते",
+              ...commonTrans.hi.commonOptions,
             ],
             smoking: "धूम्रपान की आदतें",
             smokingSelect: "धूम्रपान की आदत चुनें",
@@ -1333,8 +1487,7 @@
               "धूम्रपान नहीं करते",
               "धूम्रपान करते हैं",
               "कभी-कभार करते हैं",
-              "अन्य",
-              "बताना नहीं चाहते",
+              ...commonTrans.hi.commonOptions,
             ],
             drinking: "शराब की आदतें",
             drinkingSelect: "शराब की आदत चुनें",
@@ -1342,8 +1495,7 @@
               "शराब नहीं पीते",
               "शराब पीते हैं",
               "कभी-कभार पीते हैं",
-              "अन्य",
-              "बताना नहीं चाहते",
+              ...commonTrans.hi.commonOptions,
             ],
             religion: "धर्म",
             religionSelect: "धर्म चुनें",
@@ -1357,8 +1509,7 @@
               "पारसी",
               "कोई धर्म नहीं",
               "आध्यात्मिक",
-              "अन्य",
-              "बताना नहीं चाहते",
+              ...commonTrans.hi.commonOptions,
             ],
             skinTone: "रंग-रूप",
             skinToneSelect: "रंग-रूप चुनें",
@@ -1368,8 +1519,7 @@
               "गेहूंआ",
               "सांवला",
               "गहरा रंग",
-              "अन्य",
-              "बताना नहीं चाहते",
+              ...commonTrans.hi.commonOptions,
             ],
             bloodGroup: "रक्त समूह",
             bloodGroupSelect: "रक्त समूह चुनें",
@@ -1404,16 +1554,27 @@
               "सिंधी",
               "मारवाड़ी",
               "राजस्थानी",
-              "अन्य",
-              "बताना नहीं चाहते",
+              ...commonTrans.hi.commonOptions,
+            ],
+            secFamily: "परिवार की जानकारी",
+            familyType: "परिवार का प्रकार",
+            familyTypeSelect: "परिवार का प्रकार चुनें",
+            familyTypeOptions: [
+              "एकल परिवार",
+              "संयुक्त परिवार",
+              "अकेले रहते हैं",
+              ...commonTrans.hi.commonOptions,
             ],
             mother: "माता",
             motherPlaceholder: "नाम, पेशा या अन्य विवरण",
             father: "पिता",
             fatherPlaceholder: "नाम, पेशा या अन्य विवरण",
             siblings: "भाई-बहन",
-            siblingsPlaceholder: "जैसे: 1 भाई, 1 बहन",
-            familyType: "परिवार का प्रकार",
+            siblingCountSelect: "संख्या चुनें",
+            brothers: "भाई",
+            marriedBrothers: "विवाहित भाई",
+            sisters: "बहनें",
+            marriedSisters: "विवाहित बहनें",
             education: "शिक्षा",
             educationPlaceholder: "उच्चतम शैक्षणिक योग्यता",
             occupation: "पेशा",
@@ -1450,8 +1611,6 @@
             secondSelect: "सेकंड",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            familySelect: "परिवार का प्रकार चुनें",
-            families: ["एकल परिवार", "संयुक्त परिवार", "अन्य"],
             create: "प्रिंट योग्य प्रोफ़ाइल बनाएँ →",
             reset: "फ़ॉर्म साफ़ करें",
             required: "* आवश्यक फ़ील्ड",
@@ -1487,7 +1646,6 @@
             secPerInfo: "ਨਿੱਜੀ ਜਾਣਕਾਰੀ",
             secLocation: "ਮੌਜੂਦਾ ਟਿਕਾਣਾ",
             subLocation: "ਮੌਜੂਦਾ ਸ਼ਹਿਰ ਅਤੇ ਰਾਜ ਲਾਜ਼ਮੀ ਹਨ।",
-            secFamily: "ਪਰਿਵਾਰ ਅਤੇ ਨਿੱਜੀ ਜਾਣਕਾਰੀ",
             subFamily: "ਸਿਰਫ਼ ਉਹੀ ਜਾਣਕਾਰੀ ਸਾਂਝੀ ਕਰੋ ਜਿਸ ਨਾਲ ਤੁਸੀਂ ਸਹਿਜ ਹੋ।",
             // name:"ਪੂਰਾ ਨਾਮ",
             name: "ਨਾਮ",
@@ -1502,22 +1660,19 @@
               "ਭੈਣ",
               "ਰਿਸ਼ਤੇਦਾਰ",
               "ਦੋਸਤ",
-              "ਹੋਰ",
+              ...commonTrans.pa.commonOptions,
             ],
             gender: "ਲਿੰਗ",
             genderSelect: "ਲਿੰਗ ਚੁਣੋ",
-            genderOptions: ["ਮਰਦ", "ਔਰਤ", "ਹੋਰ", "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ"],
-            manglik: "ਮਾਂਗਲਿਕ ਸਥਿਤੀ",
-            manglikSelect: "ਮਾਂਗਲਿਕ ਸਥਿਤੀ ਚੁਣੋ",
-            manglikOptions: [
-              "ਮਾਂਗਲਿਕ ਨਹੀਂ",
-              "ਮਾਂਗਲਿਕ",
-              "ਆਂਸ਼ਿਕ ਮਾਂਗਲਿਕ",
-              "ਪੱਕਾ ਮਾਂਗਲਿਕ",
-              "ਪਤਾ ਨਹੀਂ",
-              "ਮਾਂਗਲਿਕ ਹੋਣਾ ਮਾਇਨੇ ਨਹੀਂ ਰੱਖਦਾ",
-              //"ਕੋਈ ਫ਼ਰਕ ਨਹੀਂ ਪੈਂਦਾ",
-              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+            genderOptions: ["ਮਰਦ", "ਔਰਤ", ...commonTrans.pa.commonOptions],
+            category: "ਸ਼੍ਰੇਣੀ",
+            categorySelect: "ਸ਼੍ਰੇਣੀ ਚੁਣੋ",
+            categoryOptions: [
+              "ਆਮ",
+              "ਪੱਛੜੀਆਂ ਸ਼੍ਰੇਣੀਆਂ (OBC)",
+              "ਅਨੁਸੂਚਿਤ ਜਾਤੀ (SC)",
+              "ਅਨੁਸੂਚਿਤ ਜਨਜਾਤੀ (ST)",
+              ...commonTrans.pa.commonOptions,
             ],
             maritalStatus: "ਵਿਆਹੁਤਾ ਸਥਿਤੀ",
             maritalStatusSelect: "ਵਿਆਹੁਤਾ ਸਥਿਤੀ ਚੁਣੋ",
@@ -1555,10 +1710,29 @@
             birthCityPlaceholder: "ਸ਼ਹਿਰ",
             birthStatePlaceholder: "ਰਾਜ",
             birthCountryPlaceholder: "ਦੇਸ਼",
+            manglikZodiacSigns: "ਮਾਂਗਲਿਕ ਸਥਿਤੀ ਅਤੇ ਰਾਸ਼ੀ ਦਾ ਵੇਰਵਾ",
+            manglik: "ਮਾਂਗਲਿਕ ਸਥਿਤੀ",
+            manglikSelect: "ਮਾਂਗਲਿਕ ਸਥਿਤੀ ਚੁਣੋ",
+            manglikOptions: [
+              "ਮਾਂਗਲਿਕ ਨਹੀਂ",
+              "ਮਾਂਗਲਿਕ",
+              "ਆਂਸ਼ਿਕ ਮਾਂਗਲਿਕ",
+              "ਪੱਕਾ ਮਾਂਗਲਿਕ",
+              "ਪਤਾ ਨਹੀਂ",
+              "ਮਾਂਗਲਿਕ ਹੋਣਾ ਮਾਇਨੇ ਨਹੀਂ ਰੱਖਦਾ",
+              //"ਕੋਈ ਫ਼ਰਕ ਨਹੀਂ ਪੈਂਦਾ",
+              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+            ],
+            sunSign: "ਸੂਰਜ ਰਾਸ਼ੀ",
+            sunSignSelect: "ਸੂਰਜ ਰਾਸ਼ੀ ਚੁਣੋ",
+            sunSignOptions: [...commonTrans.pa.zodiacSigns],
+            moonSign: "ਚੰਦਰ ਰਾਸ਼ੀ",
+            moonSignSelect: "ਚੰਦਰ ਰਾਸ਼ੀ ਚੁਣੋ",
+            moonSignOptions: [...commonTrans.pa.zodiacSigns],
             currentCityPlaceholder: "ਸ਼ਹਿਰ",
             currentStatePlaceholder: "ਰਾਜ",
             currentCountryPlaceholder: "ਦੇਸ਼",
-            casteGotra: "ਜਾਤ / ਉਪ-ਜਾਤ / ਗੋਤ",
+            casteGotra: "ਜਾਤ ਅਤੇ ਗੋਤ",
             castePlaceholder: "ਜਾਤ",
             subCastePlaceholder: "ਉਪ-ਜਾਤ",
             gotraPlaceholder: "ਗੋਤ",
@@ -1571,8 +1745,7 @@
               "ਜੈਨ ਭੋਜਨ",
               "ਅੰਡੇ ਖਾਂਦੇ ਹਨ",
               "ਮਾਸਾਹਾਰੀ",
-              "ਹੋਰ",
-              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+              ...commonTrans.pa.commonOptions,
             ],
             smoking: "ਧੂਮਰਪਾਨ ਦੀ ਆਦਤਾਂ",
             smokingSelect: "ਧੂਮਰਪਾਨ ਦੀ ਆਦਤ ਚੁਣੋ",
@@ -1580,8 +1753,7 @@
               "ਧੂਮਰਪਾਨ ਨਹੀਂ ਕਰਦੇ",
               "ਧੂਮਰਪਾਨ ਕਰਦੇ ਹਨ",
               "ਕਦੇ-ਕਦਾਈਂ ਕਰਦੇ ਹਨ",
-              "ਹੋਰ",
-              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+              ...commonTrans.pa.commonOptions,
             ],
             drinking: "ਸ਼ਰਾਬ ਦੀ ਆਦਤਾਂ",
             drinkingSelect: "ਸ਼ਰਾਬ ਦੀ ਆਦਤ ਚੁਣੋ",
@@ -1589,8 +1761,7 @@
               "ਸ਼ਰਾਬ ਨਹੀਂ ਪੀਂਦੇ",
               "ਸ਼ਰਾਬ ਪੀਂਦੇ ਹਨ",
               "ਕਦੇ-ਕਦਾਈਂ ਪੀਂਦੇ ਹਨ",
-              "ਹੋਰ",
-              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+              ...commonTrans.pa.commonOptions,
             ],
             religion: "ਧਰਮ",
             religionSelect: "ਧਰਮ ਚੁਣੋ",
@@ -1604,8 +1775,7 @@
               "ਪਾਰਸੀ",
               "ਕੋਈ ਧਰਮ ਨਹੀਂ",
               "ਅਧਿਆਤਮਿਕ",
-              "ਹੋਰ",
-              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+              ...commonTrans.pa.commonOptions,
             ],
             skinTone: "ਰੰਗ-ਰੂਪ",
             skinToneSelect: "ਰੰਗ-ਰੂਪ ਚੁਣੋ",
@@ -1615,8 +1785,7 @@
               "ਕਣਕਵੰਨਾ",
               "ਸਾਂਵਲਾ",
               "ਗੂੜ੍ਹਾ ਰੰਗ",
-              "ਹੋਰ",
-              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+              ...commonTrans.pa.commonOptions,
             ],
             bloodGroup: "ਬਲੱਡ ਗਰੁੱਪ",
             bloodGroupSelect: "ਬਲੱਡ ਗਰੁੱਪ ਚੁਣੋ",
@@ -1651,16 +1820,27 @@
               "ਸਿੰਧੀ",
               "ਮਾਰਵਾੜੀ",
               "ਰਾਜਸਥਾਨੀ",
-              "ਹੋਰ",
-              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            secFamily: "ਪਰਿਵਾਰ ਦੀ ਜਾਣਕਾਰੀ",
+            familyType: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ",
+            familyTypeSelect: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ ਚੁਣੋ",
+            familyTypeOptions: [
+              "ਛੋਟਾ ਪਰਿਵਾਰ",
+              "ਸਾਂਝਾ ਪਰਿਵਾਰ",
+              "ਇਕੱਲੇ ਰਹਿੰਦੇ ਹਨ",
+              ...commonTrans.pa.commonOptions,
             ],
             mother: "ਮਾਤਾ",
             motherPlaceholder: "ਨਾਮ, ਕਿੱਤਾ ਜਾਂ ਹੋਰ ਜਾਣਕਾਰੀ",
             father: "ਪਿਤਾ",
             fatherPlaceholder: "ਨਾਮ, ਕਿੱਤਾ ਜਾਂ ਹੋਰ ਜਾਣਕਾਰੀ",
             siblings: "ਭੈਣ-ਭਰਾ",
-            siblingsPlaceholder: "ਜਿਵੇਂ: 1 ਭਰਾ, 1 ਭੈਣ",
-            familyType: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ",
+            siblingCountSelect: "ਗਿਣਤੀ ਚੁਣੋ",
+            brothers: "ਭਰਾ",
+            marriedBrothers: "ਵਿਆਹੇ ਭਰਾ",
+            sisters: "ਭੈਣਾਂ",
+            marriedSisters: "ਵਿਆਹੀਆਂ ਭੈਣਾਂ",
             education: "ਸਿੱਖਿਆ",
             educationPlaceholder: "ਸਭ ਤੋਂ ਉੱਚੀ ਵਿੱਦਿਅਕ ਯੋਗਤਾ",
             occupation: "ਕਿੱਤਾ",
@@ -1697,8 +1877,6 @@
             secondSelect: "ਸਕਿੰਟ",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            familySelect: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ ਚੁਣੋ",
-            families: ["ਛੋਟਾ ਪਰਿਵਾਰ", "ਸਾਂਝਾ ਪਰਿਵਾਰ", "ਹੋਰ"],
             create: "ਪ੍ਰਿੰਟ ਲਈ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ →",
             reset: "ਫਾਰਮ ਸਾਫ਼ ਕਰੋ",
             required: "* ਲਾਜ਼ਮੀ ਜਾਣਕਾਰੀ",
@@ -1724,9 +1902,9 @@
           profileFor: "👤",
           name: "📝",
           gender: "⚥",
+          category: "🏷️",
           religion: "🕉️",
-          manglik: "🪐",
-          maritalAndChildren: "💍👧👦",
+          maritalAndChildren: "💍",
           maritalStatus: "💍",
           childrenGirls: "👧",
           childrenBoys: "👦",
@@ -1747,7 +1925,8 @@
           birthCity: "📍",
           birthState: " 🗺️",
           birthCountry: "🌐",
-          casteGotra: "🤝",
+          manglikZodiacSigns: "🪐",
+          casteGotra: "📜",
           caste: "🤝",
           subCaste: "🌿",
           gotra: "📜",
@@ -1762,6 +1941,10 @@
           mother: "👩",
           father: "👨",
           siblings: "👫",
+          brothers: "👦",
+          marriedBrothers: "👦💍",
+          sisters: "👧",
+          marriedSisters: "👧💍",
           familyType: "🏡",
           education: "🎓",
           occupation: "💼",
@@ -1770,6 +1953,7 @@
           "profileFor",
           "name",
           "gender",
+          "category",
           "religion",
           "manglik",
           "maritalStatus",
@@ -1801,7 +1985,10 @@
           "motherTongue",
           "mother",
           "father",
-          "siblings",
+          "brothers",
+          "marriedBrothers",
+          "sisters",
+          "marriedSisters",
           "familyType",
           "education",
           "occupation",
@@ -1869,6 +2056,13 @@
             );
           }
         }
+        const siblingCounts = Array.from({ length: 11 }, (_, i) => String(i));
+        function updateMarriedSiblingOptions(totalId, marriedId) {
+          const t = trans[$("language").value] || trans.en;
+          const total = $(totalId).value;
+          const maximum = total === "" ? 10 : Number(total);
+          setOptions(marriedId, null, siblingCounts.slice(0, maximum + 1));
+        }
         function updateBirthDays(t) {
           const year = Number(val("birthYear")),
             month = Number(val("birthMonth")),
@@ -1880,7 +2074,7 @@
           );
         }
         function updateLanguage() {
-          const t = translations[$("language").value] || translations.en;
+          const t = trans[$("language").value] || trans.en;
           $("brandTitle").textContent = t.brandTitle;
           document.title = t.brandTitle;
           [
@@ -1952,14 +2146,17 @@
           setOptions("birthAmPm", t.amPmSelect, t.amPm);
           setOptions("profileFor", t.profileForSelect, t.profileForOptions);
           setOptions("gender", t.genderSelect, t.genderOptions);
+          setOptions("category", t.categorySelect, t.categoryOptions);
           setOptions("manglik", t.manglikSelect, t.manglikOptions);
+          setOptions("sunSign", t.sunSignSelect, t.sunSignOptions);
+          setOptions("moonSign", t.moonSignSelect, t.moonSignOptions);
 
           setOptions(
             "maritalStatus",
             t.maritalStatusSelect,
             t.maritalStatusOptions,
           );
-          const selectedLang = translations[$("language").value];
+          const selectedLang = trans[$("language").value];
           const girlChildCounts = Array.from({ length: 11 }, (_, i) =>
             i === 0
               ? { value: i, label: selectedLang.noGirl }
@@ -2030,7 +2227,11 @@
           );
           $("childrenGirls").setAttribute("aria-label", t.childrenGirls);
           $("childrenBoys").setAttribute("aria-label", t.childrenBoys);
-          setOptions("familyType", t.familySelect, t.families);
+          setOptions("familyType", t.familyTypeSelect, t.familyTypeOptions);
+          setOptions("brothers", null, siblingCounts);
+          setOptions("sisters", null, siblingCounts);
+          updateMarriedSiblingOptions("brothers", "marriedBrothers");
+          updateMarriedSiblingOptions("sisters", "marriedSisters");
           $("createBtn").textContent = t.create;
           $("resetBtn").textContent = t.reset;
           $("requiredNote").textContent = t.required;
@@ -2044,11 +2245,17 @@
           toggleChildren();
         }
         $("language").addEventListener("change", updateLanguage);
+        $("brothers").addEventListener("change", () =>
+          updateMarriedSiblingOptions("brothers", "marriedBrothers"),
+        );
+        $("sisters").addEventListener("change", () =>
+          updateMarriedSiblingOptions("sisters", "marriedSisters"),
+        );
         $("birthYear").addEventListener("change", () =>
-          updateBirthDays(translations[$("language").value] || translations.en),
+          updateBirthDays(trans[$("language").value] || trans.en),
         );
         $("birthMonth").addEventListener("change", () =>
-          updateBirthDays(translations[$("language").value] || translations.en),
+          updateBirthDays(trans[$("language").value] || trans.en),
         );
         function toggleChildren() {
           const show = $("maritalStatus").selectedIndex > 1;
@@ -2067,7 +2274,7 @@
           return $(id).value.trim();
         }
         function readLocalizedFormFields() {
-          const t = translations[$("language").value] || translations.en;
+          const t = trans[$("language").value] || trans.en;
           const fields = {};
 
           for (const [index, control] of [
@@ -2157,7 +2364,7 @@
           }
         }
         function buildProfile() {
-          const t = translations[$("language").value] || translations.en;
+          const t = trans[$("language").value] || trans.en;
           const statusText =
             $("maritalStatus").selectedOptions[0]?.textContent || "";
           const genderText = $("gender").selectedOptions[0]?.textContent || "";
@@ -2247,7 +2454,10 @@
             [
               [t.mother, val("mother")],
               [t.father, val("father")],
-              [t.siblings, val("siblings")],
+              [t.brothers, val("brothers")],
+              [t.marriedBrothers, val("marriedBrothers")],
+              [t.sisters, val("sisters")],
+              [t.marriedSisters, val("marriedSisters")],
               [
                 t.familyType,
                 $("familyType").selectedIndex
