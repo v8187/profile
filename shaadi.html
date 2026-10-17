@@ -138,11 +138,15 @@
         place-items: center;
         font-weight: 800;
       }
+      .section-emoji {
+        font-size: 32px;
+      }
       h2 {
         font-size: 1.15rem;
         margin: 0 0 0 0;
-        letter-spacing: -0.015em;
+        line-height: 45px;
       }
+
       .section-head p {
         margin: 0;
         color: var(--muted);
@@ -179,9 +183,9 @@
         border: 0;
       }
       .fields-group-wrapper-title {
-        display: block;
-        float: none;
-        width: auto;
+        display: flex;
+        /* float: none;
+        width: auto; */
         max-width: 100%;
         margin: 0 0 9px;
         padding: 0;
@@ -246,6 +250,19 @@
         font-weight: 650;
         margin-bottom: 7px;
       }
+      label,
+      legend {
+        display: flex;
+        gap: 5px;
+      }
+      .field-label-emoji,
+      .field-label-text {
+        line-height: 26px;
+      }
+      .field-label-emoji {
+        font-size: 24px;
+      }
+
       .req {
         color: #b24a37;
       }
@@ -533,11 +550,8 @@
         <form id="profileForm">
           <section class="card">
             <div class="section-head">
-              <div class="step">1</div>
-              <div>
-                <h2 id="secBasicDetails">Basic Details</h2>
-                <!-- <p id="subBasicDetails">Choose the language for the form first.</p> -->
-              </div>
+              <div class="section-emoji">💖</div>
+              <h2 id="secBasicDetails">Basic Details</h2>
             </div>
             <div class="grid">
               <div class="field">
@@ -648,58 +662,13 @@
               </fieldset>
             </div>
           </section>
-          <!-- <section class="card">
-            <div class="section-head">
-              <div class="step">2</div>
-              <div>
-                <h2 id="secBirth">Birth details</h2>
-                <p id="subBirth">
-                  Enter date and time in separate fields if known.
-                </p>
-              </div>
-            </div>
-          </section> -->
+
           <section class="card">
             <div class="section-head">
-              <div class="step">3</div>
-              <div>
-                <h2 id="secPerInfo">Current location</h2>
-                <!-- <p id="subLocation">
-                  Your present city and state are required.
-                </p> -->
-              </div>
+              <div class="section-emoji">💝</div>
+              <h2 id="secPerInfo">Current location</h2>
             </div>
             <div class="grid">
-              <!-- <div class="field">
-                <label for="currentCity" data-label="currentCity"
-                  >Current city <span class="req">*</span></label
-                ><input
-                  id="currentCity"
-                  name="currentCity"
-                  required
-                  placeholder="Current city"
-                />
-              </div>
-              <div class="field">
-                <label for="currentState" data-label="currentState"
-                  >Current state <span class="req">*</span></label
-                ><input
-                  id="currentState"
-                  name="currentState"
-                  required
-                  placeholder="Current state"
-                />
-              </div>
-              <div class="field">
-                <label for="currentCountry" data-label="currentCountry"
-                  >Current country</label
-                ><input
-                  id="currentCountry"
-                  name="currentCountry"
-                  value="India"
-                  placeholder="Current country"
-                />
-              </div> -->
               <div class="multiple-groups-row">
                 <fieldset class="fields-group-wrapper">
                   <legend
@@ -797,40 +766,6 @@
                   </div>
                 </div>
               </fieldset>
-              <fieldset class="fields-group-wrapper">
-                <legend
-                  class="fields-group-wrapper-title"
-                  data-label="casteGotra"
-                >
-                  Place of birth
-                </legend>
-                <div class="fields-group location">
-                  <div class="field">
-                    <input
-                      id="caste"
-                      name="caste"
-                      data-placeholder="caste"
-                      placeholder="Caste"
-                    />
-                  </div>
-                  <div class="field">
-                    <input
-                      id="subCaste"
-                      name="subCaste"
-                      data-placeholder="subCaste"
-                      placeholder="Sub Caste"
-                    />
-                  </div>
-                  <div class="field">
-                    <input
-                      id="gotra"
-                      name="gotra"
-                      data-placeholder="gotra"
-                      placeholder="Gotra"
-                    />
-                  </div>
-                </div>
-              </fieldset>
               <div class="field">
                 <label for="height" data-label="height">Height</label
                 ><select id="height" name="height"></select>
@@ -868,41 +803,91 @@
                   >motherTongue</label
                 ><select id="motherTongue" name="motherTongue"></select>
               </div>
+              <div class="grid three" style="grid-column: 1 / -1">
+                <div class="field">
+                  <label for="education" data-label="education">education</label
+                  ><select id="education" name="education"></select>
+                </div>
+                <div class="field">
+                  <label for="occupation" data-label="occupation"
+                    >occupation</label
+                  ><select id="occupation" name="occupation"></select>
+                </div>
+                <div class="field">
+                  <label for="annualIncome" data-label="annualIncome"
+                    >annualIncome</label
+                  ><select id="annualIncome" name="annualIncome"></select>
+                </div>
+              </div>
+              <div class="field full">
+                <label for="aboutProfile" data-label="aboutProfile"
+                  >More About Profile</label
+                ><textarea
+                  id="aboutProfile"
+                  name="aboutProfile"
+                  data-placeholder="aboutProfile"
+                  placeholder="A short introduction, interests and values"
+                ></textarea>
+              </div>
             </div>
           </section>
           <section class="card">
             <div class="section-head">
-              <div class="step">4</div>
-              <div>
-                <h2 id="secFamily">Family Details</h2>
-                <!-- <p id="subFamily">
-                  Share only what you feel comfortable including.
-                </p> -->
-              </div>
+              <div class="section-emoji">👨‍👩‍👧‍👦</div>
+              <h2 id="secFamily">Family Details</h2>
             </div>
-            <div class="grid three">
+            <div class="grid">
               <div class="field">
                 <label for="familyType" data-label="familyType"
                   >Family type</label
                 ><select id="familyType" name="familyType"></select>
               </div>
               <div class="field">
+                <label for="familyStatus" data-label="familyStatus"
+                  >Family Status</label
+                ><select id="familyStatus" name="familyStatus"></select>
+              </div>
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
+                  data-label="casteGotra"
+                >
+                  Place of birth
+                </legend>
+                <div class="fields-group location">
+                  <div class="field">
+                    <input
+                      id="caste"
+                      name="caste"
+                      data-placeholder="caste"
+                      placeholder="Caste"
+                    />
+                  </div>
+                  <div class="field">
+                    <input
+                      id="subCaste"
+                      name="subCaste"
+                      data-placeholder="subCaste"
+                      placeholder="Sub Caste"
+                    />
+                  </div>
+                  <div class="field">
+                    <input
+                      id="gotra"
+                      name="gotra"
+                      data-placeholder="gotra"
+                      placeholder="Gotra"
+                    />
+                  </div>
+                </div>
+              </fieldset>
+              <div class="field">
                 <label for="mother" data-label="mother">Mother</label
-                ><input
-                  id="mother"
-                  name="mother"
-                  data-placeholder="mother"
-                  placeholder="Name, occupation or other details"
-                />
+                ><select id="mother" name="mother"></select>
               </div>
               <div class="field">
                 <label for="father" data-label="father">Father</label
-                ><input
-                  id="father"
-                  name="father"
-                  data-placeholder="father"
-                  placeholder="Name, occupation or other details"
-                />
+                ><select id="father" name="father"></select>
               </div>
             </div>
             <fieldset class="fields-group-wrapper">
@@ -932,56 +917,17 @@
                 </div>
               </div>
             </fieldset>
-            <div class="grid">
-              <div class="field">
-                <label for="education" data-label="education">Education</label
-                ><input
-                  id="education"
-                  name="education"
-                  data-placeholder="education"
-                  placeholder="Highest qualification"
-                />
-              </div>
-              <div class="field">
-                <label for="occupation" data-label="occupation"
-                  >Occupation</label
-                ><input
-                  id="occupation"
-                  name="occupation"
-                  data-placeholder="occupation"
-                  placeholder="Profession / role"
-                />
-              </div>
-
-              <div class="field full">
-                <label for="about" data-label="about">About me</label
-                ><textarea
-                  id="about"
-                  name="about"
-                  data-placeholder="about"
-                  placeholder="A short introduction, interests and values"
-                ></textarea>
-              </div>
-              <div class="field full">
-                <label for="expectations" data-label="expectations"
-                  >Partner preferences (optional)</label
-                ><textarea
-                  id="expectations"
-                  name="expectations"
-                  data-placeholder="expectations"
-                  placeholder="What you are looking for in a life partner"
-                ></textarea>
-              </div>
-              <div class="field full">
-                <label for="other" data-label="other">Additional details</label
-                ><textarea
-                  id="other"
-                  name="other"
-                  data-placeholder="other"
-                  placeholder="Languages, hobbies, lifestyle or any other details"
-                ></textarea>
-              </div>
+            <div class="field full" style="margin-top: 20px">
+              <label for="aboutFamily" data-label="aboutFamily"
+                >More About Family</label
+              ><textarea
+                id="aboutFamily"
+                name="aboutFamily"
+                data-placeholder="aboutFamily"
+                placeholder="A short introduction, interests and values"
+              ></textarea>
             </div>
+
             <div class="actions">
               <button class="primary" type="submit" id="createBtn">
                 Create printable profile →
@@ -994,6 +940,24 @@
             <p class="error" id="formError" role="alert">
               Please complete all required fields and check the values.
             </p>
+          </section>
+          <section class="card">
+            <div class="section-head">
+              <div class="section-emoji">💞</div>
+              <h2 id="secPartnerPreferences">Partner Preferences</h2>
+            </div>
+            <div class="grid">
+              <div class="field full">
+                <!-- <label for="partnerPreferences" data-label="partnerPreferences"
+                  >Partner preferences</label
+                > --><textarea
+                  id="partnerPreferences"
+                  name="partnerPreferences"
+                  data-placeholder="partnerPreferences"
+                  placeholder="What you are looking for in a life partner"
+                ></textarea>
+              </div>
+            </div>
           </section>
         </form>
       </div>
@@ -1029,20 +993,6 @@
           alert("Helo");
         });
         const $ = (id) => document.getElementById(id);
-        /**   
-Aries	मेष	ਮੇਸ਼	♈
-Taurus	वृषभ	ਵ੍ਰਿਸ਼ਭ	♉
-Gemini	मिथुन	ਮਿਥੁਨ	♊
-Cancer	कर्क	ਕਰਕ	♋
-Leo	सिंह	ਸਿੰਘ	♌
-Virgo	कन्या	ਕੰਨਿਆ	♍
-Libra	तुला	ਤੁਲਾ	♎
-Scorpio	वृश्चिक	ਵ੍ਰਿਸ਼ਚਿਕ	♏
-Sagittarius	धनु	ਧਨੁ	♐
-Capricorn	मकर	ਮਕਰ	♑
-Aquarius	कुम्भ	ਕੁੰਭ	♒
-Pisces	मीन	ਮੀਨ	♓
-    * */
         const commonTrans = {
           en: {
             commonOptions: ["Others", "Prefer not to say"],
@@ -1059,6 +1009,8 @@ Pisces	मीन	ਮੀਨ	♓
               "Capricorn",
               "Aquarius",
               "Pisces",
+              "Don't Know",
+              "Prefer not to say",
             ],
           },
           hi: {
@@ -1076,6 +1028,8 @@ Pisces	मीन	ਮੀਨ	♓
               "मकर",
               "कुम्भ",
               "मीन",
+              "पता नहीं",
+              "बताना नहीं चाहते",
             ],
           },
           pa: {
@@ -1093,8 +1047,324 @@ Pisces	मीन	ਮੀਨ	♓
               "ਮਕਰ",
               "ਕੁੰਭ",
               "ਮੀਨ",
+              "ਪਤਾ ਨਹੀਂ",
+              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
             ],
           },
+        };
+        const parentsOptions = {
+          en: [
+            "Business Owner / Entrepreneur",
+            "Government Employee",
+            "Private Sector Employee",
+            "Retired (Government)",
+            "Retired (Private Sector)",
+            "Professional",
+            "Doctor",
+            "CA",
+            "Lawyer",
+            "Agriculturist / Farmer",
+            "Homemaker",
+            "Self-Employed / Freelancer",
+            "Not Employed / Looking after Home",
+            "Passed Away (Late)",
+            ...commonTrans.en.commonOptions,
+          ],
+          hi: [
+            "व्यवसायी / बिजनेसमैन",
+            "सरकारी नौकरी",
+            "प्राइवेट नौकरी",
+            "सेवानिवृत्त (सरकारी नौकरी)",
+            "सेवानिवृत्त (प्राइवेट नौकरी)",
+            "पेशेवर",
+            "डॉक्टर",
+            "वकील",
+            "सीए",
+            "कृषक / किसान",
+            "गृहणी (Homemaker)",
+            "स्वरोज़गार",
+            "वर्तमान में कार्यरत नहीं",
+            "स्वर्गवासी (Late)",
+            ...commonTrans.hi.commonOptions,
+          ],
+          pa: [
+            "ਕਾਰੋਬਾਰੀ / ਬਿਜ਼ਨਸਮੈਨ",
+            "ਸਰਕਾਰੀ ਨੌਕਰੀ",
+            "ਪ੍ਰਾਈਵੇਟ ਨੌਕਰੀ",
+            "ਰਿਟਾਇਰਡ (ਸਰਕਾਰੀ ਨੌਕਰੀ)",
+            "ਰਿਟਾਇਰਡ (ਪ੍ਰਾਈਵੇਟ ਨੌਕਰੀ)",
+            "ਪੇਸ਼ੇਵਰ",
+            "ਡਾਕਟਰ",
+            "ਵਕੀਲ",
+            "ਸੀ.ਏ.",
+            "ਖੇਤੀਬਾੜੀ / ਕਿਸਾਨ",
+            "ਘਰੇਲੂ ਮਹਿਲਾ (Homemaker)",
+            "ਸਵੈ-ਰੁਜ਼ਗਾਰ",
+            "ਵਰਤਮਾਨ ਵਿੱਚ ਕਾਰਜਸ਼ੀਲ ਨਹੀਂ",
+            "ਸਵਰਗਵਾਸੀ (Late)",
+            ...commonTrans.pa.commonOptions,
+          ],
+        };
+        const educationOptions = {
+          en: [
+            "Ph.D. / Doctorate",
+            "M.Phil. / Post-Grad Research",
+            "M.Tech. / M.E. (Engineering Masters)",
+            "MBA / PGDM (Management Masters)",
+            "M.C.A. (Computer Applications Masters)",
+            "M.S. / M.D. (Medical Postgraduate)",
+            "M.A. / M.Sc. / M.Com. (Academic Masters)",
+            "LL.M. (Law Masters)",
+            "M.Pharm. (Pharmacy Masters)",
+            "B.Tech. / B.E. (Engineering Bachelors)",
+            "B.Arch. (Architecture Bachelors)",
+            "B.B.A. / B.B.M. (Management Bachelors)",
+            "B.C.A. / B.Sc. IT (Computers Bachelors)",
+            "M.B.B.S. / B.D.S. / B.A.M.S. (Medical)",
+            "B.Pharm. / B.P.T. (Healthcare Bachelors)",
+            "B.Sc. (Nursing / Allied Health)",
+            "B.A. / B.Sc. / B.Com. (Academic Bachelors)",
+            "LL.B. (Law Bachelors)",
+            "B.Ed. / B.El.Ed. (Teaching Degrees)",
+            "B.F.A. / B.Design (Creative Arts)",
+            "B.Sc. (Agriculture / Horticulture)",
+            "B.H.M. (Hotel Management)",
+            "C.A. / C.S. / C.F.A. (Finance Professional)",
+            "ICWA / Certified Public Accountant",
+            "IAS / IPS / IFS (Civil Services)",
+            "Professional Diploma / Polytechnic",
+            "ITI / Vocational Training",
+            "Higher Secondary (12th Pass)",
+            "High School (10th Pass)",
+            ...commonTrans.en.commonOptions,
+          ],
+          hi: [
+            "पीएचडी / डॉक्टरेट",
+            "एम.फिल (अनुसंधान)",
+            "एम.टेक / एम.ई.",
+            "एमबीए (MBA)",
+            "एमसीए (MCA)",
+            "एमएस / एमडी (चिकित्सा परास्नातक)",
+            "परास्नातक (कला / विज्ञान / वाणिज्य)",
+            "एलएलएम (कानून परास्नातक)",
+            "एम.फार्मा (फार्मेसी परास्नातक)",
+            "बी.टेक / बी.ई.",
+            "बी.आर्क (वास्तुकला स्नातक)",
+            "बीबीए / बीबीएम",
+            "बीसीए / बीएससी आईटी",
+            "एमबीबीएस / बीडीएस / बीएएमएस",
+            "बी.फार्मा / बीपीटी (स्वास्थ्य सेवा)",
+            "बीएससी (नर्सिंग)",
+            "स्नातक (कला / विज्ञान / वाणिज्य)",
+            "एलएलबी (कानून स्नातक)",
+            "बीएड / डीएलएड (शिक्षण स्नातक)",
+            "ललित कला / डिजाइनिंग स्नातक",
+            "कृषि विज्ञान स्नातक",
+            "होटल मैनेजमेंट स्नातक",
+            "सीए / सीएस / सीएफए",
+            "आईसीडब्ल्यूए",
+            "सिविल सेवा (प्रशासनिक अधिकारी)",
+            "डिप्लोमा / पॉलिटेक्निक",
+            "आईटीआई / व्यावसायिक प्रशिक्षण",
+            "उच्च माध्यमिक (12वीं पास)",
+            "माध्यमिक (10वीं पास)",
+            ...commonTrans.hi.commonOptions,
+          ],
+          pa: [
+            "ਪੀ.ਐੱਚ.ਡੀ / ਡਾਕਟਰੇਟ",
+            "ਐੱਮ.ਫ਼ਿਲ (ਖੋਜ)",
+            "ਐੱม.ਟੈਕ / ਐੱਮ.ਈ.",
+            "ਐੱਮ.ਬੀ.ਏ (MBA)",
+            "ਐੱਮ.ਸੀ.ਏ (MCA)",
+            "ਐੱਮ.ਐੱਸ / ਐੱਮ.ਡੀ (ਮੈਡੀਕਲ ਮਾਸਟਰਜ਼)",
+            "ਪੋਸਟ-ਗ੍ਰੈਜੂਏਸ਼ਨ (ਆਰਟਸ / ਸਾਇੰਸ / ਕਾਮਰਸ)",
+            "ਐੱਲ.ਐੱਲ.ਐੱਮ (ਕਾਨੂੰਨ ਮਾਸਟਰਜ਼)",
+            "ਐੱਮ.ਫਾਰਮਾ (ਫਾਰਮੇਸੀ ਮਾਸਟਰਜ਼)",
+            "ਬੀ.ਟੈਕ / ਬੀ.ਈ.",
+            "ਬੀ.ਆਰਕ (ਵਾਸਤੂਕਲਾ ਗ੍ਰੈਜੂਏਸ਼ਨ)",
+            "ਬੀ.ਬੀ.ਏ / ਬੀ.ਬੀ.ਐੱਮ",
+            "ਬੀ.ਸੀ.ਏ / ਬੀ.ਐੱਸ.ਸੀ ਆਈ.ਟੀ",
+            "ਐੱਮ.ਬੀ.ਬੀ.ਐੱਸ / ਬੀ.ਡੀ.ਐੱਸ / ਬੀ.ਏ.ਐੱਮ.ਐੱਸ",
+            "ਬੀ.ਫਾਰਮਾ / ਬੀ.ਪੀ.ਟੀ (ਸਿਹਤ ਸੰਭਾਲ)",
+            "ਬੀ.ਐੱਸ.ਸੀ (ਨਰਸਿੰਗ)",
+            "ਗ੍ਰੈਜੂਏਸ਼ਨ (ਆਰਟਸ / ਸਾਇੰਸ / ਕਾਮਰਸ)",
+            "ਐੱਲ.ਐੱਲ.ਬੀ (ਕਾਨੂੰਨ ਗ੍ਰੈਜੂਏਸ਼ਨ)",
+            "ਬੀ.ਐੱਡ / ਡੀ.ਐੱਲ.ਐੱਡ (ਅਧਿਆਪਨ ਗ੍ਰੈਜੂਏਸ਼ਨ)",
+            "ਲਲਿਤ ਕਲਾ / ਡਿਜ਼ਾਈਨਿੰਗ ਗ੍ਰੈਜੂਏਸ਼ਨ",
+            "ਖੇਤੀਬਾੜੀ ਵਿਗਿਆਨ ਗ੍ਰੈਜੂਏਸ਼ਨ",
+            "ਹੋਟਲ ਮੈਨੇਜਮੈਂਟ ਗ੍ਰੈਜੂਏਸ਼ਨ",
+            "ਸੀ.ਏ / ਸੀ.ਐੱਸ / ਸੀ.ਐੱਫ.ਏ",
+            "ਆਈ.ਸੀ.ਡਬਲਯੂ.ਏ",
+            "ਸਿਵਲ ਸੇਵਾਵਾਂ (ਪ੍ਰਸ਼ਾਸਨਿਕ ਅਧਿਕਾਰੀ)",
+            "ਡਿਪਲੋਮਾ / ਪੌਲੀਟੈਕਨਿਕ",
+            "ਆਈ.ਟੀ.ਆਈ / ਪੇਸ਼ੇਵਰ ਸਿਖਲਾਈ",
+            "ਉੱਚ ਮਾਧਿਅਮਿਕ (12ਵੀਂ ਪਾਸ)",
+            "ਮਾਧਿਅਮਿਕ (10ਵੀਂ ਪਾਸ)",
+            ...commonTrans.pa.commonOptions,
+          ],
+        };
+        const occupationOptions = {
+          en: [
+            "Software Engineer / IT Professional",
+            "Data Scientist / AI Analyst",
+            "Doctor / Surgeon / Physician",
+            "Dentist / Orthodontist",
+            "Pharmacist / Healthcare Specialist",
+            "Nurse / Medical Therapist",
+            "Chartered Accountant (CA) / CS",
+            "Investment Banker / Financial Analyst",
+            "Business Analyst / Consultant",
+            "HR Manager / Recruiting Professional",
+            "Marketing / Digital Media Executive",
+            "Civil Services (IAS / IPS / IFS)",
+            "Government Employee (State/Central)",
+            "Bank Officer / PSU Employee",
+            "Defense / Army / Navy / Air Force",
+            "Police / Security Services",
+            "Advocate / Lawyer / Legal Consultant",
+            "Architect / Interior Designer",
+            "Civil / Mechanical / Electrical Engineer",
+            "Professor / Lecturer / Researcher",
+            "Teacher / Educator",
+            "Business Owner / Entrepreneur",
+            "Merchant / Shopkeeper / Trader",
+            "Real Estate Broker / Developer",
+            "Journalist / Writer / Editor",
+            "Content Creator / Influencer",
+            "Graphic Designer / Animator",
+            "Pilot / Cabin Crew / Aviation",
+            "Merchant Navy Professional",
+            "Hotel / Hospitality Management",
+            "Agriculture / Farming Professional",
+            "Student / Preparing for Exams",
+            "Homemaker",
+            "Not Employed / Looking for Job",
+            ...commonTrans.en.commonOptions,
+          ],
+          hi: [
+            "सॉफ्टवेयर इंजीनियर / आईटी प्रोफेशनल",
+            "डेटा साइंटिस्ट / एआई विश्लेषक",
+            "डॉक्टर / चिकित्सक / सर्जन",
+            "दंत चिकित्सक (Dentist)",
+            "फार्मासिस्ट / स्वास्थ्य सेवा विशेषज्ञ",
+            "नर्स / चिकित्सा चिकित्सक",
+            "चार्टर्ड अकाउंटेंट (CA) / सीएस",
+            "निवेश बैंकर / वित्तीय विश्लेषक",
+            "बिजनेस एनालिस्ट / सलाहकार",
+            "मानव संसाधन (HR) प्रबंधक",
+            "मार्केटिंग / डिजिटल मीडिया कार्यकारी",
+            "सिविल सेवा (प्रशासनिक अधिकारी)",
+            "सरकारी कर्मचारी",
+            "बैंक अधिकारी / पीएसयू कर्मचारी",
+            "रक्षा बल (सेना / नौसेना / वायु सेना)",
+            "पुलिस / सुरक्षा सेवाएँ",
+            "अधिवक्ता / वकील / कानूनी सलाहकार",
+            "आर्किटेक्ट / इंटीरियर डिजाइनर",
+            "इंजीनियर (सिविल / मैकेनिकल / इलेक्ट्रिकल)",
+            "प्रोफेसर / व्याख्याता / शोधकर्ता",
+            "शिक्षक / शिक्षिका",
+            "व्यवसाय स्वामी / उद्यमी",
+            "व्यापारी / दुकानदार",
+            "रियल एस्टेट ब्रोकर / डेवलपर",
+            "पत्रकार / लेखक / संपादक",
+            "कंटेंट क्रिएटर / इन्फ्लुएंसर",
+            "ग्राफिक डिजाइनर / एनिमेटर",
+            "पायलट / केबिन क्रू (विमानन क्षेत्र)",
+            "मर्चेंट नेवी प्रोफेशनल",
+            "होटल / आतिथ्य प्रबंधन (Hospitality)",
+            "कृषि / किसान",
+            "छात्र / प्रतियोगी परीक्षाओं की तैयारी",
+            "गृहणी (Homemaker)",
+            "वर्तमान में कार्यरत नहीं",
+            ...commonTrans.hi.commonOptions,
+          ],
+          pa: [
+            "ਸੌਫਟਵੇਅਰ ਇੰਜੀਨੀਅਰ / ਆਈ.ਟੀ. ਪ੍ਰੋਫੈਸ਼ਨਲ",
+            "ਡੇਟਾ ਸਾਇੰਟਿਸਟ / ਏ.ਆਈ. ਵਿਸ਼ਲੇਸ਼ਕ",
+            "ਡਾਕਟਰ / ਚਿਕਿਤਸਕ / ਸਰਜਨ",
+            "ਦੰਦਾਂ ਦਾ ਚਿਕਿਤਸਕ (Dentist)",
+            "ਫਾਰਮਾਸਿਸਟ / ਸਿਹਤ ਸੰਭਾਲ ਮਾਹਰ",
+            "ਨਰਸ / ਮੈਡੀਕਲ ਥੈਰੇਪਿਸਟ",
+            "ਚਾਰਟਰਡ ਅਕਾਊਂਟੈਂਟ (CA) / ਸੀ.ਐੱਸ.",
+            "ਨਿਵੇਸ਼ ਬੈਂਕਰ / ਵਿੱਤੀ ਵਿਸ਼ਲੇਸ਼ਕ",
+            "ਬਿਜ਼ਨਸ ਐਨਾਲਿਸਟ / ਸਲਾਹਕਾਰ",
+            "ਮਾਨਵ ਸੰਸਾਧਨ (HR) ਪ੍ਰਬੰਧਕ",
+            "ਮਾਰਕੀਟਿੰਗ / ਡਿਜੀਟਲ ਮੀਡੀਆ ਕਾਰਜਕਾਰੀ",
+            "ਸਿਵਲ ਸੇਵਾਵਾਂ (ਪ੍ਰਸ਼ਾਸਨਿਕ ਅਧਿਕਾਰੀ)",
+            "ਸਰਕਾਰੀ ਕਰਮਚਾਰੀ",
+            "ਬੈਂਕ ਅਧਿਕਾਰੀ / ਪੀ.ਐੱਸ.ਯੂ. ਕਰਮਚਾਰੀ",
+            "ਰੱਖਿਆ ਬਲ (ਸੈਨਾ / ਨੇਵੀ / ਏਅਰ ਫੋਰਸ)",
+            "ਪੁਲਿਸ / ਸੁਰੱਖਿਆ ਸੇਵਾਵਾਂ",
+            "ਐਡਵੋਕੇਟ / ਵਕੀਲ / ਕਾਨੂੰਨੀ ਸਲਾਹਕਾਰ",
+            "ਆਰਕੀਟੈਕਟ / ਇੰਟੀਰੀਅਰ ਡਿਜ਼ਾਈਨਰ",
+            "ਇੰਜੀਨੀਅਰ (ਸਿਵਲ / ਮੈਕੇਨੀਕਲ / ਇਲੈਕਟ੍ਰੀਕਲ)",
+            "ਪ੍ਰੋਫੈਸਰ / ਲੈਕਚਰਾਰ / ਖੋਜਕਰਤਾ",
+            "ਅਧਿਆਪਕ / ਅਧਿਆਪਿਕਾ",
+            "ਕਾਰੋਬਾਰੀ ਮਾਲਕ / ਉੱਦਮੀ",
+            "ਵਪਾਰੀ / ਦੁਕਾਨਦਾਰ",
+            "ਰੀਅਲ ਅਸਟੇਟ ਬ੍ਰੋਕਰ / ਡਿਵੈਲਪਰ",
+            "ਪੱਤਰਕਾਰ / ਲੇਖਕ / ਸੰਪਾਦਕ",
+            "ਕੰਟੈਂਟ ਕ੍ਰਿਏਟਰ / ਇਨਫਲੂਐਂਸਰ",
+            "ਗ੍ਰਾਫਿਕ ਡਿਜ਼ਾਈਨਰ / ਐਨੀਮੇਟਰ",
+            "ਪਾਇਲਟ / ਕੇਬਿਨ ਕਰੂ (ਵਿਮਾਨਨ ਖੇਤਰ)",
+            "ਮਰਚੈਂਟ ਨੇਵੀ ਪ੍ਰੋਫੈਸ਼ਨਲ",
+            "ਹੋਟਲ / ਆਤਿਥਥ ਪ੍ਰਬੰਧਨ (Hospitality)",
+            "ਖੇਤੀਬਾੜੀ / ਕਿਸਾਨ",
+            "ਵਿਦਿਆਰਥੀ / ਪ੍ਰਤੀਯੋਗੀ ਪ੍ਰੀਖਿਆਵਾਂ ਦੀ ਤਿਆਰੀ",
+            "ਘਰੇਲੂ ਮਹਿਲਾ (Homemaker)",
+            "ਵਰਤਮਾਨ ਵਿੱਚ ਕਾਰਜਸ਼ੀਲ ਨਹੀਂ",
+            ...commonTrans.pa.commonOptions,
+          ],
+        };
+        const annualIncomeOptions = {
+          en: [
+            "No Income / Not Earning",
+            "Under 3 Lakhs (LPA)",
+            "3 - 5 Lakhs (LPA)",
+            "5 - 7 Lakhs (LPA)",
+            "7 - 10 Lakhs (LPA)",
+            "10 - 12 Lakhs (LPA)",
+            "12 - 15 Lakhs (LPA)",
+            "15 - 20 Lakhs (LPA)",
+            "20 - 25 Lakhs (LPA)",
+            "25 - 35 Lakhs (LPA)",
+            "35 - 50 Lakhs (LPA)",
+            "50 Lakhs - 1 Crore",
+            "Above 1 Crore +",
+            ...commonTrans.en.commonOptions,
+          ],
+          hi: [
+            "कोई आय नहीं / कार्यरत नहीं",
+            "3 लाख से कम सालाना",
+            "3 से 5 लाख सालाना",
+            "5 से 7 लाख सालाना",
+            "7 से 10 लाख सालाना",
+            "10 से 12 लाख सालाना",
+            "12 से 15 लाख सालाना",
+            "15 से 20 लाख सालाना",
+            "20 से 25 लाख सालाना",
+            "25 से 35 लाख सालाना",
+            "35 से 50 लाख सालाना",
+            "50 लाख से 1 करोड़ सालाना",
+            "1 करोड़ से अधिक सालाना",
+            ...commonTrans.hi.commonOptions,
+          ],
+          pa: [
+            "ਕੋਈ ਆਮਦਨ ਨਹੀਂ / ਕਾਰਜਸ਼ੀਲ ਨਹੀਂ",
+            "3 ਲੱਖ ਤੋਂ ਘੱਟ ਸਾਲਾਨਾ",
+            "3 ਤੋਂ 5 ਲੱਖ ਸਾਲਾਨਾ",
+            "5 ਤੋਂ 7 ਲੱਖ ਸਾਲਾਨਾ",
+            "7 ਤੋਂ 10 ਲੱਖ ਸਾਲਾਨਾ",
+            "10 ਤੋਂ 12 ਲੱਖ ਸਾਲਾਨਾ",
+            "12 ਤੋਂ 15 ਲੱਖ ਸਾਲਾਨਾ",
+            "15 ਤੋਂ 20 ਲੱਖ ਸਾਲਾਨਾ",
+            "20 ਤੋਂ 25 ਲੱਖ ਸਾਲਾਨਾ",
+            "25 ਤੋਂ 35 ਲੱਖ ਸਾਲਾਨਾ",
+            "35 ਤੋਂ 50 ਲੱਖ ਸਾਲਾਨਾ",
+            "50 ਲੱਖ ਤੋਂ 1 ਕਰੋੜ ਸਾਲਾਨਾ",
+            "1 ਕਰੋੜ ਤੋਂ ਵੱਧ ਸਾਲਾਨਾ",
+            ...commonTrans.pa.commonOptions,
+          ],
         };
         const trans = {
           en: {
@@ -1185,7 +1455,7 @@ Pisces	मीन	ਮੀਨ	♓
               "Anshik Manglik",
               "High Manglik",
               "Don't Know",
-              "Doesn't Matter",
+              // "Doesn't Matter",
               "Prefer not to say",
             ],
             sunSign: "Sun Sign",
@@ -1197,10 +1467,6 @@ Pisces	मीन	ਮੀਨ	♓
             currentCityPlaceholder: "City",
             currentStatePlaceholder: "State",
             currentCountryPlaceholder: "Country",
-            casteGotra: "Caste & Gotra",
-            castePlaceholder: "Caste",
-            subCastePlaceholder: "Sub Caste",
-            gotraPlaceholder: "Gotra",
             diet: "Diet preference",
             dietSelect: "Select diet preference",
             dietOptions: [
@@ -1287,6 +1553,15 @@ Pisces	मीन	ਮੀਨ	♓
               "Rajasthani",
               ...commonTrans.en.commonOptions,
             ],
+            education: "Education",
+            educationSelect: "Select Education",
+            educationOptions: [...educationOptions.en],
+            occupation: "Occupation",
+            occupationSelect: "Select Occupation",
+            occupationOptions: [...occupationOptions.en],
+            annualIncome: "Annual Income",
+            annualIncomeSelect: "Select Annual Income",
+            annualIncomeOptions: [...annualIncomeOptions.en],
             secFamily: "Family Details",
             familyType: "Family type",
             familyTypeSelect: "Select family type",
@@ -1296,32 +1571,47 @@ Pisces	मीन	ਮੀਨ	♓
               "Living Alone",
               ...commonTrans.en.commonOptions,
             ],
+            familyStatus: "Family Status",
+            familyStatusSelect: "Select family Status",
+            familyStatusOptions: [
+              "Middle Class",
+              "Upper Middle Class",
+              "Lower Middle Class",
+              "Rich / Affluent",
+              ...commonTrans.en.commonOptions,
+            ],
+            casteGotra: "Caste & Gotra",
+            castePlaceholder: "Caste",
+            subCastePlaceholder: "Sub Caste",
+            gotraPlaceholder: "Gotra",
             mother: "Mother",
-            motherPlaceholder: "Name, occupation or other details",
+            motherSelect: "Select about Mother",
+            motherOptions: [...parentsOptions.en],
+            // motherPlaceholder: "Name, occupation or other details",
             father: "Father",
-            fatherPlaceholder: "Name, occupation or other details",
+            fatherSelect: "Select about Father",
+            fatherOptions: [...parentsOptions.en],
+            // fatherPlaceholder: "Name, occupation or other details",
             siblings: "Siblings",
             siblingCountSelect: "Select count",
             brothers: "Brothers",
             marriedBrothers: "Married Brothers",
             sisters: "Sisters",
             marriedSisters: "Married Sisters",
-            education: "Education",
             educationPlaceholder: "Highest qualification",
-            occupation: "Occupation",
             occupationPlaceholder: "Profession / role",
             height: "Height",
             heightSelect: "Select height",
             weight: "Weight",
             weightSelect: "Select weight",
-            about: "About me",
-            aboutPlaceholder: "A short introduction, interests and values",
-            expectations: "Partner preferences (optional)",
-            expectationsPlaceholder:
+            aboutProfile: "More About Profile",
+            aboutProfilePlaceholder: "More About Profile...",
+            aboutFamily: "More About Family",
+            aboutFamilyPlaceholder: "More About Family...",
+            secPartnerPreferences: "Partner Preferences",
+            partnerPreferences: "Partner Preferences",
+            partnerPreferencesPlaceholder:
               "What you are looking for in a life partner",
-            other: "Additional details",
-            otherPlaceholder:
-              "Languages, hobbies, lifestyle or any other details",
             monthOptions: [
               "January",
               "February",
@@ -1453,7 +1743,7 @@ Pisces	मीन	ਮੀਨ	♓
               "आंशिक मांगलिक",
               "पक्का मांगलिक",
               "पता नहीं",
-              "मांगलिक मायने नहीं रखता",
+              // "मांगलिक मायने नहीं रखता",
               //"कोई फ़र्क नहीं पड़ता",
               "बताना नहीं चाहते",
             ],
@@ -1466,10 +1756,6 @@ Pisces	मीन	ਮੀਨ	♓
             currentCityPlaceholder: "शहर",
             currentStatePlaceholder: "राज्य",
             currentCountryPlaceholder: "देश",
-            casteGotra: "जाति और गोत्र",
-            castePlaceholder: "जाति",
-            subCastePlaceholder: "उप-जाति",
-            gotraPlaceholder: "गोत्र",
             diet: "खान-पान की आदतें",
             dietSelect: "खान-पान चुनें",
             dietOptions: [
@@ -1556,6 +1842,15 @@ Pisces	मीन	ਮੀਨ	♓
               "राजस्थानी",
               ...commonTrans.hi.commonOptions,
             ],
+            education: "शिक्षा",
+            educationSelect: "शिक्षा चुनें",
+            educationOptions: [...educationOptions.hi],
+            occupation: "पेशा",
+            occupationSelect: "पेशा चुनें",
+            occupationOptions: [...occupationOptions.hi],
+            annualIncome: "वार्षिक आय",
+            annualIncomeSelect: "वार्षिक आय चुनें",
+            annualIncomeOptions: [...annualIncomeOptions.hi],
             secFamily: "परिवार की जानकारी",
             familyType: "परिवार का प्रकार",
             familyTypeSelect: "परिवार का प्रकार चुनें",
@@ -1565,17 +1860,33 @@ Pisces	मीन	ਮੀਨ	♓
               "अकेले रहते हैं",
               ...commonTrans.hi.commonOptions,
             ],
+            familyStatus: "परिवार का प्रकार",
+            familyStatusSelect: "परिवार का प्रकार चुनें",
+            familyStatusOptions: [
+              "मध्यम वर्ग",
+              "उच्च मध्यम वर्ग",
+              "निम्न मध्यम वर्ग",
+              "समृद्ध / उच्च वर्ग",
+              ...commonTrans.hi.commonOptions,
+            ],
+            casteGotra: "जाति और गोत्र",
+            castePlaceholder: "जाति",
+            subCastePlaceholder: "उप-जाति",
+            gotraPlaceholder: "गोत्र",
             mother: "माता",
-            motherPlaceholder: "नाम, पेशा या अन्य विवरण",
+            motherSelect: "माता के बारे में चुनें",
+            motherOptions: [...parentsOptions.hi],
+            // motherPlaceholder: "नाम, पेशा या अन्य विवरण",
             father: "पिता",
-            fatherPlaceholder: "नाम, पेशा या अन्य विवरण",
+            fatherSelect: "पिता के बारे में चुनें",
+            fatherOptions: [...parentsOptions.hi],
+            // fatherPlaceholder: "नाम, पेशा या अन्य विवरण",
             siblings: "भाई-बहन",
             siblingCountSelect: "संख्या चुनें",
             brothers: "भाई",
             marriedBrothers: "विवाहित भाई",
             sisters: "बहनें",
             marriedSisters: "विवाहित बहनें",
-            education: "शिक्षा",
             educationPlaceholder: "उच्चतम शैक्षणिक योग्यता",
             occupation: "पेशा",
             occupationPlaceholder: "पेशा / भूमिका",
@@ -1583,12 +1894,13 @@ Pisces	मीन	ਮੀਨ	♓
             heightSelect: "कद चुनें",
             weight: "वज़न",
             weightSelect: "वज़न चुनें",
-            about: "मेरे बारे में",
-            aboutPlaceholder: "संक्षिप्त परिचय, रुचियाँ और मूल्य",
-            expectations: "जीवनसाथी से अपेक्षाएँ (वैकल्पिक)",
-            expectationsPlaceholder: "जीवनसाथी में आप क्या खोज रहे हैं",
-            other: "अतिरिक्त जानकारी",
-            otherPlaceholder: "भाषाएँ, शौक, जीवनशैली या अन्य जानकारी",
+            aboutProfile: "प्रोफ़ाइल के बारे में अन्य विवरण",
+            aboutProfilePlaceholder: "प्रोफ़ाइल के बारे में अन्य विवरण...",
+            aboutFamily: "परिवार  के बारे में अन्य विवरण",
+            aboutFamilyPlaceholder: "परिवार  के बारे में अन्य विवरण...",
+            secPartnerPreferences: "जीवनसाथी से अपेक्षाएँ",
+            partnerPreferences: "जीवनसाथी से अपेक्षाएँ",
+            partnerPreferencesPlaceholder: "जीवनसाथी से अपेक्षाएँ...",
             monthOptions: [
               "जनवरी",
               "फ़रवरी",
@@ -1719,7 +2031,7 @@ Pisces	मीन	ਮੀਨ	♓
               "ਆਂਸ਼ਿਕ ਮਾਂਗਲਿਕ",
               "ਪੱਕਾ ਮਾਂਗਲਿਕ",
               "ਪਤਾ ਨਹੀਂ",
-              "ਮਾਂਗਲਿਕ ਹੋਣਾ ਮਾਇਨੇ ਨਹੀਂ ਰੱਖਦਾ",
+              // "ਮਾਂਗਲਿਕ ਹੋਣਾ ਮਾਇਨੇ ਨਹੀਂ ਰੱਖਦਾ",
               //"ਕੋਈ ਫ਼ਰਕ ਨਹੀਂ ਪੈਂਦਾ",
               "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
             ],
@@ -1732,10 +2044,6 @@ Pisces	मीन	ਮੀਨ	♓
             currentCityPlaceholder: "ਸ਼ਹਿਰ",
             currentStatePlaceholder: "ਰਾਜ",
             currentCountryPlaceholder: "ਦੇਸ਼",
-            casteGotra: "ਜਾਤ ਅਤੇ ਗੋਤ",
-            castePlaceholder: "ਜਾਤ",
-            subCastePlaceholder: "ਉਪ-ਜਾਤ",
-            gotraPlaceholder: "ਗੋਤ",
             diet: "ਖਾਣ-ਪੀਣ ਦੀ ਪਸੰਦ",
             dietSelect: "ਖਾਣ-ਪੀਣ ਦੀ ਪਸੰਦ ਚੁਣੋ",
             dietOptions: [
@@ -1822,6 +2130,15 @@ Pisces	मीन	ਮੀਨ	♓
               "ਰਾਜਸਥਾਨੀ",
               ...commonTrans.pa.commonOptions,
             ],
+            education: "ਸਿੱਖਿਆ",
+            educationSelect: "ਸਿੱਖਿਆ ਚੁਣੋ",
+            educationOptions: [...educationOptions.pa],
+            occupation: "ਕਿੱਤਾ",
+            occupationSelect: "ਕਿੱਤਾ ਚੁਣੋ",
+            occupationOptions: [...occupationOptions.pa],
+            annualIncome: "ਸਾਲਾਨਾ ਆਮਦਨ",
+            annualIncomeSelect: "ਸਾਲਾਨਾ ਆਮਦਨ ਚੁਣੋ",
+            annualIncomeOptions: [...annualIncomeOptions.pa],
             secFamily: "ਪਰਿਵਾਰ ਦੀ ਜਾਣਕਾਰੀ",
             familyType: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ",
             familyTypeSelect: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ ਚੁਣੋ",
@@ -1831,30 +2148,46 @@ Pisces	मीन	ਮੀਨ	♓
               "ਇਕੱਲੇ ਰਹਿੰਦੇ ਹਨ",
               ...commonTrans.pa.commonOptions,
             ],
+            familyStatus: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ",
+            familyStatusSelect: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ ਚੁਣੋ",
+            familyStatusOptions: [
+              "ਮੱਧ ਵਰਗ",
+              "ਉੱਚ ਮੱਧ ਵਰਗ",
+              "ਨਿਮਨ ਮੱਧ ਵਰਗ",
+              "ਅਮੀਰ / ਉੱਚ ਵਰਗ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            casteGotra: "ਜਾਤ ਅਤੇ ਗੋਤ",
+            castePlaceholder: "ਜਾਤ",
+            subCastePlaceholder: "ਉਪ-ਜਾਤ",
+            gotraPlaceholder: "ਗੋਤ",
             mother: "ਮਾਤਾ",
-            motherPlaceholder: "ਨਾਮ, ਕਿੱਤਾ ਜਾਂ ਹੋਰ ਜਾਣਕਾਰੀ",
+            motherSelect: "ਮਾਤਾ ਬਾਰੇ ਚੁਣੋ",
+            motherOptions: [...parentsOptions.pa],
+            // motherPlaceholder: "ਨਾਮ, ਕਿੱਤਾ ਜਾਂ ਹੋਰ ਜਾਣਕਾਰੀ",
             father: "ਪਿਤਾ",
-            fatherPlaceholder: "ਨਾਮ, ਕਿੱਤਾ ਜਾਂ ਹੋਰ ਜਾਣਕਾਰੀ",
+            fatherSelect: "ਪਿਤਾ ਬਾਰੇ ਚੁਣੋ",
+            fatherOptions: [...parentsOptions.pa],
+            // fatherPlaceholder: "ਨਾਮ, ਕਿੱਤਾ ਜਾਂ ਹੋਰ ਜਾਣਕਾਰੀ",
             siblings: "ਭੈਣ-ਭਰਾ",
             siblingCountSelect: "ਗਿਣਤੀ ਚੁਣੋ",
             brothers: "ਭਰਾ",
             marriedBrothers: "ਵਿਆਹੇ ਭਰਾ",
             sisters: "ਭੈਣਾਂ",
             marriedSisters: "ਵਿਆਹੀਆਂ ਭੈਣਾਂ",
-            education: "ਸਿੱਖਿਆ",
             educationPlaceholder: "ਸਭ ਤੋਂ ਉੱਚੀ ਵਿੱਦਿਅਕ ਯੋਗਤਾ",
-            occupation: "ਕਿੱਤਾ",
             occupationPlaceholder: "ਕਿੱਤਾ / ਭੂਮਿਕਾ",
             height: "ਕੱਦ",
             heightSelect: "ਕੱਦ ਚੁਣੋ",
             weight: "ਭਾਰ",
             weightSelect: "ਭਾਰ ਚੁਣੋ",
-            about: "ਮੇਰੇ ਬਾਰੇ",
-            aboutPlaceholder: "ਛੋਟੀ ਜਾਣ-ਪਛਾਣ, ਦਿਲਚਸਪੀਆਂ ਅਤੇ ਕਦਰਾਂ-ਕੀਮਤਾਂ",
-            expectations: "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ (ਵਿਕਲਪਿਕ)",
-            expectationsPlaceholder: "ਤੁਸੀਂ ਜੀਵਨ ਸਾਥੀ ਵਿੱਚ ਕੀ ਲੱਭ ਰਹੇ ਹੋ",
-            other: "ਹੋਰ ਜਾਣਕਾਰੀ",
-            otherPlaceholder: "ਭਾਸ਼ਾਵਾਂ, ਸ਼ੌਕ, ਜੀਵਨ-ਸ਼ੈਲੀ ਜਾਂ ਹੋਰ ਜਾਣਕਾਰੀ",
+            aboutProfile: "ਪ੍ਰੋਫਾਈਲ ਬਾਰੇ ਹੋਰ ਵੇਰਵਾ",
+            aboutProfilePlaceholder: "ਪ੍ਰੋਫਾਈਲ ਬਾਰੇ ਹੋਰ ਵੇਰਵਾ...",
+            aboutFamily: "ਪਰਿਵਾਰ ਬਾਰੇ ਹੋਰ ਵੇਰਵਾ",
+            aboutFamilyPlaceholder: "ਪਰਿਵਾਰ ਬਾਰੇ ਹੋਰ ਵੇਰਵਾ...",
+            secPartnerPreferences: "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ",
+            partnerPreferences: "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ",
+            partnerPreferencesPlaceholder: "ਤੁਸੀਂ ਜੀਵਨ ਸਾਥੀ ਵਿੱਚ ਕੀ ਲੱਭ ਰਹੇ ਹੋ",
             monthOptions: [
               "ਜਨਵਰੀ",
               "ਫ਼ਰਵਰੀ",
@@ -1934,20 +2267,25 @@ Pisces	मीन	ਮੀਨ	♓
           weight: "⚖️",
           skinTone: "✨",
           bloodGroup: "🩸",
-          diet: "🍏",
+          diet: "🍽",
           smoking: "🚬",
           drinking: "🍺",
           motherTongue: "🗣️",
-          mother: "👩",
-          father: "👨",
-          siblings: "👫",
-          brothers: "👦",
-          marriedBrothers: "👦💍",
-          sisters: "👧",
-          marriedSisters: "👧💍",
+          mother: "👱🏻‍♀️",
+          father: "👱🏻‍♂️",
+          siblings: "👫🏻",
+          brothers: "🙋🏻",
+          marriedBrothers: "🙋🏻💍",
+          sisters: "🙋🏻‍♀️",
+          marriedSisters: "🙋🏻‍♀️💍",
           familyType: "🏡",
+          familyStatus: "💎",
           education: "🎓",
           occupation: "💼",
+          annualIncome: "💰",
+          aboutFamily: "👨‍👩‍👧‍👦",
+          aboutProfile: "💖",
+          partnerPreferences: "💞",
         };
         const labelIds = [
           "profileFor",
@@ -1990,6 +2328,7 @@ Pisces	मीन	ਮੀਨ	♓
           "sisters",
           "marriedSisters",
           "familyType",
+          "familyStatus",
           "education",
           "occupation",
         ];
@@ -2096,7 +2435,7 @@ Pisces	मीन	ਮੀਨ	♓
           document.querySelectorAll("[data-label]").forEach((el) => {
             const k = el.dataset.label;
             const required = el.querySelector(".req");
-            el.textContent = emojisMap[k] + " " + (t[k] || k);
+            el.innerHTML = `<span class="field-label-emoji">${emojisMap[k]}</span><span class="field-label-text">${t[k] || k}</span>`;
             if (required) el.append("", required);
           });
           [
@@ -2225,9 +2564,23 @@ Pisces	मीन	ਮੀਨ	♓
             t.motherTongueSelect,
             t.motherTongueOptions,
           );
+          setOptions("education", t.educationSelect, t.educationOptions);
+          setOptions("occupation", t.occupationSelect, t.occupationOptions);
+          setOptions(
+            "annualIncome",
+            t.annualIncomeSelect,
+            t.annualIncomeOptions,
+          );
           $("childrenGirls").setAttribute("aria-label", t.childrenGirls);
           $("childrenBoys").setAttribute("aria-label", t.childrenBoys);
           setOptions("familyType", t.familyTypeSelect, t.familyTypeOptions);
+          setOptions(
+            "familyStatus",
+            t.familyStatusSelect,
+            t.familyStatusOptions,
+          );
+          setOptions("mother", t.motherSelect, t.motherOptions);
+          setOptions("father", t.fatherSelect, t.fatherOptions);
           setOptions("brothers", null, siblingCounts);
           setOptions("sisters", null, siblingCounts);
           updateMarriedSiblingOptions("brothers", "marriedBrothers");
@@ -2470,7 +2823,7 @@ Pisces	मीन	ਮੀਨ	♓
               [t.weight, $("weight").selectedOptions[0]?.textContent || ""],
               [t.religion, val("religion")],
               [t.about, val("about")],
-              [t.expectations, val("expectations")],
+              [t.partnerPreferences, val("partnerPreferences")],
               [t.other, val("Others")],
             ],
             t,
