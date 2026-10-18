@@ -306,13 +306,6 @@
       .hidden {
         display: none !important;
       }
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-        margin-top: 22px;
-      }
       button {
         border: 0;
         border-radius: 12px;
@@ -358,64 +351,40 @@
         font-size: 0.83rem;
         padding: 0 16px 28px;
       }
-      #preview {
-        display: none;
-      }
-      .preview-top {
-        border-bottom: 2px solid var(--brand);
-        padding-bottom: 15px;
-        margin-bottom: 22px;
-      }
-      .preview-top h2 {
-        font-size: 1.8rem;
-        color: var(--brand);
-      }
-      .preview-top p {
-        color: var(--muted);
-        margin: 5px 0 0;
-      }
-      .profile-section {
-        margin: 22px 0;
-        break-inside: avoid;
-      }
-      .profile-section h3 {
-        font-size: 1rem;
-        color: var(--brand);
-        border-bottom: 1px solid var(--line);
-        padding-bottom: 7px;
-        margin: 0 0 10px;
-      }
-      .profile-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px 24px;
-      }
-      .profile-item {
-        padding: 3px 0;
-        overflow-wrap: anywhere;
-      }
-      .profile-item .key {
-        display: block;
-        font-size: 0.76rem;
-        text-transform: uppercase;
-        letter-spacing: 0.07em;
-        color: #6d7d77;
-        margin-bottom: 2px;
-      }
-      .profile-item .val {
-        font-weight: 600;
-        white-space: pre-wrap;
-      }
       .print-note {
         font-size: 0.82rem;
         color: var(--muted);
         margin-top: 20px;
       }
+      .format-actions,
+      .output-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .format-actions button,
+      .output-actions button {
+        flex: 1 1 220px;
+      }
+      #profileOutput {
+        margin: 0;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #f8fbf9;
+        font: inherit;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      #outputStatus {
+        min-height: 1.5em;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
       @media (max-width: 820px) {
         .grid,
         .grid.three,
-        .multiple-groups-row,
-        .profile-grid {
+        .multiple-groups-row {
           grid-template-columns: 1fr;
         }
         .grid.four {
@@ -430,6 +399,15 @@
         }
         .card {
           border-radius: 14px;
+        }
+        .format-actions,
+        .output-actions {
+          flex-direction: column;
+        }
+        .format-actions button,
+        .output-actions button {
+          width: 100%;
+          flex-basis: auto;
         }
         header {
           padding-top: 26px;
@@ -448,7 +426,6 @@
         header,
         #formView,
         footer,
-        .actions,
         .notice,
         .screen-only {
           display: none !important;
@@ -457,7 +434,7 @@
           padding: 0;
           max-width: none;
         }
-        #preview {
+        #outputView {
           display: block !important;
         }
         .card {
@@ -466,20 +443,14 @@
           padding: 0;
           margin: 0;
         }
-        .preview-top h2 {
-          font-size: 23pt;
+        #profileOutput {
+          border: 0;
+          padding: 0;
+          background: #fff;
         }
-        .profile-section {
-          margin: 17px 0;
-        }
-        .profile-section h3 {
-          color: #174f43;
-        }
-        .profile-item .key {
-          color: #596b64;
-        }
-        .profile-item .val {
-          font-weight: 500;
+        .output-actions,
+        #outputStatus {
+          display: none !important;
         }
       }
       @media (max-width: 650px) {
@@ -576,8 +547,9 @@
                   ><select id="gender" name="gender" required></select>
                 </div>
                 <div class="field">
-                  <label for="category" data-label="category">category</label
-                  ><select id="category" name="category"></select>
+                  <label for="category" data-label="category"
+                    >category <span class="req">*</span></label
+                  ><select id="category" name="category" required></select>
                 </div>
                 <div class="field">
                   <label for="religion" data-label="religion">Religion</label
@@ -589,7 +561,7 @@
                   class="fields-group-wrapper-title"
                   data-label="maritalAndChildren"
                 >
-                  Marital status and children
+                  Marital status and children <span class="req">*</span>
                 </legend>
                 <div class="fields-group marital" id="maritalFields">
                   <div class="field">
@@ -630,7 +602,7 @@
                   class="fields-group-wrapper-title"
                   data-label="secLocation"
                 >
-                  Current location
+                  Current location <span class="req">*</span>
                 </legend>
                 <div class="fields-group location">
                   <div class="field">
@@ -639,6 +611,7 @@
                       name="currentCity"
                       data-placeholder="currentCity"
                       placeholder="City"
+                      required
                     />
                   </div>
                   <div class="field">
@@ -647,6 +620,7 @@
                       name="currentState"
                       data-placeholder="currentState"
                       placeholder="State"
+                      required
                     />
                   </div>
                   <div class="field">
@@ -655,7 +629,7 @@
                       name="currentCountry"
                       data-placeholder="currentCountry"
                       placeholder="Country"
-                      value="India"
+                      required
                     />
                   </div>
                 </div>
@@ -675,7 +649,7 @@
                     class="fields-group-wrapper-title"
                     data-label="dateOfBirth"
                   >
-                    Date of birth
+                    Date of birth <span class="req">*</span>
                   </legend>
                   <div class="fields-group date">
                     <div class="field">
@@ -928,15 +902,6 @@
               ></textarea>
             </div>
 
-            <div class="actions">
-              <button class="primary" type="submit" id="createBtn">
-                Create printable profile →
-              </button>
-              <button class="secondary" type="reset" id="resetBtn">
-                Clear form
-              </button>
-              <span class="privacy" id="requiredNote">* Required fields</span>
-            </div>
             <p class="error" id="formError" role="alert">
               Please complete all required fields and check the values.
             </p>
@@ -944,7 +909,9 @@
           <section class="card">
             <div class="section-head">
               <div class="section-emoji">💞</div>
-              <h2 id="secPartnerPreferences">Partner Preferences</h2>
+              <h2 id="secPartnerPreferences">
+                Partner Preferences <span class="req">*</span>
+              </h2>
             </div>
             <div class="grid">
               <div class="field full">
@@ -955,32 +922,139 @@
                   name="partnerPreferences"
                   data-placeholder="partnerPreferences"
                   placeholder="What you are looking for in a life partner"
+                  required
                 ></textarea>
               </div>
             </div>
           </section>
+          <section class="card">
+            <div class="section-head">
+              <div class="section-emoji">📞</div>
+              <h2 id="secContactDetails">Contact Details</h2>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="contactNumber" data-label="contactNumber"
+                  >contactNumber</label
+                >
+                <input
+                  id="contactNumber"
+                  name="contactNumber"
+                  data-placeholder="contactNumber"
+                  placeholder="contactNumber"
+                />
+              </div>
+              <div class="field">
+                <label for="whatsappNumber" data-label="whatsappNumber"
+                  >whatsappNumber</label
+                >
+                <input
+                  id="whatsappNumber"
+                  name="whatsappNumber"
+                  data-placeholder="whatsappNumber"
+                  placeholder="whatsappNumber"
+                />
+              </div>
+              <div class="field">
+                <label for="emailId" data-label="emailId">emailId</label>
+                <input
+                  id="emailId"
+                  name="emailId"
+                  data-placeholder="emailId"
+                  placeholder="emailId"
+                />
+              </div>
+              <div class="field">
+                <label for="facebookProfile" data-label="facebookProfile"
+                  >facebookProfile</label
+                >
+                <input
+                  id="facebookProfile"
+                  name="facebookProfile"
+                  data-placeholder="facebookProfile"
+                  placeholder="facebookProfile"
+                />
+              </div>
+              <div class="field">
+                <label for="instagramProfile" data-label="instagramProfile"
+                  >instagramProfile</label
+                >
+                <input
+                  id="instagramProfile"
+                  name="instagramProfile"
+                  data-placeholder="instagramProfile"
+                  placeholder="instagramProfile"
+                />
+              </div>
+              <div class="field">
+                <label for="linkedinProfile" data-label="linkedinProfile"
+                  >linkedinProfile</label
+                >
+                <input
+                  id="linkedinProfile"
+                  name="linkedinProfile"
+                  data-placeholder="linkedinProfile"
+                  placeholder="linkedinProfile"
+                />
+              </div>
+            </div>
+          </section>
+          <section class="card">
+            <div class="section-head">
+              <div class="section-emoji">🪄</div>
+              <h2 id="profileFormatsTitle">Create a profile</h2>
+            </div>
+            <p id="requiredNote" class="help">
+              * Required fields apply to every profile format.
+            </p>
+            <div class="format-actions">
+              <button
+                class="primary"
+                type="button"
+                data-profile-format="anonymous"
+                id="anonymousProfileBtn"
+              >
+                Create Anonymous Profile
+              </button>
+              <button
+                class="secondary"
+                type="button"
+                data-profile-format="compact"
+                id="compactProfileBtn"
+              >
+                Create Compact Profile
+              </button>
+              <button
+                class="secondary"
+                type="button"
+                data-profile-format="standard"
+                id="standardProfileBtn"
+              >
+                Standard Profile
+              </button>
+              <button
+                class="secondary"
+                type="button"
+                data-profile-format="detailed"
+                id="detailedProfileBtn"
+              >
+                Detailed Profile
+              </button>
+            </div>
+          </section>
         </form>
       </div>
-      <section id="preview" class="card" aria-live="polite">
-        <div class="preview-top">
-          <h2 id="previewName">Matrimonial Profile</h2>
-          <p id="previewSub">Personal biodata</p>
+      <section class="card hidden" id="outputView" aria-labelledby="outputTitle">
+        <div class="section-head">
+          <div class="section-emoji" aria-hidden="true">💌</div>
+          <h2 id="outputTitle">Your profile</h2>
         </div>
-        <div id="profileContent"></div>
-        <p class="print-note" id="printNote">
-          Prepared with a free, offline profile maker. Personal information was
-          not uploaded by this page.
-        </p>
-        <div class="actions screen-only">
-          <button class="primary" type="button" id="printBtn">
-            Print / Save as PDF
-          </button>
-          <button class="secondary" type="button" id="editBtn">
-            ← Edit details
-          </button>
-          <button class="secondary" type="button" id="newBtn">
-            Start a new profile
-          </button>
+        <pre id="profileOutput"></pre>
+        <p id="outputStatus" role="status" aria-live="polite"></p>
+        <div class="output-actions">
+          <button class="primary" type="button" id="copyProfileBtn">Copy profile</button>
+          <button class="secondary" type="button" id="printProfileBtn">Print / Save as PDF</button>
+          <button class="secondary" type="button" id="editProfileBtn">Edit details</button>
         </div>
       </section>
     </main>
@@ -1612,6 +1686,19 @@
             partnerPreferences: "Partner Preferences",
             partnerPreferencesPlaceholder:
               "What you are looking for in a life partner",
+            secContactDetails: "Contact Details",
+            contactNumber: "Contact Number",
+            whatsappNumber: "WhatsApp Number",
+            emailId: "Email ID",
+            facebookProfile: "Facebook Profile",
+            instagramProfile: "Instagram Profile",
+            linkedinProfile: "LinkedIn Profile",
+            contactNumberPlaceholder: "+91 9874563210",
+            whatsappNumberPlaceholder: "+91 9874563210",
+            emailIdPlaceholder: "my-name@example.com",
+            facebookProfilePlaceholder: "https://www.facebook.com/my-profile",
+            instagramProfilePlaceholder: "https://www.instagram.com/my-profile",
+            linkedinProfilePlaceholder: "https://www.linkedin.com/my-profile",
             monthOptions: [
               "January",
               "February",
@@ -1634,9 +1721,35 @@
             secondSelect: "Seconds",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            create: "Create printable profile →",
+            profileFormatsTitle: "Create a profile",
+            anonymousProfile: "Create Anonymous Profile",
+            compactProfile: "Create Compact Profile",
+            standardProfile: "Standard Profile",
+            detailedProfile: "Detailed Profile",
+            outputTitle: "Your profile",
+            profileModeTitles: {
+              anonymous: "Anonymous Profile",
+              compact: "Compact Profile",
+              standard: "Standard Profile",
+              detailed: "Detailed Profile",
+            },
+            outputGroups: [
+              "Basic details",
+              "Birth details",
+              "Current location",
+              "Personal details",
+              "Family details",
+              "Partner preferences",
+              "Contact details",
+            ],
+            surname: "Surname",
+            copySuccess: "Profile copied.",
+            copyFailure: "Could not copy the profile. Select and copy the text manually.",
+            copyProfile: "Copy profile",
+            printProfile: "Print / Save as PDF",
+            editProfile: "Edit details",
             reset: "Clear form",
-            required: "* Required fields",
+            required: "* Required fields apply to every profile format.",
             previewSub: "Personal biodata",
             print: "Print / Save as PDF",
             edit: "← Edit details",
@@ -1901,6 +2014,19 @@
             secPartnerPreferences: "जीवनसाथी से अपेक्षाएँ",
             partnerPreferences: "जीवनसाथी से अपेक्षाएँ",
             partnerPreferencesPlaceholder: "जीवनसाथी से अपेक्षाएँ...",
+            secContactDetails: "संपर्क विवरण",
+            contactNumber: "फ़ोन नंबर",
+            whatsappNumber: "व्हाट्सएप नंबर",
+            emailId: "ईमेल आईडी",
+            facebookProfile: "फेसबुक प्रोफ़ाइल",
+            instagramProfile: "इंस्टाग्राम प्रोफ़ाइल",
+            linkedinProfile: "लिंक्डइन प्रोफ़ाइल",
+            contactNumberPlaceholder: "+91 9874563210",
+            whatsappNumberPlaceholder: "+91 9874563210",
+            emailIdPlaceholder: "my-name@example.com",
+            facebookProfilePlaceholder: "https://www.facebook.com/my-profile",
+            instagramProfilePlaceholder: "https://www.instagram.com/my-profile",
+            linkedinProfilePlaceholder: "https://www.linkedin.com/my-profile",
             monthOptions: [
               "जनवरी",
               "फ़रवरी",
@@ -1923,9 +2049,35 @@
             secondSelect: "सेकंड",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            create: "प्रिंट योग्य प्रोफ़ाइल बनाएँ →",
+            profileFormatsTitle: "प्रोफ़ाइल बनाएँ",
+            anonymousProfile: "अनाम प्रोफ़ाइल बनाएँ",
+            compactProfile: "संक्षिप्त प्रोफ़ाइल बनाएँ",
+            standardProfile: "मानक प्रोफ़ाइल",
+            detailedProfile: "विस्तृत प्रोफ़ाइल",
+            outputTitle: "आपकी प्रोफ़ाइल",
+            profileModeTitles: {
+              anonymous: "अनाम प्रोफ़ाइल",
+              compact: "संक्षिप्त प्रोफ़ाइल",
+              standard: "मानक प्रोफ़ाइल",
+              detailed: "विस्तृत प्रोफ़ाइल",
+            },
+            outputGroups: [
+              "मूल विवरण",
+              "जन्म विवरण",
+              "वर्तमान निवास",
+              "व्यक्तिगत विवरण",
+              "परिवार का विवरण",
+              "जीवनसाथी की अपेक्षाएँ",
+              "संपर्क विवरण",
+            ],
+            surname: "उपनाम",
+            copySuccess: "प्रोफ़ाइल कॉपी हो गई।",
+            copyFailure: "प्रोफ़ाइल कॉपी नहीं हो सकी। टेक्स्ट चुनकर स्वयं कॉपी करें।",
+            copyProfile: "प्रोफ़ाइल कॉपी करें",
+            printProfile: "प्रिंट / PDF के रूप में सेव करें",
+            editProfile: "विवरण बदलें",
             reset: "फ़ॉर्म साफ़ करें",
-            required: "* आवश्यक फ़ील्ड",
+            required: "* सभी प्रोफ़ाइल प्रारूपों के लिए आवश्यक फ़ील्ड भरें।",
             previewSub: "वैवाहिक परिचय-पत्र",
             print: "प्रिंट / PDF के रूप में सेव करें",
             edit: "← विवरण बदलें",
@@ -2188,6 +2340,19 @@
             secPartnerPreferences: "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ",
             partnerPreferences: "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ",
             partnerPreferencesPlaceholder: "ਤੁਸੀਂ ਜੀਵਨ ਸਾਥੀ ਵਿੱਚ ਕੀ ਲੱਭ ਰਹੇ ਹੋ",
+            secContactDetails: "ਸੰਪਰਕ ਵੇਰਵਾ",
+            contactNumber: "ਫ਼ੋਨ ਨੰਬਰ",
+            whatsappNumber: "ਵਟਸਐਪ ਨੰਬਰ",
+            emailId: "ਈਮੇਲ ਆਈਡੀ",
+            facebookProfile: "ਫੇਸਬੁੱਕ ਪ੍ਰੋਫਾਈਲ",
+            instagramProfile: "ਇੰਸਟਾਗ੍ਰਾਮ ਪ੍ਰੋਫਾਈਲ",
+            linkedinProfile: "ਲਿੰਕਡਇਨ ਪ੍ਰੋਫਾਈਲ",
+            contactNumberPlaceholder: "+91 9874563210",
+            whatsappNumberPlaceholder: "+91 9874563210",
+            emailIdPlaceholder: "my-name@example.com",
+            facebookProfilePlaceholder: "https://www.facebook.com/my-profile",
+            instagramProfilePlaceholder: "https://www.instagram.com/my-profile",
+            linkedinProfilePlaceholder: "https://www.linkedin.com/my-profile",
             monthOptions: [
               "ਜਨਵਰੀ",
               "ਫ਼ਰਵਰੀ",
@@ -2210,9 +2375,35 @@
             secondSelect: "ਸਕਿੰਟ",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            create: "ਪ੍ਰਿੰਟ ਲਈ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ →",
+            profileFormatsTitle: "ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            anonymousProfile: "ਗੁਮਨਾਮ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            compactProfile: "ਸੰਖੇਪ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            standardProfile: "ਮਿਆਰੀ ਪ੍ਰੋਫ਼ਾਈਲ",
+            detailedProfile: "ਵਿਸਤ੍ਰਿਤ ਪ੍ਰੋਫ਼ਾਈਲ",
+            outputTitle: "ਤੁਹਾਡੀ ਪ੍ਰੋਫ਼ਾਈਲ",
+            profileModeTitles: {
+              anonymous: "ਗੁਮਨਾਮ ਪ੍ਰੋਫ਼ਾਈਲ",
+              compact: "ਸੰਖੇਪ ਪ੍ਰੋਫ਼ਾਈਲ",
+              standard: "ਮਿਆਰੀ ਪ੍ਰੋਫ਼ਾਈਲ",
+              detailed: "ਵਿਸਤ੍ਰਿਤ ਪ੍ਰੋਫ਼ਾਈਲ",
+            },
+            outputGroups: [
+              "ਮੁੱਢਲੇ ਵੇਰਵੇ",
+              "ਜਨਮ ਦੇ ਵੇਰਵੇ",
+              "ਮੌਜੂਦਾ ਟਿਕਾਣਾ",
+              "ਨਿੱਜੀ ਵੇਰਵੇ",
+              "ਪਰਿਵਾਰਕ ਵੇਰਵੇ",
+              "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ",
+              "ਸੰਪਰਕ ਵੇਰਵੇ",
+            ],
+            surname: "ਉਪਨਾਮ",
+            copySuccess: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਹੋ ਗਈ।",
+            copyFailure: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਨਹੀਂ ਹੋਈ। ਟੈਕਸਟ ਚੁਣ ਕੇ ਖੁਦ ਕਾਪੀ ਕਰੋ।",
+            copyProfile: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਕਰੋ",
+            printProfile: "ਪ੍ਰਿੰਟ / PDF ਵਜੋਂ ਸੇਵ ਕਰੋ",
+            editProfile: "ਵੇਰਵੇ ਸੋਧੋ",
             reset: "ਫਾਰਮ ਸਾਫ਼ ਕਰੋ",
-            required: "* ਲਾਜ਼ਮੀ ਜਾਣਕਾਰੀ",
+            required: "* ਹਰ ਪ੍ਰੋਫ਼ਾਈਲ ਕਿਸਮ ਲਈ ਲਾਜ਼ਮੀ ਜਾਣਕਾਰੀ ਭਰੋ।",
             previewSub: "ਵਿਆਹ ਸੰਬੰਧੀ ਬਾਇਓਡਾਟਾ",
             print: "ਪ੍ਰਿੰਟ / PDF ਵਜੋਂ ਸੇਵ ਕਰੋ",
             edit: "← ਵੇਰਵੇ ਸੋਧੋ",
@@ -2286,6 +2477,13 @@
           aboutFamily: "👨‍👩‍👧‍👦",
           aboutProfile: "💖",
           partnerPreferences: "💞",
+          secContactDetails: "📞",
+          contactNumber: "📞",
+          whatsappNumber: "💬",
+          emailId: "✉️",
+          facebookProfile: "🌐",
+          instagramProfile: "📸",
+          linkedinProfile: "💼",
         };
         const labelIds = [
           "profileFor",
@@ -2430,7 +2628,8 @@
             "secLocation",
             //"subLocation",
             "secFamily",
-            //"subFamily",
+            "secPartnerPreferences",
+            "secContactDetails",
           ].forEach((id) => $(id) && ($(id).textContent = t[id]));
           document.querySelectorAll("[data-label]").forEach((el) => {
             const k = el.dataset.label;
@@ -2585,14 +2784,16 @@
           setOptions("sisters", null, siblingCounts);
           updateMarriedSiblingOptions("brothers", "marriedBrothers");
           updateMarriedSiblingOptions("sisters", "marriedSisters");
-          $("createBtn").textContent = t.create;
-          $("resetBtn").textContent = t.reset;
+          $("profileFormatsTitle").textContent = t.profileFormatsTitle;
+          $("anonymousProfileBtn").textContent = t.anonymousProfile;
+          $("compactProfileBtn").textContent = t.compactProfile;
+          $("standardProfileBtn").textContent = t.standardProfile;
+          $("detailedProfileBtn").textContent = t.detailedProfile;
           $("requiredNote").textContent = t.required;
-          $("previewSub").textContent = t.previewSub;
-          $("printBtn").textContent = t.print;
-          $("editBtn").textContent = t.edit;
-          $("newBtn").textContent = t.new;
-          $("printNote").textContent = t.printNote;
+          $("copyProfileBtn").textContent = t.copyProfile;
+          $("printProfileBtn").textContent = t.printProfile;
+          $("editProfileBtn").textContent = t.editProfile;
+          $("outputTitle").textContent = t.outputTitle;
           $("footerText").textContent = t.footer;
           document.documentElement.lang = $("language").value;
           toggleChildren();
@@ -2689,175 +2890,298 @@
           return fields;
         }
         window.readLocalizedFormFields = readLocalizedFormFields;
-        function addItem(container, label, value, t) {
-          if (!value) return;
-          const item = document.createElement("div");
-          item.className = "profile-item";
-          const key = document.createElement("span");
-          key.className = "key";
-          key.textContent = label;
-          const v = document.createElement("div");
-          v.className = "val";
-          v.textContent = value;
-          item.append(key, v);
-          container.appendChild(item);
-        }
-        function makeSection(parent, title, items, t) {
-          const section = document.createElement("section");
-          section.className = "profile-section";
-          const h = document.createElement("h3");
-          h.textContent = title;
-          section.appendChild(h);
-          const grid = document.createElement("div");
-          grid.className = "profile-grid";
-          items.forEach(([label, value]) => addItem(grid, label, value, t));
-          if (grid.children.length) {
-            section.appendChild(grid);
-            parent.appendChild(section);
-          }
-        }
-        function buildProfile() {
+        const profileFieldGroups = [
+          {
+            title: "Basic details",
+            emoji: "💖",
+            ids: [
+              "profileFor",
+              "name",
+              "gender",
+              "category",
+              "religion",
+              "maritalStatus",
+              "childrenGirls",
+              "childrenBoys",
+            ],
+          },
+          {
+            title: "Birth details",
+            emoji: "🪐",
+            ids: [
+              "birthYear",
+              "birthMonth",
+              "birthDate",
+              "birthHour",
+              "birthMinute",
+              "birthSecond",
+              "birthAmPm",
+              "birthCity",
+              "birthState",
+              "birthCountry",
+              "manglik",
+              "sunSign",
+              "moonSign",
+            ],
+          },
+          {
+            title: "Current location",
+            emoji: "📍",
+            ids: ["currentCity", "currentState", "currentCountry"],
+          },
+          {
+            title: "Personal details",
+            emoji: "✨",
+            ids: [
+              "height",
+              "weight",
+              "skinTone",
+              "bloodGroup",
+              "diet",
+              "smoking",
+              "drinking",
+              "motherTongue",
+              "education",
+              "occupation",
+              "annualIncome",
+              "aboutProfile",
+            ],
+          },
+          {
+            title: "Family details",
+            emoji: "👨‍👩‍👧‍👦",
+            ids: [
+              "familyType",
+              "familyStatus",
+              "caste",
+              "subCaste",
+              "gotra",
+              "mother",
+              "father",
+              "brothers",
+              "marriedBrothers",
+              "sisters",
+              "marriedSisters",
+              "aboutFamily",
+            ],
+          },
+          {
+            title: "Partner preferences",
+            emoji: "💞",
+            ids: ["partnerPreferences"],
+          },
+          {
+            title: "Contact details",
+            emoji: "📞",
+            ids: [
+              "contactNumber",
+              "whatsappNumber",
+              "emailId",
+              "facebookProfile",
+              "instagramProfile",
+              "linkedinProfile",
+            ],
+          },
+        ];
+        const anonymousExcludedFields = new Set([
+          "profileFor",
+          "birthMonth",
+          "birthDate",
+          "birthHour",
+          "birthMinute",
+          "birthSecond",
+          "birthAmPm",
+          "birthCity",
+          "birthState",
+          "birthCountry",
+          "currentState",
+          "currentCountry",
+          "caste",
+          "subCaste",
+          "gotra",
+          "mother",
+          "father",
+          "aboutProfile",
+          "aboutFamily",
+          "partnerPreferences",
+          "contactNumber",
+          "whatsappNumber",
+          "emailId",
+          "facebookProfile",
+          "instagramProfile",
+          "linkedinProfile",
+        ]);
+        function readProfileEntries() {
           const t = trans[$("language").value] || trans.en;
-          const statusText =
-            $("maritalStatus").selectedOptions[0]?.textContent || "";
-          const genderText = $("gender").selectedOptions[0]?.textContent || "";
-          const manglikText =
-            $("manglik").selectedOptions[0]?.textContent || "";
-          const profileForText =
-            $("profileFor").selectedOptions[0]?.textContent || "";
-          const monthText =
-            $("birthMonth").selectedOptions[0]?.textContent || "";
-          const amPmText = $("birthAmPm").selectedOptions[0]?.textContent || "";
-          const birthDate = [
-            monthText && val("birthMonth") ? monthText : "",
-            val("birthDate"),
-            val("birthYear"),
-          ]
-            .filter(Boolean)
-            .join("");
-          const time = [
-            val("birthHour"),
-            val("birthMinute"),
-            val("birthSecond"),
-            amPmText,
-          ].some(Boolean)
-            ? [
-                val("birthHour") || "00",
-                val("birthMinute") || "00",
-                val("birthSecond") || "00",
-              ].join(":") + (amPmText ? ` ${amPmText}` : "")
-            : "";
-          const birthPlace = [
-            val("birthCity"),
-            val("birthState"),
-            val("birthCountry"),
-          ]
-            .filter(Boolean)
-            .join(",");
-          $("previewName").textContent = val("name") || t.profileTitle;
-          $("profileContent").innerHTML = "";
-          makeSection(
-            $("profileContent"),
-            t.sections[0],
-            [
-              [t.profileFor, profileForText],
-              [t.name, val("name")],
-              [t.gender, genderText],
-              [t.manglik, manglikText],
-              [t.maritalStatus, statusText],
-              ...($("maritalStatus").selectedIndex > 1
-                ? [
-                    [t.childSummary, ""],
-                    [t.girlCount, val("childrenGirls") || "0"],
-                    [t.boyCount, val("childrenBoys") || "0"],
-                  ]
-                : []),
-            ],
-            t,
-          );
-          makeSection(
-            $("profileContent"),
-            t.sections[1],
-            [
-              [t.dateOfBirth, birthDate],
-              [t.timeOfBirth, time],
-              [t.placeOfBirth, birthPlace],
-            ],
-            t,
-          );
-          makeSection(
-            $("profileContent"),
-            t.sections[2],
-            [
-              [t.currentCity, val("currentCity")],
-              [t.currentState, val("currentState")],
-              [t.currentCountry, val("currentCountry")],
-              [
-                t.diet,
-                $("diet").selectedIndex
-                  ? $("diet").selectedOptions[0].textContent
-                  : "",
-              ],
-            ],
-            t,
-          );
-          makeSection(
-            $("profileContent"),
-            t.sections[3],
-            [
-              [t.mother, val("mother")],
-              [t.father, val("father")],
-              [t.brothers, val("brothers")],
-              [t.marriedBrothers, val("marriedBrothers")],
-              [t.sisters, val("sisters")],
-              [t.marriedSisters, val("marriedSisters")],
-              [
-                t.familyType,
-                $("familyType").selectedIndex
-                  ? $("familyType").selectedOptions[0].textContent
-                  : "",
-              ],
-              [t.education, val("education")],
-              [t.occupation, val("occupation")],
-              [t.height, $("height").selectedOptions[0]?.textContent || ""],
-              [t.weight, $("weight").selectedOptions[0]?.textContent || ""],
-              [t.religion, val("religion")],
-              [t.about, val("about")],
-              [t.partnerPreferences, val("partnerPreferences")],
-              [t.other, val("Others")],
-            ],
-            t,
-          );
-          $("formView").style.display = "none";
-          $("preview").style.display = "block";
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          const entries = new Map();
+          for (const control of $("profileForm").elements) {
+            if (!control.matches("input, select, textarea") || !control.id)
+              continue;
+            if (control.id === "language" || control.disabled) continue;
+            let value = "";
+            if (control instanceof HTMLSelectElement) {
+              if (!control.value) continue;
+              value = [...control.selectedOptions]
+                .map((option) => option.textContent.trim())
+                .filter(Boolean)
+                .join(", ");
+            } else {
+              value = control.value.trim();
+            }
+            if (!value) continue;
+            const labelKey =
+              control.labels?.[0]?.dataset.label ||
+              control.dataset.label ||
+              control.id;
+            const label =
+              t[labelKey] ||
+              t[control.id] ||
+              t[`${control.id}Placeholder`] ||
+              control.getAttribute("aria-label") ||
+              control.labels?.[0]?.textContent.trim() ||
+              control.name ||
+              control.id;
+            entries.set(control.id, {
+              id: control.id,
+              label,
+              value,
+              emoji: emojisMap[labelKey] || emojisMap[control.id] || "•",
+            });
+          }
+          return entries;
         }
-        $("profileForm").addEventListener("submit", (e) => {
-          e.preventDefault();
+        function getProfileGroups(mode, entries, t) {
+          return profileFieldGroups
+            .map((group, index) => {
+              const items = group.ids
+                .filter((id) =>
+                  mode === "anonymous"
+                    ? !anonymousExcludedFields.has(id)
+                    : true,
+                )
+                .map((id) => {
+                  const entry = entries.get(id);
+                  if (!entry) return null;
+                  if (mode === "anonymous" && id === "name") {
+                    const nameParts = entry.value.split(/\s+/);
+                    if (nameParts.length < 2) return null;
+                    return {
+                      ...entry,
+                      id: "surname",
+                      label: t.surname,
+                      value: nameParts[nameParts.length - 1],
+                      emoji: emojisMap.name,
+                    };
+                  }
+                  return entry;
+                })
+                .filter(Boolean);
+              return {
+                title: t.outputGroups[index],
+                emoji: group.emoji,
+                items,
+              };
+            })
+            .filter((group) => group.items.length);
+        }
+        function formatProfile(mode) {
+          const t = trans[$("language").value] || trans.en;
+          const entries = readProfileEntries();
+          const groups = getProfileGroups(mode, entries, t);
+          if (mode === "anonymous" || mode === "compact") {
+            return groups
+              .flatMap((group) => group.items)
+              .map((item) => `${item.label}: ${item.value}`)
+              .join(" · ");
+          }
+          if (mode === "standard") {
+            return groups
+              .flatMap((group) => group.items)
+              .map((item) => `${item.label}: ${item.value}`)
+              .join("\n");
+          }
+          return groups
+            .map(
+              (group) =>
+                `${group.emoji} ${group.title}\n${group.items
+                  .map(
+                    (item) => `  ${item.emoji} ${item.label}: ${item.value}`,
+                  )
+                  .join("\n")}`,
+            )
+            .join("\n\n");
+        }
+        function createProfile(mode) {
+          const form = $("profileForm");
           $("formError").style.display = "none";
-          const form = e.currentTarget;
           if (!form.reportValidity()) {
             $("formError").style.display = "block";
             return;
           }
-          buildProfile();
-        });
-        $("printBtn").addEventListener("click", () => window.print());
-        $("editBtn").addEventListener("click", () => {
-          $("preview").style.display = "none";
-          $("formView").style.display = "block";
+          const t = trans[$("language").value] || trans.en;
+          $("profileOutput").textContent = formatProfile(mode);
+          $("outputTitle").textContent = t.profileModeTitles[mode];
+          $("outputStatus").textContent = "";
+          $("formView").style.display = "none";
+          $("outputView").classList.remove("hidden");
           window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        document.querySelectorAll("[data-profile-format]").forEach((button) => {
+          button.addEventListener("click", () =>
+            createProfile(button.dataset.profileFormat),
+          );
         });
-        $("newBtn").addEventListener("click", () => {
-          if (confirm("Clear the current profile and start a new one?")) {
-            $("profileForm").reset();
-            $("language").value = "en";
-            updateLanguage();
-            toggleChildren();
-            $("preview").style.display = "none";
-            $("formView").style.display = "block";
-            window.scrollTo({ top: 0, behavior: "smooth" });
+        $("copyProfileBtn").addEventListener("click", async () => {
+          const t = trans[$("language").value] || trans.en;
+          let clipboardError;
+          try {
+            if (navigator.clipboard?.writeText) {
+              await navigator.clipboard.writeText(
+                $("profileOutput").textContent,
+              );
+              $("outputStatus").textContent = t.copySuccess;
+              return;
+            }
+          } catch (error) {
+            clipboardError = error;
           }
+          const fallback = document.createElement("textarea");
+          fallback.value = $("profileOutput").textContent;
+          fallback.setAttribute("readonly", "");
+          fallback.style.position = "fixed";
+          fallback.style.top = "0";
+          fallback.style.left = "0";
+          fallback.style.opacity = "0.01";
+          fallback.style.fontSize = "16px";
+          document.body.appendChild(fallback);
+          let copied = false;
+          let fallbackError;
+          try {
+            fallback.focus();
+            fallback.select();
+            fallback.setSelectionRange(0, fallback.value.length);
+            copied =
+              typeof document.execCommand === "function" &&
+              document.execCommand("copy");
+          } catch (error) {
+            fallbackError = error;
+          } finally {
+            fallback.remove();
+          }
+          if (copied) {
+            $("outputStatus").textContent = t.copySuccess;
+          } else {
+            const error = clipboardError || fallbackError;
+            if (error) console.error("Could not copy profile.", error);
+            $("outputStatus").textContent = t.copyFailure;
+          }
+        });
+        $("printProfileBtn").addEventListener("click", () => window.print());
+        $("editProfileBtn").addEventListener("click", () => {
+          $("outputView").classList.add("hidden");
+          $("formView").style.display = "block";
+          $("outputStatus").textContent = "";
+          window.scrollTo({ top: 0, behavior: "smooth" });
         });
         $("profileForm").addEventListener("reset", () =>
           setTimeout(() => {
