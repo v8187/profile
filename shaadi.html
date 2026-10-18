@@ -908,7 +908,7 @@
           </section>
           <section class="card">
             <div class="section-head">
-              <div class="section-emoji">💞</div>
+              <div class="section-emoji">💍</div>
               <h2 id="secPartnerPreferences">
                 Partner Preferences <span class="req">*</span>
               </h2>
@@ -1044,7 +1044,11 @@
           </section>
         </form>
       </div>
-      <section class="card hidden" id="outputView" aria-labelledby="outputTitle">
+      <section
+        class="card hidden"
+        id="outputView"
+        aria-labelledby="outputTitle"
+      >
         <div class="section-head">
           <div class="section-emoji" aria-hidden="true">💌</div>
           <h2 id="outputTitle">Your profile</h2>
@@ -1052,9 +1056,15 @@
         <pre id="profileOutput"></pre>
         <p id="outputStatus" role="status" aria-live="polite"></p>
         <div class="output-actions">
-          <button class="primary" type="button" id="copyProfileBtn">Copy profile</button>
-          <button class="secondary" type="button" id="printProfileBtn">Print / Save as PDF</button>
-          <button class="secondary" type="button" id="editProfileBtn">Edit details</button>
+          <button class="primary" type="button" id="copyProfileBtn">
+            Copy profile
+          </button>
+          <button class="secondary" type="button" id="printProfileBtn">
+            Print / Save as PDF
+          </button>
+          <button class="secondary" type="button" id="editProfileBtn">
+            Edit details
+          </button>
         </div>
       </section>
     </main>
@@ -1496,11 +1506,13 @@
               "Annulled",
             ],
             childrenGirls: "Children - Girls",
+            girlSelect: "Select Girl Children",
             noGirl: "No Girl",
             girl: "Girl",
             girls: "Girls",
             girlCount: "Girl children",
             childrenBoys: "Children - Boys",
+            boySelect: "Select Boy Children",
             noBoy: "No Boy",
             boy: "Boy",
             boys: "Boys",
@@ -1742,9 +1754,101 @@
               "Partner preferences",
               "Contact details",
             ],
+            narrative: {
+              relationTerms: [
+                "",
+                "son",
+                "daughter",
+                "brother",
+                "sister",
+                "relative",
+                "friend",
+              ],
+              maritalStatuses: [
+                "single",
+                "widowed",
+                "divorced",
+                "awaiting a divorce",
+                "separated",
+                "a single parent",
+                "annulled",
+              ],
+              self: "This profile is for myself",
+              selfNamed: "This profile is for myself ({name})",
+              relation: "This profile is for my {relation}",
+              relationNamed: "This profile is for my {relation}, {name}",
+              subject: { male: "He", female: "She", other: "This person" },
+              possessive: { male: "His", female: "Her", other: "Their" },
+              born: "{subject} was born on {date}",
+              bornIn: "{subject} was born in {date}",
+              bornWithManglik: "{subject} was born on {date} and is {manglik}",
+              bornInWithManglik:
+                "{subject} was born in {date} and is {manglik}",
+              manglikOnly: "{subject} is {manglik}",
+              birthTime: "at {value}",
+              birthPlace: "born in {value}",
+              sunSign: "sun sign {value}",
+              moonSign: "moon sign {value}",
+              birthContext: "Birth details also include {details}",
+              marital: "{subject} is {status}{children}",
+              children: " and has {summary}",
+              childrenNone: " and has no children",
+              childrenSummary: "{total} children ({details})",
+              childrenOne: "{total} child ({details})",
+              son: "{count} son",
+              sons: "{count} sons",
+              daughter: "{count} daughter",
+              daughters: "{count} daughters",
+              currentLocation: "{subject} is based out of {location}",
+              background: "{possessive} background includes {details}",
+              personal: "{possessive} personal details include {details}",
+              family: "{subject} comes from {details}",
+              familyType: "a {value} family",
+              familyStatus: "a {value} household",
+              caste: "{value} community",
+              gotra: "the {value} gotra",
+              parentsBoth: "parents who are {mother} and {father}",
+              parentMother: "a mother who is {value}",
+              parentFather: "a father who is {value}",
+              brothersCount: "{count} brothers",
+              sistersCount: "{count} sisters",
+              noSiblings: "no siblings",
+              marriedBrother: "{count} married brother",
+              marriedBrothers: "{count} married brothers",
+              marriedSister: "{count} married sister",
+              marriedSisters: "{count} married sisters",
+              aboutProfile: "{value}",
+              aboutFamily: "{value}",
+              partner: "{possessive} partner preferences are {value}",
+              contact: "For contact, {details}",
+              education: "education in {value}",
+              occupation: "work as {value}",
+              income: "income of {value}",
+              height: "height of {value}",
+              weight: "weight of {value}",
+              skinTone: "{value} complexion",
+              bloodGroup: "{value} blood group",
+              diet: "{value} diet",
+              smoking: "smoking habits of {value}",
+              drinking: "drinking habits of {value}",
+              motherTongue: "{value} as a mother tongue",
+              aboutDetails: "{label}: {value}",
+              religion: "{value} faith",
+              category: "belonging to the {value} category",
+              contactNumber: "phone {value}",
+              whatsappNumber: "WhatsApp {value}",
+              emailId: "email {value}",
+              facebookProfile: "Facebook {value}",
+              instagramProfile: "Instagram {value}",
+              linkedinProfile: "LinkedIn {value}",
+              separator: ", ",
+              finalSeparator: " and ",
+              period: ".",
+            },
             surname: "Surname",
             copySuccess: "Profile copied.",
-            copyFailure: "Could not copy the profile. Select and copy the text manually.",
+            copyFailure:
+              "Could not copy the profile. Select and copy the text manually.",
             copyProfile: "Copy profile",
             printProfile: "Print / Save as PDF",
             editProfile: "Edit details",
@@ -1823,11 +1927,13 @@
               "विवाह रद्द (अमान्य)",
             ],
             childrenGirls: "बच्चे - लड़कियाँ",
+            girlSelect: "बच्चे चुनें",
             noGirl: "कोई लड़की नहीं",
             girl: "लड़की",
             girls: "लड़कियाँ",
             girlCount: "बेटियाँ",
             childrenBoys: "बच्चे - लड़के",
+            boySelect: "बच्चे चुनें",
             noBoy: "कोई लड़का नहीं",
             boy: "लड़का",
             boys: "लड़के",
@@ -2070,9 +2176,100 @@
               "जीवनसाथी की अपेक्षाएँ",
               "संपर्क विवरण",
             ],
+            narrative: {
+              relationTerms: [
+                "",
+                "बेटे",
+                "बेटी",
+                "भाई",
+                "बहन",
+                "रिश्तेदार",
+                "मित्र",
+              ],
+              maritalStatuses: [
+                "अविवाहित",
+                "विधवा/विधुर",
+                "तलाकशुदा",
+                "तलाक की कार्यवाही जारी",
+                "अलग रह रहे",
+                "एकल माता/पिता",
+                "विवाह रद्द",
+              ],
+              self: "यह प्रोफ़ाइल मेरे लिए है",
+              selfNamed: "यह प्रोफ़ाइल मेरे लिए है ({name})",
+              relation: "यह प्रोफ़ाइल {relation} के लिए है",
+              relationNamed: "यह प्रोफ़ाइल {relation}, {name} के लिए है",
+              subject: { male: "वे", female: "वे", other: "वे" },
+              possessive: { male: "उनका", female: "उनका", other: "उनका" },
+              born: "इनका जन्म {date} को हुआ",
+              bornIn: "इनका जन्म {date} में हुआ",
+              bornWithManglik: "इनका जन्म {date} को हुआ और ये {manglik} हैं",
+              bornInWithManglik: "इनका जन्म {date} में हुआ और ये {manglik} हैं",
+              manglikOnly: "ये {manglik} हैं",
+              birthTime: "जन्म का समय {value}",
+              birthPlace: "जन्म स्थान {value}",
+              sunSign: "सूर्य राशि {value}",
+              moonSign: "चंद्र राशि {value}",
+              birthContext: "जन्म के अन्य विवरण हैं: {details}",
+              marital: "इनकी वैवाहिक स्थिति {status} है{children}",
+              children: " और इनके {summary} हैं",
+              childrenNone: " और इनकी कोई संतान नहीं है",
+              childrenSummary: "{total} संतानें ({details})",
+              childrenOne: "{total} संतान ({details})",
+              son: "{count} बेटा",
+              sons: "{count} बेटे",
+              daughter: "{count} बेटी",
+              daughters: "{count} बेटियाँ",
+              currentLocation: "ये वर्तमान में {location} में रहते हैं",
+              background: "{possessive} पृष्ठभूमि में {details} शामिल हैं",
+              personal: "इनके व्यक्तिगत विवरण में {details} शामिल हैं",
+              family: "इनका परिवार {details} है",
+              familyType: "{value} परिवार",
+              familyStatus: "{value} वर्ग का",
+              caste: "{value} समुदाय",
+              gotra: "{value} गोत्र",
+              parentsBoth: "माता {mother} और पिता {father}",
+              parentMother: "माता {value}",
+              parentFather: "पिता {value}",
+              brothersCount: "{count} भाई",
+              sistersCount: "{count} बहनें",
+              noSiblings: "कोई भाई-बहन नहीं",
+              marriedBrother: "{count} विवाहित भाई",
+              marriedBrothers: "{count} विवाहित भाई",
+              marriedSister: "{count} विवाहित बहन",
+              marriedSisters: "{count} विवाहित बहनें",
+              aboutProfile: "{value}",
+              aboutFamily: "{value}",
+              partner: "जीवनसाथी के लिए इनकी अपेक्षाएँ हैं: {value}",
+              contact: "संपर्क के लिए: {details}",
+              education: "{value} की शिक्षा",
+              occupation: "{value} में काम",
+              income: "{value} की आय",
+              height: "{value} कद",
+              weight: "{value} वज़न",
+              skinTone: "{value} रंग",
+              bloodGroup: "{value} रक्त समूह",
+              diet: "{value} भोजन",
+              smoking: "{value} धूम्रपान की आदत",
+              drinking: "{value} मद्यपान की आदत",
+              motherTongue: "{value} मातृभाषा",
+              aboutDetails: "{label}: {value}",
+              religion: "{value} धर्म",
+              category: "{value} श्रेणी",
+              contactNumber: "फ़ोन {value}",
+              whatsappNumber: "WhatsApp {value}",
+              emailId: "ईमेल {value}",
+              facebookProfile: "Facebook {value}",
+              instagramProfile: "Instagram {value}",
+              linkedinProfile: "LinkedIn {value}",
+              separator: ", ",
+              finalSeparator: " और ",
+              period: "।",
+            },
             surname: "उपनाम",
             copySuccess: "प्रोफ़ाइल कॉपी हो गई।",
-            copyFailure: "प्रोफ़ाइल कॉपी नहीं हो सकी। टेक्स्ट चुनकर स्वयं कॉपी करें।",
+            copyFailure:
+              "प्रोफ़ाइल कॉपी नहीं हो सकी। टेक्स्ट चुनकर स्वयं कॉपी करें।",
             copyProfile: "प्रोफ़ाइल कॉपी करें",
             printProfile: "प्रिंट / PDF के रूप में सेव करें",
             editProfile: "विवरण बदलें",
@@ -2150,11 +2347,13 @@
               "ਵਿਆਹ ਰੱਦ (ਅਮਾਨਤ)",
             ],
             childrenGirls: "ਬੱਚੇ - ਲੜਕੀਆਂ",
+            girlSelect: "ਬੱਚੇ ਚੁਣੋ",
             noGirl: "ਕੋਈ ਲੜਕੀ ਨਹੀਂ",
             girl: "ਲੜਕੀ",
             girls: "ਲੜਕੀਆਂ",
             girlCount: "ਧੀਆਂ",
             childrenBoys: "ਬੱਚੇ - ਲੜਕੇ",
+            boySelect: "ਬੱਚੇ ਚੁਣੋ",
             noBoy: "ਕੋਈ ਲੜਕਾ ਨਹੀਂ",
             boy: "ਲੜਕਾ",
             boys: "ਲੜਕੇ",
@@ -2396,6 +2595,102 @@
               "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ",
               "ਸੰਪਰਕ ਵੇਰਵੇ",
             ],
+            narrative: {
+              relationTerms: [
+                "",
+                "ਪੁੱਤਰ",
+                "ਧੀ",
+                "ਭਰਾ",
+                "ਭੈਣ",
+                "ਰਿਸ਼ਤੇਦਾਰ",
+                "ਦੋਸਤ",
+              ],
+              maritalStatuses: [
+                "ਅਣਵਿਆਹੇ",
+                "ਵਿਧਵਾ/ਵਿਧੁਰ",
+                "ਤਲਾਕਸ਼ੁਦਾ",
+                "ਤਲਾਕ ਦੀ ਕਾਰਵਾਈ ਅਧੀਨ",
+                "ਵੱਖ ਰਹਿੰਦੇ",
+                "ਇਕੱਲਾ ਮਾਤਾ/ਪਿਤਾ",
+                "ਵਿਆਹ ਰੱਦ",
+              ],
+              self: "ਇਹ ਪ੍ਰੋਫ਼ਾਈਲ ਮੇਰੇ ਲਈ ਹੈ",
+              selfNamed: "ਇਹ ਪ੍ਰੋਫ਼ਾਈਲ ਮੇਰੇ ਲਈ ਹੈ ({name})",
+              relation: "ਇਹ ਪ੍ਰੋਫ਼ਾਈਲ {relation} ਲਈ ਹੈ",
+              relationNamed: "ਇਹ ਪ੍ਰੋਫ਼ਾਈਲ {relation}, {name} ਲਈ ਹੈ",
+              subject: { male: "ਉਹ", female: "ਉਹ", other: "ਉਹ" },
+              possessive: {
+                male: "ਉਨ੍ਹਾਂ ਦੀ",
+                female: "ਉਨ੍ਹਾਂ ਦੀ",
+                other: "ਉਨ੍ਹਾਂ ਦੀ",
+              },
+              born: "ਉਨ੍ਹਾਂ ਦਾ ਜਨਮ {date} ਨੂੰ ਹੋਇਆ",
+              bornIn: "ਉਨ੍ਹਾਂ ਦਾ ਜਨਮ {date} ਵਿੱਚ ਹੋਇਆ",
+              bornWithManglik:
+                "ਉਨ੍ਹਾਂ ਦਾ ਜਨਮ {date} ਨੂੰ ਹੋਇਆ ਅਤੇ ਉਹ {manglik} ਹਨ",
+              bornInWithManglik:
+                "ਉਨ੍ਹਾਂ ਦਾ ਜਨਮ {date} ਵਿੱਚ ਹੋਇਆ ਅਤੇ ਉਹ {manglik} ਹਨ",
+              manglikOnly: "ਉਹ {manglik} ਹਨ",
+              birthTime: "ਜਨਮ ਦਾ ਸਮਾਂ {value}",
+              birthPlace: "ਜਨਮ ਸਥਾਨ {value}",
+              sunSign: "ਸੂਰਜ ਰਾਸ਼ੀ {value}",
+              moonSign: "ਚੰਦਰ ਰਾਸ਼ੀ {value}",
+              birthContext: "ਜਨਮ ਦੇ ਹੋਰ ਵੇਰਵੇ ਹਨ: {details}",
+              marital: "ਉਨ੍ਹਾਂ ਦੀ ਵਿਆਹੁਤਾ ਸਥਿਤੀ {status} ਹੈ{children}",
+              children: " ਅਤੇ ਉਨ੍ਹਾਂ ਦੇ {summary} ਹਨ",
+              childrenNone: " ਅਤੇ ਉਨ੍ਹਾਂ ਦੀ ਕੋਈ ਸੰਤਾਨ ਨਹੀਂ ਹੈ",
+              childrenSummary: "{total} ਬੱਚੇ ({details})",
+              childrenOne: "{total} ਬੱਚਾ ({details})",
+              son: "{count} ਪੁੱਤਰ",
+              sons: "{count} ਪੁੱਤਰ",
+              daughter: "{count} ਧੀ",
+              daughters: "{count} ਧੀਆਂ",
+              currentLocation: "ਉਹ ਇਸ ਵੇਲੇ {location} ਵਿੱਚ ਰਹਿੰਦੇ ਹਨ",
+              background: "{possessive} ਪਿਛੋਕੜ ਵਿੱਚ {details} ਸ਼ਾਮਲ ਹਨ",
+              personal: "ਉਨ੍ਹਾਂ ਦੇ ਨਿੱਜੀ ਵੇਰਵਿਆਂ ਵਿੱਚ {details} ਸ਼ਾਮਲ ਹਨ",
+              family: "ਉਨ੍ਹਾਂ ਦਾ ਪਰਿਵਾਰ {details} ਹੈ",
+              familyType: "{value} ਪਰਿਵਾਰ",
+              familyStatus: "{value} ਵਰਗ ਦਾ",
+              caste: "{value} ਭਾਈਚਾਰਾ",
+              gotra: "{value} ਗੋਤ",
+              parentsBoth: "ਮਾਤਾ {mother} ਅਤੇ ਪਿਤਾ {father}",
+              parentMother: "ਮਾਤਾ {value}",
+              parentFather: "ਪਿਤਾ {value}",
+              brothersCount: "{count} ਭਰਾ",
+              sistersCount: "{count} ਭੈਣਾਂ",
+              noSiblings: "ਕੋਈ ਭੈਣ-ਭਰਾ ਨਹੀਂ",
+              marriedBrother: "{count} ਵਿਆਹਿਆ ਭਰਾ",
+              marriedBrothers: "{count} ਵਿਆਹੇ ਭਰਾ",
+              marriedSister: "{count} ਵਿਆਹੀ ਭੈਣ",
+              marriedSisters: "{count} ਵਿਆਹੀਆਂ ਭੈਣਾਂ",
+              aboutProfile: "{value}",
+              aboutFamily: "{value}",
+              partner: "ਜੀਵਨ ਸਾਥੀ ਲਈ ਉਨ੍ਹਾਂ ਦੀਆਂ ਉਮੀਦਾਂ ਹਨ: {value}",
+              contact: "ਸੰਪਰਕ ਲਈ: {details}",
+              education: "{value} ਦੀ ਪੜ੍ਹਾਈ",
+              occupation: "{value} ਵਿੱਚ ਕੰਮ",
+              income: "{value} ਦੀ ਆਮਦਨ",
+              height: "{value} ਕੱਦ",
+              weight: "{value} ਭਾਰ",
+              skinTone: "{value} ਰੰਗ",
+              bloodGroup: "{value} ਬਲੱਡ ਗਰੁੱਪ",
+              diet: "{value} ਖੁਰਾਕ",
+              smoking: "{value} ਸਿਗਰਟਨੋਸ਼ੀ ਦੀ ਆਦਤ",
+              drinking: "{value} ਸ਼ਰਾਬ ਪੀਣ ਦੀ ਆਦਤ",
+              motherTongue: "{value} ਮਾਤ-ਭਾਸ਼ਾ",
+              aboutDetails: "{label}: {value}",
+              religion: "{value} ਧਰਮ",
+              category: "{value} ਸ਼੍ਰੇਣੀ",
+              contactNumber: "ਫ਼ੋਨ {value}",
+              whatsappNumber: "WhatsApp {value}",
+              emailId: "ਈਮੇਲ {value}",
+              facebookProfile: "Facebook {value}",
+              instagramProfile: "Instagram {value}",
+              linkedinProfile: "LinkedIn {value}",
+              separator: ", ",
+              finalSeparator: " ਅਤੇ ",
+              period: "।",
+            },
             surname: "ਉਪਨਾਮ",
             copySuccess: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਹੋ ਗਈ।",
             copyFailure: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਨਹੀਂ ਹੋਈ। ਟੈਕਸਟ ਚੁਣ ਕੇ ਖੁਦ ਕਾਪੀ ਕਰੋ।",
@@ -2476,9 +2771,9 @@
           annualIncome: "💰",
           aboutFamily: "👨‍👩‍👧‍👦",
           aboutProfile: "💖",
-          partnerPreferences: "💞",
+          partnerPreferences: "💍",
           secContactDetails: "📞",
-          contactNumber: "📞",
+          contactNumber: "📱",
           whatsappNumber: "💬",
           emailId: "✉️",
           facebookProfile: "🌐",
@@ -2703,7 +2998,7 @@
                   label: `${i} ${i === 1 ? selectedLang.girl : selectedLang.girls}`,
                 },
           );
-          setOptions("childrenGirls", null, girlChildCounts);
+          setOptions("childrenGirls", t.girlSelect, girlChildCounts);
           const boyChildCounts = Array.from({ length: 11 }, (_, i) =>
             i === 0
               ? { value: i, label: selectedLang.noBoy }
@@ -2712,7 +3007,7 @@
                   label: `${i} ${i === 1 ? selectedLang.boy : selectedLang.boys}`,
                 },
           );
-          setOptions("childrenBoys", /* t.childrenBoys */ null, boyChildCounts);
+          setOptions("childrenBoys", t.boySelect, boyChildCounts);
           const heights = Array.from({ length: 43 }, (_, i) => {
             const totalInches = 48 + i;
             const feet = Math.floor(totalInches / 12);
@@ -2814,14 +3109,14 @@
         function toggleChildren() {
           const show = $("maritalStatus").selectedIndex > 1;
           if (!show) {
-            $("childrenGirls").value = 0;
-            $("childrenBoys").value = 0;
+            $("childrenGirls").value = "";
+            $("childrenBoys").value = "";
           }
 
-          $("childrenGirls").disabled = !show;
-          $("childrenBoys").disabled = !show;
-          $("childrenGirls").required = show;
-          $("childrenBoys").required = show;
+          // $("childrenGirls").disabled = !show;
+          // $("childrenBoys").disabled = !show;
+          // $("childrenGirls").required = show;
+          // $("childrenBoys").required = show;
         }
         $("maritalStatus").addEventListener("change", toggleChildren);
         function val(id) {
@@ -2967,12 +3262,12 @@
           },
           {
             title: "Partner preferences",
-            emoji: "💞",
+            emoji: emojisMap.partnerPreferences,
             ids: ["partnerPreferences"],
           },
           {
             title: "Contact details",
-            emoji: "📞",
+            emoji: emojisMap.secContactDetails,
             ids: [
               "contactNumber",
               "whatsappNumber",
@@ -2984,9 +3279,6 @@
           },
         ];
         const anonymousExcludedFields = new Set([
-          "profileFor",
-          "birthMonth",
-          "birthDate",
           "birthHour",
           "birthMinute",
           "birthSecond",
@@ -3003,7 +3295,6 @@
           "father",
           "aboutProfile",
           "aboutFamily",
-          "partnerPreferences",
           "contactNumber",
           "whatsappNumber",
           "emailId",
@@ -3084,15 +3375,357 @@
             })
             .filter((group) => group.items.length);
         }
+        function formatNarrativeProfile(groups, t, mode) {
+          const narrative = t.narrative;
+          const entries = new Map(
+            groups.flatMap((group) =>
+              group.items.map((item) => [item.id, item]),
+            ),
+          );
+          const value = (id) =>
+            entries.get(id)?.value.replace(/\s+/g, " ").trim();
+          const joinList = (values) => {
+            const present = values.filter(Boolean);
+            if (present.length < 2) return present[0] || "";
+            return `${present.slice(0, -1).join(narrative.separator)}${narrative.finalSeparator}${present[present.length - 1]}`;
+          };
+          const finishSentence = (text) =>
+            /[.!?।؟]$/.test(text) ? text : `${text}${narrative.period}`;
+          const sentences = [];
+          const profileFor = $("profileFor");
+          const name = mode === "anonymous" ? "" : value("name");
+          const relation =
+            narrative.relationTerms[profileFor.selectedIndex - 1] ||
+            profileFor.selectedOptions[0]?.textContent
+              .trim()
+              .toLocaleLowerCase() ||
+            "";
+          const intro =
+            profileFor.selectedIndex === 1
+              ? name
+                ? narrative.selfNamed.replace("{name}", name)
+                : narrative.self
+              : profileFor.value
+                ? (name ? narrative.relationNamed : narrative.relation)
+                    .replace("{relation}", relation)
+                    .replace("{name}", name || "")
+                : "";
+          if (intro) sentences.push(finishSentence(intro));
+
+          const gender = $("gender");
+          const pronoun =
+            gender.selectedIndex === 1
+              ? narrative.subject.male
+              : gender.selectedIndex === 2
+                ? narrative.subject.female
+                : narrative.subject.other;
+          const possessive =
+            gender.selectedIndex === 1
+              ? narrative.possessive.male
+              : gender.selectedIndex === 2
+                ? narrative.possessive.female
+                : narrative.possessive.other;
+
+          const dateParts = [
+            value("birthDate"),
+            value("birthMonth"),
+            value("birthYear"),
+          ].filter(Boolean);
+          const birthDate = dateParts.join(" ");
+          const manglik = value("manglik");
+          const birthTime = ["birthHour", "birthMinute", "birthAmPm"]
+            .map(value)
+            .filter(Boolean)
+            .join(":");
+          const birthPlace = ["birthCity", "birthState", "birthCountry"]
+            .map(value)
+            .filter(Boolean)
+            .join(", ");
+          const birthContext = [
+            birthTime && narrative.birthTime.replace("{value}", birthTime),
+            birthPlace && narrative.birthPlace.replace("{value}", birthPlace),
+            value("sunSign") &&
+              narrative.sunSign.replace("{value}", value("sunSign")),
+            value("moonSign") &&
+              narrative.moonSign.replace("{value}", value("moonSign")),
+          ].filter(Boolean);
+          if (birthDate || manglik || birthContext.length) {
+            const hasDay = Boolean(value("birthDate"));
+            const birthTemplate = hasDay ? narrative.born : narrative.bornIn;
+            const manglikTemplate = hasDay
+              ? narrative.bornWithManglik
+              : narrative.bornInWithManglik;
+            const birthLine = birthDate
+              ? manglik
+                ? manglikTemplate
+                    .replace("{subject}", pronoun)
+                    .replace("{date}", birthDate)
+                    .replace("{manglik}", manglik)
+                : birthTemplate
+                    .replace("{subject}", pronoun)
+                    .replace("{date}", birthDate)
+              : manglik
+                ? narrative.manglikOnly
+                    .replace("{subject}", pronoun)
+                    .replace("{manglik}", manglik)
+                : "";
+            const birthDetails = birthContext.length
+              ? narrative.birthContext.replace(
+                  "{details}",
+                  joinList(birthContext),
+                )
+              : "";
+            sentences.push(
+              [birthLine, birthDetails]
+                .filter(Boolean)
+                .map(finishSentence)
+                .join(" "),
+            );
+          }
+
+          const maritalStatus = value("maritalStatus");
+          if (maritalStatus) {
+            const maritalStatusText =
+              narrative.maritalStatuses[$("maritalStatus").selectedIndex - 1] ||
+              maritalStatus.toLocaleLowerCase();
+            let childClause = "";
+            if ($("maritalStatus").selectedIndex !== 1) {
+              const girlsValue = $("childrenGirls").value;
+              const boysValue = $("childrenBoys").value;
+              if (girlsValue === "" && boysValue === "") {
+                childClause = narrative.childrenNone;
+              } else {
+                const girls = Number(girlsValue || 0);
+                const boys = Number(boysValue || 0);
+                if (girls + boys === 0) {
+                  childClause = narrative.childrenNone;
+                } else {
+                  const childDetails = [];
+                  if (boys) {
+                    childDetails.push(
+                      narrative[boys === 1 ? "son" : "sons"].replace(
+                        "{count}",
+                        String(boys),
+                      ),
+                    );
+                  }
+                  if (girls) {
+                    childDetails.push(
+                      narrative[girls === 1 ? "daughter" : "daughters"].replace(
+                        "{count}",
+                        String(girls),
+                      ),
+                    );
+                  }
+                  const total = boys + girls;
+                  const summary = narrative[
+                    total === 1 ? "childrenOne" : "childrenSummary"
+                  ]
+                    .replace("{total}", String(total))
+                    .replace("{details}", joinList(childDetails));
+                  childClause = narrative.children.replace(
+                    "{summary}",
+                    summary,
+                  );
+                }
+              }
+            }
+            sentences.push(
+              finishSentence(
+                narrative.marital
+                  .replace("{subject}", pronoun)
+                  .replace("{status}", maritalStatusText)
+                  .replace("{children}", childClause),
+              ),
+            );
+          }
+
+          const currentLocation = [
+            "currentCity",
+            "currentState",
+            "currentCountry",
+          ]
+            .map(value)
+            .filter(Boolean)
+            .join(", ");
+          if (currentLocation) {
+            sentences.push(
+              finishSentence(
+                narrative.currentLocation
+                  .replace("{subject}", pronoun)
+                  .replace("{location}", currentLocation),
+              ),
+            );
+          }
+
+          const background = [
+            value("religion") &&
+              narrative.religion.replace("{value}", value("religion")),
+            value("category") &&
+              narrative.category.replace("{value}", value("category")),
+            value("motherTongue") &&
+              narrative.motherTongue.replace("{value}", value("motherTongue")),
+          ].filter(Boolean);
+          if (background.length) {
+            sentences.push(
+              finishSentence(
+                narrative.background
+                  .replace("{possessive}", possessive)
+                  .replace("{details}", joinList(background)),
+              ),
+            );
+          }
+
+          const personal = [
+            value("education") &&
+              narrative.education.replace("{value}", value("education")),
+            value("occupation") &&
+              narrative.occupation.replace("{value}", value("occupation")),
+            value("annualIncome") &&
+              narrative.income.replace("{value}", value("annualIncome")),
+            value("height") &&
+              narrative.height.replace("{value}", value("height")),
+            value("weight") &&
+              narrative.weight.replace("{value}", value("weight")),
+            value("skinTone") &&
+              narrative.skinTone.replace("{value}", value("skinTone")),
+            value("bloodGroup") &&
+              narrative.bloodGroup.replace("{value}", value("bloodGroup")),
+            value("diet") && narrative.diet.replace("{value}", value("diet")),
+            value("smoking") &&
+              narrative.smoking.replace("{value}", value("smoking")),
+            value("drinking") &&
+              narrative.drinking.replace("{value}", value("drinking")),
+          ].filter(Boolean);
+          if (personal.length) {
+            sentences.push(
+              finishSentence(
+                narrative.personal
+                  .replace("{possessive}", possessive)
+                  .replace("{details}", joinList(personal)),
+              ),
+            );
+          }
+          if (value("aboutProfile"))
+            sentences.push(finishSentence(value("aboutProfile")));
+
+          const family = [];
+          if (value("familyType")) {
+            family.push(
+              narrative.familyType.replace("{value}", value("familyType")),
+            );
+          }
+          if (value("familyStatus")) {
+            family.push(
+              narrative.familyStatus.replace("{value}", value("familyStatus")),
+            );
+          }
+          if (value("caste") || value("subCaste")) {
+            family.push(
+              narrative.caste.replace(
+                "{value}",
+                [value("caste"), value("subCaste")].filter(Boolean).join(", "),
+              ),
+            );
+          }
+          if (value("gotra")) {
+            family.push(narrative.gotra.replace("{value}", value("gotra")));
+          }
+          const mother = value("mother");
+          const father = value("father");
+          if (mother && father) {
+            family.push(
+              narrative.parentsBoth
+                .replace("{mother}", mother || "")
+                .replace("{father}", father || ""),
+            );
+          } else if (mother) {
+            family.push(narrative.parentMother.replace("{value}", mother));
+          } else if (father) {
+            family.push(narrative.parentFather.replace("{value}", father));
+          }
+          const brothers = value("brothers");
+          const sisters = value("sisters");
+          if (
+            brothers !== undefined &&
+            sisters !== undefined &&
+            Number(brothers) === 0 &&
+            Number(sisters) === 0
+          ) {
+            family.push(narrative.noSiblings);
+          } else {
+            if (brothers && Number(brothers) > 0)
+              family.push(narrative.brothersCount.replace("{count}", brothers));
+            if (sisters && Number(sisters) > 0)
+              family.push(narrative.sistersCount.replace("{count}", sisters));
+          }
+          const marriedBrothers = value("marriedBrothers");
+          const marriedSisters = value("marriedSisters");
+          if (marriedBrothers && Number(marriedBrothers) > 0)
+            family.push(
+              narrative[
+                Number(marriedBrothers) === 1
+                  ? "marriedBrother"
+                  : "marriedBrothers"
+              ].replace("{count}", marriedBrothers),
+            );
+          if (marriedSisters && Number(marriedSisters) > 0)
+            family.push(
+              narrative[
+                Number(marriedSisters) === 1
+                  ? "marriedSister"
+                  : "marriedSisters"
+              ].replace("{count}", marriedSisters),
+            );
+          if (family.length) {
+            sentences.push(
+              finishSentence(
+                narrative.family
+                  .replace("{subject}", pronoun)
+                  .replace("{details}", joinList(family)),
+              ),
+            );
+          }
+          if (value("aboutFamily"))
+            sentences.push(finishSentence(value("aboutFamily")));
+
+          if (value("partnerPreferences")) {
+            sentences.push(
+              finishSentence(
+                narrative.partner
+                  .replace("{possessive}", possessive)
+                  .replace("{value}", value("partnerPreferences")),
+              ),
+            );
+          }
+          const contactDetails = [
+            "contactNumber",
+            "whatsappNumber",
+            "emailId",
+            "facebookProfile",
+            "instagramProfile",
+            "linkedinProfile",
+          ]
+            .filter(value)
+            .map((id) => narrative[id].replace("{value}", value(id)));
+          if (contactDetails.length) {
+            sentences.push(
+              finishSentence(
+                narrative.contact.replace(
+                  "{details}",
+                  joinList(contactDetails),
+                ),
+              ),
+            );
+          }
+          return sentences.join(" ");
+        }
         function formatProfile(mode) {
           const t = trans[$("language").value] || trans.en;
           const entries = readProfileEntries();
           const groups = getProfileGroups(mode, entries, t);
           if (mode === "anonymous" || mode === "compact") {
-            return groups
-              .flatMap((group) => group.items)
-              .map((item) => `${item.label}: ${item.value}`)
-              .join(" · ");
+            return formatNarrativeProfile(groups, t, mode);
           }
           if (mode === "standard") {
             return groups
@@ -3104,9 +3737,7 @@
             .map(
               (group) =>
                 `${group.emoji} ${group.title}\n${group.items
-                  .map(
-                    (item) => `  ${item.emoji} ${item.label}: ${item.value}`,
-                  )
+                  .map((item) => `  ${item.emoji} ${item.label}: ${item.value}`)
                   .join("\n")}`,
             )
             .join("\n\n");
