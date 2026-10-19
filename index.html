@@ -1,0 +1,3827 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#173b35" />
+    <title>Matrimonial Profile Maker — Free & Private</title>
+    <style>
+      :root {
+        --ink: #20312e;
+        --muted: #687975;
+        --brand: #176b5b;
+        --brand2: #d9eee7;
+        --line: #dce7e2;
+        --paper: #fff;
+        --bg: #f3f7f5;
+        --accent: #d9a85b;
+        --danger: #a33434;
+        --radius: 18px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: linear-gradient(145deg, #f4f8f6, #edf4f0 55%, #f8f5ef);
+        color: var(--ink);
+        font:
+          16px/1.5 system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial,
+          sans-serif;
+      }
+      header {
+        padding: 20px;
+        background:
+          radial-gradient(circle at 85% 0%, #752c5a 0, transparent 33%),
+          linear-gradient(120deg, #331421, #5d2054);
+        color: #fff;
+      }
+      .head-inner,
+      main {
+        max-width: 1040px;
+        margin: auto;
+      }
+      .head-inner {
+        padding: 0 16px;
+      }
+      .brandline {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .logo {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border: 1px solid #ffffff55;
+        border-radius: 14px;
+        font-size: 22px;
+        background: #ffffff12;
+      }
+      .eyebrow {
+        flex: 1;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 1.3rem;
+        color: #ddb6cd;
+        font-weight: 800;
+      }
+      h1 {
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        line-height: 1.1;
+        margin: 0 0 12px;
+        letter-spacing: -0.035em;
+      }
+      header p {
+        margin: 0;
+        max-width: 680px;
+        color: #e0efea;
+      }
+      .pillrow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+      .pill {
+        border: 1px solid #ffffff40;
+        background: #ffffff12;
+        border-radius: 999px;
+        padding: 5px 11px;
+        font-size: 0.82rem;
+      }
+      main {
+        padding: 24px 16px 48px;
+      }
+      .notice {
+        display: flex;
+        gap: 12px;
+        padding: 14px 16px;
+        background: #fff9e9;
+        border: 1px solid #f1dfb9;
+        border-radius: 14px;
+        margin-bottom: 18px;
+        color: #604d2e;
+        font-size: 0.92rem;
+      }
+      .notice strong {
+        display: block;
+        margin-bottom: 2px;
+      }
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: clamp(17px, 3vw, 28px);
+        margin-bottom: 18px;
+        box-shadow: 0 8px 28px #1d49300a;
+      }
+      .section-head {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .step {
+        flex: 0 0 34px;
+        height: 34px;
+        border-radius: 11px;
+        background: var(--brand2);
+        color: var(--brand);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+      .section-emoji {
+        font-size: 32px;
+      }
+      h2 {
+        font-size: 1.15rem;
+        margin: 0 0 0 0;
+        line-height: 45px;
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 18px;
+      }
+      .grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .grid.four {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .grid > .fields-group-wrapper {
+        grid-column: 1 / -1;
+        margin: 0;
+      }
+      .multiple-groups-row {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+        gap: 16px 18px;
+      }
+      .multiple-groups-row > .fields-group-wrapper {
+        margin: 0;
+      }
+      .fields-group-wrapper {
+        min-width: 0;
+        margin: 18px 0 0;
+        padding: 0;
+        border: 0;
+      }
+      .fields-group-wrapper-title {
+        display: flex;
+        /* float: none;
+        width: auto; */
+        max-width: 100%;
+        margin: 0 0 9px;
+        padding: 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+      .section-head + .fields-group-wrapper {
+        margin-top: 0;
+      }
+      .fields-group {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0;
+      }
+      .fields-group.date {
+        /* grid-template-columns: 90px 110px 90px; */
+        grid-template-columns: repeat(3, minmax(0, 0.338fr));
+      }
+      .fields-group.time {
+        /* grid-template-columns: 90px 110px 110px 100px; */
+        grid-template-columns: repeat(4, minmax(0, 0.25fr));
+      }
+      .fields-group.location {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .fields-group.marital {
+        /* grid-template-columns: auto 140px 140px; */
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .fields-group.manglikZodiacSigns {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .fields-group .field {
+        position: relative;
+      }
+      .fields-group .field + .field {
+        margin-left: -1px;
+      }
+      .fields-group input,
+      .fields-group select {
+        position: relative;
+        border-radius: 0;
+      }
+      .fields-group .field:first-child input,
+      .fields-group .field:first-child select {
+        border-radius: 11px 0 0 11px;
+      }
+      .fields-group .field:last-child input,
+      .fields-group .field:last-child select {
+        border-radius: 0 11px 11px 0;
+      }
+      .fields-group .field:focus-within {
+        z-index: 1;
+      }
+      .field {
+        min-width: 0;
+      }
+      label {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 650;
+        margin-bottom: 7px;
+      }
+      label,
+      legend {
+        display: flex;
+        gap: 5px;
+      }
+      .field-label-emoji,
+      .field-label-text {
+        line-height: 26px;
+      }
+      .field-label-emoji {
+        font-size: 24px;
+      }
+
+      .req {
+        color: #b24a37;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid #cfdcd6;
+        border-radius: 11px;
+        background: #fff;
+        color: var(--ink);
+        padding: 11px 12px;
+        font: inherit;
+        outline: none;
+        transition:
+          border 0.15s,
+          box-shadow 0.15s;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #3d9380;
+        box-shadow: 0 0 0 3px #3d93801b;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: #9aa8a2;
+      }
+      textarea {
+        min-height: 88px;
+        resize: vertical;
+      }
+      .help {
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 5px;
+      }
+      .full {
+        grid-column: 1/-1;
+      }
+      .hidden {
+        display: none !important;
+      }
+      button {
+        border: 0;
+        border-radius: 12px;
+        padding: 12px 18px;
+        font: inherit;
+        font-weight: 750;
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          filter 0.15s;
+      }
+      button:hover {
+        filter: brightness(0.97);
+        transform: translateY(-1px);
+      }
+      .primary {
+        background: var(--brand);
+        color: #fff;
+        box-shadow: 0 6px 15px #176b5b25;
+      }
+      .secondary {
+        background: #edf4f1;
+        color: #255248;
+        border: 1px solid #d5e4dd;
+      }
+      .privacy {
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin-left: auto;
+      }
+      .error {
+        display: none;
+        color: var(--danger);
+        font-size: 0.85rem;
+        margin-top: 5px;
+      }
+      input:invalid:not(:placeholder-shown) {
+        border-color: #d7a29a;
+      }
+      footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.83rem;
+        padding: 0 16px 28px;
+      }
+      .print-note {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-top: 20px;
+      }
+      .format-actions,
+      .output-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .format-actions button,
+      .output-actions button {
+        flex: 1 1 220px;
+      }
+      #profileOutput {
+        margin: 0;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #f8fbf9;
+        font: inherit;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      #outputStatus {
+        min-height: 1.5em;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      @media (max-width: 820px) {
+        .grid,
+        .grid.three,
+        .multiple-groups-row {
+          grid-template-columns: 1fr;
+        }
+        .grid.four {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .privacy {
+          width: 100%;
+          margin-left: 0;
+        }
+        .full {
+          grid-column: auto;
+        }
+        .card {
+          border-radius: 14px;
+        }
+        .format-actions,
+        .output-actions {
+          flex-direction: column;
+        }
+        .format-actions button,
+        .output-actions button {
+          width: 100%;
+          flex-basis: auto;
+        }
+        header {
+          padding-top: 26px;
+        }
+      }
+      @media print {
+        @page {
+          size: A4;
+          margin: 16mm;
+        }
+        body {
+          background: #fff;
+          color: #172521;
+          font-size: 11pt;
+        }
+        header,
+        #formView,
+        footer,
+        .notice,
+        .screen-only {
+          display: none !important;
+        }
+        main {
+          padding: 0;
+          max-width: none;
+        }
+        #outputView {
+          display: block !important;
+        }
+        .card {
+          border: 0;
+          box-shadow: none;
+          padding: 0;
+          margin: 0;
+        }
+        #profileOutput {
+          border: 0;
+          padding: 0;
+          background: #fff;
+        }
+        .output-actions,
+        #outputStatus {
+          display: none !important;
+        }
+      }
+      @media (max-width: 650px) {
+        .fields-group:not(.date, .time),
+        .fields-group.location,
+        .fields-group.marital {
+          grid-template-columns: 1fr;
+        }
+        .fields-group:not(.date, .time) .field + .field {
+          margin: -1px 0 0;
+        }
+        .fields-group:not(.date, .time) .field:first-child input,
+        .fields-group:not(.date, .time) .field:first-child select {
+          border-radius: 11px 11px 0 0;
+        }
+        .fields-group:not(.date, .time) .field:last-child input,
+        .fields-group:not(.date, .time) .field:last-child select {
+          border-radius: 0 0 11px 11px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="head-inner">
+        <div class="brandline">
+          <div class="logo" aria-hidden="true">✦</div>
+          <div class="eyebrow" id="brandTitle">
+            Matrimonial Profile Maker — Free & Private
+          </div>
+          <div class="field">
+            <label for="language" id="labLanguage"
+              >Language / भाषा / ਭਾਸ਼ਾ <span class="req">*</span></label
+            ><select id="language" name="language">
+              <option value="en">English</option>
+              <option value="hi">हिन्दी (Hindi)</option>
+              <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+            </select>
+          </div>
+        </div>
+        <!-- <h1 id="heroTitle">Your story, thoughtfully presented.</h1> -->
+        <p id="heroSub">
+          Create a clean matrimonial biodata in a few simple steps. Your details
+          stay in this browser session — nothing is uploaded or saved by this
+          page.
+        </p>
+        <!-- <div class="pillrow">
+          <span class="pill" id="pill1">Free to use</span
+          ><span class="pill" id="pill2">No account required</span
+          ><span class="pill" id="pill3">Print or save as PDF</span>
+        </div> -->
+      </div>
+    </header>
+    <main>
+      <!-- <div class="notice screen-only">
+        <div aria-hidden="true">🔒</div>
+        <div>
+          <strong id="privacyTitle">Private by design</strong
+          ><span id="privacyText"
+            >This standalone page has no backend and does not store your
+            information. Use “Create printable profile” to prepare a print-ready
+            copy, then choose “Save as PDF” in your browser’s print
+            dialog.</span
+          >
+        </div>
+      </div> -->
+      <div id="formView">
+        <form id="profileForm">
+          <section class="card">
+            <div class="section-head">
+              <div class="section-emoji">💖</div>
+              <h2 id="secBasicDetails">Basic Details</h2>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="profileFor" data-label="profileFor"
+                  >Profile created for</label
+                ><select id="profileFor" name="profileFor"></select>
+              </div>
+              <div class="field">
+                <label for="name" data-label="name">Name</label
+                ><input
+                  id="name"
+                  name="name"
+                  autocomplete="name"
+                  data-placeholder="name"
+                  placeholder="Enter Name"
+                />
+              </div>
+              <div class="grid three" style="grid-column: 1 / -1">
+                <div class="field">
+                  <label for="gender" data-label="gender"
+                    >Gender <span class="req">*</span></label
+                  ><select id="gender" name="gender" required></select>
+                </div>
+                <div class="field">
+                  <label for="category" data-label="category"
+                    >category <span class="req">*</span></label
+                  ><select id="category" name="category" required></select>
+                </div>
+                <div class="field">
+                  <label for="religion" data-label="religion">Religion</label
+                  ><select id="religion" name="religion"></select>
+                </div>
+              </div>
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
+                  data-label="maritalAndChildren"
+                >
+                  Marital status and children <span class="req">*</span>
+                </legend>
+                <div class="fields-group marital" id="maritalFields">
+                  <div class="field">
+                    <!-- <label for="maritalStatus" data-label="maritalStatus"
+                        >Marital status <span class="req">*</span></label
+                      > -->
+                    <select
+                      id="maritalStatus"
+                      name="maritalStatus"
+                      required
+                    ></select>
+                  </div>
+                  <div class="field" id="girlsWrap">
+                    <!-- <label for="childrenGirls" data-label="childrenGirls"
+                        >Children - Girls<span class="req">*</span></label
+                      > -->
+                    <select
+                      id="childrenGirls"
+                      name="childrenGirls"
+                      required
+                    ></select>
+                  </div>
+                  <div class="field" id="boysWrap">
+                    <!-- <label for="childrenBoys" data-label="childrenBoys"
+                        >Children - Boys<span class="req">*</span></label
+                      > -->
+                    <select
+                      id="childrenBoys"
+                      name="childrenBoys"
+                      required
+                    ></select>
+                  </div>
+                </div>
+              </fieldset>
+
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
+                  data-label="secLocation"
+                >
+                  Current location <span class="req">*</span>
+                </legend>
+                <div class="fields-group location">
+                  <div class="field">
+                    <input
+                      id="currentCity"
+                      name="currentCity"
+                      data-placeholder="currentCity"
+                      placeholder="City"
+                      required
+                    />
+                  </div>
+                  <div class="field">
+                    <input
+                      id="currentState"
+                      name="currentState"
+                      data-placeholder="currentState"
+                      placeholder="State"
+                      required
+                    />
+                  </div>
+                  <div class="field">
+                    <input
+                      id="currentCountry"
+                      name="currentCountry"
+                      data-placeholder="currentCountry"
+                      placeholder="Country"
+                      required
+                    />
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="section-head">
+              <div class="section-emoji">💝</div>
+              <h2 id="secPerInfo">Current location</h2>
+            </div>
+            <div class="grid">
+              <div class="multiple-groups-row">
+                <fieldset class="fields-group-wrapper">
+                  <legend
+                    class="fields-group-wrapper-title"
+                    data-label="dateOfBirth"
+                  >
+                    Date of birth <span class="req">*</span>
+                  </legend>
+                  <div class="fields-group date">
+                    <div class="field">
+                      <select id="birthYear" name="birthYear" required></select>
+                    </div>
+                    <div class="field">
+                      <select id="birthMonth" name="birthMonth"></select>
+                    </div>
+                    <div class="field">
+                      <select id="birthDate" name="birthDate"></select>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="fields-group-wrapper">
+                  <legend
+                    class="fields-group-wrapper-title"
+                    data-label="timeOfBirth"
+                  >
+                    Time of birth
+                  </legend>
+                  <div class="fields-group time">
+                    <div class="field">
+                      <select id="birthHour" name="birthHour"></select>
+                    </div>
+                    <div class="field">
+                      <select id="birthMinute" name="birthMinute"></select>
+                    </div>
+                    <div class="field">
+                      <select id="birthSecond" name="birthSecond"></select>
+                    </div>
+                    <div class="field">
+                      <select id="birthAmPm" name="birthAmPm"></select>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
+                  data-label="placeOfBirth"
+                >
+                  Place of birth
+                </legend>
+                <div class="fields-group location">
+                  <div class="field">
+                    <input
+                      id="birthCity"
+                      name="birthCity"
+                      data-placeholder="birthCity"
+                      placeholder="City"
+                    />
+                  </div>
+                  <div class="field">
+                    <input
+                      id="birthState"
+                      name="birthState"
+                      data-placeholder="birthState"
+                      placeholder="State"
+                    />
+                  </div>
+                  <div class="field">
+                    <input
+                      id="birthCountry"
+                      name="birthCountry"
+                      data-placeholder="birthCountry"
+                      placeholder="Country"
+                      value="India"
+                    />
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
+                  data-label="manglikZodiacSigns"
+                >
+                  Manglik Status & Zodiac Signs
+                </legend>
+                <div class="fields-group manglikZodiacSigns">
+                  <div class="field">
+                    <select id="manglik" name="manglik" required></select>
+                  </div>
+                  <div class="field">
+                    <select id="sunSign" name="sunSign"></select>
+                  </div>
+                  <div class="field">
+                    <select id="moonSign" name="moonSign"></select>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="field">
+                <label for="height" data-label="height">Height</label
+                ><select id="height" name="height"></select>
+              </div>
+              <div class="field">
+                <label for="weight" data-label="weight">Weight</label
+                ><select id="weight" name="weight"></select>
+              </div>
+              <div class="field">
+                <label for="skinTone" data-label="skinTone">skinTone</label
+                ><select id="skinTone" name="skinTone"></select>
+              </div>
+              <div class="field">
+                <label for="bloodGroup" data-label="bloodGroup"
+                  >bloodGroup</label
+                ><select id="bloodGroup" name="bloodGroup"></select>
+              </div>
+
+              <div class="field">
+                <label for="diet" data-label="diet">Dietary habits</label
+                ><select id="diet" name="diet"></select>
+              </div>
+              <div class="field">
+                <label for="smoking" data-label="smoking"
+                  >smokingary habits</label
+                ><select id="smoking" name="smoking"></select>
+              </div>
+              <div class="field">
+                <label for="drinking" data-label="drinking"
+                  >drinkingary habits</label
+                ><select id="drinking" name="drinking"></select>
+              </div>
+              <div class="field">
+                <label for="motherTongue" data-label="motherTongue"
+                  >motherTongue</label
+                ><select id="motherTongue" name="motherTongue"></select>
+              </div>
+              <div class="grid three" style="grid-column: 1 / -1">
+                <div class="field">
+                  <label for="education" data-label="education">education</label
+                  ><select id="education" name="education"></select>
+                </div>
+                <div class="field">
+                  <label for="occupation" data-label="occupation"
+                    >occupation</label
+                  ><select id="occupation" name="occupation"></select>
+                </div>
+                <div class="field">
+                  <label for="annualIncome" data-label="annualIncome"
+                    >annualIncome</label
+                  ><select id="annualIncome" name="annualIncome"></select>
+                </div>
+              </div>
+              <div class="field full">
+                <label for="aboutProfile" data-label="aboutProfile"
+                  >More About Profile</label
+                ><textarea
+                  id="aboutProfile"
+                  name="aboutProfile"
+                  data-placeholder="aboutProfile"
+                  placeholder="A short introduction, interests and values"
+                ></textarea>
+              </div>
+            </div>
+          </section>
+          <section class="card">
+            <div class="section-head">
+              <div class="section-emoji">👨‍👩‍👧‍👦</div>
+              <h2 id="secFamily">Family Details</h2>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="familyType" data-label="familyType"
+                  >Family type</label
+                ><select id="familyType" name="familyType"></select>
+              </div>
+              <div class="field">
+                <label for="familyStatus" data-label="familyStatus"
+                  >Family Status</label
+                ><select id="familyStatus" name="familyStatus"></select>
+              </div>
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
+                  data-label="casteGotra"
+                >
+                  Place of birth
+                </legend>
+                <div class="fields-group location">
+                  <div class="field">
+                    <input
+                      id="caste"
+                      name="caste"
+                      data-placeholder="caste"
+                      placeholder="Caste"
+                    />
+                  </div>
+                  <div class="field">
+                    <input
+                      id="subCaste"
+                      name="subCaste"
+                      data-placeholder="subCaste"
+                      placeholder="Sub Caste"
+                    />
+                  </div>
+                  <div class="field">
+                    <input
+                      id="gotra"
+                      name="gotra"
+                      data-placeholder="gotra"
+                      placeholder="Gotra"
+                    />
+                  </div>
+                </div>
+              </fieldset>
+              <div class="field">
+                <label for="mother" data-label="mother">Mother</label
+                ><select id="mother" name="mother"></select>
+              </div>
+              <div class="field">
+                <label for="father" data-label="father">Father</label
+                ><select id="father" name="father"></select>
+              </div>
+            </div>
+            <fieldset class="fields-group-wrapper">
+              <!-- <legend class="fields-group-wrapper-title" data-label="siblings">
+                Siblings
+              </legend> -->
+              <div class="grid four">
+                <div class="field">
+                  <label for="brothers" data-label="brothers"
+                    >No. of Brothers</label
+                  ><select id="brothers" name="brothers"></select>
+                </div>
+                <div class="field">
+                  <label for="marriedBrothers" data-label="marriedBrothers"
+                    >Married Brothers</label
+                  ><select id="marriedBrothers" name="marriedBrothers"></select>
+                </div>
+                <div class="field">
+                  <label for="sisters" data-label="sisters"
+                    >No. of Sisters</label
+                  ><select id="sisters" name="sisters"></select>
+                </div>
+                <div class="field">
+                  <label for="marriedSisters" data-label="marriedSisters"
+                    >Married Sisters</label
+                  ><select id="marriedSisters" name="marriedSisters"></select>
+                </div>
+              </div>
+            </fieldset>
+            <div class="field full" style="margin-top: 20px">
+              <label for="aboutFamily" data-label="aboutFamily"
+                >More About Family</label
+              ><textarea
+                id="aboutFamily"
+                name="aboutFamily"
+                data-placeholder="aboutFamily"
+                placeholder="A short introduction, interests and values"
+              ></textarea>
+            </div>
+
+            <p class="error" id="formError" role="alert">
+              Please complete all required fields and check the values.
+            </p>
+          </section>
+          <section class="card">
+            <div class="section-head">
+              <div class="section-emoji">💍</div>
+              <h2 id="secPartnerPreferences">
+                Partner Preferences <span class="req">*</span>
+              </h2>
+            </div>
+            <div class="grid">
+              <div class="field full">
+                <!-- <label for="partnerPreferences" data-label="partnerPreferences"
+                  >Partner preferences</label
+                > --><textarea
+                  id="partnerPreferences"
+                  name="partnerPreferences"
+                  data-placeholder="partnerPreferences"
+                  placeholder="What you are looking for in a life partner"
+                  required
+                ></textarea>
+              </div>
+            </div>
+          </section>
+          <section class="card">
+            <div class="section-head">
+              <div class="section-emoji">📞</div>
+              <h2 id="secContactDetails">Contact Details</h2>
+            </div>
+            <div class="grid">
+              <div class="field">
+                <label for="contactNumber" data-label="contactNumber"
+                  >contactNumber</label
+                >
+                <input
+                  id="contactNumber"
+                  name="contactNumber"
+                  data-placeholder="contactNumber"
+                  placeholder="contactNumber"
+                />
+              </div>
+              <div class="field">
+                <label for="whatsappNumber" data-label="whatsappNumber"
+                  >whatsappNumber</label
+                >
+                <input
+                  id="whatsappNumber"
+                  name="whatsappNumber"
+                  data-placeholder="whatsappNumber"
+                  placeholder="whatsappNumber"
+                />
+              </div>
+              <div class="field">
+                <label for="emailId" data-label="emailId">emailId</label>
+                <input
+                  id="emailId"
+                  name="emailId"
+                  data-placeholder="emailId"
+                  placeholder="emailId"
+                />
+              </div>
+              <div class="field">
+                <label for="facebookProfile" data-label="facebookProfile"
+                  >facebookProfile</label
+                >
+                <input
+                  id="facebookProfile"
+                  name="facebookProfile"
+                  data-placeholder="facebookProfile"
+                  placeholder="facebookProfile"
+                />
+              </div>
+              <div class="field">
+                <label for="instagramProfile" data-label="instagramProfile"
+                  >instagramProfile</label
+                >
+                <input
+                  id="instagramProfile"
+                  name="instagramProfile"
+                  data-placeholder="instagramProfile"
+                  placeholder="instagramProfile"
+                />
+              </div>
+              <div class="field">
+                <label for="linkedinProfile" data-label="linkedinProfile"
+                  >linkedinProfile</label
+                >
+                <input
+                  id="linkedinProfile"
+                  name="linkedinProfile"
+                  data-placeholder="linkedinProfile"
+                  placeholder="linkedinProfile"
+                />
+              </div>
+            </div>
+          </section>
+          <section class="card">
+            <div class="section-head">
+              <div class="section-emoji">🪄</div>
+              <h2 id="profileFormatsTitle">Create a profile</h2>
+            </div>
+            <p id="requiredNote" class="help">
+              * Required fields apply to every profile format.
+            </p>
+            <div class="format-actions">
+              <button
+                class="primary"
+                type="button"
+                data-profile-format="anonymous"
+                id="anonymousProfileBtn"
+              >
+                Create Anonymous Profile
+              </button>
+              <button
+                class="secondary"
+                type="button"
+                data-profile-format="compact"
+                id="compactProfileBtn"
+              >
+                Create Compact Profile
+              </button>
+              <button
+                class="secondary"
+                type="button"
+                data-profile-format="standard"
+                id="standardProfileBtn"
+              >
+                Standard Profile
+              </button>
+              <button
+                class="secondary"
+                type="button"
+                data-profile-format="detailed"
+                id="detailedProfileBtn"
+              >
+                Detailed Profile
+              </button>
+            </div>
+          </section>
+        </form>
+      </div>
+      <section
+        class="card hidden"
+        id="outputView"
+        aria-labelledby="outputTitle"
+      >
+        <div class="section-head">
+          <div class="section-emoji" aria-hidden="true">💌</div>
+          <h2 id="outputTitle">Your profile</h2>
+        </div>
+        <pre id="profileOutput"></pre>
+        <p id="outputStatus" role="status" aria-live="polite"></p>
+        <div class="output-actions">
+          <button class="primary" type="button" id="copyProfileBtn">
+            Copy profile
+          </button>
+          <button class="secondary" type="button" id="printProfileBtn">
+            Print / Save as PDF
+          </button>
+          <button class="secondary" type="button" id="editProfileBtn">
+            Edit details
+          </button>
+        </div>
+      </section>
+    </main>
+    <footer id="footerText">
+      Free community service · No account · No backend · No data storage
+    </footer>
+    <script>
+      (function () {
+        document.addEventListener("onload", function () {
+          alert("Helo");
+        });
+        const $ = (id) => document.getElementById(id);
+        const commonTrans = {
+          en: {
+            commonOptions: ["Others", "Prefer not to say"],
+            zodiacSigns: [
+              "Aries",
+              "Taurus",
+              "Gemini",
+              "Cancer",
+              "Leo",
+              "Virgo",
+              "Libra",
+              "Scorpio",
+              "Sagittarius",
+              "Capricorn",
+              "Aquarius",
+              "Pisces",
+              "Don't Know",
+              "Prefer not to say",
+            ],
+          },
+          hi: {
+            commonOptions: ["अन्य", "बताना नहीं चाहते"],
+            zodiacSigns: [
+              "मेष",
+              "वृषभ",
+              "मिथुन",
+              "कर्क",
+              "सिंह",
+              "कन्या",
+              "तुला",
+              "वृश्चिक",
+              "धनु",
+              "मकर",
+              "कुम्भ",
+              "मीन",
+              "पता नहीं",
+              "बताना नहीं चाहते",
+            ],
+          },
+          pa: {
+            commonOptions: ["ਹੋਰ", "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ"],
+            zodiacSigns: [
+              "ਮੇਸ਼",
+              "ਵ੍ਰਿਸ਼ਭ",
+              "ਮਿਥੁਨ",
+              "ਕਰਕ",
+              "ਸਿੰਘ",
+              "ਕੰਨਿਆ",
+              "ਤੁਲਾ",
+              "ਵ੍ਰਿਸ਼ਚਿਕ",
+              "ਧਨੁ",
+              "ਮਕਰ",
+              "ਕੁੰਭ",
+              "ਮੀਨ",
+              "ਪਤਾ ਨਹੀਂ",
+              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+            ],
+          },
+        };
+        const parentsOptions = {
+          en: [
+            "Business Owner / Entrepreneur",
+            "Government Employee",
+            "Private Sector Employee",
+            "Retired (Government)",
+            "Retired (Private Sector)",
+            "Professional",
+            "Doctor",
+            "CA",
+            "Lawyer",
+            "Agriculturist / Farmer",
+            "Homemaker",
+            "Self-Employed / Freelancer",
+            "Not Employed / Looking after Home",
+            "Passed Away (Late)",
+            ...commonTrans.en.commonOptions,
+          ],
+          hi: [
+            "व्यवसायी / बिजनेसमैन",
+            "सरकारी नौकरी",
+            "प्राइवेट नौकरी",
+            "सेवानिवृत्त (सरकारी नौकरी)",
+            "सेवानिवृत्त (प्राइवेट नौकरी)",
+            "पेशेवर",
+            "डॉक्टर",
+            "वकील",
+            "सीए",
+            "कृषक / किसान",
+            "गृहणी (Homemaker)",
+            "स्वरोज़गार",
+            "वर्तमान में कार्यरत नहीं",
+            "स्वर्गवासी (Late)",
+            ...commonTrans.hi.commonOptions,
+          ],
+          pa: [
+            "ਕਾਰੋਬਾਰੀ / ਬਿਜ਼ਨਸਮੈਨ",
+            "ਸਰਕਾਰੀ ਨੌਕਰੀ",
+            "ਪ੍ਰਾਈਵੇਟ ਨੌਕਰੀ",
+            "ਰਿਟਾਇਰਡ (ਸਰਕਾਰੀ ਨੌਕਰੀ)",
+            "ਰਿਟਾਇਰਡ (ਪ੍ਰਾਈਵੇਟ ਨੌਕਰੀ)",
+            "ਪੇਸ਼ੇਵਰ",
+            "ਡਾਕਟਰ",
+            "ਵਕੀਲ",
+            "ਸੀ.ਏ.",
+            "ਖੇਤੀਬਾੜੀ / ਕਿਸਾਨ",
+            "ਘਰੇਲੂ ਮਹਿਲਾ (Homemaker)",
+            "ਸਵੈ-ਰੁਜ਼ਗਾਰ",
+            "ਵਰਤਮਾਨ ਵਿੱਚ ਕਾਰਜਸ਼ੀਲ ਨਹੀਂ",
+            "ਸਵਰਗਵਾਸੀ (Late)",
+            ...commonTrans.pa.commonOptions,
+          ],
+        };
+        const educationOptions = {
+          en: [
+            "Ph.D. / Doctorate",
+            "M.Phil. / Post-Grad Research",
+            "M.Tech. / M.E. (Engineering Masters)",
+            "MBA / PGDM (Management Masters)",
+            "M.C.A. (Computer Applications Masters)",
+            "M.S. / M.D. (Medical Postgraduate)",
+            "M.A. / M.Sc. / M.Com. (Academic Masters)",
+            "LL.M. (Law Masters)",
+            "M.Pharm. (Pharmacy Masters)",
+            "B.Tech. / B.E. (Engineering Bachelors)",
+            "B.Arch. (Architecture Bachelors)",
+            "B.B.A. / B.B.M. (Management Bachelors)",
+            "B.C.A. / B.Sc. IT (Computers Bachelors)",
+            "M.B.B.S. / B.D.S. / B.A.M.S. (Medical)",
+            "B.Pharm. / B.P.T. (Healthcare Bachelors)",
+            "B.Sc. (Nursing / Allied Health)",
+            "B.A. / B.Sc. / B.Com. (Academic Bachelors)",
+            "LL.B. (Law Bachelors)",
+            "B.Ed. / B.El.Ed. (Teaching Degrees)",
+            "B.F.A. / B.Design (Creative Arts)",
+            "B.Sc. (Agriculture / Horticulture)",
+            "B.H.M. (Hotel Management)",
+            "C.A. / C.S. / C.F.A. (Finance Professional)",
+            "ICWA / Certified Public Accountant",
+            "IAS / IPS / IFS (Civil Services)",
+            "Professional Diploma / Polytechnic",
+            "ITI / Vocational Training",
+            "Higher Secondary (12th Pass)",
+            "High School (10th Pass)",
+            ...commonTrans.en.commonOptions,
+          ],
+          hi: [
+            "पीएचडी / डॉक्टरेट",
+            "एम.फिल (अनुसंधान)",
+            "एम.टेक / एम.ई.",
+            "एमबीए (MBA)",
+            "एमसीए (MCA)",
+            "एमएस / एमडी (चिकित्सा परास्नातक)",
+            "परास्नातक (कला / विज्ञान / वाणिज्य)",
+            "एलएलएम (कानून परास्नातक)",
+            "एम.फार्मा (फार्मेसी परास्नातक)",
+            "बी.टेक / बी.ई.",
+            "बी.आर्क (वास्तुकला स्नातक)",
+            "बीबीए / बीबीएम",
+            "बीसीए / बीएससी आईटी",
+            "एमबीबीएस / बीडीएस / बीएएमएस",
+            "बी.फार्मा / बीपीटी (स्वास्थ्य सेवा)",
+            "बीएससी (नर्सिंग)",
+            "स्नातक (कला / विज्ञान / वाणिज्य)",
+            "एलएलबी (कानून स्नातक)",
+            "बीएड / डीएलएड (शिक्षण स्नातक)",
+            "ललित कला / डिजाइनिंग स्नातक",
+            "कृषि विज्ञान स्नातक",
+            "होटल मैनेजमेंट स्नातक",
+            "सीए / सीएस / सीएफए",
+            "आईसीडब्ल्यूए",
+            "सिविल सेवा (प्रशासनिक अधिकारी)",
+            "डिप्लोमा / पॉलिटेक्निक",
+            "आईटीआई / व्यावसायिक प्रशिक्षण",
+            "उच्च माध्यमिक (12वीं पास)",
+            "माध्यमिक (10वीं पास)",
+            ...commonTrans.hi.commonOptions,
+          ],
+          pa: [
+            "ਪੀ.ਐੱਚ.ਡੀ / ਡਾਕਟਰੇਟ",
+            "ਐੱਮ.ਫ਼ਿਲ (ਖੋਜ)",
+            "ਐੱม.ਟੈਕ / ਐੱਮ.ਈ.",
+            "ਐੱਮ.ਬੀ.ਏ (MBA)",
+            "ਐੱਮ.ਸੀ.ਏ (MCA)",
+            "ਐੱਮ.ਐੱਸ / ਐੱਮ.ਡੀ (ਮੈਡੀਕਲ ਮਾਸਟਰਜ਼)",
+            "ਪੋਸਟ-ਗ੍ਰੈਜੂਏਸ਼ਨ (ਆਰਟਸ / ਸਾਇੰਸ / ਕਾਮਰਸ)",
+            "ਐੱਲ.ਐੱਲ.ਐੱਮ (ਕਾਨੂੰਨ ਮਾਸਟਰਜ਼)",
+            "ਐੱਮ.ਫਾਰਮਾ (ਫਾਰਮੇਸੀ ਮਾਸਟਰਜ਼)",
+            "ਬੀ.ਟੈਕ / ਬੀ.ਈ.",
+            "ਬੀ.ਆਰਕ (ਵਾਸਤੂਕਲਾ ਗ੍ਰੈਜੂਏਸ਼ਨ)",
+            "ਬੀ.ਬੀ.ਏ / ਬੀ.ਬੀ.ਐੱਮ",
+            "ਬੀ.ਸੀ.ਏ / ਬੀ.ਐੱਸ.ਸੀ ਆਈ.ਟੀ",
+            "ਐੱਮ.ਬੀ.ਬੀ.ਐੱਸ / ਬੀ.ਡੀ.ਐੱਸ / ਬੀ.ਏ.ਐੱਮ.ਐੱਸ",
+            "ਬੀ.ਫਾਰਮਾ / ਬੀ.ਪੀ.ਟੀ (ਸਿਹਤ ਸੰਭਾਲ)",
+            "ਬੀ.ਐੱਸ.ਸੀ (ਨਰਸਿੰਗ)",
+            "ਗ੍ਰੈਜੂਏਸ਼ਨ (ਆਰਟਸ / ਸਾਇੰਸ / ਕਾਮਰਸ)",
+            "ਐੱਲ.ਐੱਲ.ਬੀ (ਕਾਨੂੰਨ ਗ੍ਰੈਜੂਏਸ਼ਨ)",
+            "ਬੀ.ਐੱਡ / ਡੀ.ਐੱਲ.ਐੱਡ (ਅਧਿਆਪਨ ਗ੍ਰੈਜੂਏਸ਼ਨ)",
+            "ਲਲਿਤ ਕਲਾ / ਡਿਜ਼ਾਈਨਿੰਗ ਗ੍ਰੈਜੂਏਸ਼ਨ",
+            "ਖੇਤੀਬਾੜੀ ਵਿਗਿਆਨ ਗ੍ਰੈਜੂਏਸ਼ਨ",
+            "ਹੋਟਲ ਮੈਨੇਜਮੈਂਟ ਗ੍ਰੈਜੂਏਸ਼ਨ",
+            "ਸੀ.ਏ / ਸੀ.ਐੱਸ / ਸੀ.ਐੱਫ.ਏ",
+            "ਆਈ.ਸੀ.ਡਬਲਯੂ.ਏ",
+            "ਸਿਵਲ ਸੇਵਾਵਾਂ (ਪ੍ਰਸ਼ਾਸਨਿਕ ਅਧਿਕਾਰੀ)",
+            "ਡਿਪਲੋਮਾ / ਪੌਲੀਟੈਕਨਿਕ",
+            "ਆਈ.ਟੀ.ਆਈ / ਪੇਸ਼ੇਵਰ ਸਿਖਲਾਈ",
+            "ਉੱਚ ਮਾਧਿਅਮਿਕ (12ਵੀਂ ਪਾਸ)",
+            "ਮਾਧਿਅਮਿਕ (10ਵੀਂ ਪਾਸ)",
+            ...commonTrans.pa.commonOptions,
+          ],
+        };
+        const occupationOptions = {
+          en: [
+            "Software Engineer / IT Professional",
+            "Data Scientist / AI Analyst",
+            "Doctor / Surgeon / Physician",
+            "Dentist / Orthodontist",
+            "Pharmacist / Healthcare Specialist",
+            "Nurse / Medical Therapist",
+            "Chartered Accountant (CA) / CS",
+            "Investment Banker / Financial Analyst",
+            "Business Analyst / Consultant",
+            "HR Manager / Recruiting Professional",
+            "Marketing / Digital Media Executive",
+            "Civil Services (IAS / IPS / IFS)",
+            "Government Employee (State/Central)",
+            "Bank Officer / PSU Employee",
+            "Defense / Army / Navy / Air Force",
+            "Police / Security Services",
+            "Advocate / Lawyer / Legal Consultant",
+            "Architect / Interior Designer",
+            "Civil / Mechanical / Electrical Engineer",
+            "Professor / Lecturer / Researcher",
+            "Teacher / Educator",
+            "Business Owner / Entrepreneur",
+            "Merchant / Shopkeeper / Trader",
+            "Real Estate Broker / Developer",
+            "Journalist / Writer / Editor",
+            "Content Creator / Influencer",
+            "Graphic Designer / Animator",
+            "Pilot / Cabin Crew / Aviation",
+            "Merchant Navy Professional",
+            "Hotel / Hospitality Management",
+            "Agriculture / Farming Professional",
+            "Student / Preparing for Exams",
+            "Homemaker",
+            "Not Employed / Looking for Job",
+            ...commonTrans.en.commonOptions,
+          ],
+          hi: [
+            "सॉफ्टवेयर इंजीनियर / आईटी प्रोफेशनल",
+            "डेटा साइंटिस्ट / एआई विश्लेषक",
+            "डॉक्टर / चिकित्सक / सर्जन",
+            "दंत चिकित्सक (Dentist)",
+            "फार्मासिस्ट / स्वास्थ्य सेवा विशेषज्ञ",
+            "नर्स / चिकित्सा चिकित्सक",
+            "चार्टर्ड अकाउंटेंट (CA) / सीएस",
+            "निवेश बैंकर / वित्तीय विश्लेषक",
+            "बिजनेस एनालिस्ट / सलाहकार",
+            "मानव संसाधन (HR) प्रबंधक",
+            "मार्केटिंग / डिजिटल मीडिया कार्यकारी",
+            "सिविल सेवा (प्रशासनिक अधिकारी)",
+            "सरकारी कर्मचारी",
+            "बैंक अधिकारी / पीएसयू कर्मचारी",
+            "रक्षा बल (सेना / नौसेना / वायु सेना)",
+            "पुलिस / सुरक्षा सेवाएँ",
+            "अधिवक्ता / वकील / कानूनी सलाहकार",
+            "आर्किटेक्ट / इंटीरियर डिजाइनर",
+            "इंजीनियर (सिविल / मैकेनिकल / इलेक्ट्रिकल)",
+            "प्रोफेसर / व्याख्याता / शोधकर्ता",
+            "शिक्षक / शिक्षिका",
+            "व्यवसाय स्वामी / उद्यमी",
+            "व्यापारी / दुकानदार",
+            "रियल एस्टेट ब्रोकर / डेवलपर",
+            "पत्रकार / लेखक / संपादक",
+            "कंटेंट क्रिएटर / इन्फ्लुएंसर",
+            "ग्राफिक डिजाइनर / एनिमेटर",
+            "पायलट / केबिन क्रू (विमानन क्षेत्र)",
+            "मर्चेंट नेवी प्रोफेशनल",
+            "होटल / आतिथ्य प्रबंधन (Hospitality)",
+            "कृषि / किसान",
+            "छात्र / प्रतियोगी परीक्षाओं की तैयारी",
+            "गृहणी (Homemaker)",
+            "वर्तमान में कार्यरत नहीं",
+            ...commonTrans.hi.commonOptions,
+          ],
+          pa: [
+            "ਸੌਫਟਵੇਅਰ ਇੰਜੀਨੀਅਰ / ਆਈ.ਟੀ. ਪ੍ਰੋਫੈਸ਼ਨਲ",
+            "ਡੇਟਾ ਸਾਇੰਟਿਸਟ / ਏ.ਆਈ. ਵਿਸ਼ਲੇਸ਼ਕ",
+            "ਡਾਕਟਰ / ਚਿਕਿਤਸਕ / ਸਰਜਨ",
+            "ਦੰਦਾਂ ਦਾ ਚਿਕਿਤਸਕ (Dentist)",
+            "ਫਾਰਮਾਸਿਸਟ / ਸਿਹਤ ਸੰਭਾਲ ਮਾਹਰ",
+            "ਨਰਸ / ਮੈਡੀਕਲ ਥੈਰੇਪਿਸਟ",
+            "ਚਾਰਟਰਡ ਅਕਾਊਂਟੈਂਟ (CA) / ਸੀ.ਐੱਸ.",
+            "ਨਿਵੇਸ਼ ਬੈਂਕਰ / ਵਿੱਤੀ ਵਿਸ਼ਲੇਸ਼ਕ",
+            "ਬਿਜ਼ਨਸ ਐਨਾਲਿਸਟ / ਸਲਾਹਕਾਰ",
+            "ਮਾਨਵ ਸੰਸਾਧਨ (HR) ਪ੍ਰਬੰਧਕ",
+            "ਮਾਰਕੀਟਿੰਗ / ਡਿਜੀਟਲ ਮੀਡੀਆ ਕਾਰਜਕਾਰੀ",
+            "ਸਿਵਲ ਸੇਵਾਵਾਂ (ਪ੍ਰਸ਼ਾਸਨਿਕ ਅਧਿਕਾਰੀ)",
+            "ਸਰਕਾਰੀ ਕਰਮਚਾਰੀ",
+            "ਬੈਂਕ ਅਧਿਕਾਰੀ / ਪੀ.ਐੱਸ.ਯੂ. ਕਰਮਚਾਰੀ",
+            "ਰੱਖਿਆ ਬਲ (ਸੈਨਾ / ਨੇਵੀ / ਏਅਰ ਫੋਰਸ)",
+            "ਪੁਲਿਸ / ਸੁਰੱਖਿਆ ਸੇਵਾਵਾਂ",
+            "ਐਡਵੋਕੇਟ / ਵਕੀਲ / ਕਾਨੂੰਨੀ ਸਲਾਹਕਾਰ",
+            "ਆਰਕੀਟੈਕਟ / ਇੰਟੀਰੀਅਰ ਡਿਜ਼ਾਈਨਰ",
+            "ਇੰਜੀਨੀਅਰ (ਸਿਵਲ / ਮੈਕੇਨੀਕਲ / ਇਲੈਕਟ੍ਰੀਕਲ)",
+            "ਪ੍ਰੋਫੈਸਰ / ਲੈਕਚਰਾਰ / ਖੋਜਕਰਤਾ",
+            "ਅਧਿਆਪਕ / ਅਧਿਆਪਿਕਾ",
+            "ਕਾਰੋਬਾਰੀ ਮਾਲਕ / ਉੱਦਮੀ",
+            "ਵਪਾਰੀ / ਦੁਕਾਨਦਾਰ",
+            "ਰੀਅਲ ਅਸਟੇਟ ਬ੍ਰੋਕਰ / ਡਿਵੈਲਪਰ",
+            "ਪੱਤਰਕਾਰ / ਲੇਖਕ / ਸੰਪਾਦਕ",
+            "ਕੰਟੈਂਟ ਕ੍ਰਿਏਟਰ / ਇਨਫਲੂਐਂਸਰ",
+            "ਗ੍ਰਾਫਿਕ ਡਿਜ਼ਾਈਨਰ / ਐਨੀਮੇਟਰ",
+            "ਪਾਇਲਟ / ਕੇਬਿਨ ਕਰੂ (ਵਿਮਾਨਨ ਖੇਤਰ)",
+            "ਮਰਚੈਂਟ ਨੇਵੀ ਪ੍ਰੋਫੈਸ਼ਨਲ",
+            "ਹੋਟਲ / ਆਤਿਥਥ ਪ੍ਰਬੰਧਨ (Hospitality)",
+            "ਖੇਤੀਬਾੜੀ / ਕਿਸਾਨ",
+            "ਵਿਦਿਆਰਥੀ / ਪ੍ਰਤੀਯੋਗੀ ਪ੍ਰੀਖਿਆਵਾਂ ਦੀ ਤਿਆਰੀ",
+            "ਘਰੇਲੂ ਮਹਿਲਾ (Homemaker)",
+            "ਵਰਤਮਾਨ ਵਿੱਚ ਕਾਰਜਸ਼ੀਲ ਨਹੀਂ",
+            ...commonTrans.pa.commonOptions,
+          ],
+        };
+        const annualIncomeOptions = {
+          en: [
+            "No Income / Not Earning",
+            "Under 3 Lakhs (LPA)",
+            "3 - 5 Lakhs (LPA)",
+            "5 - 7 Lakhs (LPA)",
+            "7 - 10 Lakhs (LPA)",
+            "10 - 12 Lakhs (LPA)",
+            "12 - 15 Lakhs (LPA)",
+            "15 - 20 Lakhs (LPA)",
+            "20 - 25 Lakhs (LPA)",
+            "25 - 35 Lakhs (LPA)",
+            "35 - 50 Lakhs (LPA)",
+            "50 Lakhs - 1 Crore",
+            "Above 1 Crore +",
+            ...commonTrans.en.commonOptions,
+          ],
+          hi: [
+            "कोई आय नहीं / कार्यरत नहीं",
+            "3 लाख से कम सालाना",
+            "3 से 5 लाख सालाना",
+            "5 से 7 लाख सालाना",
+            "7 से 10 लाख सालाना",
+            "10 से 12 लाख सालाना",
+            "12 से 15 लाख सालाना",
+            "15 से 20 लाख सालाना",
+            "20 से 25 लाख सालाना",
+            "25 से 35 लाख सालाना",
+            "35 से 50 लाख सालाना",
+            "50 लाख से 1 करोड़ सालाना",
+            "1 करोड़ से अधिक सालाना",
+            ...commonTrans.hi.commonOptions,
+          ],
+          pa: [
+            "ਕੋਈ ਆਮਦਨ ਨਹੀਂ / ਕਾਰਜਸ਼ੀਲ ਨਹੀਂ",
+            "3 ਲੱਖ ਤੋਂ ਘੱਟ ਸਾਲਾਨਾ",
+            "3 ਤੋਂ 5 ਲੱਖ ਸਾਲਾਨਾ",
+            "5 ਤੋਂ 7 ਲੱਖ ਸਾਲਾਨਾ",
+            "7 ਤੋਂ 10 ਲੱਖ ਸਾਲਾਨਾ",
+            "10 ਤੋਂ 12 ਲੱਖ ਸਾਲਾਨਾ",
+            "12 ਤੋਂ 15 ਲੱਖ ਸਾਲਾਨਾ",
+            "15 ਤੋਂ 20 ਲੱਖ ਸਾਲਾਨਾ",
+            "20 ਤੋਂ 25 ਲੱਖ ਸਾਲਾਨਾ",
+            "25 ਤੋਂ 35 ਲੱਖ ਸਾਲਾਨਾ",
+            "35 ਤੋਂ 50 ਲੱਖ ਸਾਲਾਨਾ",
+            "50 ਲੱਖ ਤੋਂ 1 ਕਰੋੜ ਸਾਲਾਨਾ",
+            "1 ਕਰੋੜ ਤੋਂ ਵੱਧ ਸਾਲਾਨਾ",
+            ...commonTrans.pa.commonOptions,
+          ],
+        };
+        const trans = {
+          en: {
+            brandTitle: "Matrimonial Profile Maker — Free & Private",
+            heroTitle: "Your story, thoughtfully presented.",
+            heroSub:
+              "Create a clean matrimonial biodata in a few simple steps. Your details stay in this browser session — nothing is uploaded or saved by this page.",
+            privacyTitle: "Private by design",
+            privacyText:
+              "This standalone page has no backend and does not store your information. Use “Create printable profile” to prepare a print-ready copy, then choose “Save as PDF” in your browser’s print dialog.",
+            secBasicDetails: "Basic Details",
+            subBasicDetails: "Choose the language for the form first.",
+            secBirth: "Birth details",
+            subBirth: "Enter date and time in separate fields if known.",
+            secPerInfo: "Personal Information",
+            secLocation: "Current location",
+            subLocation: "Your present city and state are required.",
+
+            subFamily: "Share only what you feel comfortable including.",
+            name: "Name",
+            namePlaceholder: "Enter Name",
+            profileFor: "Profile created for",
+            profileForSelect: "Select profile created for",
+            profileForOptions: [
+              "Self",
+              "Son",
+              "Daughter",
+              "Brother",
+              "Sister",
+              "Relative",
+              "Friend",
+              ...commonTrans.en.commonOptions,
+            ],
+            gender: "Gender",
+            genderSelect: "Select gender",
+            genderOptions: ["Male", "Female", ...commonTrans.en.commonOptions],
+            category: "Category",
+            categorySelect: "Select category",
+            categoryOptions: [
+              "General / Unreserved category",
+              "Other Backward Classes (OBC)",
+              "Scheduled Castes (SC)",
+              "Scheduled Tribes (ST)",
+              ...commonTrans.en.commonOptions,
+            ],
+            maritalStatus: "Marital status",
+            maritalStatusSelect: "Select marital status",
+            maritalStatusOptions: [
+              "Unmarried",
+              "Widow/Widower",
+              "Divorced",
+              "Awaiting Divorce",
+              "Separated",
+              "Single Parent",
+              "Annulled",
+            ],
+            childrenGirls: "Children - Girls",
+            girlSelect: "Select Girl Children",
+            noGirl: "No Girl",
+            girl: "Girl",
+            girls: "Girls",
+            girlCount: "Girl children",
+            childrenBoys: "Children - Boys",
+            boySelect: "Select Boy Children",
+            noBoy: "No Boy",
+            boy: "Boy",
+            boys: "Boys",
+            boyCount: "Boy children",
+            childSummary: "Children",
+            maritalAndChildren: "Marital status and children",
+            dateOfBirth: "Date of birth",
+            timeOfBirth: "Time of birth",
+            placeOfBirth: "Place of birth",
+            birthYear: "Year",
+            birthMonth: "Month",
+            birthDate: "Day",
+            birthHour: "Hour",
+            birthMinute: "Minutes",
+            birthSecond: "Seconds",
+            birthAmPm: "AM/PM",
+            birthCityPlaceholder: "City",
+            birthStatePlaceholder: "State",
+            birthCountryPlaceholder: "Country",
+            manglikZodiacSigns: "Manglik Status & Zodiac Signs",
+            manglik: "Manglik status",
+            manglikSelect: "Select Manglik status",
+            manglikOptions: [
+              "Non-Manglik",
+              "Manglik",
+              "Anshik Manglik",
+              "High Manglik",
+              "Don't Know",
+              // "Doesn't Matter",
+              "Prefer not to say",
+            ],
+            sunSign: "Sun Sign",
+            sunSignSelect: "Select Sun Sign",
+            sunSignOptions: [...commonTrans.en.zodiacSigns],
+            moonSign: "Moon Sign",
+            moonSignSelect: "Select Moon Sign",
+            moonSignOptions: [...commonTrans.en.zodiacSigns],
+            currentCityPlaceholder: "City",
+            currentStatePlaceholder: "State",
+            currentCountryPlaceholder: "Country",
+            diet: "Diet preference",
+            dietSelect: "Select diet preference",
+            dietOptions: [
+              "Vegetarian",
+              "Vegan",
+              "Saatwik (No Onion/Garlic)",
+              "Jain",
+              "Eggetarian",
+              "Non-vegetarian",
+              ...commonTrans.en.commonOptions,
+            ],
+            smoking: "Smoking Habits",
+            smokingSelect: "Select Smoking Habits",
+            smokingOptions: [
+              "Non-Smoker",
+              "Smoker",
+              "Occasional Smoker",
+              ...commonTrans.en.commonOptions,
+            ],
+            drinking: "Drinking Habits",
+            drinkingSelect: "Select Drinking Habits",
+            drinkingOptions: [
+              "Non-Drinker",
+              "Drinker",
+              "Occasional Drinker",
+              ...commonTrans.en.commonOptions,
+            ],
+            religion: "Religion",
+            religionSelect: "Select Religion",
+            religionOptions: [
+              "Hinduism",
+              "Sikhism",
+              "Islam",
+              "Christianity",
+              "Jainism",
+              "Buddhism",
+              "Parsi / Zoroastrianism",
+              "No Religion",
+              "Spiritual",
+              ...commonTrans.en.commonOptions,
+            ],
+            skinTone: "Skin Tone",
+            skinToneSelect: "Select Skin Tone",
+            skinToneOptions: [
+              "Fair",
+              "Very Fair",
+              "Wheatish",
+              "Wheatish Brown",
+              "Dark",
+              ...commonTrans.en.commonOptions,
+            ],
+            bloodGroup: "Blood Group",
+            bloodGroupSelect: "Select Blood Group",
+            bloodGroupOptions: [
+              "A+",
+              "A-",
+              "B+",
+              "B-",
+              "O+",
+              "O-",
+              "AB+",
+              "AB-",
+              "Don't Know",
+              "Prefer not to say",
+            ],
+            motherTongue: "Mother Tongue",
+            motherTongueSelect: "Select Mother Tongue",
+            motherTongueOptions: [
+              "Hindi",
+              "Punjabi",
+              "English",
+              "Bengali",
+              "Gujarati",
+              "Marathi",
+              "Telugu",
+              "Tamil",
+              "Kannada",
+              "Malayalam",
+              "Odia",
+              "Urdu",
+              "Assamese",
+              "Sindhi",
+              "Marwari",
+              "Rajasthani",
+              ...commonTrans.en.commonOptions,
+            ],
+            education: "Education",
+            educationSelect: "Select Education",
+            educationOptions: [...educationOptions.en],
+            occupation: "Occupation",
+            occupationSelect: "Select Occupation",
+            occupationOptions: [...occupationOptions.en],
+            annualIncome: "Annual Income",
+            annualIncomeSelect: "Select Annual Income",
+            annualIncomeOptions: [...annualIncomeOptions.en],
+            secFamily: "Family Details",
+            familyType: "Family type",
+            familyTypeSelect: "Select family type",
+            familyTypeOptions: [
+              "Nuclear",
+              "Joint",
+              "Living Alone",
+              ...commonTrans.en.commonOptions,
+            ],
+            familyStatus: "Family Status",
+            familyStatusSelect: "Select family Status",
+            familyStatusOptions: [
+              "Middle Class",
+              "Upper Middle Class",
+              "Lower Middle Class",
+              "Rich / Affluent",
+              ...commonTrans.en.commonOptions,
+            ],
+            casteGotra: "Caste & Gotra",
+            castePlaceholder: "Caste",
+            subCastePlaceholder: "Sub Caste",
+            gotraPlaceholder: "Gotra",
+            mother: "Mother",
+            motherSelect: "Select about Mother",
+            motherOptions: [...parentsOptions.en],
+            // motherPlaceholder: "Name, occupation or other details",
+            father: "Father",
+            fatherSelect: "Select about Father",
+            fatherOptions: [...parentsOptions.en],
+            // fatherPlaceholder: "Name, occupation or other details",
+            siblings: "Siblings",
+            siblingCountSelect: "Select count",
+            brothers: "Brothers",
+            marriedBrothers: "Married Brothers",
+            sisters: "Sisters",
+            marriedSisters: "Married Sisters",
+            educationPlaceholder: "Highest qualification",
+            occupationPlaceholder: "Profession / role",
+            height: "Height",
+            heightSelect: "Select height",
+            weight: "Weight",
+            weightSelect: "Select weight",
+            aboutProfile: "More About Profile",
+            aboutProfilePlaceholder: "More About Profile...",
+            aboutFamily: "More About Family",
+            aboutFamilyPlaceholder: "More About Family...",
+            secPartnerPreferences: "Partner Preferences",
+            partnerPreferences: "Partner Preferences",
+            partnerPreferencesPlaceholder:
+              "What you are looking for in a life partner",
+            secContactDetails: "Contact Details",
+            contactNumber: "Contact Number",
+            whatsappNumber: "WhatsApp Number",
+            emailId: "Email ID",
+            facebookProfile: "Facebook Profile",
+            instagramProfile: "Instagram Profile",
+            linkedinProfile: "LinkedIn Profile",
+            contactNumberPlaceholder: "+91 9874563210",
+            whatsappNumberPlaceholder: "+91 9874563210",
+            emailIdPlaceholder: "my-name@example.com",
+            facebookProfilePlaceholder: "https://www.facebook.com/my-profile",
+            instagramProfilePlaceholder: "https://www.instagram.com/my-profile",
+            linkedinProfilePlaceholder: "https://www.linkedin.com/my-profile",
+            monthOptions: [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ],
+            monthSelect: "Month",
+            yearSelect: "Year",
+            dateSelect: "Day",
+            hourSelect: "Hour",
+            minuteSelect: "Minutes",
+            secondSelect: "Seconds",
+            amPmSelect: "AM/PM",
+            amPm: ["AM", "PM"],
+            profileFormatsTitle: "Create a profile",
+            anonymousProfile: "Create Anonymous Profile",
+            compactProfile: "Create Compact Profile",
+            standardProfile: "Standard Profile",
+            detailedProfile: "Detailed Profile",
+            outputTitle: "Your profile",
+            profileModeTitles: {
+              anonymous: "Anonymous Profile",
+              compact: "Compact Profile",
+              standard: "Standard Profile",
+              detailed: "Detailed Profile",
+            },
+            outputGroups: [
+              "Basic details",
+              "Birth details",
+              "Current location",
+              "Personal details",
+              "Family details",
+              "Partner preferences",
+              "Contact details",
+            ],
+            narrative: {
+              relationTerms: [
+                "",
+                "son",
+                "daughter",
+                "brother",
+                "sister",
+                "relative",
+                "friend",
+              ],
+              maritalStatuses: [
+                "single",
+                "widowed",
+                "divorced",
+                "awaiting a divorce",
+                "separated",
+                "a single parent",
+                "annulled",
+              ],
+              self: "This profile is for myself",
+              selfNamed: "This profile is for myself ({name})",
+              relation: "This profile is for my {relation}",
+              relationNamed: "This profile is for my {relation}, {name}",
+              subject: { male: "He", female: "She", other: "This person" },
+              possessive: { male: "His", female: "Her", other: "Their" },
+              born: "{subject} was born on {date}",
+              bornIn: "{subject} was born in {date}",
+              bornWithManglik: "{subject} was born on {date} and is {manglik}",
+              bornInWithManglik:
+                "{subject} was born in {date} and is {manglik}",
+              manglikOnly: "{subject} is {manglik}",
+              birthTime: "at {value}",
+              birthPlace: "born in {value}",
+              sunSign: "sun sign {value}",
+              moonSign: "moon sign {value}",
+              birthContext: "Birth details also include {details}",
+              marital: "{subject} is {status}{children}",
+              children: " and has {summary}",
+              childrenNone: " and has no children",
+              childrenSummary: "{total} children ({details})",
+              childrenOne: "{total} child ({details})",
+              son: "{count} son",
+              sons: "{count} sons",
+              daughter: "{count} daughter",
+              daughters: "{count} daughters",
+              currentLocation: "{subject} is based out of {location}",
+              background: "{possessive} background includes {details}",
+              personal: "{possessive} personal details include {details}",
+              family: "{subject} comes from {details}",
+              familyType: "a {value} family",
+              familyStatus: "a {value} household",
+              caste: "{value} community",
+              gotra: "the {value} gotra",
+              parentsBoth: "parents who are {mother} and {father}",
+              parentMother: "a mother who is {value}",
+              parentFather: "a father who is {value}",
+              brothersCount: "{count} brothers",
+              sistersCount: "{count} sisters",
+              noSiblings: "no siblings",
+              marriedBrother: "{count} married brother",
+              marriedBrothers: "{count} married brothers",
+              marriedSister: "{count} married sister",
+              marriedSisters: "{count} married sisters",
+              aboutProfile: "{value}",
+              aboutFamily: "{value}",
+              partner: "{possessive} partner preferences are {value}",
+              contact: "For contact, {details}",
+              education: "education in {value}",
+              occupation: "work as {value}",
+              income: "income of {value}",
+              height: "height of {value}",
+              weight: "weight of {value}",
+              skinTone: "{value} complexion",
+              bloodGroup: "{value} blood group",
+              diet: "{value} diet",
+              smoking: "smoking habits of {value}",
+              drinking: "drinking habits of {value}",
+              motherTongue: "{value} as a mother tongue",
+              aboutDetails: "{label}: {value}",
+              religion: "{value} faith",
+              category: "belonging to the {value} category",
+              contactNumber: "phone {value}",
+              whatsappNumber: "WhatsApp {value}",
+              emailId: "email {value}",
+              facebookProfile: "Facebook {value}",
+              instagramProfile: "Instagram {value}",
+              linkedinProfile: "LinkedIn {value}",
+              separator: ", ",
+              finalSeparator: " and ",
+              period: ".",
+            },
+            surname: "Surname",
+            copySuccess: "Profile copied.",
+            copyFailure:
+              "Could not copy the profile. Select and copy the text manually.",
+            copyProfile: "Copy profile",
+            printProfile: "Print / Save as PDF",
+            editProfile: "Edit details",
+            reset: "Clear form",
+            required: "* Required fields apply to every profile format.",
+            previewSub: "Personal biodata",
+            print: "Print / Save as PDF",
+            edit: "← Edit details",
+            new: "Start a new profile",
+            printNote:
+              "Prepared with a free, offline profile maker. Personal information was not uploaded by this page.",
+            footer:
+              "Free community service · No account · No backend · No data storage",
+            sections: [
+              "Basic details",
+              "Birth details",
+              "Current location",
+              "Family & personal information",
+            ],
+            empty: "Not provided",
+            profileTitle: "Matrimonial Profile",
+          },
+          hi: {
+            brandTitle: "शादी के लिए बायोडाटा बनाएँ - निःशुल्क और सुरक्षित",
+            heroTitle: "आपकी पहचान, सुंदर और सरल रूप में।",
+            heroSub:
+              "कुछ आसान चरणों में अपना वैवाहिक परिचय-पत्र बनाएँ। आपकी जानकारी इसी ब्राउज़र सत्र में रहती है—यह पेज इसे अपलोड या सेव नहीं करता।",
+            privacyTitle: "आपकी गोपनीयता पहले",
+            privacyText:
+              "यह एक स्वतंत्र HTML पेज है; इसका कोई बैकएंड नहीं है और यह आपकी जानकारी सेव नहीं करता। “प्रिंट योग्य प्रोफ़ाइल बनाएँ” चुनें, फिर ब्राउज़र के प्रिंट विकल्प में “PDF के रूप में सेव करें” चुनें।",
+            secBasicDetails: "मूल विवरण",
+            subBasicDetails: "सबसे पहले फ़ॉर्म की भाषा चुनें।",
+            secBirth: "जन्म विवरण",
+            subBirth: "यदि जानकारी उपलब्ध हो, तो तारीख और समय अलग-अलग भरें।",
+            secPerInfo: "व्यक्तिगत विवरण",
+            secLocation: "वर्तमान निवास",
+            subLocation: "वर्तमान शहर और राज्य भरना आवश्यक है।",
+            subFamily: "केवल वही जानकारी दें जिसे साझा करना आप उचित समझें।",
+            // name:"पूरा नाम",
+            name: "नाम",
+            namePlaceholder: "नाम दर्ज करें",
+            // profileFor:"प्रोफ़ाइल किसके लिए बनाई गई है",
+            profileFor: "प्रोफ़ाइल किसके लिए है",
+            profileForSelect: "प्रोफ़ाइल किसके लिए है",
+            profileForOptions: [
+              "अपने लिए",
+              "बेटा",
+              "बेटी",
+              "भाई",
+              "बहन",
+              "रिश्तेदार",
+              "मित्र",
+              ...commonTrans.hi.commonOptions,
+            ],
+            gender: "लिंग",
+            genderSelect: "लिंग चुनें",
+            genderOptions: ["पुरुष", "महिला", ...commonTrans.hi.commonOptions],
+            category: "श्रेणी",
+            categorySelect: "श्रेणी चुनें",
+            categoryOptions: [
+              "सामान्य",
+              "अन्य पिछड़ा वर्ग (OBC)",
+              "अनुसूचित जाति (SC)",
+              "अनुसूचित जनजाति (ST)",
+              ...commonTrans.hi.commonOptions,
+            ],
+            maritalStatus: "वैवाहिक स्थिति",
+            maritalStatusSelect: "वैवाहिक स्थिति चुनें",
+            maritalStatusOptions: [
+              "अविवाहित",
+              "विधवा/विधुर",
+              "तलाकशुदा",
+              "तलाक की कार्यवाही जारी",
+              "अलग रह रहे हैं",
+              "एकल माता/पिता",
+              "विवाह रद्द (अमान्य)",
+            ],
+            childrenGirls: "बच्चे - लड़कियाँ",
+            girlSelect: "बच्चे चुनें",
+            noGirl: "कोई लड़की नहीं",
+            girl: "लड़की",
+            girls: "लड़कियाँ",
+            girlCount: "बेटियाँ",
+            childrenBoys: "बच्चे - लड़के",
+            boySelect: "बच्चे चुनें",
+            noBoy: "कोई लड़का नहीं",
+            boy: "लड़का",
+            boys: "लड़के",
+            boyCount: "बेटे",
+            childSummary: "बच्चे",
+            maritalAndChildren: "वैवाहिक स्थिति और बच्चे",
+            dateOfBirth: "जन्म तिथि",
+            timeOfBirth: "जन्म का समय",
+            placeOfBirth: "जन्म स्थान",
+            birthYear: "वर्ष",
+            birthMonth: "माह",
+            birthDate: "दिन",
+            birthHour: "घंटा",
+            birthMinute: "मिनट",
+            birthSecond: "सेकंड",
+            birthAmPm: "AM/PM",
+            birthCityPlaceholder: "शहर",
+            birthStatePlaceholder: "राज्य",
+            birthCountryPlaceholder: "देश",
+            manglikZodiacSigns: "मांगलिक स्थिति और राशि विवरण",
+            manglik: "मांगलिक स्थिति",
+            manglikSelect: "मांगलिक स्थिति चुनें",
+            manglikOptions: [
+              "मांगलिक नहीं",
+              "मांगलिक",
+              "आंशिक मांगलिक",
+              "पक्का मांगलिक",
+              "पता नहीं",
+              // "मांगलिक मायने नहीं रखता",
+              //"कोई फ़र्क नहीं पड़ता",
+              "बताना नहीं चाहते",
+            ],
+            sunSign: "चंद्र राशि",
+            sunSignSelect: "चंद्र राशि चुनें",
+            sunSignOptions: [...commonTrans.hi.zodiacSigns],
+            moonSign: "सूर्य राशि",
+            moonSignSelect: "सूर्य राशि चुनें",
+            moonSignOptions: [...commonTrans.hi.zodiacSigns],
+            currentCityPlaceholder: "शहर",
+            currentStatePlaceholder: "राज्य",
+            currentCountryPlaceholder: "देश",
+            diet: "खान-पान की आदतें",
+            dietSelect: "खान-पान चुनें",
+            dietOptions: [
+              "शाकाहारी",
+              "वीगन",
+              "सात्विक (बिना प्याज/लहसुन)",
+              "जैन भोजन",
+              "अंडा खाते हैं",
+              "मांसाहारी",
+              ...commonTrans.hi.commonOptions,
+            ],
+            smoking: "धूम्रपान की आदतें",
+            smokingSelect: "धूम्रपान की आदत चुनें",
+            smokingOptions: [
+              "धूम्रपान नहीं करते",
+              "धूम्रपान करते हैं",
+              "कभी-कभार करते हैं",
+              ...commonTrans.hi.commonOptions,
+            ],
+            drinking: "शराब की आदतें",
+            drinkingSelect: "शराब की आदत चुनें",
+            drinkingOptions: [
+              "शराब नहीं पीते",
+              "शराब पीते हैं",
+              "कभी-कभार पीते हैं",
+              ...commonTrans.hi.commonOptions,
+            ],
+            religion: "धर्म",
+            religionSelect: "धर्म चुनें",
+            religionOptions: [
+              "हिंदू",
+              "सिख",
+              "मुस्लिम",
+              "ईसाई",
+              "जैन",
+              "बौद्ध",
+              "पारसी",
+              "कोई धर्म नहीं",
+              "आध्यात्मिक",
+              ...commonTrans.hi.commonOptions,
+            ],
+            skinTone: "रंग-रूप",
+            skinToneSelect: "रंग-रूप चुनें",
+            skinToneOptions: [
+              "गोरा",
+              "बहुत गोरा",
+              "गेहूंआ",
+              "सांवला",
+              "गहरा रंग",
+              ...commonTrans.hi.commonOptions,
+            ],
+            bloodGroup: "रक्त समूह",
+            bloodGroupSelect: "रक्त समूह चुनें",
+            bloodGroupOptions: [
+              "A+ (ए पॉजिटिव)",
+              "A- (ए नेगेटिव)",
+              "B+ (बी पॉजिटिव)",
+              "B- (बी नेगेटिव)",
+              "O+ (ओ पॉजिटिव)",
+              "O- (ओ नेगेटिव)",
+              "AB+ (एबी पॉजिटिव)",
+              "AB- (एबी नेगेटिव)",
+              "पता नहीं",
+              "बताना नहीं चाहते",
+            ],
+            motherTongue: "मातृभाषा",
+            motherTongueSelect: "मातृभाषा चुनें",
+            motherTongueOptions: [
+              "हिंदी",
+              "पंजाबी",
+              "अंग्रेजी",
+              "बंगाली",
+              "गुजराती",
+              "मराठी",
+              "तेलुगु",
+              "तमिल",
+              "कन्नड़",
+              "मलयालम",
+              "ओड़िया",
+              "उर्दू",
+              "असमी",
+              "सिंधी",
+              "मारवाड़ी",
+              "राजस्थानी",
+              ...commonTrans.hi.commonOptions,
+            ],
+            education: "शिक्षा",
+            educationSelect: "शिक्षा चुनें",
+            educationOptions: [...educationOptions.hi],
+            occupation: "पेशा",
+            occupationSelect: "पेशा चुनें",
+            occupationOptions: [...occupationOptions.hi],
+            annualIncome: "वार्षिक आय",
+            annualIncomeSelect: "वार्षिक आय चुनें",
+            annualIncomeOptions: [...annualIncomeOptions.hi],
+            secFamily: "परिवार की जानकारी",
+            familyType: "परिवार का प्रकार",
+            familyTypeSelect: "परिवार का प्रकार चुनें",
+            familyTypeOptions: [
+              "एकल परिवार",
+              "संयुक्त परिवार",
+              "अकेले रहते हैं",
+              ...commonTrans.hi.commonOptions,
+            ],
+            familyStatus: "परिवार का प्रकार",
+            familyStatusSelect: "परिवार का प्रकार चुनें",
+            familyStatusOptions: [
+              "मध्यम वर्ग",
+              "उच्च मध्यम वर्ग",
+              "निम्न मध्यम वर्ग",
+              "समृद्ध / उच्च वर्ग",
+              ...commonTrans.hi.commonOptions,
+            ],
+            casteGotra: "जाति और गोत्र",
+            castePlaceholder: "जाति",
+            subCastePlaceholder: "उप-जाति",
+            gotraPlaceholder: "गोत्र",
+            mother: "माता",
+            motherSelect: "माता के बारे में चुनें",
+            motherOptions: [...parentsOptions.hi],
+            // motherPlaceholder: "नाम, पेशा या अन्य विवरण",
+            father: "पिता",
+            fatherSelect: "पिता के बारे में चुनें",
+            fatherOptions: [...parentsOptions.hi],
+            // fatherPlaceholder: "नाम, पेशा या अन्य विवरण",
+            siblings: "भाई-बहन",
+            siblingCountSelect: "संख्या चुनें",
+            brothers: "भाई",
+            marriedBrothers: "विवाहित भाई",
+            sisters: "बहनें",
+            marriedSisters: "विवाहित बहनें",
+            educationPlaceholder: "उच्चतम शैक्षणिक योग्यता",
+            occupation: "पेशा",
+            occupationPlaceholder: "पेशा / भूमिका",
+            height: "कद",
+            heightSelect: "कद चुनें",
+            weight: "वज़न",
+            weightSelect: "वज़न चुनें",
+            aboutProfile: "प्रोफ़ाइल के बारे में अन्य विवरण",
+            aboutProfilePlaceholder: "प्रोफ़ाइल के बारे में अन्य विवरण...",
+            aboutFamily: "परिवार  के बारे में अन्य विवरण",
+            aboutFamilyPlaceholder: "परिवार  के बारे में अन्य विवरण...",
+            secPartnerPreferences: "जीवनसाथी से अपेक्षाएँ",
+            partnerPreferences: "जीवनसाथी से अपेक्षाएँ",
+            partnerPreferencesPlaceholder: "जीवनसाथी से अपेक्षाएँ...",
+            secContactDetails: "संपर्क विवरण",
+            contactNumber: "फ़ोन नंबर",
+            whatsappNumber: "व्हाट्सएप नंबर",
+            emailId: "ईमेल आईडी",
+            facebookProfile: "फेसबुक प्रोफ़ाइल",
+            instagramProfile: "इंस्टाग्राम प्रोफ़ाइल",
+            linkedinProfile: "लिंक्डइन प्रोफ़ाइल",
+            contactNumberPlaceholder: "+91 9874563210",
+            whatsappNumberPlaceholder: "+91 9874563210",
+            emailIdPlaceholder: "my-name@example.com",
+            facebookProfilePlaceholder: "https://www.facebook.com/my-profile",
+            instagramProfilePlaceholder: "https://www.instagram.com/my-profile",
+            linkedinProfilePlaceholder: "https://www.linkedin.com/my-profile",
+            monthOptions: [
+              "जनवरी",
+              "फ़रवरी",
+              "मार्च",
+              "अप्रैल",
+              "मई",
+              "जून",
+              "जुलाई",
+              "अगस्त",
+              "सितंबर",
+              "अक्टूबर",
+              "नवंबर",
+              "दिसंबर",
+            ],
+            monthSelect: "माह",
+            yearSelect: "वर्ष",
+            dateSelect: "दिन",
+            hourSelect: "घंटा",
+            minuteSelect: "मिनट",
+            secondSelect: "सेकंड",
+            amPmSelect: "AM/PM",
+            amPm: ["AM", "PM"],
+            profileFormatsTitle: "प्रोफ़ाइल बनाएँ",
+            anonymousProfile: "अनाम प्रोफ़ाइल बनाएँ",
+            compactProfile: "संक्षिप्त प्रोफ़ाइल बनाएँ",
+            standardProfile: "मानक प्रोफ़ाइल",
+            detailedProfile: "विस्तृत प्रोफ़ाइल",
+            outputTitle: "आपकी प्रोफ़ाइल",
+            profileModeTitles: {
+              anonymous: "अनाम प्रोफ़ाइल",
+              compact: "संक्षिप्त प्रोफ़ाइल",
+              standard: "मानक प्रोफ़ाइल",
+              detailed: "विस्तृत प्रोफ़ाइल",
+            },
+            outputGroups: [
+              "मूल विवरण",
+              "जन्म विवरण",
+              "वर्तमान निवास",
+              "व्यक्तिगत विवरण",
+              "परिवार का विवरण",
+              "जीवनसाथी की अपेक्षाएँ",
+              "संपर्क विवरण",
+            ],
+            narrative: {
+              relationTerms: [
+                "",
+                "बेटे",
+                "बेटी",
+                "भाई",
+                "बहन",
+                "रिश्तेदार",
+                "मित्र",
+              ],
+              maritalStatuses: [
+                "अविवाहित",
+                "विधवा/विधुर",
+                "तलाकशुदा",
+                "तलाक की कार्यवाही जारी",
+                "अलग रह रहे",
+                "एकल माता/पिता",
+                "विवाह रद्द",
+              ],
+              self: "यह प्रोफ़ाइल मेरे लिए है",
+              selfNamed: "यह प्रोफ़ाइल मेरे लिए है ({name})",
+              relation: "यह प्रोफ़ाइल {relation} के लिए है",
+              relationNamed: "यह प्रोफ़ाइल {relation}, {name} के लिए है",
+              subject: { male: "वे", female: "वे", other: "वे" },
+              possessive: { male: "उनका", female: "उनका", other: "उनका" },
+              born: "इनका जन्म {date} को हुआ",
+              bornIn: "इनका जन्म {date} में हुआ",
+              bornWithManglik: "इनका जन्म {date} को हुआ और ये {manglik} हैं",
+              bornInWithManglik: "इनका जन्म {date} में हुआ और ये {manglik} हैं",
+              manglikOnly: "ये {manglik} हैं",
+              birthTime: "जन्म का समय {value}",
+              birthPlace: "जन्म स्थान {value}",
+              sunSign: "सूर्य राशि {value}",
+              moonSign: "चंद्र राशि {value}",
+              birthContext: "जन्म के अन्य विवरण हैं: {details}",
+              marital: "इनकी वैवाहिक स्थिति {status} है{children}",
+              children: " और इनके {summary} हैं",
+              childrenNone: " और इनकी कोई संतान नहीं है",
+              childrenSummary: "{total} संतानें ({details})",
+              childrenOne: "{total} संतान ({details})",
+              son: "{count} बेटा",
+              sons: "{count} बेटे",
+              daughter: "{count} बेटी",
+              daughters: "{count} बेटियाँ",
+              currentLocation: "ये वर्तमान में {location} में रहते हैं",
+              background: "{possessive} पृष्ठभूमि में {details} शामिल हैं",
+              personal: "इनके व्यक्तिगत विवरण में {details} शामिल हैं",
+              family: "इनका परिवार {details} है",
+              familyType: "{value} परिवार",
+              familyStatus: "{value} वर्ग का",
+              caste: "{value} समुदाय",
+              gotra: "{value} गोत्र",
+              parentsBoth: "माता {mother} और पिता {father}",
+              parentMother: "माता {value}",
+              parentFather: "पिता {value}",
+              brothersCount: "{count} भाई",
+              sistersCount: "{count} बहनें",
+              noSiblings: "कोई भाई-बहन नहीं",
+              marriedBrother: "{count} विवाहित भाई",
+              marriedBrothers: "{count} विवाहित भाई",
+              marriedSister: "{count} विवाहित बहन",
+              marriedSisters: "{count} विवाहित बहनें",
+              aboutProfile: "{value}",
+              aboutFamily: "{value}",
+              partner: "जीवनसाथी के लिए इनकी अपेक्षाएँ हैं: {value}",
+              contact: "संपर्क के लिए: {details}",
+              education: "{value} की शिक्षा",
+              occupation: "{value} में काम",
+              income: "{value} की आय",
+              height: "{value} कद",
+              weight: "{value} वज़न",
+              skinTone: "{value} रंग",
+              bloodGroup: "{value} रक्त समूह",
+              diet: "{value} भोजन",
+              smoking: "{value} धूम्रपान की आदत",
+              drinking: "{value} मद्यपान की आदत",
+              motherTongue: "{value} मातृभाषा",
+              aboutDetails: "{label}: {value}",
+              religion: "{value} धर्म",
+              category: "{value} श्रेणी",
+              contactNumber: "फ़ोन {value}",
+              whatsappNumber: "WhatsApp {value}",
+              emailId: "ईमेल {value}",
+              facebookProfile: "Facebook {value}",
+              instagramProfile: "Instagram {value}",
+              linkedinProfile: "LinkedIn {value}",
+              separator: ", ",
+              finalSeparator: " और ",
+              period: "।",
+            },
+            surname: "उपनाम",
+            copySuccess: "प्रोफ़ाइल कॉपी हो गई।",
+            copyFailure:
+              "प्रोफ़ाइल कॉपी नहीं हो सकी। टेक्स्ट चुनकर स्वयं कॉपी करें।",
+            copyProfile: "प्रोफ़ाइल कॉपी करें",
+            printProfile: "प्रिंट / PDF के रूप में सेव करें",
+            editProfile: "विवरण बदलें",
+            reset: "फ़ॉर्म साफ़ करें",
+            required: "* सभी प्रोफ़ाइल प्रारूपों के लिए आवश्यक फ़ील्ड भरें।",
+            previewSub: "वैवाहिक परिचय-पत्र",
+            print: "प्रिंट / PDF के रूप में सेव करें",
+            edit: "← विवरण बदलें",
+            new: "नई प्रोफ़ाइल बनाएँ",
+            printNote:
+              "यह परिचय-पत्र मुफ़्त ऑफ़लाइन टूल से बनाया गया है। इस पेज ने आपकी जानकारी अपलोड नहीं की।",
+            footer:
+              "निःशुल्क जनसेवा · अकाउंट नहीं · बैकएंड नहीं · डेटा सेव नहीं होता",
+            sections: [
+              "मूल विवरण",
+              "जन्म विवरण",
+              "वर्तमान निवास",
+              "परिवार और व्यक्तिगत जानकारी",
+            ],
+            empty: "जानकारी नहीं दी गई",
+            profileTitle: "वैवाहिक परिचय-पत्र",
+          },
+          pa: {
+            brandTitle: "ਵਿਆਹ ਲਈ ਪ੍ਰੋਫਾਈਲ ਬਣਾਓ - ਮੁਫ਼ਤ ਅਤੇ ਸੁਰੱਖਿਅਤ",
+            heroTitle: "ਤੁਹਾਡੀ ਪਹਿਚਾਣ, ਸੁੰਦਰ ਤੇ ਸਾਦੇ ਢੰਗ ਨਾਲ।",
+            heroSub:
+              "ਕੁਝ ਸੌਖੇ ਕਦਮਾਂ ਵਿੱਚ ਆਪਣਾ ਵਿਆਹ ਸੰਬੰਧੀ ਬਾਇਓਡਾਟਾ ਬਣਾਓ। ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਸੈਸ਼ਨ ਤੱਕ ਰਹਿੰਦੀ ਹੈ—ਇਹ ਪੇਜ ਇਸਨੂੰ ਅੱਪਲੋਡ ਜਾਂ ਸੇਵ ਨਹੀਂ ਕਰਦਾ।",
+            privacyTitle: "ਤੁਹਾਡੀ ਨਿੱਜਤਾ ਪਹਿਲਾਂ",
+            privacyText:
+              "ਇਹ ਇੱਕ ਸੁਤੰਤਰ HTML ਪੇਜ ਹੈ; ਇਸਦਾ ਕੋਈ ਬੈਕਐਂਡ ਨਹੀਂ ਅਤੇ ਇਹ ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਸੇਵ ਨਹੀਂ ਕਰਦਾ। “ਪ੍ਰਿੰਟ ਲਈ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ” ਚੁਣੋ, ਫਿਰ ਬ੍ਰਾਊਜ਼ਰ ਦੇ ਪ੍ਰਿੰਟ ਵਿਕਲਪ ਵਿੱਚ “PDF ਵਜੋਂ ਸੇਵ ਕਰੋ” ਚੁਣੋ।",
+            secBasicDetails: "ਮੁੱਢਲੇ ਵੇਰਵੇ",
+            subBasicDetails: "ਸਭ ਤੋਂ ਪਹਿਲਾਂ ਫਾਰਮ ਦੀ ਭਾਸ਼ਾ ਚੁਣੋ।",
+            secBirth: "ਜਨਮ ਦੇ ਵੇਰਵੇ",
+            subBirth: "ਜੇ ਪਤਾ ਹੋਵੇ ਤਾਂ ਤਾਰੀਖ ਅਤੇ ਸਮਾਂ ਵੱਖ-ਵੱਖ ਭਰੋ।",
+            secPerInfo: "ਨਿੱਜੀ ਜਾਣਕਾਰੀ",
+            secLocation: "ਮੌਜੂਦਾ ਟਿਕਾਣਾ",
+            subLocation: "ਮੌਜੂਦਾ ਸ਼ਹਿਰ ਅਤੇ ਰਾਜ ਲਾਜ਼ਮੀ ਹਨ।",
+            subFamily: "ਸਿਰਫ਼ ਉਹੀ ਜਾਣਕਾਰੀ ਸਾਂਝੀ ਕਰੋ ਜਿਸ ਨਾਲ ਤੁਸੀਂ ਸਹਿਜ ਹੋ।",
+            // name:"ਪੂਰਾ ਨਾਮ",
+            name: "ਨਾਮ",
+            namePlaceholder: "ਨਾਮ ਦਰਜ ਕਰੋ",
+            profileFor: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਿਸ ਲਈ ਹੈ",
+            profileForSelect: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਿਸ ਲਈ ਹੈ",
+            profileForOptions: [
+              "ਆਪਣੇ ਲਈ",
+              "ਪੁੱਤਰ",
+              "ਧੀ",
+              "ਭਰਾ",
+              "ਭੈਣ",
+              "ਰਿਸ਼ਤੇਦਾਰ",
+              "ਦੋਸਤ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            gender: "ਲਿੰਗ",
+            genderSelect: "ਲਿੰਗ ਚੁਣੋ",
+            genderOptions: ["ਮਰਦ", "ਔਰਤ", ...commonTrans.pa.commonOptions],
+            category: "ਸ਼੍ਰੇਣੀ",
+            categorySelect: "ਸ਼੍ਰੇਣੀ ਚੁਣੋ",
+            categoryOptions: [
+              "ਆਮ",
+              "ਪੱਛੜੀਆਂ ਸ਼੍ਰੇਣੀਆਂ (OBC)",
+              "ਅਨੁਸੂਚਿਤ ਜਾਤੀ (SC)",
+              "ਅਨੁਸੂਚਿਤ ਜਨਜਾਤੀ (ST)",
+              ...commonTrans.pa.commonOptions,
+            ],
+            maritalStatus: "ਵਿਆਹੁਤਾ ਸਥਿਤੀ",
+            maritalStatusSelect: "ਵਿਆਹੁਤਾ ਸਥਿਤੀ ਚੁਣੋ",
+            maritalStatusOptions: [
+              "ਅਣਵਿਆਹੇ",
+              "ਵਿਧਵਾ/ਵਿਧੁਰ",
+              "ਤਲਾਕਸ਼ੁਦਾ",
+              "ਤਲਾਕ ਦੀ ਕਾਰਵਾਈ ਅਧੀਨ",
+              "ਵੱਖ ਰਹਿੰਦੇ ਹਨ",
+              "ਇਕੱਲਾ ਮਾਤਾ/ਪਿਤਾ",
+              "ਵਿਆਹ ਰੱਦ (ਅਮਾਨਤ)",
+            ],
+            childrenGirls: "ਬੱਚੇ - ਲੜਕੀਆਂ",
+            girlSelect: "ਬੱਚੇ ਚੁਣੋ",
+            noGirl: "ਕੋਈ ਲੜਕੀ ਨਹੀਂ",
+            girl: "ਲੜਕੀ",
+            girls: "ਲੜਕੀਆਂ",
+            girlCount: "ਧੀਆਂ",
+            childrenBoys: "ਬੱਚੇ - ਲੜਕੇ",
+            boySelect: "ਬੱਚੇ ਚੁਣੋ",
+            noBoy: "ਕੋਈ ਲੜਕਾ ਨਹੀਂ",
+            boy: "ਲੜਕਾ",
+            boys: "ਲੜਕੇ",
+            boyCount: "ਪੁੱਤਰ",
+            childSummary: "ਬੱਚੇ",
+            maritalAndChildren: "ਵਿਆਹੁਤਾ ਸਥਿਤੀ ਅਤੇ ਬੱਚੇ",
+            dateOfBirth: "ਜਨਮ ਮਿਤੀ",
+            timeOfBirth: "ਜਨਮ ਦਾ ਸਮਾਂ",
+            placeOfBirth: "ਜਨਮ ਸਥਾਨ",
+            birthYear: "ਸਾਲ",
+            birthMonth: "ਮਹੀਨਾ",
+            birthDate: "ਦਿਨ",
+            birthHour: "ਘੰਟਾ",
+            birthMinute: "ਮਿੰਟ",
+            birthSecond: "ਸਕਿੰਟ",
+            birthAmPm: "AM/PM",
+            birthCityPlaceholder: "ਸ਼ਹਿਰ",
+            birthStatePlaceholder: "ਰਾਜ",
+            birthCountryPlaceholder: "ਦੇਸ਼",
+            manglikZodiacSigns: "ਮਾਂਗਲਿਕ ਸਥਿਤੀ ਅਤੇ ਰਾਸ਼ੀ ਦਾ ਵੇਰਵਾ",
+            manglik: "ਮਾਂਗਲਿਕ ਸਥਿਤੀ",
+            manglikSelect: "ਮਾਂਗਲਿਕ ਸਥਿਤੀ ਚੁਣੋ",
+            manglikOptions: [
+              "ਮਾਂਗਲਿਕ ਨਹੀਂ",
+              "ਮਾਂਗਲਿਕ",
+              "ਆਂਸ਼ਿਕ ਮਾਂਗਲਿਕ",
+              "ਪੱਕਾ ਮਾਂਗਲਿਕ",
+              "ਪਤਾ ਨਹੀਂ",
+              // "ਮਾਂਗਲਿਕ ਹੋਣਾ ਮਾਇਨੇ ਨਹੀਂ ਰੱਖਦਾ",
+              //"ਕੋਈ ਫ਼ਰਕ ਨਹੀਂ ਪੈਂਦਾ",
+              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+            ],
+            sunSign: "ਸੂਰਜ ਰਾਸ਼ੀ",
+            sunSignSelect: "ਸੂਰਜ ਰਾਸ਼ੀ ਚੁਣੋ",
+            sunSignOptions: [...commonTrans.pa.zodiacSigns],
+            moonSign: "ਚੰਦਰ ਰਾਸ਼ੀ",
+            moonSignSelect: "ਚੰਦਰ ਰਾਸ਼ੀ ਚੁਣੋ",
+            moonSignOptions: [...commonTrans.pa.zodiacSigns],
+            currentCityPlaceholder: "ਸ਼ਹਿਰ",
+            currentStatePlaceholder: "ਰਾਜ",
+            currentCountryPlaceholder: "ਦੇਸ਼",
+            diet: "ਖਾਣ-ਪੀਣ ਦੀ ਪਸੰਦ",
+            dietSelect: "ਖਾਣ-ਪੀਣ ਦੀ ਪਸੰਦ ਚੁਣੋ",
+            dietOptions: [
+              "ਸ਼ਾਕਾਹਾਰੀ",
+              "ਵੀਗਨ",
+              "ਸਾਤਵਿਕ (ਬਿਨਾਂ ਪਿਆਜ਼/ਲਸਣ)",
+              "ਜੈਨ ਭੋਜਨ",
+              "ਅੰਡੇ ਖਾਂਦੇ ਹਨ",
+              "ਮਾਸਾਹਾਰੀ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            smoking: "ਧੂਮਰਪਾਨ ਦੀ ਆਦਤਾਂ",
+            smokingSelect: "ਧੂਮਰਪਾਨ ਦੀ ਆਦਤ ਚੁਣੋ",
+            smokingOptions: [
+              "ਧੂਮਰਪਾਨ ਨਹੀਂ ਕਰਦੇ",
+              "ਧੂਮਰਪਾਨ ਕਰਦੇ ਹਨ",
+              "ਕਦੇ-ਕਦਾਈਂ ਕਰਦੇ ਹਨ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            drinking: "ਸ਼ਰਾਬ ਦੀ ਆਦਤਾਂ",
+            drinkingSelect: "ਸ਼ਰਾਬ ਦੀ ਆਦਤ ਚੁਣੋ",
+            drinkingOptions: [
+              "ਸ਼ਰਾਬ ਨਹੀਂ ਪੀਂਦੇ",
+              "ਸ਼ਰਾਬ ਪੀਂਦੇ ਹਨ",
+              "ਕਦੇ-ਕਦਾਈਂ ਪੀਂਦੇ ਹਨ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            religion: "ਧਰਮ",
+            religionSelect: "ਧਰਮ ਚੁਣੋ",
+            religionOptions: [
+              "ਹਿੰਦੂ",
+              "ਸਿੱਖ",
+              "ਮੁਸਲਿਮ",
+              "ਈਸਾਈ",
+              "ਜੈਨ",
+              "ਬੌਧ",
+              "ਪਾਰਸੀ",
+              "ਕੋਈ ਧਰਮ ਨਹੀਂ",
+              "ਅਧਿਆਤਮਿਕ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            skinTone: "ਰੰਗ-ਰੂਪ",
+            skinToneSelect: "ਰੰਗ-ਰੂਪ ਚੁਣੋ",
+            skinToneOptions: [
+              "ਗੋਰਾ",
+              "ਬਹੁਤ ਗੋਰਾ",
+              "ਕਣਕਵੰਨਾ",
+              "ਸਾਂਵਲਾ",
+              "ਗੂੜ੍ਹਾ ਰੰਗ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            bloodGroup: "ਬਲੱਡ ਗਰੁੱਪ",
+            bloodGroupSelect: "ਬਲੱਡ ਗਰੁੱਪ ਚੁਣੋ",
+            bloodGroupOptions: [
+              "A+ (ਏ ਪੋਜ਼ੀਟਿਵ)",
+              "A- (ਏ ਨੇਗੇਟਿਵ)",
+              "B+ (ਬੀ ਪੋਜ਼ੀਟਿਵ)",
+              "B- (ਬੀ ਨੇਗੇਟਿਵ)",
+              "O+ (ओ ਪੋਜ਼ੀਟਿਵ)",
+              "O- (ओ ਨੇਗੇਟਿਵ)",
+              "AB+ (ਏਬੀ ਪੋਜ਼ੀਟਿਵ)",
+              "AB- (ਏਬੀ ਨੇਗੇਟਿਵ)",
+              "ਪਤਾ ਨਹੀਂ",
+              "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ",
+            ],
+            motherTongue: "ਮਾਂ-ਬੋਲੀ",
+            motherTongueSelect: "ਮਾਂ-ਬੋਲੀ ਚੁਣੋ",
+            motherTongueOptions: [
+              "ਹਿੰਦੀ",
+              "ਪੰਜਾਬੀ",
+              "ਅੰਗਰੇਜ਼ੀ",
+              "ਬੰਗਾਲੀ",
+              "ਗੁਜਰਾਤੀ",
+              "ਮਰਾਠੀ",
+              "ਤੇਲਗੂ",
+              "ਤਮਿਲ",
+              "ਕੰਨੜ",
+              "ਮਲਿਆਲਮ",
+              "ਓਡੀਆ",
+              "ਉਰਦੂ",
+              "ਅਸਾਮੀ",
+              "ਸਿੰਧੀ",
+              "ਮਾਰਵਾੜੀ",
+              "ਰਾਜਸਥਾਨੀ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            education: "ਸਿੱਖਿਆ",
+            educationSelect: "ਸਿੱਖਿਆ ਚੁਣੋ",
+            educationOptions: [...educationOptions.pa],
+            occupation: "ਕਿੱਤਾ",
+            occupationSelect: "ਕਿੱਤਾ ਚੁਣੋ",
+            occupationOptions: [...occupationOptions.pa],
+            annualIncome: "ਸਾਲਾਨਾ ਆਮਦਨ",
+            annualIncomeSelect: "ਸਾਲਾਨਾ ਆਮਦਨ ਚੁਣੋ",
+            annualIncomeOptions: [...annualIncomeOptions.pa],
+            secFamily: "ਪਰਿਵਾਰ ਦੀ ਜਾਣਕਾਰੀ",
+            familyType: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ",
+            familyTypeSelect: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ ਚੁਣੋ",
+            familyTypeOptions: [
+              "ਛੋਟਾ ਪਰਿਵਾਰ",
+              "ਸਾਂਝਾ ਪਰਿਵਾਰ",
+              "ਇਕੱਲੇ ਰਹਿੰਦੇ ਹਨ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            familyStatus: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ",
+            familyStatusSelect: "ਪਰਿਵਾਰ ਦੀ ਕਿਸਮ ਚੁਣੋ",
+            familyStatusOptions: [
+              "ਮੱਧ ਵਰਗ",
+              "ਉੱਚ ਮੱਧ ਵਰਗ",
+              "ਨਿਮਨ ਮੱਧ ਵਰਗ",
+              "ਅਮੀਰ / ਉੱਚ ਵਰਗ",
+              ...commonTrans.pa.commonOptions,
+            ],
+            casteGotra: "ਜਾਤ ਅਤੇ ਗੋਤ",
+            castePlaceholder: "ਜਾਤ",
+            subCastePlaceholder: "ਉਪ-ਜਾਤ",
+            gotraPlaceholder: "ਗੋਤ",
+            mother: "ਮਾਤਾ",
+            motherSelect: "ਮਾਤਾ ਬਾਰੇ ਚੁਣੋ",
+            motherOptions: [...parentsOptions.pa],
+            // motherPlaceholder: "ਨਾਮ, ਕਿੱਤਾ ਜਾਂ ਹੋਰ ਜਾਣਕਾਰੀ",
+            father: "ਪਿਤਾ",
+            fatherSelect: "ਪਿਤਾ ਬਾਰੇ ਚੁਣੋ",
+            fatherOptions: [...parentsOptions.pa],
+            // fatherPlaceholder: "ਨਾਮ, ਕਿੱਤਾ ਜਾਂ ਹੋਰ ਜਾਣਕਾਰੀ",
+            siblings: "ਭੈਣ-ਭਰਾ",
+            siblingCountSelect: "ਗਿਣਤੀ ਚੁਣੋ",
+            brothers: "ਭਰਾ",
+            marriedBrothers: "ਵਿਆਹੇ ਭਰਾ",
+            sisters: "ਭੈਣਾਂ",
+            marriedSisters: "ਵਿਆਹੀਆਂ ਭੈਣਾਂ",
+            educationPlaceholder: "ਸਭ ਤੋਂ ਉੱਚੀ ਵਿੱਦਿਅਕ ਯੋਗਤਾ",
+            occupationPlaceholder: "ਕਿੱਤਾ / ਭੂਮਿਕਾ",
+            height: "ਕੱਦ",
+            heightSelect: "ਕੱਦ ਚੁਣੋ",
+            weight: "ਭਾਰ",
+            weightSelect: "ਭਾਰ ਚੁਣੋ",
+            aboutProfile: "ਪ੍ਰੋਫਾਈਲ ਬਾਰੇ ਹੋਰ ਵੇਰਵਾ",
+            aboutProfilePlaceholder: "ਪ੍ਰੋਫਾਈਲ ਬਾਰੇ ਹੋਰ ਵੇਰਵਾ...",
+            aboutFamily: "ਪਰਿਵਾਰ ਬਾਰੇ ਹੋਰ ਵੇਰਵਾ",
+            aboutFamilyPlaceholder: "ਪਰਿਵਾਰ ਬਾਰੇ ਹੋਰ ਵੇਰਵਾ...",
+            secPartnerPreferences: "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ",
+            partnerPreferences: "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ",
+            partnerPreferencesPlaceholder: "ਤੁਸੀਂ ਜੀਵਨ ਸਾਥੀ ਵਿੱਚ ਕੀ ਲੱਭ ਰਹੇ ਹੋ",
+            secContactDetails: "ਸੰਪਰਕ ਵੇਰਵਾ",
+            contactNumber: "ਫ਼ੋਨ ਨੰਬਰ",
+            whatsappNumber: "ਵਟਸਐਪ ਨੰਬਰ",
+            emailId: "ਈਮੇਲ ਆਈਡੀ",
+            facebookProfile: "ਫੇਸਬੁੱਕ ਪ੍ਰੋਫਾਈਲ",
+            instagramProfile: "ਇੰਸਟਾਗ੍ਰਾਮ ਪ੍ਰੋਫਾਈਲ",
+            linkedinProfile: "ਲਿੰਕਡਇਨ ਪ੍ਰੋਫਾਈਲ",
+            contactNumberPlaceholder: "+91 9874563210",
+            whatsappNumberPlaceholder: "+91 9874563210",
+            emailIdPlaceholder: "my-name@example.com",
+            facebookProfilePlaceholder: "https://www.facebook.com/my-profile",
+            instagramProfilePlaceholder: "https://www.instagram.com/my-profile",
+            linkedinProfilePlaceholder: "https://www.linkedin.com/my-profile",
+            monthOptions: [
+              "ਜਨਵਰੀ",
+              "ਫ਼ਰਵਰੀ",
+              "ਮਾਰਚ",
+              "ਅਪ੍ਰੈਲ",
+              "ਮਈ",
+              "ਜੂਨ",
+              "ਜੁਲਾਈ",
+              "ਅਗਸਤ",
+              "ਸਤੰਬਰ",
+              "ਅਕਤੂਬਰ",
+              "ਨਵੰਬਰ",
+              "ਦਸੰਬਰ",
+            ],
+            monthSelect: "ਮਹੀਨਾ",
+            yearSelect: "ਸਾਲ",
+            dateSelect: "ਦਿਨ",
+            hourSelect: "ਘੰਟਾ",
+            minuteSelect: "ਮਿੰਟ",
+            secondSelect: "ਸਕਿੰਟ",
+            amPmSelect: "AM/PM",
+            amPm: ["AM", "PM"],
+            profileFormatsTitle: "ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            anonymousProfile: "ਗੁਮਨਾਮ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            compactProfile: "ਸੰਖੇਪ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            standardProfile: "ਮਿਆਰੀ ਪ੍ਰੋਫ਼ਾਈਲ",
+            detailedProfile: "ਵਿਸਤ੍ਰਿਤ ਪ੍ਰੋਫ਼ਾਈਲ",
+            outputTitle: "ਤੁਹਾਡੀ ਪ੍ਰੋਫ਼ਾਈਲ",
+            profileModeTitles: {
+              anonymous: "ਗੁਮਨਾਮ ਪ੍ਰੋਫ਼ਾਈਲ",
+              compact: "ਸੰਖੇਪ ਪ੍ਰੋਫ਼ਾਈਲ",
+              standard: "ਮਿਆਰੀ ਪ੍ਰੋਫ਼ਾਈਲ",
+              detailed: "ਵਿਸਤ੍ਰਿਤ ਪ੍ਰੋਫ਼ਾਈਲ",
+            },
+            outputGroups: [
+              "ਮੁੱਢਲੇ ਵੇਰਵੇ",
+              "ਜਨਮ ਦੇ ਵੇਰਵੇ",
+              "ਮੌਜੂਦਾ ਟਿਕਾਣਾ",
+              "ਨਿੱਜੀ ਵੇਰਵੇ",
+              "ਪਰਿਵਾਰਕ ਵੇਰਵੇ",
+              "ਜੀਵਨ ਸਾਥੀ ਤੋਂ ਉਮੀਦਾਂ",
+              "ਸੰਪਰਕ ਵੇਰਵੇ",
+            ],
+            narrative: {
+              relationTerms: [
+                "",
+                "ਪੁੱਤਰ",
+                "ਧੀ",
+                "ਭਰਾ",
+                "ਭੈਣ",
+                "ਰਿਸ਼ਤੇਦਾਰ",
+                "ਦੋਸਤ",
+              ],
+              maritalStatuses: [
+                "ਅਣਵਿਆਹੇ",
+                "ਵਿਧਵਾ/ਵਿਧੁਰ",
+                "ਤਲਾਕਸ਼ੁਦਾ",
+                "ਤਲਾਕ ਦੀ ਕਾਰਵਾਈ ਅਧੀਨ",
+                "ਵੱਖ ਰਹਿੰਦੇ",
+                "ਇਕੱਲਾ ਮਾਤਾ/ਪਿਤਾ",
+                "ਵਿਆਹ ਰੱਦ",
+              ],
+              self: "ਇਹ ਪ੍ਰੋਫ਼ਾਈਲ ਮੇਰੇ ਲਈ ਹੈ",
+              selfNamed: "ਇਹ ਪ੍ਰੋਫ਼ਾਈਲ ਮੇਰੇ ਲਈ ਹੈ ({name})",
+              relation: "ਇਹ ਪ੍ਰੋਫ਼ਾਈਲ {relation} ਲਈ ਹੈ",
+              relationNamed: "ਇਹ ਪ੍ਰੋਫ਼ਾਈਲ {relation}, {name} ਲਈ ਹੈ",
+              subject: { male: "ਉਹ", female: "ਉਹ", other: "ਉਹ" },
+              possessive: {
+                male: "ਉਨ੍ਹਾਂ ਦੀ",
+                female: "ਉਨ੍ਹਾਂ ਦੀ",
+                other: "ਉਨ੍ਹਾਂ ਦੀ",
+              },
+              born: "ਉਨ੍ਹਾਂ ਦਾ ਜਨਮ {date} ਨੂੰ ਹੋਇਆ",
+              bornIn: "ਉਨ੍ਹਾਂ ਦਾ ਜਨਮ {date} ਵਿੱਚ ਹੋਇਆ",
+              bornWithManglik:
+                "ਉਨ੍ਹਾਂ ਦਾ ਜਨਮ {date} ਨੂੰ ਹੋਇਆ ਅਤੇ ਉਹ {manglik} ਹਨ",
+              bornInWithManglik:
+                "ਉਨ੍ਹਾਂ ਦਾ ਜਨਮ {date} ਵਿੱਚ ਹੋਇਆ ਅਤੇ ਉਹ {manglik} ਹਨ",
+              manglikOnly: "ਉਹ {manglik} ਹਨ",
+              birthTime: "ਜਨਮ ਦਾ ਸਮਾਂ {value}",
+              birthPlace: "ਜਨਮ ਸਥਾਨ {value}",
+              sunSign: "ਸੂਰਜ ਰਾਸ਼ੀ {value}",
+              moonSign: "ਚੰਦਰ ਰਾਸ਼ੀ {value}",
+              birthContext: "ਜਨਮ ਦੇ ਹੋਰ ਵੇਰਵੇ ਹਨ: {details}",
+              marital: "ਉਨ੍ਹਾਂ ਦੀ ਵਿਆਹੁਤਾ ਸਥਿਤੀ {status} ਹੈ{children}",
+              children: " ਅਤੇ ਉਨ੍ਹਾਂ ਦੇ {summary} ਹਨ",
+              childrenNone: " ਅਤੇ ਉਨ੍ਹਾਂ ਦੀ ਕੋਈ ਸੰਤਾਨ ਨਹੀਂ ਹੈ",
+              childrenSummary: "{total} ਬੱਚੇ ({details})",
+              childrenOne: "{total} ਬੱਚਾ ({details})",
+              son: "{count} ਪੁੱਤਰ",
+              sons: "{count} ਪੁੱਤਰ",
+              daughter: "{count} ਧੀ",
+              daughters: "{count} ਧੀਆਂ",
+              currentLocation: "ਉਹ ਇਸ ਵੇਲੇ {location} ਵਿੱਚ ਰਹਿੰਦੇ ਹਨ",
+              background: "{possessive} ਪਿਛੋਕੜ ਵਿੱਚ {details} ਸ਼ਾਮਲ ਹਨ",
+              personal: "ਉਨ੍ਹਾਂ ਦੇ ਨਿੱਜੀ ਵੇਰਵਿਆਂ ਵਿੱਚ {details} ਸ਼ਾਮਲ ਹਨ",
+              family: "ਉਨ੍ਹਾਂ ਦਾ ਪਰਿਵਾਰ {details} ਹੈ",
+              familyType: "{value} ਪਰਿਵਾਰ",
+              familyStatus: "{value} ਵਰਗ ਦਾ",
+              caste: "{value} ਭਾਈਚਾਰਾ",
+              gotra: "{value} ਗੋਤ",
+              parentsBoth: "ਮਾਤਾ {mother} ਅਤੇ ਪਿਤਾ {father}",
+              parentMother: "ਮਾਤਾ {value}",
+              parentFather: "ਪਿਤਾ {value}",
+              brothersCount: "{count} ਭਰਾ",
+              sistersCount: "{count} ਭੈਣਾਂ",
+              noSiblings: "ਕੋਈ ਭੈਣ-ਭਰਾ ਨਹੀਂ",
+              marriedBrother: "{count} ਵਿਆਹਿਆ ਭਰਾ",
+              marriedBrothers: "{count} ਵਿਆਹੇ ਭਰਾ",
+              marriedSister: "{count} ਵਿਆਹੀ ਭੈਣ",
+              marriedSisters: "{count} ਵਿਆਹੀਆਂ ਭੈਣਾਂ",
+              aboutProfile: "{value}",
+              aboutFamily: "{value}",
+              partner: "ਜੀਵਨ ਸਾਥੀ ਲਈ ਉਨ੍ਹਾਂ ਦੀਆਂ ਉਮੀਦਾਂ ਹਨ: {value}",
+              contact: "ਸੰਪਰਕ ਲਈ: {details}",
+              education: "{value} ਦੀ ਪੜ੍ਹਾਈ",
+              occupation: "{value} ਵਿੱਚ ਕੰਮ",
+              income: "{value} ਦੀ ਆਮਦਨ",
+              height: "{value} ਕੱਦ",
+              weight: "{value} ਭਾਰ",
+              skinTone: "{value} ਰੰਗ",
+              bloodGroup: "{value} ਬਲੱਡ ਗਰੁੱਪ",
+              diet: "{value} ਖੁਰਾਕ",
+              smoking: "{value} ਸਿਗਰਟਨੋਸ਼ੀ ਦੀ ਆਦਤ",
+              drinking: "{value} ਸ਼ਰਾਬ ਪੀਣ ਦੀ ਆਦਤ",
+              motherTongue: "{value} ਮਾਤ-ਭਾਸ਼ਾ",
+              aboutDetails: "{label}: {value}",
+              religion: "{value} ਧਰਮ",
+              category: "{value} ਸ਼੍ਰੇਣੀ",
+              contactNumber: "ਫ਼ੋਨ {value}",
+              whatsappNumber: "WhatsApp {value}",
+              emailId: "ਈਮੇਲ {value}",
+              facebookProfile: "Facebook {value}",
+              instagramProfile: "Instagram {value}",
+              linkedinProfile: "LinkedIn {value}",
+              separator: ", ",
+              finalSeparator: " ਅਤੇ ",
+              period: "।",
+            },
+            surname: "ਉਪਨਾਮ",
+            copySuccess: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਹੋ ਗਈ।",
+            copyFailure: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਨਹੀਂ ਹੋਈ। ਟੈਕਸਟ ਚੁਣ ਕੇ ਖੁਦ ਕਾਪੀ ਕਰੋ।",
+            copyProfile: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਕਰੋ",
+            printProfile: "ਪ੍ਰਿੰਟ / PDF ਵਜੋਂ ਸੇਵ ਕਰੋ",
+            editProfile: "ਵੇਰਵੇ ਸੋਧੋ",
+            reset: "ਫਾਰਮ ਸਾਫ਼ ਕਰੋ",
+            required: "* ਹਰ ਪ੍ਰੋਫ਼ਾਈਲ ਕਿਸਮ ਲਈ ਲਾਜ਼ਮੀ ਜਾਣਕਾਰੀ ਭਰੋ।",
+            previewSub: "ਵਿਆਹ ਸੰਬੰਧੀ ਬਾਇਓਡਾਟਾ",
+            print: "ਪ੍ਰਿੰਟ / PDF ਵਜੋਂ ਸੇਵ ਕਰੋ",
+            edit: "← ਵੇਰਵੇ ਸੋਧੋ",
+            new: "ਨਵੀਂ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            printNote:
+              "ਇਹ ਬਾਇਓਡਾਟਾ ਮੁਫ਼ਤ ਆਫ਼ਲਾਈਨ ਟੂਲ ਨਾਲ ਬਣਾਇਆ ਗਿਆ ਹੈ। ਇਸ ਪੇਜ ਨੇ ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਅੱਪਲੋਡ ਨਹੀਂ ਕੀਤੀ।",
+            footer:
+              "ਮੁਫ਼ਤ ਜਨ ਸੇਵਾ · ਖਾਤਾ ਨਹੀਂ · ਬੈਕਐਂਡ ਨਹੀਂ · ਡਾਟਾ ਸੇਵ ਨਹੀਂ ਹੁੰਦਾ",
+            sections: [
+              "ਮੁੱਢਲੇ ਵੇਰਵੇ",
+              "ਜਨਮ ਦੇ ਵੇਰਵੇ",
+              "ਮੌਜੂਦਾ ਟਿਕਾਣਾ",
+              "ਪਰਿਵਾਰ ਅਤੇ ਨਿੱਜੀ ਜਾਣਕਾਰੀ",
+            ],
+            empty: "ਜਾਣਕਾਰੀ ਨਹੀਂ ਦਿੱਤੀ",
+            profileTitle: "ਵਿਆਹ ਸੰਬੰਧੀ ਬਾਇਓਡਾਟਾ",
+          },
+        };
+        const emojisMap = {
+          profileFor: "👤",
+          name: "📝",
+          gender: "⚥",
+          category: "🏷️",
+          religion: "🕉️",
+          maritalAndChildren: "💍",
+          maritalStatus: "💍",
+          childrenGirls: "👧",
+          childrenBoys: "👦",
+          secLocation: "🗺️",
+          currentCity: "🏙️",
+          currentState: "🗺️",
+          currentCountry: "🌍",
+          dateOfBirth: "📆",
+          birthYear: "📅",
+          birthMonth: "🗓️",
+          birthDate: "📆",
+          timeOfBirth: "🕒",
+          birthHour: "🕒",
+          birthMinute: "⏱️",
+          birthSecond: "⏳",
+          birthAmPm: "☀️",
+          placeOfBirth: "📍",
+          birthCity: "📍",
+          birthState: " 🗺️",
+          birthCountry: "🌐",
+          manglikZodiacSigns: "🪐",
+          casteGotra: "📜",
+          caste: "🤝",
+          subCaste: "🌿",
+          gotra: "📜",
+          height: "📏",
+          weight: "⚖️",
+          skinTone: "✨",
+          bloodGroup: "🩸",
+          diet: "🍽",
+          smoking: "🚬",
+          drinking: "🍺",
+          motherTongue: "🗣️",
+          mother: "👱🏻‍♀️",
+          father: "👱🏻‍♂️",
+          siblings: "👫🏻",
+          brothers: "🙋🏻",
+          marriedBrothers: "🙋🏻💍",
+          sisters: "🙋🏻‍♀️",
+          marriedSisters: "🙋🏻‍♀️💍",
+          familyType: "🏡",
+          familyStatus: "💎",
+          education: "🎓",
+          occupation: "💼",
+          annualIncome: "💰",
+          aboutFamily: "👨‍👩‍👧‍👦",
+          aboutProfile: "💖",
+          partnerPreferences: "💍",
+          secContactDetails: "📞",
+          contactNumber: "📱",
+          whatsappNumber: "💬",
+          emailId: "✉️",
+          facebookProfile: "🌐",
+          instagramProfile: "📸",
+          linkedinProfile: "💼",
+        };
+        const labelIds = [
+          "profileFor",
+          "name",
+          "gender",
+          "category",
+          "religion",
+          "manglik",
+          "maritalStatus",
+          "childrenGirls",
+          "childrenBoys",
+          "currentCity",
+          "currentState",
+          "currentCountry",
+          "birthYear",
+          "birthMonth",
+          "birthDate",
+          "birthHour",
+          "birthMinute",
+          "birthSecond",
+          "birthAmPm",
+          "birthCity",
+          "birthState",
+          "birthCountry",
+          "caste",
+          "subCaste",
+          "gotra",
+          "height",
+          "weight",
+          "skinTone",
+          "bloodGroup",
+          "diet",
+          "smoking",
+          "drinking",
+          "motherTongue",
+          "mother",
+          "father",
+          "brothers",
+          "marriedBrothers",
+          "sisters",
+          "marriedSisters",
+          "familyType",
+          "familyStatus",
+          "education",
+          "occupation",
+        ];
+        function setOptions(id, first = null, values, keepValue = true) {
+          const el = $(id);
+          const oldValue = keepValue ? el.value : "";
+          const oldIndex = keepValue ? el.selectedIndex : -1;
+          const oldText = keepValue ? el.selectedOptions[0]?.textContent : "";
+          const hadPlaceholder = el.options[0]?.value === "";
+          el.innerHTML = "";
+
+          if (first !== null) {
+            const o = document.createElement("option");
+            o.value = "";
+            o.textContent = first;
+            el.appendChild(o);
+          }
+
+          values.forEach((v, i) => {
+            const x = document.createElement("option");
+            let value = v;
+            let label = v;
+
+            if (
+              v !== null &&
+              v !== undefined &&
+              v.value !== null &&
+              v.value !== undefined &&
+              v.label !== null &&
+              v.label !== undefined
+            ) {
+              value = v.value;
+              label = v.label;
+            }
+
+            const optionIndex = i + (first !== null ? 1 : 0);
+            const stringValue = String(value);
+            x.value =
+              id === "birthMonth"
+                ? String(i + 1)
+                : /^[\d-]+$/.test(stringValue)
+                  ? stringValue
+                  : String(optionIndex);
+            x.textContent = label;
+            el.appendChild(x);
+          });
+          if (!keepValue || oldIndex < 0) return;
+
+          const matchingValue = [...el.options].find(
+            (option) => option.value === oldValue,
+          );
+          const matchingText = [...el.options].find(
+            (option) => option.textContent === oldText,
+          );
+          if (matchingValue) {
+            el.value = oldValue;
+          } else if (matchingText) {
+            el.selectedIndex = matchingText.index;
+          } else {
+            const indexOffset = first !== null && !hadPlaceholder ? 1 : 0;
+            el.selectedIndex = Math.min(
+              oldIndex + indexOffset,
+              el.options.length - 1,
+            );
+          }
+        }
+        const siblingCounts = Array.from({ length: 11 }, (_, i) => String(i));
+        function updateMarriedSiblingOptions(totalId, marriedId) {
+          const t = trans[$("language").value] || trans.en;
+          const total = $(totalId).value;
+          const maximum = total === "" ? 10 : Number(total);
+          setOptions(marriedId, null, siblingCounts.slice(0, maximum + 1));
+        }
+        function updateBirthDays(t) {
+          const year = Number(val("birthYear")),
+            month = Number(val("birthMonth")),
+            days = year && month ? new Date(year, month, 0).getDate() : 31;
+          setOptions(
+            "birthDate",
+            t.dateSelect,
+            Array.from({ length: days }, (_, i) => String(i + 1)),
+          );
+        }
+        function updateLanguage() {
+          const t = trans[$("language").value] || trans.en;
+          $("brandTitle").textContent = t.brandTitle;
+          document.title = t.brandTitle;
+          [
+            "brandTitle",
+            "heroTitle",
+            "heroSub",
+            "privacyTitle",
+            "privacyText",
+            "secBasicDetails",
+            //"subBasicDetails",
+            "secBirth",
+            //"subBirth",
+            "secPerInfo",
+            "secLocation",
+            //"subLocation",
+            "secFamily",
+            "secPartnerPreferences",
+            "secContactDetails",
+          ].forEach((id) => $(id) && ($(id).textContent = t[id]));
+          document.querySelectorAll("[data-label]").forEach((el) => {
+            const k = el.dataset.label;
+            const required = el.querySelector(".req");
+            el.innerHTML = `<span class="field-label-emoji">${emojisMap[k]}</span><span class="field-label-text">${t[k] || k}</span>`;
+            if (required) el.append("", required);
+          });
+          [
+            "birthYear",
+            "birthMonth",
+            "birthDate",
+            "birthHour",
+            "birthMinute",
+            "birthSecond",
+            "birthAmPm",
+            "birthCity",
+            "birthState",
+            "birthCountry",
+            "currentCity",
+            "currentState",
+            "currentCountry",
+          ].forEach((id) => {
+            $(id).setAttribute("aria-label", t[id]);
+          });
+          document.querySelectorAll("[data-placeholder]").forEach((el) => {
+            const key = el.dataset.placeholder;
+            el.placeholder = t[`${key}Placeholder`];
+          });
+          const currentYear = new Date().getFullYear();
+          setOptions(
+            "birthYear",
+            t.yearSelect,
+            Array.from({ length: 58 }, (_, i) => String(currentYear - 18 - i)),
+          );
+          setOptions("birthMonth", t.monthSelect, t.monthOptions);
+          updateBirthDays(t);
+          setOptions(
+            "birthHour",
+            t.hourSelect,
+            Array.from({ length: 12 }, (_, i) => String(i + 1)),
+          );
+          setOptions(
+            "birthMinute",
+            t.minuteSelect,
+            Array.from({ length: 60 }, (_, i) => String(i).padStart(2, "0")),
+          );
+          setOptions(
+            "birthSecond",
+            t.secondSelect,
+            Array.from({ length: 60 }, (_, i) => String(i).padStart(2, "0")),
+          );
+          setOptions("birthAmPm", t.amPmSelect, t.amPm);
+          setOptions("profileFor", t.profileForSelect, t.profileForOptions);
+          setOptions("gender", t.genderSelect, t.genderOptions);
+          setOptions("category", t.categorySelect, t.categoryOptions);
+          setOptions("manglik", t.manglikSelect, t.manglikOptions);
+          setOptions("sunSign", t.sunSignSelect, t.sunSignOptions);
+          setOptions("moonSign", t.moonSignSelect, t.moonSignOptions);
+
+          setOptions(
+            "maritalStatus",
+            t.maritalStatusSelect,
+            t.maritalStatusOptions,
+          );
+          const selectedLang = trans[$("language").value];
+          const girlChildCounts = Array.from({ length: 11 }, (_, i) =>
+            i === 0
+              ? { value: i, label: selectedLang.noGirl }
+              : {
+                  value: i,
+                  label: `${i} ${i === 1 ? selectedLang.girl : selectedLang.girls}`,
+                },
+          );
+          setOptions("childrenGirls", t.girlSelect, girlChildCounts);
+          const boyChildCounts = Array.from({ length: 11 }, (_, i) =>
+            i === 0
+              ? { value: i, label: selectedLang.noBoy }
+              : {
+                  value: i,
+                  label: `${i} ${i === 1 ? selectedLang.boy : selectedLang.boys}`,
+                },
+          );
+          setOptions("childrenBoys", t.boySelect, boyChildCounts);
+          const heights = Array.from({ length: 43 }, (_, i) => {
+            const totalInches = 48 + i;
+            const feet = Math.floor(totalInches / 12);
+            const inches = totalInches % 12;
+            const centimeters = Math.round(totalInches * 2.54);
+            return `${feet}' ${inches}" (${centimeters} CM)`;
+          });
+          setOptions("height", t.heightSelect, heights);
+          const weights = (function generateWeightList(minKg, maxKg) {
+            const list = [];
+
+            // Standard conversion factor: 1 kg = 2.20462 lbs
+            const kgToLbs = (kg) => Math.round(kg * 2.20462);
+
+            // Loop through the range in steps of 2
+            for (let start = minKg; start <= maxKg; start += 3) {
+              let end = start + 2;
+
+              // Ensure the end range does not exceed the user-defined maximum
+              if (end > maxKg) {
+                end = maxKg;
+              }
+
+              const startLbs = kgToLbs(start);
+              const endLbs = kgToLbs(end);
+
+              // Format output string based on whether it's a range or a single remaining number
+              if (start === end) {
+                list.push(`${start} KGs (${startLbs} lbs)`);
+              } else {
+                list.push(
+                  `${start} - ${end} KGs (${startLbs} - ${endLbs} lbs)`,
+                );
+              }
+            }
+
+            return list;
+          })(30, 200);
+          setOptions("weight", t.weightSelect, weights);
+          setOptions("diet", t.dietSelect, t.dietOptions);
+          setOptions("religion", t.religionSelect, t.religionOptions);
+          setOptions("skinTone", t.skinToneSelect, t.skinToneOptions);
+          setOptions("bloodGroup", t.bloodGroupSelect, t.bloodGroupOptions);
+          setOptions("smoking", t.smokingSelect, t.smokingOptions);
+          setOptions("drinking", t.drinkingSelect, t.drinkingOptions);
+          setOptions(
+            "motherTongue",
+            t.motherTongueSelect,
+            t.motherTongueOptions,
+          );
+          setOptions("education", t.educationSelect, t.educationOptions);
+          setOptions("occupation", t.occupationSelect, t.occupationOptions);
+          setOptions(
+            "annualIncome",
+            t.annualIncomeSelect,
+            t.annualIncomeOptions,
+          );
+          $("childrenGirls").setAttribute("aria-label", t.childrenGirls);
+          $("childrenBoys").setAttribute("aria-label", t.childrenBoys);
+          setOptions("familyType", t.familyTypeSelect, t.familyTypeOptions);
+          setOptions(
+            "familyStatus",
+            t.familyStatusSelect,
+            t.familyStatusOptions,
+          );
+          setOptions("mother", t.motherSelect, t.motherOptions);
+          setOptions("father", t.fatherSelect, t.fatherOptions);
+          setOptions("brothers", null, siblingCounts);
+          setOptions("sisters", null, siblingCounts);
+          updateMarriedSiblingOptions("brothers", "marriedBrothers");
+          updateMarriedSiblingOptions("sisters", "marriedSisters");
+          $("profileFormatsTitle").textContent = t.profileFormatsTitle;
+          $("anonymousProfileBtn").textContent = t.anonymousProfile;
+          $("compactProfileBtn").textContent = t.compactProfile;
+          $("standardProfileBtn").textContent = t.standardProfile;
+          $("detailedProfileBtn").textContent = t.detailedProfile;
+          $("requiredNote").textContent = t.required;
+          $("copyProfileBtn").textContent = t.copyProfile;
+          $("printProfileBtn").textContent = t.printProfile;
+          $("editProfileBtn").textContent = t.editProfile;
+          $("outputTitle").textContent = t.outputTitle;
+          $("footerText").textContent = t.footer;
+          document.documentElement.lang = $("language").value;
+          toggleChildren();
+        }
+        $("language").addEventListener("change", updateLanguage);
+        $("brothers").addEventListener("change", () =>
+          updateMarriedSiblingOptions("brothers", "marriedBrothers"),
+        );
+        $("sisters").addEventListener("change", () =>
+          updateMarriedSiblingOptions("sisters", "marriedSisters"),
+        );
+        $("birthYear").addEventListener("change", () =>
+          updateBirthDays(trans[$("language").value] || trans.en),
+        );
+        $("birthMonth").addEventListener("change", () =>
+          updateBirthDays(trans[$("language").value] || trans.en),
+        );
+        function toggleChildren() {
+          const show = $("maritalStatus").selectedIndex > 1;
+          if (!show) {
+            $("childrenGirls").value = "";
+            $("childrenBoys").value = "";
+          }
+
+          // $("childrenGirls").disabled = !show;
+          // $("childrenBoys").disabled = !show;
+          // $("childrenGirls").required = show;
+          // $("childrenBoys").required = show;
+        }
+        $("maritalStatus").addEventListener("change", toggleChildren);
+        function val(id) {
+          return $(id).value.trim();
+        }
+        function readLocalizedFormFields() {
+          const t = trans[$("language").value] || trans.en;
+          const fields = {};
+
+          for (const [index, control] of [
+            ...$("profileForm").elements,
+          ].entries()) {
+            if (!control.matches("input, select, textarea")) continue;
+            if (["submit", "reset", "image", "hidden"].includes(control.type))
+              continue;
+            if (
+              ["checkbox", "radio"].includes(control.type) &&
+              !control.checked
+            )
+              continue;
+
+            const label = control.labels?.[0];
+            const labelKey = label?.dataset.label || control.dataset.label;
+            const fieldName = control.name || control.id;
+            const fieldLabel =
+              t[labelKey] ||
+              t[control.id] ||
+              control.getAttribute("aria-label") ||
+              label?.textContent.trim() ||
+              control.name ||
+              control.id ||
+              `Field ${index + 1}`;
+            let fieldValue;
+            let fieldDisplayValue;
+
+            if (control instanceof HTMLSelectElement) {
+              const selectedOptions = [...control.selectedOptions];
+
+              fieldDisplayValue = control.multiple
+                ? selectedOptions.map((option) => option.textContent)
+                : control.value
+                  ? selectedOptions[0]?.textContent || ""
+                  : "";
+              fieldValue = control.value;
+            } else {
+              fieldValue = control.value;
+              fieldDisplayValue = control.value;
+            }
+
+            if (Object.prototype.hasOwnProperty.call(fields, fieldLabel)) {
+              fields[fieldName] = {
+                label: fieldLabel,
+                value: Array.isArray(fields[fieldName])
+                  ? [...fields[fieldName], fieldValue]
+                  : [fields[fieldName], fieldValue],
+              };
+            } else {
+              fields[fieldName] = {
+                label: fieldLabel,
+                value: fieldValue,
+                displayValue: fieldDisplayValue,
+              };
+            }
+          }
+
+          return fields;
+        }
+        window.readLocalizedFormFields = readLocalizedFormFields;
+        const profileFieldGroups = [
+          {
+            title: "Basic details",
+            emoji: "💖",
+            ids: [
+              "profileFor",
+              "name",
+              "gender",
+              "category",
+              "religion",
+              "maritalStatus",
+              "childrenGirls",
+              "childrenBoys",
+            ],
+          },
+          {
+            title: "Birth details",
+            emoji: "🪐",
+            ids: [
+              "birthYear",
+              "birthMonth",
+              "birthDate",
+              "birthHour",
+              "birthMinute",
+              "birthSecond",
+              "birthAmPm",
+              "birthCity",
+              "birthState",
+              "birthCountry",
+              "manglik",
+              "sunSign",
+              "moonSign",
+            ],
+          },
+          {
+            title: "Current location",
+            emoji: "📍",
+            ids: ["currentCity", "currentState", "currentCountry"],
+          },
+          {
+            title: "Personal details",
+            emoji: "✨",
+            ids: [
+              "height",
+              "weight",
+              "skinTone",
+              "bloodGroup",
+              "diet",
+              "smoking",
+              "drinking",
+              "motherTongue",
+              "education",
+              "occupation",
+              "annualIncome",
+              "aboutProfile",
+            ],
+          },
+          {
+            title: "Family details",
+            emoji: "👨‍👩‍👧‍👦",
+            ids: [
+              "familyType",
+              "familyStatus",
+              "caste",
+              "subCaste",
+              "gotra",
+              "mother",
+              "father",
+              "brothers",
+              "marriedBrothers",
+              "sisters",
+              "marriedSisters",
+              "aboutFamily",
+            ],
+          },
+          {
+            title: "Partner preferences",
+            emoji: emojisMap.partnerPreferences,
+            ids: ["partnerPreferences"],
+          },
+          {
+            title: "Contact details",
+            emoji: emojisMap.secContactDetails,
+            ids: [
+              "contactNumber",
+              "whatsappNumber",
+              "emailId",
+              "facebookProfile",
+              "instagramProfile",
+              "linkedinProfile",
+            ],
+          },
+        ];
+        const anonymousExcludedFields = new Set([
+          "birthHour",
+          "birthMinute",
+          "birthSecond",
+          "birthAmPm",
+          "birthCity",
+          "birthState",
+          "birthCountry",
+          "currentState",
+          "currentCountry",
+          "caste",
+          "subCaste",
+          "gotra",
+          "mother",
+          "father",
+          "aboutProfile",
+          "aboutFamily",
+          "contactNumber",
+          "whatsappNumber",
+          "emailId",
+          "facebookProfile",
+          "instagramProfile",
+          "linkedinProfile",
+        ]);
+        function readProfileEntries() {
+          const t = trans[$("language").value] || trans.en;
+          const entries = new Map();
+          for (const control of $("profileForm").elements) {
+            if (!control.matches("input, select, textarea") || !control.id)
+              continue;
+            if (control.id === "language" || control.disabled) continue;
+            let value = "";
+            if (control instanceof HTMLSelectElement) {
+              if (!control.value) continue;
+              value = [...control.selectedOptions]
+                .map((option) => option.textContent.trim())
+                .filter(Boolean)
+                .join(", ");
+            } else {
+              value = control.value.trim();
+            }
+            if (!value) continue;
+            const labelKey =
+              control.labels?.[0]?.dataset.label ||
+              control.dataset.label ||
+              control.id;
+            const label =
+              t[labelKey] ||
+              t[control.id] ||
+              t[`${control.id}Placeholder`] ||
+              control.getAttribute("aria-label") ||
+              control.labels?.[0]?.textContent.trim() ||
+              control.name ||
+              control.id;
+            entries.set(control.id, {
+              id: control.id,
+              label,
+              value,
+              emoji: emojisMap[labelKey] || emojisMap[control.id] || "•",
+            });
+          }
+          return entries;
+        }
+        function getProfileGroups(mode, entries, t) {
+          return profileFieldGroups
+            .map((group, index) => {
+              const items = group.ids
+                .filter((id) =>
+                  mode === "anonymous"
+                    ? !anonymousExcludedFields.has(id)
+                    : true,
+                )
+                .map((id) => {
+                  const entry = entries.get(id);
+                  if (!entry) return null;
+                  if (mode === "anonymous" && id === "name") {
+                    const nameParts = entry.value.split(/\s+/);
+                    if (nameParts.length < 2) return null;
+                    return {
+                      ...entry,
+                      id: "surname",
+                      label: t.surname,
+                      value: nameParts[nameParts.length - 1],
+                      emoji: emojisMap.name,
+                    };
+                  }
+                  return entry;
+                })
+                .filter(Boolean);
+              return {
+                title: t.outputGroups[index],
+                emoji: group.emoji,
+                items,
+              };
+            })
+            .filter((group) => group.items.length);
+        }
+        function formatNarrativeProfile(groups, t, mode) {
+          const narrative = t.narrative;
+          const entries = new Map(
+            groups.flatMap((group) =>
+              group.items.map((item) => [item.id, item]),
+            ),
+          );
+          const value = (id) =>
+            entries.get(id)?.value.replace(/\s+/g, " ").trim();
+          const joinList = (values) => {
+            const present = values.filter(Boolean);
+            if (present.length < 2) return present[0] || "";
+            return `${present.slice(0, -1).join(narrative.separator)}${narrative.finalSeparator}${present[present.length - 1]}`;
+          };
+          const finishSentence = (text) =>
+            /[.!?।؟]$/.test(text) ? text : `${text}${narrative.period}`;
+          const sentences = [];
+          const profileFor = $("profileFor");
+          const name = mode === "anonymous" ? "" : value("name");
+          const relation =
+            narrative.relationTerms[profileFor.selectedIndex - 1] ||
+            profileFor.selectedOptions[0]?.textContent
+              .trim()
+              .toLocaleLowerCase() ||
+            "";
+          const intro =
+            profileFor.selectedIndex === 1
+              ? name
+                ? narrative.selfNamed.replace("{name}", name)
+                : narrative.self
+              : profileFor.value
+                ? (name ? narrative.relationNamed : narrative.relation)
+                    .replace("{relation}", relation)
+                    .replace("{name}", name || "")
+                : "";
+          if (intro) sentences.push(finishSentence(intro));
+
+          const gender = $("gender");
+          const pronoun =
+            gender.selectedIndex === 1
+              ? narrative.subject.male
+              : gender.selectedIndex === 2
+                ? narrative.subject.female
+                : narrative.subject.other;
+          const possessive =
+            gender.selectedIndex === 1
+              ? narrative.possessive.male
+              : gender.selectedIndex === 2
+                ? narrative.possessive.female
+                : narrative.possessive.other;
+
+          const dateParts = [
+            value("birthDate"),
+            value("birthMonth"),
+            value("birthYear"),
+          ].filter(Boolean);
+          const birthDate = dateParts.join(" ");
+          const manglik = value("manglik");
+          const birthTime = ["birthHour", "birthMinute", "birthAmPm"]
+            .map(value)
+            .filter(Boolean)
+            .join(":");
+          const birthPlace = ["birthCity", "birthState", "birthCountry"]
+            .map(value)
+            .filter(Boolean)
+            .join(", ");
+          const birthContext = [
+            birthTime && narrative.birthTime.replace("{value}", birthTime),
+            birthPlace && narrative.birthPlace.replace("{value}", birthPlace),
+            value("sunSign") &&
+              narrative.sunSign.replace("{value}", value("sunSign")),
+            value("moonSign") &&
+              narrative.moonSign.replace("{value}", value("moonSign")),
+          ].filter(Boolean);
+          if (birthDate || manglik || birthContext.length) {
+            const hasDay = Boolean(value("birthDate"));
+            const birthTemplate = hasDay ? narrative.born : narrative.bornIn;
+            const manglikTemplate = hasDay
+              ? narrative.bornWithManglik
+              : narrative.bornInWithManglik;
+            const birthLine = birthDate
+              ? manglik
+                ? manglikTemplate
+                    .replace("{subject}", pronoun)
+                    .replace("{date}", birthDate)
+                    .replace("{manglik}", manglik)
+                : birthTemplate
+                    .replace("{subject}", pronoun)
+                    .replace("{date}", birthDate)
+              : manglik
+                ? narrative.manglikOnly
+                    .replace("{subject}", pronoun)
+                    .replace("{manglik}", manglik)
+                : "";
+            const birthDetails = birthContext.length
+              ? narrative.birthContext.replace(
+                  "{details}",
+                  joinList(birthContext),
+                )
+              : "";
+            sentences.push(
+              [birthLine, birthDetails]
+                .filter(Boolean)
+                .map(finishSentence)
+                .join(" "),
+            );
+          }
+
+          const maritalStatus = value("maritalStatus");
+          if (maritalStatus) {
+            const maritalStatusText =
+              narrative.maritalStatuses[$("maritalStatus").selectedIndex - 1] ||
+              maritalStatus.toLocaleLowerCase();
+            let childClause = "";
+            if ($("maritalStatus").selectedIndex !== 1) {
+              const girlsValue = $("childrenGirls").value;
+              const boysValue = $("childrenBoys").value;
+              if (girlsValue === "" && boysValue === "") {
+                childClause = narrative.childrenNone;
+              } else {
+                const girls = Number(girlsValue || 0);
+                const boys = Number(boysValue || 0);
+                if (girls + boys === 0) {
+                  childClause = narrative.childrenNone;
+                } else {
+                  const childDetails = [];
+                  if (boys) {
+                    childDetails.push(
+                      narrative[boys === 1 ? "son" : "sons"].replace(
+                        "{count}",
+                        String(boys),
+                      ),
+                    );
+                  }
+                  if (girls) {
+                    childDetails.push(
+                      narrative[girls === 1 ? "daughter" : "daughters"].replace(
+                        "{count}",
+                        String(girls),
+                      ),
+                    );
+                  }
+                  const total = boys + girls;
+                  const summary = narrative[
+                    total === 1 ? "childrenOne" : "childrenSummary"
+                  ]
+                    .replace("{total}", String(total))
+                    .replace("{details}", joinList(childDetails));
+                  childClause = narrative.children.replace(
+                    "{summary}",
+                    summary,
+                  );
+                }
+              }
+            }
+            sentences.push(
+              finishSentence(
+                narrative.marital
+                  .replace("{subject}", pronoun)
+                  .replace("{status}", maritalStatusText)
+                  .replace("{children}", childClause),
+              ),
+            );
+          }
+
+          const currentLocation = [
+            "currentCity",
+            "currentState",
+            "currentCountry",
+          ]
+            .map(value)
+            .filter(Boolean)
+            .join(", ");
+          if (currentLocation) {
+            sentences.push(
+              finishSentence(
+                narrative.currentLocation
+                  .replace("{subject}", pronoun)
+                  .replace("{location}", currentLocation),
+              ),
+            );
+          }
+
+          const background = [
+            value("religion") &&
+              narrative.religion.replace("{value}", value("religion")),
+            value("category") &&
+              narrative.category.replace("{value}", value("category")),
+            value("motherTongue") &&
+              narrative.motherTongue.replace("{value}", value("motherTongue")),
+          ].filter(Boolean);
+          if (background.length) {
+            sentences.push(
+              finishSentence(
+                narrative.background
+                  .replace("{possessive}", possessive)
+                  .replace("{details}", joinList(background)),
+              ),
+            );
+          }
+
+          const personal = [
+            value("education") &&
+              narrative.education.replace("{value}", value("education")),
+            value("occupation") &&
+              narrative.occupation.replace("{value}", value("occupation")),
+            value("annualIncome") &&
+              narrative.income.replace("{value}", value("annualIncome")),
+            value("height") &&
+              narrative.height.replace("{value}", value("height")),
+            value("weight") &&
+              narrative.weight.replace("{value}", value("weight")),
+            value("skinTone") &&
+              narrative.skinTone.replace("{value}", value("skinTone")),
+            value("bloodGroup") &&
+              narrative.bloodGroup.replace("{value}", value("bloodGroup")),
+            value("diet") && narrative.diet.replace("{value}", value("diet")),
+            value("smoking") &&
+              narrative.smoking.replace("{value}", value("smoking")),
+            value("drinking") &&
+              narrative.drinking.replace("{value}", value("drinking")),
+          ].filter(Boolean);
+          if (personal.length) {
+            sentences.push(
+              finishSentence(
+                narrative.personal
+                  .replace("{possessive}", possessive)
+                  .replace("{details}", joinList(personal)),
+              ),
+            );
+          }
+          if (value("aboutProfile"))
+            sentences.push(finishSentence(value("aboutProfile")));
+
+          const family = [];
+          if (value("familyType")) {
+            family.push(
+              narrative.familyType.replace("{value}", value("familyType")),
+            );
+          }
+          if (value("familyStatus")) {
+            family.push(
+              narrative.familyStatus.replace("{value}", value("familyStatus")),
+            );
+          }
+          if (value("caste") || value("subCaste")) {
+            family.push(
+              narrative.caste.replace(
+                "{value}",
+                [value("caste"), value("subCaste")].filter(Boolean).join(", "),
+              ),
+            );
+          }
+          if (value("gotra")) {
+            family.push(narrative.gotra.replace("{value}", value("gotra")));
+          }
+          const mother = value("mother");
+          const father = value("father");
+          if (mother && father) {
+            family.push(
+              narrative.parentsBoth
+                .replace("{mother}", mother || "")
+                .replace("{father}", father || ""),
+            );
+          } else if (mother) {
+            family.push(narrative.parentMother.replace("{value}", mother));
+          } else if (father) {
+            family.push(narrative.parentFather.replace("{value}", father));
+          }
+          const brothers = value("brothers");
+          const sisters = value("sisters");
+          if (
+            brothers !== undefined &&
+            sisters !== undefined &&
+            Number(brothers) === 0 &&
+            Number(sisters) === 0
+          ) {
+            family.push(narrative.noSiblings);
+          } else {
+            if (brothers && Number(brothers) > 0)
+              family.push(narrative.brothersCount.replace("{count}", brothers));
+            if (sisters && Number(sisters) > 0)
+              family.push(narrative.sistersCount.replace("{count}", sisters));
+          }
+          const marriedBrothers = value("marriedBrothers");
+          const marriedSisters = value("marriedSisters");
+          if (marriedBrothers && Number(marriedBrothers) > 0)
+            family.push(
+              narrative[
+                Number(marriedBrothers) === 1
+                  ? "marriedBrother"
+                  : "marriedBrothers"
+              ].replace("{count}", marriedBrothers),
+            );
+          if (marriedSisters && Number(marriedSisters) > 0)
+            family.push(
+              narrative[
+                Number(marriedSisters) === 1
+                  ? "marriedSister"
+                  : "marriedSisters"
+              ].replace("{count}", marriedSisters),
+            );
+          if (family.length) {
+            sentences.push(
+              finishSentence(
+                narrative.family
+                  .replace("{subject}", pronoun)
+                  .replace("{details}", joinList(family)),
+              ),
+            );
+          }
+          if (value("aboutFamily"))
+            sentences.push(finishSentence(value("aboutFamily")));
+
+          if (value("partnerPreferences")) {
+            sentences.push(
+              finishSentence(
+                narrative.partner
+                  .replace("{possessive}", possessive)
+                  .replace("{value}", value("partnerPreferences")),
+              ),
+            );
+          }
+          const contactDetails = [
+            "contactNumber",
+            "whatsappNumber",
+            "emailId",
+            "facebookProfile",
+            "instagramProfile",
+            "linkedinProfile",
+          ]
+            .filter(value)
+            .map((id) => narrative[id].replace("{value}", value(id)));
+          if (contactDetails.length) {
+            sentences.push(
+              finishSentence(
+                narrative.contact.replace(
+                  "{details}",
+                  joinList(contactDetails),
+                ),
+              ),
+            );
+          }
+          return sentences.join(" ");
+        }
+        function formatProfile(mode) {
+          const t = trans[$("language").value] || trans.en;
+          const entries = readProfileEntries();
+          const groups = getProfileGroups(mode, entries, t);
+          if (mode === "anonymous" || mode === "compact") {
+            return formatNarrativeProfile(groups, t, mode);
+          }
+          if (mode === "standard") {
+            return groups
+              .flatMap((group) => group.items)
+              .map((item) => `${item.label}: ${item.value}`)
+              .join("\n");
+          }
+          return groups
+            .map(
+              (group) =>
+                `${group.emoji} ${group.title}\n${group.items
+                  .map((item) => `  ${item.emoji} ${item.label}: ${item.value}`)
+                  .join("\n")}`,
+            )
+            .join("\n\n");
+        }
+        function createProfile(mode) {
+          const form = $("profileForm");
+          $("formError").style.display = "none";
+          if (!form.reportValidity()) {
+            $("formError").style.display = "block";
+            return;
+          }
+          const t = trans[$("language").value] || trans.en;
+          $("profileOutput").textContent = formatProfile(mode);
+          $("outputTitle").textContent = t.profileModeTitles[mode];
+          $("outputStatus").textContent = "";
+          $("formView").style.display = "none";
+          $("outputView").classList.remove("hidden");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        document.querySelectorAll("[data-profile-format]").forEach((button) => {
+          button.addEventListener("click", () =>
+            createProfile(button.dataset.profileFormat),
+          );
+        });
+        $("copyProfileBtn").addEventListener("click", async () => {
+          const t = trans[$("language").value] || trans.en;
+          let clipboardError;
+          try {
+            if (navigator.clipboard?.writeText) {
+              await navigator.clipboard.writeText(
+                $("profileOutput").textContent,
+              );
+              $("outputStatus").textContent = t.copySuccess;
+              return;
+            }
+          } catch (error) {
+            clipboardError = error;
+          }
+          const fallback = document.createElement("textarea");
+          fallback.value = $("profileOutput").textContent;
+          fallback.setAttribute("readonly", "");
+          fallback.style.position = "fixed";
+          fallback.style.top = "0";
+          fallback.style.left = "0";
+          fallback.style.opacity = "0.01";
+          fallback.style.fontSize = "16px";
+          document.body.appendChild(fallback);
+          let copied = false;
+          let fallbackError;
+          try {
+            fallback.focus();
+            fallback.select();
+            fallback.setSelectionRange(0, fallback.value.length);
+            copied =
+              typeof document.execCommand === "function" &&
+              document.execCommand("copy");
+          } catch (error) {
+            fallbackError = error;
+          } finally {
+            fallback.remove();
+          }
+          if (copied) {
+            $("outputStatus").textContent = t.copySuccess;
+          } else {
+            const error = clipboardError || fallbackError;
+            if (error) console.error("Could not copy profile.", error);
+            $("outputStatus").textContent = t.copyFailure;
+          }
+        });
+        $("printProfileBtn").addEventListener("click", () => window.print());
+        $("editProfileBtn").addEventListener("click", () => {
+          $("outputView").classList.add("hidden");
+          $("formView").style.display = "block";
+          $("outputStatus").textContent = "";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+        $("profileForm").addEventListener("reset", () =>
+          setTimeout(() => {
+            toggleChildren();
+            $("formError").style.display = "none";
+          }, 0),
+        );
+        updateLanguage();
+      })();
+    </script>
+  </body>
+</html>
