@@ -3971,22 +3971,68 @@
               body: JSON.stringify(mockPayload),
             });
 
-            const result = await response.json();
+            const result = await response?.json();
 
+            const content =
+              result?.aiResponse?.choices?.[0].message;
+              console.log("content = ", content)
+
+            /**
+ * {
+  "id": "chatcmpl-b85d347dab1dc639",
+  "object": "chat.completion",
+  "created": 1792607502,
+  "model": "@cf/zai-org/glm-4.7-flash",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [],
+        "reasoning": "1.  **Analyze the Request:**\n    *   **Task:** Write a matrimonial profile.\n    *   **Language:** English.\n    *   **Format:** Paragraph.\n    *   **Constraints:** Use ONLY supplied facts. Never invent details. Return ONLY the profile text.\n\n2.  **Analyze the Profile Data:**\n    *   Name: Vikram\n    *   Gender: Male\n    *   Birth Year: 1982 (Age 42/43 based on current year, but the prompt gives a conflicting \"age\" field of 44. I should prioritize the specific \"age\" field provided as it's an attribute in the JSON, or use the birth year to calculate if the \"age\" seems off. Let's check: 2024 - 1982 = 42. However, the JSON explicitly says \"age\": 44. Usually, specific fields override. I will stick to the \"age\" field provided to avoid confusion, or phrasing it to fit \"Vikram born in 1982\" which implies he is in his 40s.\n    *   Marital Status: Divorced\n    *   Education: BCA\n    *   Occupation: IT Professional\n    *   Current City: Amritsar\n    *   Current State: Punjab\n    *   Diet: Vegetarian\n    *   Family Details: Respectable family\n\n3.  **Drafting - Attempt 1 (Focusing on listing facts):**\n    Vikram is a 44-year-old male born in 1982. He is an IT Professional with a BCA degree. He lives in Amritsar, Punjab. His diet is Vegetarian. He comes from a respectable family. His marital status is Divorced.\n\n4.  **Refining - Attempt 2 (Improving flow and tone to sound like a matrimonial profile):**\n    I am Vikram, an IT Professional with a BCA degree, living in Amritsar, Punjab. I am 44 years old and belong to a respectable family. As a vegetarian, I value healthy living. My current marital status is Divorced.\n\n5.  **Refining - Attempt 3 (Polishing for a \"ready to copy\" feel):**\n    *   Start with an introduction.\n    *   Weave in the location.\n    *   Mention the profession and education.\n    *   Mention the family and diet.\n    *   Mention the marital status.\n\n    *Draft:*\n    I am Vikram, a 44-year-old IT Professional based in Amritsar, Punjab. I hold a BCA degree and belong to a respectable family. With a passion for health, I follow a strict Vegetarian diet. I am currently seeking a connection and bring a mature perspective from my previously married life.\n\n6.  **Final check against constraints:**\n    *   Use only facts? Yes (Name, 44/1982, IT Pro, BCA, Amritsar/Punjab, Vegetarian, Respectable family, Divorced).\n    *   Paragraph format? Yes.\n    *   No invented details? Yes.\n\n    *Self-Correction on Age vs Birth Year:* The JSON says \"age\": 44. I will use \"44\". If the user meant gestation, 1982+44 = 2026. That's impossible. So the age is slightly",
+        "reasoning_content": "1.  **Analyze the Request:**\n    *   **Task:** Write a matrimonial profile.\n    *   **Language:** English.\n    *   **Format:** Paragraph.\n    *   **Constraints:** Use ONLY supplied facts. Never invent details. Return ONLY the profile text.\n\n2.  **Analyze the Profile Data:**\n    *   Name: Vikram\n    *   Gender: Male\n    *   Birth Year: 1982 (Age 42/43 based on current year, but the prompt gives a conflicting \"age\" field of 44. I should prioritize the specific \"age\" field provided as it's an attribute in the JSON, or use the birth year to calculate if the \"age\" seems off. Let's check: 2024 - 1982 = 42. However, the JSON explicitly says \"age\": 44. Usually, specific fields override. I will stick to the \"age\" field provided to avoid confusion, or phrasing it to fit \"Vikram born in 1982\" which implies he is in his 40s.\n    *   Marital Status: Divorced\n    *   Education: BCA\n    *   Occupation: IT Professional\n    *   Current City: Amritsar\n    *   Current State: Punjab\n    *   Diet: Vegetarian\n    *   Family Details: Respectable family\n\n3.  **Drafting - Attempt 1 (Focusing on listing facts):**\n    Vikram is a 44-year-old male born in 1982. He is an IT Professional with a BCA degree. He lives in Amritsar, Punjab. His diet is Vegetarian. He comes from a respectable family. His marital status is Divorced.\n\n4.  **Refining - Attempt 2 (Improving flow and tone to sound like a matrimonial profile):**\n    I am Vikram, an IT Professional with a BCA degree, living in Amritsar, Punjab. I am 44 years old and belong to a respectable family. As a vegetarian, I value healthy living. My current marital status is Divorced.\n\n5.  **Refining - Attempt 3 (Polishing for a \"ready to copy\" feel):**\n    *   Start with an introduction.\n    *   Weave in the location.\n    *   Mention the profession and education.\n    *   Mention the family and diet.\n    *   Mention the marital status.\n\n    *Draft:*\n    I am Vikram, a 44-year-old IT Professional based in Amritsar, Punjab. I hold a BCA degree and belong to a respectable family. With a passion for health, I follow a strict Vegetarian diet. I am currently seeking a connection and bring a mature perspective from my previously married life.\n\n6.  **Final check against constraints:**\n    *   Use only facts? Yes (Name, 44/1982, IT Pro, BCA, Amritsar/Punjab, Vegetarian, Respectable family, Divorced).\n    *   Paragraph format? Yes.\n    *   No invented details? Yes.\n\n    *Self-Correction on Age vs Birth Year:* The JSON says \"age\": 44. I will use \"44\". If the user meant gestation, 1982+44 = 2026. That's impossible. So the age is slightly"
+      },
+      "logprobs": null,
+      "finish_reason": "length",
+      "stop_reason": null,
+      "token_ids": null
+    }
+  ],
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+    "prompt_tokens": 113,
+    "completion_tokens": 700,
+    "total_tokens": 813,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "neurons": 26.1015
+  },
+  "prompt_logprobs": null,
+  "prompt_token_ids": null,
+  "kv_transfer_params": null
+}
+ * */
             // Handle array or object variations depending on the model's output schema
-            let outputText = "";
-            if (Array.isArray(result) && result[0]?.generated_text) {
-              outputText = result[0].generated_text;
-            } else if (result?.generated_text) {
-              outputText = result.generated_text;
-            }
+            // let outputText = "";
+            // if (Array.isArray(result) && result[0]?.generated_text) {
+            //   outputText = result[0].generated_text;
+            // } else if (result?.generated_text) {
+            //   outputText = result.generated_text;
+            // }
 
-            if (outputText) {
-              const cleanText = outputText.replace(prompt, "").trim();
-              $("moreAboutProfile").value = cleanText;
-            } else {
-              alert("Could not generate text. Make sure your variables match.");
-            }
+            // if (outputText) {
+            //   const cleanText = outputText.replace(prompt, "").trim();
+            //   $("moreAboutProfile").value = cleanText;
+            // } else {
+            //   alert("Could not generate text. Make sure your variables match.");
+            // }
           } catch (error) {
             console.error("Error calling proxy Worker:", error);
             alert("Failed to connect to the secure AI generator.");
