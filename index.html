@@ -802,6 +802,10 @@
                   data-placeholder="aboutProfile"
                   placeholder="A short introduction, interests and values"
                 ></textarea>
+                <button class="secondary" type="button" id="generateBioBtn">
+                  Generate AI bio
+                </button>
+                <p id="aiStatus" role="status" aria-live="polite"></p>
               </div>
             </div>
           </section>
@@ -1851,6 +1855,12 @@
             amPm: ["AM", "PM"],
             profileFormatsTitle: "Create a profile",
             anonymousProfile: "Create Anonymous Profile",
+            generateBio: "Generate AI bio",
+            aiPrivacyNote:
+              "Choosing this sends selected profile details, including free-text answers, to Hugging Face. Birth and contact fields are excluded; check free-text answers for private details.",
+            aiGenerating: "Generating your bio…",
+            aiSuccess: "AI bio added to More About Profile.",
+            aiInvalid: "Complete the required fields before generating a bio.",
             compactProfile: "Create Compact Profile",
             standardProfile: "Standard Profile",
             detailedProfile: "Detailed Profile",
@@ -2273,6 +2283,12 @@
             amPm: ["AM", "PM"],
             profileFormatsTitle: "प्रोफ़ाइल बनाएँ",
             anonymousProfile: "अनाम प्रोफ़ाइल बनाएँ",
+            generateBio: "AI बायो बनाएँ",
+            aiPrivacyNote:
+              "बायो बनाने पर चुने गए प्रोफ़ाइल विवरण और लिखित उत्तर Hugging Face को भेजे जाते हैं। जन्म और संपर्क फ़ील्ड शामिल नहीं होते; निजी विवरण के लिए लिखित उत्तर जाँचें।",
+            aiGenerating: "बायो बनाया जा रहा है…",
+            aiSuccess: "AI बायो 'प्रोफ़ाइल के बारे में' में जोड़ दिया गया।",
+            aiInvalid: "बायो बनाने से पहले आवश्यक फ़ील्ड भरें।",
             compactProfile: "संक्षिप्त प्रोफ़ाइल बनाएँ",
             standardProfile: "मानक प्रोफ़ाइल",
             detailedProfile: "विस्तृत प्रोफ़ाइल",
@@ -2692,6 +2708,12 @@
             amPm: ["AM", "PM"],
             profileFormatsTitle: "ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
             anonymousProfile: "ਗੁਮਨਾਮ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            generateBio: "AI ਬਾਇਓ ਬਣਾਓ",
+            aiPrivacyNote:
+              "ਬਾਇਓ ਬਣਾਉਣ 'ਤੇ ਚੁਣੇ ਪ੍ਰੋਫਾਈਲ ਵੇਰਵੇ ਅਤੇ ਲਿਖਤੀ ਜਵਾਬ Hugging Face ਨੂੰ ਭੇਜੇ ਜਾਂਦੇ ਹਨ। ਜਨਮ ਅਤੇ ਸੰਪਰਕ ਵਾਲੇ ਖਾਨੇ ਸ਼ਾਮਲ ਨਹੀਂ ਹੁੰਦੇ; ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਲਈ ਲਿਖਤੀ ਜਵਾਬ ਜਾਂਚੋ।",
+            aiGenerating: "ਬਾਇਓ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ…",
+            aiSuccess: "AI ਬਾਇਓ 'ਪ੍ਰੋਫਾਈਲ ਬਾਰੇ' ਵਿੱਚ ਜੋੜ ਦਿੱਤਾ ਗਿਆ ਹੈ।",
+            aiInvalid: "ਬਾਇਓ ਬਣਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਲਾਜ਼ਮੀ ਜਾਣਕਾਰੀ ਭਰੋ।",
             compactProfile: "ਸੰਖੇਪ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
             standardProfile: "ਮਿਆਰੀ ਪ੍ਰੋਫ਼ਾਈਲ",
             detailedProfile: "ਵਿਸਤ੍ਰਿਤ ਪ੍ਰੋਫ਼ਾਈਲ",
@@ -3153,6 +3175,7 @@
           updateMarriedSiblingOptions("sisters", "marriedSisters");
           $("profileFormatsTitle").textContent = t.profileFormatsTitle;
           $("anonymousProfileBtn").textContent = t.anonymousProfile;
+          $("generateBioBtn").textContent = t.generateBio;
           $("compactProfileBtn").textContent = t.compactProfile;
           $("standardProfileBtn").textContent = t.standardProfile;
           $("detailedProfileBtn").textContent = t.detailedProfile;
@@ -3830,6 +3853,8 @@
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
         $("anonymousProfileBtn").addEventListener("click", () => generateBio());
+
+        $("generateBioBtn").addEventListener("click", generateBio);
         // document.querySelectorAll("[data-profile-format]").forEach((button) => {
         //   button.addEventListener("click", () =>
         //     createProfile(button.dataset.profileFormat),
