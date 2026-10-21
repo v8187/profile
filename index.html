@@ -3821,6 +3821,54 @@
           }, 0),
         );
         updateLanguage();
+
+        // Replace this with your actual deployed Cloudflare Worker URL
+const WORKER_URL = "https://workers.dev"; 
+
+async function generateBio() {
+    const name = document.getElementById("name")?.value || "Someone";
+    const education = document.getElementById("education")?.value || "Graduate";
+    const occupation = document.getElementById("occupation")?.value || "Professional";
+    const location = document.getElementById("currentLocation")?.value || "India";
+
+    const prompt = `Write a brief, polite, and formal matrimonial biodata description (About Me section) in third-person for a candidate with these details:
+    Name: ${name}
+    Education: ${education}
+    Occupation: ${occupation}
+    Current Location: ${location}
+    
+    Keep it under 4 paragraphs. Make it sound appealing for a marriage profile.`;
+
+    try {
+        // Fetch from your secure proxy instead of calling Hugging Face directly
+        const response = await fetch(WORKER_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: prompt }),
+        });
+
+        const result = await response.json();
+        
+        // Handle array or object variations depending on the model's output schema
+        let outputText = "";
+        if (Array.isArray(result) && result[0]?.generated_text) {
+            outputText = result[0].generated_text;
+        } else if (result?.generated_text) {
+            outputText = result.generated_text;
+        }
+
+        if (outputText) {
+            const cleanText = outputText.replace(prompt, "").trim();
+            document.getElementById("moreAboutProfile").value = cleanText;
+        } else {
+            alert("Could not generate text. Make sure your variables match.");
+        }
+    } catch (error) {
+        console.error("Error calling proxy Worker:", error);
+        alert("Failed to connect to the secure AI generator.");
+    }
+}
+
       })();
     </script>
   </body>
