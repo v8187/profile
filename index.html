@@ -3852,7 +3852,7 @@
           $("outputView").classList.remove("hidden");
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
-        $("anonymousProfileBtn").addEventListener("click", () => generateBio());
+        // $("anonymousProfileBtn").addEventListener("click", () => generateBio());
 
         $("generateBioBtn").addEventListener("click", generateBio);
         // document.querySelectorAll("[data-profile-format]").forEach((button) => {
@@ -3963,9 +3963,9 @@
             const response = await fetch(WORKER_URL, {
               method: "POST",
               headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "POST, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type",
+                // "Access-Control-Allow-Origin": "*",
+                // "Access-Control-Allow-Methods": "POST, OPTIONS",
+                // "Access-Control-Allow-Headers": "Content-Type",
                 "Content-Type": "application/json",
               },
               body: JSON.stringify(mockPayload),
