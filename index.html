@@ -1073,10 +1073,126 @@
     </footer>
     <script>
       (function () {
-        document.addEventListener("onload", function () {
-          alert("Helo");
-        });
+        const fieldsIds = [
+          "profileFor",
+          "name",
+          "gender",
+          "category",
+          "religion",
+          "maritalStatus",
+          "childrenGirls",
+          "childrenBoys",
+          "currentCity",
+          "currentState",
+          "currentCountry",
+          "birthYear",
+          "birthMonth",
+          "birthDate",
+          "birthHour",
+          "birthMinute",
+          "birthSecond",
+          "birthAmPm",
+          "birthCity",
+          "birthState",
+          "birthCountry",
+          "manglik",
+          "sunSign",
+          "moonSign",
+          "height",
+          "weight",
+          "skinTone",
+          "bloodGroup",
+          "diet",
+          "smoking",
+          "drinking",
+          "motherTongue",
+          "education",
+          "occupation",
+          "annualIncome",
+          "aboutProfile",
+          "familyType",
+          "familyStatus",
+          "caste",
+          "subCaste",
+          "gotra",
+          "mother",
+          "father",
+          "brothers",
+          "marriedBrothers",
+          "sisters",
+          "marriedSisters",
+          "aboutFamily",
+          "partnerPreferences",
+          "contactNumber",
+          "whatsappNumber",
+          "emailId",
+          "facebookProfile",
+          "instagramProfile",
+          "linkedinProfile",
+        ];
+        const mockValues = {
+          profileFor: 1,
+          name: "Vikram",
+          gender: 1,
+          category: 1,
+          religion: 1,
+          maritalStatus: 1,
+          childrenGirls: 0,
+          childrenBoys: 0,
+          currentCity: "Amritsar",
+          currentState: "Punjab",
+          currentCountry: "India",
+          birthYear: 1990,
+          birthMonth: 1,
+          birthDate: 5,
+          birthHour: 1,
+          birthMinute: 20,
+          birthSecond: "00",
+          birthAmPm: 2,
+          birthCity: "Amritsar",
+          birthState: "Punjab",
+          birthCountry: "India",
+          manglik: 4,
+          sunSign: 6,
+          moonSign: 6,
+          height: 20,
+          weight: 12,
+          skinTone: 1,
+          bloodGroup: 1,
+          diet: 1,
+          smoking: 1,
+          drinking: 1,
+          motherTongue: 2,
+          education: 2,
+          occupation: 1,
+          annualIncome: 2,
+          aboutProfile: "I am simple and down to earth personality",
+          familyType: 1,
+          familyStatus: 1,
+          caste: "Aggarwal",
+          subCaste: "",
+          gotra: "Goyal",
+          mother: 1,
+          father: 1,
+          brothers: 1,
+          marriedBrothers: 1,
+          sisters: 2,
+          marriedSisters: 1,
+          aboutFamily: "We are simple family, have own house",
+          partnerPreferences:
+            "Looking for simple, vegetarrian, family oriented girl. Child upto 3 years also accepted",
+          contactNumber: "9876543210",
+          whatsappNumber: "9876543210",
+          emailId: "vikram@gmail.com",
+          facebookProfile: "https://www.facebook.com/vikram",
+          instagramProfile: "https://www.instagram.com/vikram",
+          linkedinProfile: "https://www.linkedin.com/vikram",
+        };
+
         const $ = (id) => document.getElementById(id);
+        function getFormFields() {
+          return document.forms[0].querySelectorAll("select, input, textarea");
+        }
         const commonTrans = {
           en: {
             commonOptions: ["Others", "Prefer not to say"],
@@ -2780,51 +2896,7 @@
           instagramProfile: "📸",
           linkedinProfile: "💼",
         };
-        const labelIds = [
-          "profileFor",
-          "name",
-          "gender",
-          "category",
-          "religion",
-          "manglik",
-          "maritalStatus",
-          "childrenGirls",
-          "childrenBoys",
-          "currentCity",
-          "currentState",
-          "currentCountry",
-          "birthYear",
-          "birthMonth",
-          "birthDate",
-          "birthHour",
-          "birthMinute",
-          "birthSecond",
-          "birthAmPm",
-          "birthCity",
-          "birthState",
-          "birthCountry",
-          "caste",
-          "subCaste",
-          "gotra",
-          "height",
-          "weight",
-          "skinTone",
-          "bloodGroup",
-          "diet",
-          "smoking",
-          "drinking",
-          "motherTongue",
-          "mother",
-          "father",
-          "brothers",
-          "marriedBrothers",
-          "sisters",
-          "marriedSisters",
-          "familyType",
-          "familyStatus",
-          "education",
-          "occupation",
-        ];
+
         function setOptions(id, first = null, values, keepValue = true) {
           const el = $(id);
           const oldValue = keepValue ? el.value : "";
@@ -3757,7 +3829,7 @@
           $("outputView").classList.remove("hidden");
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
-        $('anonymousProfileBtn').addEventListener("click", () => generateBio());
+        $("anonymousProfileBtn").addEventListener("click", () => generateBio());
         // document.querySelectorAll("[data-profile-format]").forEach((button) => {
         //   button.addEventListener("click", () =>
         //     createProfile(button.dataset.profileFormat),
@@ -3824,52 +3896,79 @@
         updateLanguage();
 
         // Replace this with your actual deployed Cloudflare Worker URL
-const WORKER_URL = "https://profile-1xq.v8187.workers.dev"; 
+        const WORKER_URL = "https://profile-1xq.v8187.workers.dev";
 
-async function generateBio() {
-    const name = document.getElementById("name")?.value || "Someone";
-    const education = document.getElementById("education")?.value || "Graduate";
-    const occupation = document.getElementById("occupation")?.value || "Professional";
-    const location = document.getElementById("currentLocation")?.value || "India";
+        async function generateBio() {
+          const lang = $("language").value;
+          const name = $("name")?.value || "Someone";
+          const education =
+            trans[lang].educationOptions[
+              (Number($("education")?.value) || 1) - 1
+            ] || "Graduate";
+          const occupation = $("occupation")?.value || "Professional";
+          const location = $("currentLocation")?.value || "India";
 
-    const prompt = `Write a brief, polite, and formal matrimonial biodata description (About Me section) in third-person for a candidate with these details:
-    Name: ${name}
-    Education: ${education}
-    Occupation: ${occupation}
-    Current Location: ${location}
-    
-    Keep it under 4 paragraphs. Make it sound appealing for a marriage profile.`;
+          const prompt = `Write a brief, polite, and formal matrimonial biodata description (About Me section) in third-person for a candidate with these details:
+      Name: ${name}
+      Education: ${education}
+      Occupation: ${occupation}
+      Current Location: ${location}
 
-    try {
-        // Fetch from your secure proxy instead of calling Hugging Face directly
-        const response = await fetch(WORKER_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: prompt }),
-        });
+      Keep it under 4 paragraphs. Make it sound appealing for a marriage profile.`;
+          const mockPayload = {
+            language: "English",
+            format: "paragraph",
+            tone: "natural",
+            profile: {
+              name: "Vikram",
+              gender: "Male",
+              birthYear: "1982",
+              age: 44,
+              maritalStatus: "Divorced",
+              education: "BCA",
+              occupation: "IT Professional",
+              currentCity: "Amritsar",
+              currentState: "Punjab",
+              diet: "Vegetarian",
+              familyDetails: "Respectable family",
+            },
+          };
+          try {
+            // Fetch from your secure proxy instead of calling Hugging Face directly
+            const response = await fetch(WORKER_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(mockPayload),
+            });
 
-        const result = await response.json();
-        
-        // Handle array or object variations depending on the model's output schema
-        let outputText = "";
-        if (Array.isArray(result) && result[0]?.generated_text) {
-            outputText = result[0].generated_text;
-        } else if (result?.generated_text) {
-            outputText = result.generated_text;
+            const result = await response.json();
+
+            // Handle array or object variations depending on the model's output schema
+            let outputText = "";
+            if (Array.isArray(result) && result[0]?.generated_text) {
+              outputText = result[0].generated_text;
+            } else if (result?.generated_text) {
+              outputText = result.generated_text;
+            }
+
+            if (outputText) {
+              const cleanText = outputText.replace(prompt, "").trim();
+              $("moreAboutProfile").value = cleanText;
+            } else {
+              alert("Could not generate text. Make sure your variables match.");
+            }
+          } catch (error) {
+            console.error("Error calling proxy Worker:", error);
+            alert("Failed to connect to the secure AI generator.");
+          }
         }
 
-        if (outputText) {
-            const cleanText = outputText.replace(prompt, "").trim();
-            document.getElementById("moreAboutProfile").value = cleanText;
-        } else {
-            alert("Could not generate text. Make sure your variables match.");
-        }
-    } catch (error) {
-        console.error("Error calling proxy Worker:", error);
-        alert("Failed to connect to the secure AI generator.");
-    }
-}
-
+        (function fillMockValues() {
+          getFormFields().forEach((el) => {
+            el.value = mockValues[el.name || el.id];
+            el.dispatchEvent(new Event("change", { bubbles: true }));
+          });
+        })();
       })();
     </script>
   </body>
