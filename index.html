@@ -3757,11 +3757,12 @@
           $("outputView").classList.remove("hidden");
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
-        document.querySelectorAll("[data-profile-format]").forEach((button) => {
-          button.addEventListener("click", () =>
-            createProfile(button.dataset.profileFormat),
-          );
-        });
+        $('anonymousProfileBtn').addEventListener("click", () => generateBio());
+        // document.querySelectorAll("[data-profile-format]").forEach((button) => {
+        //   button.addEventListener("click", () =>
+        //     createProfile(button.dataset.profileFormat),
+        //   );
+        // });
         $("copyProfileBtn").addEventListener("click", async () => {
           const t = trans[$("language").value] || trans.en;
           let clipboardError;
