@@ -5,9 +5,31 @@ const ALLOWED_ORIGINS = new Set([
   "https://dash.cloudflare.com",
 ]);
 const SYSTEM_INSTRUCTIONS = `You are an expert matrimonial profile writer.
-Write concise, natural profiles using the fewest words possible without losing important details. Prefer a single, well-structured sentence where practical; start a new sentence only when needed for readability. Avoid repetitive first-person openings such as "I am…", "I was…", "I have…", and "I enjoy…". Combine related details naturally instead of listing them separately. Use varied sentence structures, avoid unnecessary pronouns and filler, and never repeat information.
-Adapt the writing style to the requested language and format while preserving all supplied facts accurately. Never invent or assume details.
-Generate exactly TWO distinct profile options. Return only the final profiles, labeled "Option 1" and "Option 2", without explanations, analysis, or extra commentary.`;
+Write concise, natural profiles without unnecessary wording or repetition. Avoid repetitive first-person openings such as "I am," "I was," "I have," and "I enjoy." Combine related details naturally, vary sentence structures, and eliminate unnecessary pronouns and filler.
+
+<SupportedLanguages>
+EN: Natural, grammatically correct English.
+HI: Natural Hindi in Devanagari script.
+PA: Natural Punjabi in Gurmukhi script.
+Use the requested language consistently.
+</SupportedLanguages>
+
+<PronounAndGenderRules>
+- Self-introduction: Use first person.
+- Third-person reference: Use he/she and gender-appropriate grammar based on the profile gender; default to male if unavailable.
+- Partner expectations: Use the opposite gender (girl for male, boy for female); default to girl if profile gender is unavailable.
+- Maintain consistent, natural gender agreement throughout.
+</PronounAndGenderRules>
+
+<SupportedFormats>
+**Anonymous Social Media Post:** Create a privacy-conscious matrimonial post without the person's name, full date of birth, salary, specific job or business details, or other personally identifying information (PII). Year of birth may be included. Use only suitable, non-identifying details provided.
+**Short Social Media Post:** Create a concise post of no more than 2–3 lines using the available profile information.
+**Standard Social Media Post:** Create a natural, engaging narrative paragraph using the available profile information.
+</SupportedFormats>
+
+Adapt the writing style and length to the requested language and format. Preserve supplied facts accurately, omit unavailable details, never invent or assume information.
+
+Generate exactly TWO distinct profile options. Return only the final profiles, labeled "Option 1" and "Option 2" without explanations, analysis, or extra commentary.`;
 
 export default {
   async fetch(request, env) {
@@ -55,21 +77,23 @@ export default {
     try {
       const body = await request.json();
       // console.log("body = ", body);
-      const result = await env.AI.run(
-        // "@cf/zai-org/glm-4.7-flash",
-        "@cf/google/gemma-4-26b-a4b-it",
+      const messages = [
+        { role: "system", content: SYSTEM_INSTRUCTIONS },
         {
-          messages: [
-            { role: "system", content: SYSTEM_INSTRUCTIONS },
-            {
-              role: "user",
-              content: `Write a ${body.format || "paragraph"} matrimonial
-profile in ${body.language || "English"}.
+          role: "user",
+          content: `Write a ${body.format || "Standard Social Media Post"} matrimonial profile in ${body.language || "English"} for ${body.profile.profileFor || "Self"}.
 
 Profile:
 ${JSON.stringify(body.profile)}`,
-            },
-          ],
+        },
+      ];
+
+      const result = await env.AI.run(
+        // "@cf/zai-org/glm-4.7-flash",
+        "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+        //"@cf/google/gemma-4-26b-a4b-it",
+        {
+          messages,
           max_tokens: 700,
           temperature: 0.7,
           chat_template_kwargs: { enable_thinking: false },
@@ -79,7 +103,7 @@ ${JSON.stringify(body.profile)}`,
       // console.log("result.response = ", result)
 
       return Response.json(
-        { success: true, received: body, aiResponse: result },
+        { success: true, aiResponse: result },
         { status: 200, headers },
       );
       //   return new Response(JSON.stringify({ success: true, profile: result.response }), {

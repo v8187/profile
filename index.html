@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="rose">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,8 +9,11 @@
       :root {
         --ink: #20312e;
         --muted: #687975;
-        --brand: #176b5b;
-        --brand2: #d9eee7;
+        --brand: #a63f63;
+        --brand2: #f6dfe7;
+        --theme-start: #45172c;
+        --theme-end: #a13f62;
+        --theme-glow: #e77b9a;
         --line: #dce7e2;
         --paper: #fff;
         --bg: #f3f7f5;
@@ -36,9 +39,41 @@
       header {
         padding: 20px;
         background:
-          radial-gradient(circle at 85% 0%, #752c5a 0, transparent 33%),
-          linear-gradient(120deg, #331421, #5d2054);
+          radial-gradient(
+            circle at 85% 0%,
+            var(--theme-glow) 0,
+            transparent 38%
+          ),
+          linear-gradient(120deg, var(--theme-start), var(--theme-end));
         color: #fff;
+      }
+      :root[data-theme="ruby"] {
+        --brand: #a72f4d;
+        --brand2: #f6dce2;
+        --theme-start: #3d1321;
+        --theme-end: #a72f4d;
+        --theme-glow: #ef7488;
+      }
+      :root[data-theme="plum"] {
+        --brand: #75416f;
+        --brand2: #efe0f0;
+        --theme-start: #28162e;
+        --theme-end: #71436c;
+        --theme-glow: #bc7ab5;
+      }
+      :root[data-theme="teal"] {
+        --brand: #286f70;
+        --brand2: #dcefee;
+        --theme-start: #123c43;
+        --theme-end: #277b79;
+        --theme-glow: #65b4ae;
+      }
+      :root[data-theme="saffron"] {
+        --brand: #9a6329;
+        --brand2: #f6e9d2;
+        --theme-start: #3e2618;
+        --theme-end: #9a5f32;
+        --theme-glow: #d9a85b;
       }
       .head-inner,
       main {
@@ -53,6 +88,132 @@
         align-items: center;
         gap: 12px;
         margin-bottom: 16px;
+      }
+      .language-switcher {
+        margin: 0 auto;
+        padding: 0;
+        border: 0;
+        width: fit-content;
+      }
+      .language-switcher legend {
+        margin-bottom: 4px;
+        font-size: 0.82rem;
+        font-weight: 650;
+      }
+      .language-options {
+        display: flex;
+        width: fit-content;
+        max-width: 100%;
+      }
+      .language-option {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 6px 10px;
+        border: 1px solid #ffffff80;
+        border-radius: 0;
+        background: linear-gradient(120deg, #331421, #5d2054);
+        background: var(--brand);
+        color: #fff;
+        color: var(--brand2);
+        cursor: pointer;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        min-width: 200px;
+      }
+      .language-option + .language-option {
+        margin-left: -1px;
+      }
+      .language-option:first-child {
+        border-radius: 7px 0 0 7px;
+      }
+      .language-option:last-child {
+        border-radius: 0 7px 7px 0;
+      }
+      .language-option input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+      .language-option:focus-within {
+        z-index: 2;
+        outline: 2px solid #ddb6cd;
+        outline-offset: 2px;
+      }
+      .language-option.selected {
+        z-index: 1;
+        border-color: #fff;
+        background: #fff;
+        color: var(--brand);
+      }
+      .theme-switcher {
+        display: grid;
+        justify-items: center;
+        gap: 6px;
+        margin: 14px auto 0;
+        padding: 0;
+        border: 0;
+      }
+      .theme-switcher legend {
+        justify-content: center;
+        font-size: 0.85rem;
+        font-weight: 650;
+      }
+      .theme-options {
+        display: flex;
+        gap: 10px;
+      }
+      .theme-swatch {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        margin: 0;
+        cursor: pointer;
+      }
+      .theme-swatch input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+      .theme-swatch span {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #ffffffbb;
+        border-radius: 5px;
+        background: var(--swatch-color);
+        box-shadow: 0 1px 4px #160c1233;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .theme-swatch input:checked + span {
+        transform: scale(1.12);
+        box-shadow:
+          0 0 0 2px var(--theme-start),
+          0 0 0 4px #fff;
+      }
+      .theme-swatch:focus-within {
+        outline: 2px solid #fff;
+        outline-offset: 3px;
+        border-radius: 5px;
       }
       .logo {
         display: grid;
@@ -70,6 +231,7 @@
         letter-spacing: 0.16em;
         font-size: 1.3rem;
         color: #ddb6cd;
+        color: var(--brand2);
         font-weight: 800;
       }
       h1 {
@@ -80,8 +242,10 @@
       }
       header p {
         margin: 0;
-        max-width: 680px;
+        /*max-width: 680px;*/
+        margin-bottom: 16px;
         color: #e0efea;
+        color: var(--brand2);
       }
       .pillrow {
         display: flex;
@@ -127,6 +291,11 @@
         gap: 12px;
         align-items: center;
         margin-bottom: 20px;
+      }
+      .section-head h2,
+      .fields-group-wrapper-title,
+      #profileForm .field > label {
+        color: var(--brand);
       }
       .step {
         flex: 0 0 34px;
@@ -284,8 +453,8 @@
       input:focus,
       select:focus,
       textarea:focus {
-        border-color: #3d9380;
-        box-shadow: 0 0 0 3px #3d93801b;
+        border-color: var(--brand);
+        box-shadow: 0 0 0 3px var(--brand2);
       }
       input::placeholder,
       textarea::placeholder {
@@ -322,14 +491,19 @@
         transform: translateY(-1px);
       }
       .primary {
+        /* background: linear-gradient(
+          120deg,
+          var(--theme-start),
+          var(--theme-end)
+        ); */
         background: var(--brand);
         color: #fff;
-        box-shadow: 0 6px 15px #176b5b25;
+        box-shadow: 0 6px 15px var(--brand2);
       }
       .secondary {
-        background: #edf4f1;
-        color: #255248;
-        border: 1px solid #d5e4dd;
+        background: var(--brand2);
+        color: var(--brand);
+        border: 1px solid var(--brand2);
       }
       .privacy {
         color: var(--muted);
@@ -454,6 +628,13 @@
         }
       }
       @media (max-width: 650px) {
+        .brandline {
+          flex-wrap: wrap;
+        }
+
+        .language-option {
+          min-width: 132px;
+        }
         .fields-group:not(.date, .time),
         .fields-group.location,
         .fields-group.marital {
@@ -481,15 +662,6 @@
           <div class="eyebrow" id="brandTitle">
             Matrimonial Profile Maker — Free & Private
           </div>
-          <div class="field">
-            <label for="language" id="labLanguage"
-              >Language / भाषा / ਭਾਸ਼ਾ <span class="req">*</span></label
-            ><select id="language" name="language">
-              <option value="en">English</option>
-              <option value="hi">हिन्दी (Hindi)</option>
-              <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
-            </select>
-          </div>
         </div>
         <!-- <h1 id="heroTitle">Your story, thoughtfully presented.</h1> -->
         <p id="heroSub">
@@ -497,6 +669,80 @@
           stay in this browser session — nothing is uploaded or saved by this
           page.
         </p>
+        <fieldset class="language-switcher">
+          <!-- <label for="language" id="labLanguage"
+              >Language / भाषा / ਭਾਸ਼ਾ <span class="req">*</span></label
+            ><select id="language" name="language">
+              <option value="en">English</option>
+              <option value="hi">हिन्दी (Hindi)</option>
+              <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+            </select> -->
+          <div class="language-options">
+            <label class="language-option selected">
+              <input type="radio" name="languageChoice" value="en" checked />
+              English
+            </label>
+            <label class="language-option">
+              <input type="radio" name="languageChoice" value="hi" />
+              हिन्दी
+            </label>
+            <label class="language-option">
+              <input type="radio" name="languageChoice" value="pa" />
+              ਪੰਜਾਬੀ
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="theme-switcher">
+          <!-- <legend id="themeLegend">Choose a color</legend> -->
+          <div class="theme-options">
+            <label class="theme-swatch" title="Rose">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="rose"
+                aria-label="Rose"
+                checked
+              />
+              <span style="--swatch-color: #a63f63" aria-hidden="true"></span>
+            </label>
+            <label class="theme-swatch" title="Ruby">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="ruby"
+                aria-label="Ruby"
+              />
+              <span style="--swatch-color: #a72f4d" aria-hidden="true"></span>
+            </label>
+            <label class="theme-swatch" title="Plum">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="plum"
+                aria-label="Plum"
+              />
+              <span style="--swatch-color: #75416f" aria-hidden="true"></span>
+            </label>
+            <label class="theme-swatch" title="Teal">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="teal"
+                aria-label="Teal"
+              />
+              <span style="--swatch-color: #286f70" aria-hidden="true"></span>
+            </label>
+            <label class="theme-swatch" title="Saffron">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="saffron"
+                aria-label="Saffron"
+              />
+              <span style="--swatch-color: #9a6329" aria-hidden="true"></span>
+            </label>
+          </div>
+        </fieldset>
         <!-- <div class="pillrow">
           <span class="pill" id="pill1">Free to use</span
           ><span class="pill" id="pill2">No account required</span
@@ -802,9 +1048,9 @@
                   data-placeholder="aboutProfile"
                   placeholder="A short introduction, interests and values"
                 ></textarea>
-                <button class="secondary" type="button" id="generateBioBtn">
+                <!-- <button class="secondary" type="button" id="generateBioBtn">
                   Generate AI bio
-                </button>
+                </button> -->
                 <p id="aiStatus" role="status" aria-live="polite"></p>
               </div>
             </div>
@@ -1008,42 +1254,32 @@
               <div class="section-emoji">🪄</div>
               <h2 id="profileFormatsTitle">Create a profile</h2>
             </div>
-            <p id="requiredNote" class="help">
+            <!-- <p id="requiredNote" class="help">
               * Required fields apply to every profile format.
-            </p>
+            </p> -->
             <div class="format-actions">
               <button
                 class="primary"
                 type="button"
-                data-profile-format="anonymous"
-                id="anonymousProfileBtn"
-              >
-                Create Anonymous Profile
-              </button>
+                id="genAnonymousPost"
+              ></button>
+              <button class="primary" type="button" id="genShortPost"></button>
               <button
-                class="secondary"
+                class="primary"
                 type="button"
-                data-profile-format="compact"
-                id="compactProfileBtn"
-              >
-                Create Compact Profile
-              </button>
+                id="genStandardPost"
+              ></button>
               <button
-                class="secondary"
+                class="primary"
                 type="button"
-                data-profile-format="standard"
-                id="standardProfileBtn"
-              >
-                Standard Profile
-              </button>
+                id="genProfileFormat1"
+              ></button>
               <button
-                class="secondary"
+                class="primary"
                 type="button"
-                data-profile-format="detailed"
-                id="detailedProfileBtn"
-              >
-                Detailed Profile
-              </button>
+                id="genProfileFormat2"
+              ></button>
+              <button class="secondary" type="button" id="resetForm"></button>
             </div>
           </section>
         </form>
@@ -1573,6 +1809,7 @@
         const trans = {
           en: {
             brandTitle: "Matrimonial Profile Maker — Free & Private",
+            themeLegend: "Choose a color",
             heroTitle: "Your story, thoughtfully presented.",
             heroSub:
               "Create a clean matrimonial biodata in a few simple steps. Your details stay in this browser session — nothing is uploaded or saved by this page.",
@@ -1853,7 +2090,15 @@
             secondSelect: "Seconds",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            profileFormatsTitle: "Create a profile",
+            buttons: {
+              anonymousPost: "Anonymous Social Media Post",
+              shortPost: "Short Social Media Post",
+              standardPost: "Standard Social Media Post",
+              profileFormat1: "Full Profile - Format 1",
+              profileFormat2: "Full Profile - Format 2",
+              resetForm: "Reset Form",
+            },
+            profileFormatsTitle: "Matrimony Profile Formats",
             anonymousProfile: "Create Anonymous Profile",
             generateBio: "Generate AI bio",
             aiPrivacyNote:
@@ -1861,9 +2106,6 @@
             aiGenerating: "Generating your bio…",
             aiSuccess: "AI bio added to More About Profile.",
             aiInvalid: "Complete the required fields before generating a bio.",
-            compactProfile: "Create Compact Profile",
-            standardProfile: "Standard Profile",
-            detailedProfile: "Detailed Profile",
             outputTitle: "Your profile",
             profileModeTitles: {
               anonymous: "Anonymous Profile",
@@ -1999,6 +2241,7 @@
           },
           hi: {
             brandTitle: "शादी के लिए बायोडाटा बनाएँ - निःशुल्क और सुरक्षित",
+            themeLegend: "रंग चुनें",
             heroTitle: "आपकी पहचान, सुंदर और सरल रूप में।",
             heroSub:
               "कुछ आसान चरणों में अपना वैवाहिक परिचय-पत्र बनाएँ। आपकी जानकारी इसी ब्राउज़र सत्र में रहती है—यह पेज इसे अपलोड या सेव नहीं करता।",
@@ -2281,7 +2524,15 @@
             secondSelect: "सेकंड",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            profileFormatsTitle: "प्रोफ़ाइल बनाएँ",
+            buttons: {
+              anonymousPost: "बिना पहचान बताए सोशल मीडिया पोस्ट",
+              shortPost: "संक्षिप्त सोशल मीडिया पोस्ट",
+              standardPost: "मानक सोशल मीडिया पोस्ट",
+              profileFormat1: "पूर्ण प्रोफ़ाइल - प्रारूप (फॉर्मेट) 1",
+              profileFormat2: "पूर्ण प्रोफ़ाइल - प्रारूप (फॉर्मेट) 2",
+              resetForm: "फॉर्म साफ (रीसेट) करें",
+            },
+            profileFormatsTitle: "मैट्रिमोनी प्रोफ़ाइल फॉर्मेट",
             anonymousProfile: "अनाम प्रोफ़ाइल बनाएँ",
             generateBio: "AI बायो बनाएँ",
             aiPrivacyNote:
@@ -2289,9 +2540,6 @@
             aiGenerating: "बायो बनाया जा रहा है…",
             aiSuccess: "AI बायो 'प्रोफ़ाइल के बारे में' में जोड़ दिया गया।",
             aiInvalid: "बायो बनाने से पहले आवश्यक फ़ील्ड भरें।",
-            compactProfile: "संक्षिप्त प्रोफ़ाइल बनाएँ",
-            standardProfile: "मानक प्रोफ़ाइल",
-            detailedProfile: "विस्तृत प्रोफ़ाइल",
             outputTitle: "आपकी प्रोफ़ाइल",
             profileModeTitles: {
               anonymous: "अनाम प्रोफ़ाइल",
@@ -2426,6 +2674,7 @@
           },
           pa: {
             brandTitle: "ਵਿਆਹ ਲਈ ਪ੍ਰੋਫਾਈਲ ਬਣਾਓ - ਮੁਫ਼ਤ ਅਤੇ ਸੁਰੱਖਿਅਤ",
+            themeLegend: "ਰੰਗ ਚੁਣੋ",
             heroTitle: "ਤੁਹਾਡੀ ਪਹਿਚਾਣ, ਸੁੰਦਰ ਤੇ ਸਾਦੇ ਢੰਗ ਨਾਲ।",
             heroSub:
               "ਕੁਝ ਸੌਖੇ ਕਦਮਾਂ ਵਿੱਚ ਆਪਣਾ ਵਿਆਹ ਸੰਬੰਧੀ ਬਾਇਓਡਾਟਾ ਬਣਾਓ। ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਸੈਸ਼ਨ ਤੱਕ ਰਹਿੰਦੀ ਹੈ—ਇਹ ਪੇਜ ਇਸਨੂੰ ਅੱਪਲੋਡ ਜਾਂ ਸੇਵ ਨਹੀਂ ਕਰਦਾ।",
@@ -2706,7 +2955,15 @@
             secondSelect: "ਸਕਿੰਟ",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            profileFormatsTitle: "ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            buttons: {
+              anonymousPost: "ਬਿਨਾਂ ਪਛਾਣ ਦੱਸੇ ਸੋਸ਼ਲ ਮੀਡੀਆ ਪੋਸਟ",
+              shortPost: "ਛੋਟੀ ਸੋਸ਼ਲ ਮੀਡੀਆ ਪੋਸਟ",
+              standardPost: "ਸਟੈਂਡਰਡ ਸੋਸ਼ਲ ਮੀਡੀਆ ਪੋਸਟ",
+              profileFormat1: "ਪੂਰੀ ਪ੍ਰੋਫਾਈਲ - ਫਾਰਮੈਟ (ਫਾਰਮੈਟ) 1",
+              profileFormat2: "ਪੂਰੀ ਪ੍ਰੋਫਾਈਲ - ਫਾਰਮੈਟ (ਫਾਰਮੈਟ) 2",
+              resetForm: "ਫਾਰਮ ਸਾਫ਼ (ਰੀਸੈੱਟ) ਕਰੋ",
+            },
+            profileFormatsTitle: "ਮੈਟਰੀਮੋਨੀ ਪ੍ਰੋਫਾਈਲ ਫਾਰਮੈਟ",
             anonymousProfile: "ਗੁਮਨਾਮ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
             generateBio: "AI ਬਾਇਓ ਬਣਾਓ",
             aiPrivacyNote:
@@ -2714,9 +2971,6 @@
             aiGenerating: "ਬਾਇਓ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ…",
             aiSuccess: "AI ਬਾਇਓ 'ਪ੍ਰੋਫਾਈਲ ਬਾਰੇ' ਵਿੱਚ ਜੋੜ ਦਿੱਤਾ ਗਿਆ ਹੈ।",
             aiInvalid: "ਬਾਇਓ ਬਣਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਲਾਜ਼ਮੀ ਜਾਣਕਾਰੀ ਭਰੋ।",
-            compactProfile: "ਸੰਖੇਪ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
-            standardProfile: "ਮਿਆਰੀ ਪ੍ਰੋਫ਼ਾਈਲ",
-            detailedProfile: "ਵਿਸਤ੍ਰਿਤ ਪ੍ਰੋਫ਼ਾਈਲ",
             outputTitle: "ਤੁਹਾਡੀ ਪ੍ਰੋਫ਼ਾਈਲ",
             profileModeTitles: {
               anonymous: "ਗੁਮਨਾਮ ਪ੍ਰੋਫ਼ਾਈਲ",
@@ -2984,7 +3238,7 @@
         }
         const siblingCounts = Array.from({ length: 11 }, (_, i) => String(i));
         function updateMarriedSiblingOptions(totalId, marriedId) {
-          const t = trans[$("language").value] || trans.en;
+          const t = trans[getSelectedLanguage()] || trans.en;
           const total = $(totalId).value;
           const maximum = total === "" ? 10 : Number(total);
           setOptions(marriedId, null, siblingCounts.slice(0, maximum + 1));
@@ -3000,7 +3254,16 @@
           );
         }
         function updateLanguage() {
-          const t = trans[$("language").value] || trans.en;
+          const language = getSelectedLanguage();
+          const t = trans[language] || trans.en;
+          // $("themeLegend").textContent = t.themeLegend;
+          document
+            .querySelectorAll('input[name="languageChoice"]')
+            .forEach((input) => {
+              input
+                .closest(".language-option")
+                .classList.toggle("selected", input.checked);
+            });
           $("brandTitle").textContent = t.brandTitle;
           document.title = t.brandTitle;
           [
@@ -3083,7 +3346,7 @@
             t.maritalStatusSelect,
             t.maritalStatusOptions,
           );
-          const selectedLang = trans[$("language").value];
+          const selectedLang = trans[getSelectedLanguage()];
           const girlChildCounts = Array.from({ length: 11 }, (_, i) =>
             i === 0
               ? { value: i, label: selectedLang.noGirl }
@@ -3174,21 +3437,40 @@
           updateMarriedSiblingOptions("brothers", "marriedBrothers");
           updateMarriedSiblingOptions("sisters", "marriedSisters");
           $("profileFormatsTitle").textContent = t.profileFormatsTitle;
-          $("anonymousProfileBtn").textContent = t.anonymousProfile;
-          $("generateBioBtn").textContent = t.generateBio;
-          $("compactProfileBtn").textContent = t.compactProfile;
-          $("standardProfileBtn").textContent = t.standardProfile;
-          $("detailedProfileBtn").textContent = t.detailedProfile;
-          $("requiredNote").textContent = t.required;
+
+          // $("generateBioBtn").textContent = t.generateBio;
+          $("genAnonymousPost").textContent = t.buttons.anonymousPost;
+          $("genShortPost").textContent = t.buttons.shortPost;
+          $("genStandardPost").textContent = t.buttons.standardPost;
+          $("genProfileFormat1").textContent = t.buttons.profileFormat1;
+          $("genProfileFormat2").textContent = t.buttons.profileFormat2;
+          $("resetForm").textContent = t.buttons.resetForm;
+
           $("copyProfileBtn").textContent = t.copyProfile;
           $("printProfileBtn").textContent = t.printProfile;
           $("editProfileBtn").textContent = t.editProfile;
           $("outputTitle").textContent = t.outputTitle;
           $("footerText").textContent = t.footer;
-          document.documentElement.lang = $("language").value;
+          document.documentElement.lang = language;
           toggleChildren();
         }
-        $("language").addEventListener("change", updateLanguage);
+        document
+          .querySelectorAll('input[name="languageChoice"]')
+          .forEach((input) => input.addEventListener("change", updateLanguage));
+        function updateTheme() {
+          const theme =
+            document.querySelector('input[name="themeChoice"]:checked')
+              ?.value || "rose";
+          document.documentElement.dataset.theme = theme;
+          document.querySelector('meta[name="theme-color"]').content =
+            getComputedStyle(document.documentElement)
+              .getPropertyValue("--theme-start")
+              .trim();
+        }
+        document
+          .querySelectorAll('input[name="themeChoice"]')
+          .forEach((input) => input.addEventListener("change", updateTheme));
+        updateTheme();
         $("brothers").addEventListener("change", () =>
           updateMarriedSiblingOptions("brothers", "marriedBrothers"),
         );
@@ -3196,10 +3478,10 @@
           updateMarriedSiblingOptions("sisters", "marriedSisters"),
         );
         $("birthYear").addEventListener("change", () =>
-          updateBirthDays(trans[$("language").value] || trans.en),
+          updateBirthDays(trans[getSelectedLanguage()] || trans.en),
         );
         $("birthMonth").addEventListener("change", () =>
-          updateBirthDays(trans[$("language").value] || trans.en),
+          updateBirthDays(trans[getSelectedLanguage()] || trans.en),
         );
         function toggleChildren() {
           const show = $("maritalStatus").selectedIndex > 1;
@@ -3217,8 +3499,14 @@
         function val(id) {
           return $(id).value.trim();
         }
+        function getSelectedLanguage() {
+          return (
+            document.querySelector('input[name="languageChoice"]:checked')
+              ?.value || "en"
+          );
+        }
         function readLocalizedFormFields() {
-          const t = trans[$("language").value] || trans.en;
+          const t = trans[getSelectedLanguage()] || trans.en;
           const fields = {};
 
           for (const [index, control] of [
@@ -3398,7 +3686,7 @@
           "linkedinProfile",
         ]);
         function readProfileEntries() {
-          const t = trans[$("language").value] || trans.en;
+          const t = trans[getSelectedLanguage()] || trans.en;
           const entries = new Map();
           for (const control of $("profileForm").elements) {
             if (!control.matches("input, select, textarea") || !control.id)
@@ -3435,6 +3723,28 @@
             });
           }
           return entries;
+        }
+        function getProfileValues() {
+          const entries = readProfileEntries();
+          const values = {};
+          entries.forEach((v, k) => {
+            values[k] = v?.value || v;
+          });
+          values.currentLocation = values.currentCity;
+          if (values.currentState) {
+            values.currentLocation += `, ${values.currentState}`;
+          }
+          if (values.currentCountry) {
+            values.currentLocation += `, ${values.currentCountry}`;
+          }
+          values.birthPlace = values.birthCity;
+          if (values.birthState) {
+            values.birthPlace += `, ${values.birthState}`;
+          }
+          if (values.birthCountry) {
+            values.birthPlace += `, ${values.birthCountry}`;
+          }
+          return values;
         }
         function getProfileGroups(mode, entries, t) {
           return profileFieldGroups
@@ -3816,7 +4126,7 @@
           return sentences.join(" ");
         }
         function formatProfile(mode) {
-          const t = trans[$("language").value] || trans.en;
+          const t = trans[getSelectedLanguage()] || trans.en;
           const entries = readProfileEntries();
           const groups = getProfileGroups(mode, entries, t);
           if (mode === "anonymous" || mode === "compact") {
@@ -3844,7 +4154,7 @@
             $("formError").style.display = "block";
             return;
           }
-          const t = trans[$("language").value] || trans.en;
+          const t = trans[getSelectedLanguage()] || trans.en;
           $("profileOutput").textContent = formatProfile(mode);
           $("outputTitle").textContent = t.profileModeTitles[mode];
           $("outputStatus").textContent = "";
@@ -3852,16 +4162,35 @@
           $("outputView").classList.remove("hidden");
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
+        function resetForm() {
+          setTimeout(() => {
+            toggleChildren();
+            $("formError").style.display = "none";
+          }, 0);
+        }
         // $("anonymousProfileBtn").addEventListener("click", () => generateBio());
 
-        $("generateBioBtn").addEventListener("click", generateBio);
+        // $("generateBioBtn").addEventListener("click", generateBio);
+        $("genAnonymousPost").addEventListener("click", function () {
+          generateBio({ format: trans.en.buttons.anonymousPost });
+        });
+        $("genShortPost").addEventListener("click", function () {
+          generateBio({ format: trans.en.buttons.shortPost });
+        });
+        $("genStandardPost").addEventListener("click", function () {
+          generateBio({ format: trans.en.buttons.standardPost });
+        });
+        $("genProfileFormat1").addEventListener("click", function () {});
+        $("genProfileFormat2").addEventListener("click", function () {});
+        $("resetForm").addEventListener("click", resetForm);
+        $("profileForm").addEventListener("reset", resetForm);
         // document.querySelectorAll("[data-profile-format]").forEach((button) => {
         //   button.addEventListener("click", () =>
         //     createProfile(button.dataset.profileFormat),
         //   );
         // });
         $("copyProfileBtn").addEventListener("click", async () => {
-          const t = trans[$("language").value] || trans.en;
+          const t = trans[getSelectedLanguage()] || trans.en;
           let clipboardError;
           try {
             if (navigator.clipboard?.writeText) {
@@ -3912,34 +4241,31 @@
           $("outputStatus").textContent = "";
           window.scrollTo({ top: 0, behavior: "smooth" });
         });
-        $("profileForm").addEventListener("reset", () =>
-          setTimeout(() => {
-            toggleChildren();
-            $("formError").style.display = "none";
-          }, 0),
-        );
         updateLanguage();
 
         // Replace this with your actual deployed Cloudflare Worker URL
         const WORKER_URL = "https://profile-1xq.v8187.workers.dev";
 
-        async function generateBio() {
-          const lang = $("language").value;
-          const name = $("name")?.value || "Someone";
-          const education =
-            trans[lang].educationOptions[
-              (Number($("education")?.value) || 1) - 1
-            ] || "Graduate";
-          const occupation = $("occupation")?.value || "Professional";
-          const location = $("currentLocation")?.value || "India";
+        async function generateBio({
+          format = trans.en.buttons.anonymousPost,
+        }) {
+          const language = getSelectedLanguage();
+          const formData = getProfileValues();
+
+          delete formData.currentCity;
+          delete formData.currentState;
+          delete formData.currentCountry;
+          delete formData.birthCity;
+          delete formData.birthState;
+          delete formData.birthCountry;
 
           const prompt = `Write a brief, polite, and formal matrimonial biodata description (About Me section) in third-person for a candidate with these details:
-      Name: ${name}
-      Education: ${education}
-      Occupation: ${occupation}
-      Current Location: ${location}
+            Name: ${name}
+            Education: ${education}
+            Occupation: ${occupation}
+            Current Location: ${location}
 
-      Keep it under 4 paragraphs. Make it sound appealing for a marriage profile.`;
+            Keep it under 4 paragraphs. Make it sound appealing for a marriage profile.`;
           const mockPayload = {
             language: "English",
             format: "paragraph",
@@ -3968,57 +4294,56 @@
                 // "Access-Control-Allow-Headers": "Content-Type",
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify(mockPayload),
+              body: JSON.stringify({ profile: formData, language, format }),
             });
 
             const result = await response?.json();
 
-            const content =
-              result?.aiResponse?.choices?.[0].message;
-              console.log("content = ", content)
+            const content = result?.aiResponse?.choices?.[0].message;
+            console.log("content = ", content);
 
             /**
- * {
-  "id": "chatcmpl-b85d347dab1dc639",
-  "object": "chat.completion",
-  "created": 1792607502,
-  "model": "@cf/zai-org/glm-4.7-flash",
-  "choices": [
-    {
-      "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": null,
-        "refusal": null,
-        "annotations": null,
-        "audio": null,
-        "function_call": null,
-        "tool_calls": [],
-        "reasoning": "1.  **Analyze the Request:**\n    *   **Task:** Write a matrimonial profile.\n    *   **Language:** English.\n    *   **Format:** Paragraph.\n    *   **Constraints:** Use ONLY supplied facts. Never invent details. Return ONLY the profile text.\n\n2.  **Analyze the Profile Data:**\n    *   Name: Vikram\n    *   Gender: Male\n    *   Birth Year: 1982 (Age 42/43 based on current year, but the prompt gives a conflicting \"age\" field of 44. I should prioritize the specific \"age\" field provided as it's an attribute in the JSON, or use the birth year to calculate if the \"age\" seems off. Let's check: 2024 - 1982 = 42. However, the JSON explicitly says \"age\": 44. Usually, specific fields override. I will stick to the \"age\" field provided to avoid confusion, or phrasing it to fit \"Vikram born in 1982\" which implies he is in his 40s.\n    *   Marital Status: Divorced\n    *   Education: BCA\n    *   Occupation: IT Professional\n    *   Current City: Amritsar\n    *   Current State: Punjab\n    *   Diet: Vegetarian\n    *   Family Details: Respectable family\n\n3.  **Drafting - Attempt 1 (Focusing on listing facts):**\n    Vikram is a 44-year-old male born in 1982. He is an IT Professional with a BCA degree. He lives in Amritsar, Punjab. His diet is Vegetarian. He comes from a respectable family. His marital status is Divorced.\n\n4.  **Refining - Attempt 2 (Improving flow and tone to sound like a matrimonial profile):**\n    I am Vikram, an IT Professional with a BCA degree, living in Amritsar, Punjab. I am 44 years old and belong to a respectable family. As a vegetarian, I value healthy living. My current marital status is Divorced.\n\n5.  **Refining - Attempt 3 (Polishing for a \"ready to copy\" feel):**\n    *   Start with an introduction.\n    *   Weave in the location.\n    *   Mention the profession and education.\n    *   Mention the family and diet.\n    *   Mention the marital status.\n\n    *Draft:*\n    I am Vikram, a 44-year-old IT Professional based in Amritsar, Punjab. I hold a BCA degree and belong to a respectable family. With a passion for health, I follow a strict Vegetarian diet. I am currently seeking a connection and bring a mature perspective from my previously married life.\n\n6.  **Final check against constraints:**\n    *   Use only facts? Yes (Name, 44/1982, IT Pro, BCA, Amritsar/Punjab, Vegetarian, Respectable family, Divorced).\n    *   Paragraph format? Yes.\n    *   No invented details? Yes.\n\n    *Self-Correction on Age vs Birth Year:* The JSON says \"age\": 44. I will use \"44\". If the user meant gestation, 1982+44 = 2026. That's impossible. So the age is slightly",
-        "reasoning_content": "1.  **Analyze the Request:**\n    *   **Task:** Write a matrimonial profile.\n    *   **Language:** English.\n    *   **Format:** Paragraph.\n    *   **Constraints:** Use ONLY supplied facts. Never invent details. Return ONLY the profile text.\n\n2.  **Analyze the Profile Data:**\n    *   Name: Vikram\n    *   Gender: Male\n    *   Birth Year: 1982 (Age 42/43 based on current year, but the prompt gives a conflicting \"age\" field of 44. I should prioritize the specific \"age\" field provided as it's an attribute in the JSON, or use the birth year to calculate if the \"age\" seems off. Let's check: 2024 - 1982 = 42. However, the JSON explicitly says \"age\": 44. Usually, specific fields override. I will stick to the \"age\" field provided to avoid confusion, or phrasing it to fit \"Vikram born in 1982\" which implies he is in his 40s.\n    *   Marital Status: Divorced\n    *   Education: BCA\n    *   Occupation: IT Professional\n    *   Current City: Amritsar\n    *   Current State: Punjab\n    *   Diet: Vegetarian\n    *   Family Details: Respectable family\n\n3.  **Drafting - Attempt 1 (Focusing on listing facts):**\n    Vikram is a 44-year-old male born in 1982. He is an IT Professional with a BCA degree. He lives in Amritsar, Punjab. His diet is Vegetarian. He comes from a respectable family. His marital status is Divorced.\n\n4.  **Refining - Attempt 2 (Improving flow and tone to sound like a matrimonial profile):**\n    I am Vikram, an IT Professional with a BCA degree, living in Amritsar, Punjab. I am 44 years old and belong to a respectable family. As a vegetarian, I value healthy living. My current marital status is Divorced.\n\n5.  **Refining - Attempt 3 (Polishing for a \"ready to copy\" feel):**\n    *   Start with an introduction.\n    *   Weave in the location.\n    *   Mention the profession and education.\n    *   Mention the family and diet.\n    *   Mention the marital status.\n\n    *Draft:*\n    I am Vikram, a 44-year-old IT Professional based in Amritsar, Punjab. I hold a BCA degree and belong to a respectable family. With a passion for health, I follow a strict Vegetarian diet. I am currently seeking a connection and bring a mature perspective from my previously married life.\n\n6.  **Final check against constraints:**\n    *   Use only facts? Yes (Name, 44/1982, IT Pro, BCA, Amritsar/Punjab, Vegetarian, Respectable family, Divorced).\n    *   Paragraph format? Yes.\n    *   No invented details? Yes.\n\n    *Self-Correction on Age vs Birth Year:* The JSON says \"age\": 44. I will use \"44\". If the user meant gestation, 1982+44 = 2026. That's impossible. So the age is slightly"
-      },
-      "logprobs": null,
-      "finish_reason": "length",
-      "stop_reason": null,
-      "token_ids": null
-    }
-  ],
-  "service_tier": null,
-  "system_fingerprint": null,
-  "usage": {
-    "prompt_tokens": 113,
-    "completion_tokens": 700,
-    "total_tokens": 813,
-    "prompt_tokens_details": {
-      "cached_tokens": 0
-    },
-    "neurons": 26.1015
-  },
-  "prompt_logprobs": null,
-  "prompt_token_ids": null,
-  "kv_transfer_params": null
-}
- * */
+       * {
+        "id": "chatcmpl-b85d347dab1dc639",
+        "object": "chat.completion",
+        "created": 1792607502,
+        "model": "@cf/zai-org/glm-4.7-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": null,
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "tool_calls": [],
+              "reasoning": "1.  **Analyze the Request:**\n    *   **Task:** Write a matrimonial profile.\n    *   **Language:** English.\n    *   **Format:** Paragraph.\n    *   **Constraints:** Use ONLY supplied facts. Never invent details. Return ONLY the profile text.\n\n2.  **Analyze the Profile Data:**\n    *   Name: Vikram\n    *   Gender: Male\n    *   Birth Year: 1982 (Age 42/43 based on current year, but the prompt gives a conflicting \"age\" field of 44. I should prioritize the specific \"age\" field provided as it's an attribute in the JSON, or use the birth year to calculate if the \"age\" seems off. Let's check: 2024 - 1982 = 42. However, the JSON explicitly says \"age\": 44. Usually, specific fields override. I will stick to the \"age\" field provided to avoid confusion, or phrasing it to fit \"Vikram born in 1982\" which implies he is in his 40s.\n    *   Marital Status: Divorced\n    *   Education: BCA\n    *   Occupation: IT Professional\n    *   Current City: Amritsar\n    *   Current State: Punjab\n    *   Diet: Vegetarian\n    *   Family Details: Respectable family\n\n3.  **Drafting - Attempt 1 (Focusing on listing facts):**\n    Vikram is a 44-year-old male born in 1982. He is an IT Professional with a BCA degree. He lives in Amritsar, Punjab. His diet is Vegetarian. He comes from a respectable family. His marital status is Divorced.\n\n4.  **Refining - Attempt 2 (Improving flow and tone to sound like a matrimonial profile):**\n    I am Vikram, an IT Professional with a BCA degree, living in Amritsar, Punjab. I am 44 years old and belong to a respectable family. As a vegetarian, I value healthy living. My current marital status is Divorced.\n\n5.  **Refining - Attempt 3 (Polishing for a \"ready to copy\" feel):**\n    *   Start with an introduction.\n    *   Weave in the location.\n    *   Mention the profession and education.\n    *   Mention the family and diet.\n    *   Mention the marital status.\n\n    *Draft:*\n    I am Vikram, a 44-year-old IT Professional based in Amritsar, Punjab. I hold a BCA degree and belong to a respectable family. With a passion for health, I follow a strict Vegetarian diet. I am currently seeking a connection and bring a mature perspective from my previously married life.\n\n6.  **Final check against constraints:**\n    *   Use only facts? Yes (Name, 44/1982, IT Pro, BCA, Amritsar/Punjab, Vegetarian, Respectable family, Divorced).\n    *   Paragraph format? Yes.\n    *   No invented details? Yes.\n\n    *Self-Correction on Age vs Birth Year:* The JSON says \"age\": 44. I will use \"44\". If the user meant gestation, 1982+44 = 2026. That's impossible. So the age is slightly",
+              "reasoning_content": "1.  **Analyze the Request:**\n    *   **Task:** Write a matrimonial profile.\n    *   **Language:** English.\n    *   **Format:** Paragraph.\n    *   **Constraints:** Use ONLY supplied facts. Never invent details. Return ONLY the profile text.\n\n2.  **Analyze the Profile Data:**\n    *   Name: Vikram\n    *   Gender: Male\n    *   Birth Year: 1982 (Age 42/43 based on current year, but the prompt gives a conflicting \"age\" field of 44. I should prioritize the specific \"age\" field provided as it's an attribute in the JSON, or use the birth year to calculate if the \"age\" seems off. Let's check: 2024 - 1982 = 42. However, the JSON explicitly says \"age\": 44. Usually, specific fields override. I will stick to the \"age\" field provided to avoid confusion, or phrasing it to fit \"Vikram born in 1982\" which implies he is in his 40s.\n    *   Marital Status: Divorced\n    *   Education: BCA\n    *   Occupation: IT Professional\n    *   Current City: Amritsar\n    *   Current State: Punjab\n    *   Diet: Vegetarian\n    *   Family Details: Respectable family\n\n3.  **Drafting - Attempt 1 (Focusing on listing facts):**\n    Vikram is a 44-year-old male born in 1982. He is an IT Professional with a BCA degree. He lives in Amritsar, Punjab. His diet is Vegetarian. He comes from a respectable family. His marital status is Divorced.\n\n4.  **Refining - Attempt 2 (Improving flow and tone to sound like a matrimonial profile):**\n    I am Vikram, an IT Professional with a BCA degree, living in Amritsar, Punjab. I am 44 years old and belong to a respectable family. As a vegetarian, I value healthy living. My current marital status is Divorced.\n\n5.  **Refining - Attempt 3 (Polishing for a \"ready to copy\" feel):**\n    *   Start with an introduction.\n    *   Weave in the location.\n    *   Mention the profession and education.\n    *   Mention the family and diet.\n    *   Mention the marital status.\n\n    *Draft:*\n    I am Vikram, a 44-year-old IT Professional based in Amritsar, Punjab. I hold a BCA degree and belong to a respectable family. With a passion for health, I follow a strict Vegetarian diet. I am currently seeking a connection and bring a mature perspective from my previously married life.\n\n6.  **Final check against constraints:**\n    *   Use only facts? Yes (Name, 44/1982, IT Pro, BCA, Amritsar/Punjab, Vegetarian, Respectable family, Divorced).\n    *   Paragraph format? Yes.\n    *   No invented details? Yes.\n\n    *Self-Correction on Age vs Birth Year:* The JSON says \"age\": 44. I will use \"44\". If the user meant gestation, 1982+44 = 2026. That's impossible. So the age is slightly"
+            },
+            "logprobs": null,
+            "finish_reason": "length",
+            "stop_reason": null,
+            "token_ids": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": null,
+        "usage": {
+          "prompt_tokens": 113,
+          "completion_tokens": 700,
+          "total_tokens": 813,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "neurons": 26.1015
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "kv_transfer_params": null
+      }
+       * */
             // Handle array or object variations depending on the model's output schema
             // let outputText = "";
             // if (Array.isArray(result) && result[0]?.generated_text) {
@@ -4044,6 +4369,10 @@
             el.value = mockValues[el.name || el.id];
             el.dispatchEvent(new Event("change", { bubbles: true }));
           });
+          // setTimeout(() => {
+          //   console.log(getProfileValues());
+          //   window.getProfileValues = getProfileValues;
+          // }, 1000);
         })();
       })();
     </script>
