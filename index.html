@@ -298,6 +298,9 @@
       #profileForm .field > label {
         color: var(--brand);
       }
+      #profileForm.hide-fields > section:not(#outputView) {
+        display: none;
+      }
       .step {
         flex: 0 0 34px;
         height: 34px;
@@ -333,11 +336,21 @@
       .grid.four {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
+      .form-controls {
+        width: fit-content;
+        margin: 0 auto;
+      }
       .grid.top {
         margin-bottom: 16px;
       }
       .grid.bottom {
         margin-top: 16px;
+      }
+      .form-controls .field,
+      .form-controls [id^="copyProfile"],
+      .form-controls [id^="saveProfile"],
+      .form-controls [id^="updateProfile"] {
+        display: none;
       }
       .grid > .fields-group-wrapper {
         grid-column: 1 / -1;
@@ -619,7 +632,9 @@
         margin: 7px 0 0;
       }
       .profile-output-item-emoji {
-        margin-right: 5px;
+        width: 36px;
+        display: inline-block;
+        text-align: center;
       }
       .profile-output-print .profile-output-item {
         display: grid;
@@ -639,6 +654,101 @@
       .profile-output-print .profile-output-item-value {
         font-weight: 550;
         overflow-wrap: anywhere;
+      }
+      #profileOutput.profile-output-bio {
+        display: grid;
+        gap: 18px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        white-space: normal;
+      }
+      .profile-output-bio-hero {
+        padding: 30px;
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at 90% 0%, #ffffff35, transparent 35%),
+          linear-gradient(125deg, var(--theme-start), var(--theme-end));
+        color: #fff;
+      }
+      .profile-output-bio-hero h3 {
+        margin: 0;
+        font-size: clamp(1.7rem, 5vw, 2.6rem);
+        line-height: 1.1;
+        overflow-wrap: anywhere;
+      }
+      .profile-output-bio-kicker {
+        margin: 0 0 8px;
+        color: var(--brand2);
+        font-size: 0.78rem;
+        font-weight: 750;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .profile-output-bio-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 18px;
+      }
+      .profile-output-bio-badge {
+        padding: 5px 10px;
+        border: 1px solid #ffffff70;
+        border-radius: 999px;
+        background: #ffffff18;
+        font-size: 0.88rem;
+      }
+      .profile-output-bio-section {
+        min-width: 0;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--paper);
+        overflow-wrap: anywhere;
+      }
+      .profile-output-bio-section h4 {
+        margin: 0 0 14px;
+        color: var(--brand);
+        font-size: 1rem;
+      }
+      .profile-output-bio-fields {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px 20px;
+        margin: 0;
+      }
+      .profile-output-bio-field {
+        min-width: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--line);
+      }
+      .profile-output-bio-field dt {
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .profile-output-bio-field dd {
+        margin: 3px 0 0;
+        font-weight: 600;
+      }
+      .profile-output-bio-narrative {
+        margin: 0;
+        line-height: 1.7;
+        white-space: pre-wrap;
+      }
+      @media (max-width: 650px) {
+        .profile-output-bio-hero {
+          padding: 22px;
+        }
+        .profile-output-bio-section {
+          padding: 16px;
+        }
+        .profile-output-bio-fields {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
       }
       @media (max-width: 650px) {
         #profileOutput.profile-output-grid {
@@ -697,7 +807,9 @@
           font-size: 11pt;
         }
         header,
-        #formView,
+        /* #formView, */
+        #profileForm > .form-controls,
+        #profileForm > section,
         footer,
         .notice,
         .screen-only {
@@ -733,6 +845,27 @@
         .profile-output-print .profile-output-item {
           grid-template-columns: minmax(150px, 0.8fr) minmax(0, 1.2fr);
           gap: 12px;
+        }
+        #profileOutput.profile-output-bio {
+          display: grid;
+          gap: 12px;
+        }
+        .profile-output-bio-hero,
+        .profile-output-bio-section {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        .profile-output-bio-hero {
+          background: #fff;
+          color: #172521;
+          border: 2px solid var(--brand);
+        }
+        .profile-output-bio-kicker {
+          color: var(--muted);
+        }
+        .profile-output-bio-badge {
+          border-color: var(--line);
+          background: #fff;
         }
         .output-actions,
         #outputStatus {
@@ -776,13 +909,6 @@
           </div>
         </div>
         <fieldset class="language-switcher">
-          <!-- <label for="language" id="labLanguage"
-              >Language / भाषा / ਭਾਸ਼ਾ <span class="req">*</span></label
-            ><select id="language" name="language">
-              <option value="en">English</option>
-              <option value="hi">हिन्दी (Hindi)</option>
-              <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
-            </select> -->
           <div class="language-options">
             <label class="language-option selected">
               <input type="radio" name="languageChoice" value="en" checked />
@@ -848,612 +974,556 @@
             </label>
           </div>
         </fieldset>
-        <!-- <div class="pillrow">
-          <span class="pill" id="pill1">Free to use</span
-          ><span class="pill" id="pill2">No account required</span
-          ><span class="pill" id="pill3">Print or save as PDF</span>
-        </div> -->
       </div>
     </header>
     <main>
-      <!-- <div class="notice screen-only">
-        <div aria-hidden="true">🔒</div>
-        <div>
-          <strong id="privacyTitle">Private by design</strong
-          ><span id="privacyText"
-            >This standalone page has no backend and does not store your
-            information. Use “Create printable profile” to prepare a print-ready
-            copy, then choose “Save as PDF” in your browser’s print
-            dialog.</span
-          >
-        </div>
-      </div> -->
-      <div id="formView">
-        <form id="profileForm">
-          <div class="grid three top">
-            <div class="field">
-              <select id="profileFormatTop" name="profileFormatTop"></select>
-            </div>
-            <button
-              class="primary"
-              type="button"
-              id="generateProfileTop"
-            ></button>
-            <button class="secondary" type="reset" id="resetFormTop"></button>
+      <form id="profileForm">
+        <div class="grid top form-controls">
+          <div class="field">
+            <select id="profileFormatTop" name="profileFormatTop"></select>
           </div>
-          <section class="card">
-            <div class="section-head">
-              <div class="section-emoji">💖</div>
-              <h2 id="secBasicDetails">Basic Details</h2>
+          <button
+            class="primary"
+            type="button"
+            id="generateProfileTop"
+          ></button>
+          <button class="secondary" type="reset" id="resetFormTop"></button>
+          <!-- <button class="primary" type="button" id="copyProfileTop"></button> -->
+          <button class="primary" type="button" id="saveProfileTop"></button>
+          <button
+            class="secondary"
+            type="button"
+            id="updateProfileTop"
+          ></button>
+        </div>
+        <section class="card">
+          <div class="section-head">
+            <div class="section-emoji">💖</div>
+            <h2 id="secBasicDetails">Basic Details</h2>
+          </div>
+          <div class="grid">
+            <div class="field">
+              <label for="profileFor" data-label="profileFor"
+                >Profile created for</label
+              ><select id="profileFor" name="profileFor"></select>
             </div>
-            <div class="grid">
-              <div class="field">
-                <label for="profileFor" data-label="profileFor"
-                  >Profile created for</label
-                ><select id="profileFor" name="profileFor"></select>
-              </div>
-              <div class="field">
-                <label for="name" data-label="name">Name</label
-                ><input
-                  id="name"
-                  name="name"
-                  autocomplete="name"
-                  data-placeholder="name"
-                  placeholder="Enter Name"
-                />
-              </div>
-              <div class="grid three" style="grid-column: 1 / -1">
-                <div class="field">
-                  <label for="gender" data-label="gender"
-                    >Gender <span class="req">*</span></label
-                  ><select id="gender" name="gender" required></select>
-                </div>
-                <div class="field">
-                  <label for="category" data-label="category"
-                    >category <span class="req">*</span></label
-                  ><select id="category" name="category" required></select>
-                </div>
-                <div class="field">
-                  <label for="religion" data-label="religion">Religion</label
-                  ><select id="religion" name="religion"></select>
-                </div>
-              </div>
-              <fieldset class="fields-group-wrapper">
-                <legend
-                  class="fields-group-wrapper-title"
-                  data-label="maritalAndChildren"
-                >
-                  Marital status and children <span class="req">*</span>
-                </legend>
-                <div class="fields-group marital" id="maritalFields">
-                  <div class="field">
-                    <!-- <label for="maritalStatus" data-label="maritalStatus"
-                        >Marital status <span class="req">*</span></label
-                      > -->
-                    <select
-                      id="maritalStatus"
-                      name="maritalStatus"
-                      required
-                    ></select>
-                  </div>
-                  <div class="field" id="girlsWrap">
-                    <!-- <label for="childrenGirls" data-label="childrenGirls"
-                        >Children - Girls<span class="req">*</span></label
-                      > -->
-                    <select
-                      id="childrenGirls"
-                      name="childrenGirls"
-                      required
-                    ></select>
-                  </div>
-                  <div class="field" id="boysWrap">
-                    <!-- <label for="childrenBoys" data-label="childrenBoys"
-                        >Children - Boys<span class="req">*</span></label
-                      > -->
-                    <select
-                      id="childrenBoys"
-                      name="childrenBoys"
-                      required
-                    ></select>
-                  </div>
-                </div>
-              </fieldset>
-
-              <fieldset class="fields-group-wrapper">
-                <legend
-                  class="fields-group-wrapper-title"
-                  data-label="secLocation"
-                >
-                  Current location <span class="req">*</span>
-                </legend>
-                <div class="fields-group location">
-                  <div class="field">
-                    <input
-                      id="currentCity"
-                      name="currentCity"
-                      data-placeholder="currentCity"
-                      placeholder="City"
-                      required
-                    />
-                  </div>
-                  <div class="field">
-                    <input
-                      id="currentState"
-                      name="currentState"
-                      data-placeholder="currentState"
-                      placeholder="State"
-                      required
-                    />
-                  </div>
-                  <div class="field">
-                    <input
-                      id="currentCountry"
-                      name="currentCountry"
-                      data-placeholder="currentCountry"
-                      placeholder="Country"
-                      required
-                    />
-                  </div>
-                </div>
-              </fieldset>
+            <div class="field">
+              <label for="name" data-label="name">Name</label
+              ><input
+                id="name"
+                name="name"
+                autocomplete="name"
+                data-placeholder="name"
+                placeholder="Enter Name"
+              />
             </div>
-          </section>
-
-          <section class="card">
-            <div class="section-head">
-              <div class="section-emoji">💝</div>
-              <h2 id="secPerInfo">Current location</h2>
-            </div>
-            <div class="grid">
-              <div class="multiple-groups-row">
-                <fieldset class="fields-group-wrapper">
-                  <legend
-                    class="fields-group-wrapper-title"
-                    data-label="dateOfBirth"
-                  >
-                    Date of birth <span class="req">*</span>
-                  </legend>
-                  <div class="fields-group date">
-                    <div class="field">
-                      <select id="birthYear" name="birthYear" required></select>
-                    </div>
-                    <div class="field">
-                      <select id="birthMonth" name="birthMonth"></select>
-                    </div>
-                    <div class="field">
-                      <select id="birthDate" name="birthDate"></select>
-                    </div>
-                  </div>
-                </fieldset>
-                <fieldset class="fields-group-wrapper">
-                  <legend
-                    class="fields-group-wrapper-title"
-                    data-label="timeOfBirth"
-                  >
-                    Time of birth
-                  </legend>
-                  <div class="fields-group time">
-                    <div class="field">
-                      <select id="birthHour" name="birthHour"></select>
-                    </div>
-                    <div class="field">
-                      <select id="birthMinute" name="birthMinute"></select>
-                    </div>
-                    <div class="field">
-                      <select id="birthSecond" name="birthSecond"></select>
-                    </div>
-                    <div class="field">
-                      <select id="birthAmPm" name="birthAmPm"></select>
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-              <fieldset class="fields-group-wrapper">
-                <legend
-                  class="fields-group-wrapper-title"
-                  data-label="placeOfBirth"
-                >
-                  Place of birth
-                </legend>
-                <div class="fields-group location">
-                  <div class="field">
-                    <input
-                      id="birthCity"
-                      name="birthCity"
-                      data-placeholder="birthCity"
-                      placeholder="City"
-                    />
-                  </div>
-                  <div class="field">
-                    <input
-                      id="birthState"
-                      name="birthState"
-                      data-placeholder="birthState"
-                      placeholder="State"
-                    />
-                  </div>
-                  <div class="field">
-                    <input
-                      id="birthCountry"
-                      name="birthCountry"
-                      data-placeholder="birthCountry"
-                      placeholder="Country"
-                      value="India"
-                    />
-                  </div>
-                </div>
-              </fieldset>
-              <fieldset class="fields-group-wrapper">
-                <legend
-                  class="fields-group-wrapper-title"
-                  data-label="manglikZodiacSigns"
-                >
-                  Manglik Status & Zodiac Signs
-                </legend>
-                <div class="fields-group manglikZodiacSigns">
-                  <div class="field">
-                    <select id="manglik" name="manglik" required></select>
-                  </div>
-                  <div class="field">
-                    <select id="sunSign" name="sunSign"></select>
-                  </div>
-                  <div class="field">
-                    <select id="moonSign" name="moonSign"></select>
-                  </div>
-                </div>
-              </fieldset>
+            <div class="grid three" style="grid-column: 1 / -1">
               <div class="field">
-                <label for="height" data-label="height">Height</label
-                ><select id="height" name="height"></select>
+                <label for="gender" data-label="gender"
+                  >Gender <span class="req">*</span></label
+                ><select id="gender" name="gender" required></select>
               </div>
               <div class="field">
-                <label for="weight" data-label="weight">Weight</label
-                ><select id="weight" name="weight"></select>
+                <label for="category" data-label="category"
+                  >category <span class="req">*</span></label
+                ><select id="category" name="category" required></select>
               </div>
               <div class="field">
-                <label for="skinTone" data-label="skinTone">skinTone</label
-                ><select id="skinTone" name="skinTone"></select>
-              </div>
-              <div class="field">
-                <label for="bloodGroup" data-label="bloodGroup"
-                  >bloodGroup</label
-                ><select id="bloodGroup" name="bloodGroup"></select>
-              </div>
-
-              <div class="field">
-                <label for="diet" data-label="diet">Dietary habits</label
-                ><select id="diet" name="diet"></select>
-              </div>
-              <div class="field">
-                <label for="smoking" data-label="smoking"
-                  >smokingary habits</label
-                ><select id="smoking" name="smoking"></select>
-              </div>
-              <div class="field">
-                <label for="drinking" data-label="drinking"
-                  >drinkingary habits</label
-                ><select id="drinking" name="drinking"></select>
-              </div>
-              <div class="field">
-                <label for="motherTongue" data-label="motherTongue"
-                  >motherTongue</label
-                ><select id="motherTongue" name="motherTongue"></select>
-              </div>
-              <div class="grid three" style="grid-column: 1 / -1">
-                <div class="field">
-                  <label for="education" data-label="education">education</label
-                  ><select id="education" name="education"></select>
-                </div>
-                <div class="field">
-                  <label for="occupation" data-label="occupation"
-                    >occupation</label
-                  ><select id="occupation" name="occupation"></select>
-                </div>
-                <div class="field">
-                  <label for="annualIncome" data-label="annualIncome"
-                    >annualIncome</label
-                  ><select id="annualIncome" name="annualIncome"></select>
-                </div>
-              </div>
-              <div class="field full">
-                <label for="aboutProfile" data-label="aboutProfile"
-                  >More About Profile</label
-                ><textarea
-                  id="aboutProfile"
-                  name="aboutProfile"
-                  data-placeholder="aboutProfile"
-                  placeholder="A short introduction, interests and values"
-                ></textarea>
-                <!-- <button class="secondary" type="button" id="generateBioBtn">
-                  Generate AI bio
-                </button> -->
-                <p id="aiStatus" role="status" aria-live="polite"></p>
-              </div>
-            </div>
-          </section>
-          <section class="card">
-            <div class="section-head">
-              <div class="section-emoji">👨‍👩‍👧‍👦</div>
-              <h2 id="secFamily">Family Details</h2>
-            </div>
-            <div class="grid">
-              <div class="field">
-                <label for="familyType" data-label="familyType"
-                  >Family type</label
-                ><select id="familyType" name="familyType"></select>
-              </div>
-              <div class="field">
-                <label for="familyStatus" data-label="familyStatus"
-                  >Family Status</label
-                ><select id="familyStatus" name="familyStatus"></select>
-              </div>
-              <fieldset class="fields-group-wrapper">
-                <legend
-                  class="fields-group-wrapper-title"
-                  data-label="casteGotra"
-                >
-                  Place of birth
-                </legend>
-                <div class="fields-group location">
-                  <div class="field">
-                    <input
-                      id="caste"
-                      name="caste"
-                      data-placeholder="caste"
-                      placeholder="Caste"
-                    />
-                  </div>
-                  <div class="field">
-                    <input
-                      id="subCaste"
-                      name="subCaste"
-                      data-placeholder="subCaste"
-                      placeholder="Sub Caste"
-                    />
-                  </div>
-                  <div class="field">
-                    <input
-                      id="gotra"
-                      name="gotra"
-                      data-placeholder="gotra"
-                      placeholder="Gotra"
-                    />
-                  </div>
-                </div>
-              </fieldset>
-              <div class="field">
-                <label for="mother" data-label="mother">Mother</label
-                ><select id="mother" name="mother"></select>
-              </div>
-              <div class="field">
-                <label for="father" data-label="father">Father</label
-                ><select id="father" name="father"></select>
+                <label for="religion" data-label="religion">Religion</label
+                ><select id="religion" name="religion"></select>
               </div>
             </div>
             <fieldset class="fields-group-wrapper">
-              <!-- <legend class="fields-group-wrapper-title" data-label="siblings">
-                Siblings
-              </legend> -->
-              <div class="grid four">
+              <legend
+                class="fields-group-wrapper-title"
+                data-label="maritalAndChildren"
+              >
+                Marital status and children <span class="req">*</span>
+              </legend>
+              <div class="fields-group marital" id="maritalFields">
                 <div class="field">
-                  <label for="brothers" data-label="brothers"
-                    >No. of Brothers</label
-                  ><select id="brothers" name="brothers"></select>
+                  <!-- <label for="maritalStatus" data-label="maritalStatus"
+                        >Marital status <span class="req">*</span></label
+                      > -->
+                  <select
+                    id="maritalStatus"
+                    name="maritalStatus"
+                    required
+                  ></select>
                 </div>
-                <div class="field">
-                  <label for="marriedBrothers" data-label="marriedBrothers"
-                    >Married Brothers</label
-                  ><select id="marriedBrothers" name="marriedBrothers"></select>
+                <div class="field" id="girlsWrap">
+                  <!-- <label for="childrenGirls" data-label="childrenGirls"
+                        >Children - Girls<span class="req">*</span></label
+                      > -->
+                  <select
+                    id="childrenGirls"
+                    name="childrenGirls"
+                    required
+                  ></select>
                 </div>
-                <div class="field">
-                  <label for="sisters" data-label="sisters"
-                    >No. of Sisters</label
-                  ><select id="sisters" name="sisters"></select>
-                </div>
-                <div class="field">
-                  <label for="marriedSisters" data-label="marriedSisters"
-                    >Married Sisters</label
-                  ><select id="marriedSisters" name="marriedSisters"></select>
+                <div class="field" id="boysWrap">
+                  <!-- <label for="childrenBoys" data-label="childrenBoys"
+                        >Children - Boys<span class="req">*</span></label
+                      > -->
+                  <select
+                    id="childrenBoys"
+                    name="childrenBoys"
+                    required
+                  ></select>
                 </div>
               </div>
             </fieldset>
-            <div class="field full" style="margin-top: 20px">
-              <label for="aboutFamily" data-label="aboutFamily"
-                >More About Family</label
-              ><textarea
-                id="aboutFamily"
-                name="aboutFamily"
-                data-placeholder="aboutFamily"
-                placeholder="A short introduction, interests and values"
-              ></textarea>
+
+            <fieldset class="fields-group-wrapper">
+              <legend
+                class="fields-group-wrapper-title"
+                data-label="secLocation"
+              >
+                Current location <span class="req">*</span>
+              </legend>
+              <div class="fields-group location">
+                <div class="field">
+                  <input
+                    id="currentCity"
+                    name="currentCity"
+                    data-placeholder="currentCity"
+                    placeholder="City"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <input
+                    id="currentState"
+                    name="currentState"
+                    data-placeholder="currentState"
+                    placeholder="State"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <input
+                    id="currentCountry"
+                    name="currentCountry"
+                    data-placeholder="currentCountry"
+                    placeholder="Country"
+                    required
+                  />
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <div class="section-emoji">💝</div>
+            <h2 id="secPerInfo">Current location</h2>
+          </div>
+          <div class="grid">
+            <div class="multiple-groups-row">
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
+                  data-label="dateOfBirth"
+                >
+                  Date of birth <span class="req">*</span>
+                </legend>
+                <div class="fields-group date">
+                  <div class="field">
+                    <select id="birthYear" name="birthYear" required></select>
+                  </div>
+                  <div class="field">
+                    <select id="birthMonth" name="birthMonth"></select>
+                  </div>
+                  <div class="field">
+                    <select id="birthDate" name="birthDate"></select>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="fields-group-wrapper">
+                <legend
+                  class="fields-group-wrapper-title"
+                  data-label="timeOfBirth"
+                >
+                  Time of birth
+                </legend>
+                <div class="fields-group time">
+                  <div class="field">
+                    <select id="birthHour" name="birthHour"></select>
+                  </div>
+                  <div class="field">
+                    <select id="birthMinute" name="birthMinute"></select>
+                  </div>
+                  <div class="field">
+                    <select id="birthSecond" name="birthSecond"></select>
+                  </div>
+                  <div class="field">
+                    <select id="birthAmPm" name="birthAmPm"></select>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <fieldset class="fields-group-wrapper">
+              <legend
+                class="fields-group-wrapper-title"
+                data-label="placeOfBirth"
+              >
+                Place of birth
+              </legend>
+              <div class="fields-group location">
+                <div class="field">
+                  <input
+                    id="birthCity"
+                    name="birthCity"
+                    data-placeholder="birthCity"
+                    placeholder="City"
+                  />
+                </div>
+                <div class="field">
+                  <input
+                    id="birthState"
+                    name="birthState"
+                    data-placeholder="birthState"
+                    placeholder="State"
+                  />
+                </div>
+                <div class="field">
+                  <input
+                    id="birthCountry"
+                    name="birthCountry"
+                    data-placeholder="birthCountry"
+                    placeholder="Country"
+                    value="India"
+                  />
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="fields-group-wrapper">
+              <legend
+                class="fields-group-wrapper-title"
+                data-label="manglikZodiacSigns"
+              >
+                Manglik Status & Zodiac Signs
+              </legend>
+              <div class="fields-group manglikZodiacSigns">
+                <div class="field">
+                  <select id="manglik" name="manglik" required></select>
+                </div>
+                <div class="field">
+                  <select id="sunSign" name="sunSign"></select>
+                </div>
+                <div class="field">
+                  <select id="moonSign" name="moonSign"></select>
+                </div>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="height" data-label="height">Height</label
+              ><select id="height" name="height"></select>
+            </div>
+            <div class="field">
+              <label for="weight" data-label="weight">Weight</label
+              ><select id="weight" name="weight"></select>
+            </div>
+            <div class="field">
+              <label for="skinTone" data-label="skinTone">skinTone</label
+              ><select id="skinTone" name="skinTone"></select>
+            </div>
+            <div class="field">
+              <label for="bloodGroup" data-label="bloodGroup">bloodGroup</label
+              ><select id="bloodGroup" name="bloodGroup"></select>
             </div>
 
-            <p class="error" id="formError" role="alert">
-              Please complete all required fields and check the values.
-            </p>
-          </section>
-          <section class="card">
-            <div class="section-head">
-              <div class="section-emoji">💍</div>
-              <h2 id="secPartnerPreferences">
-                Partner Preferences <span class="req">*</span>
-              </h2>
+            <div class="field">
+              <label for="diet" data-label="diet">Dietary habits</label
+              ><select id="diet" name="diet"></select>
             </div>
-            <div class="grid">
-              <div class="field full">
-                <!-- <label for="partnerPreferences" data-label="partnerPreferences"
+            <div class="field">
+              <label for="smoking" data-label="smoking">smokingary habits</label
+              ><select id="smoking" name="smoking"></select>
+            </div>
+            <div class="field">
+              <label for="drinking" data-label="drinking"
+                >drinkingary habits</label
+              ><select id="drinking" name="drinking"></select>
+            </div>
+            <div class="field">
+              <label for="motherTongue" data-label="motherTongue"
+                >motherTongue</label
+              ><select id="motherTongue" name="motherTongue"></select>
+            </div>
+            <div class="grid three" style="grid-column: 1 / -1">
+              <div class="field">
+                <label for="education" data-label="education">education</label
+                ><select id="education" name="education"></select>
+              </div>
+              <div class="field">
+                <label for="occupation" data-label="occupation"
+                  >occupation</label
+                ><select id="occupation" name="occupation"></select>
+              </div>
+              <div class="field">
+                <label for="annualIncome" data-label="annualIncome"
+                  >annualIncome</label
+                ><select id="annualIncome" name="annualIncome"></select>
+              </div>
+            </div>
+            <div class="field full">
+              <label for="aboutProfile" data-label="aboutProfile"
+                >More About Profile</label
+              ><textarea
+                id="aboutProfile"
+                name="aboutProfile"
+                data-placeholder="aboutProfile"
+                placeholder="A short introduction, interests and values"
+              ></textarea>
+              <!-- <button class="secondary" type="button" id="generateBioBtn">
+                  Generate AI bio
+                </button> -->
+              <p id="aiStatus" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+        </section>
+        <section class="card">
+          <div class="section-head">
+            <div class="section-emoji">👨‍👩‍👧‍👦</div>
+            <h2 id="secFamily">Family Details</h2>
+          </div>
+          <div class="grid">
+            <div class="field">
+              <label for="familyType" data-label="familyType">Family type</label
+              ><select id="familyType" name="familyType"></select>
+            </div>
+            <div class="field">
+              <label for="familyStatus" data-label="familyStatus"
+                >Family Status</label
+              ><select id="familyStatus" name="familyStatus"></select>
+            </div>
+            <fieldset class="fields-group-wrapper">
+              <legend
+                class="fields-group-wrapper-title"
+                data-label="casteGotra"
+              >
+                Place of birth
+              </legend>
+              <div class="fields-group location">
+                <div class="field">
+                  <input
+                    id="caste"
+                    name="caste"
+                    data-placeholder="caste"
+                    placeholder="Caste"
+                  />
+                </div>
+                <div class="field">
+                  <input
+                    id="subCaste"
+                    name="subCaste"
+                    data-placeholder="subCaste"
+                    placeholder="Sub Caste"
+                  />
+                </div>
+                <div class="field">
+                  <input
+                    id="gotra"
+                    name="gotra"
+                    data-placeholder="gotra"
+                    placeholder="Gotra"
+                  />
+                </div>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="mother" data-label="mother">Mother</label
+              ><select id="mother" name="mother"></select>
+            </div>
+            <div class="field">
+              <label for="father" data-label="father">Father</label
+              ><select id="father" name="father"></select>
+            </div>
+          </div>
+          <fieldset class="fields-group-wrapper">
+            <!-- <legend class="fields-group-wrapper-title" data-label="siblings">
+                Siblings
+              </legend> -->
+            <div class="grid four">
+              <div class="field">
+                <label for="brothers" data-label="brothers"
+                  >No. of Brothers</label
+                ><select id="brothers" name="brothers"></select>
+              </div>
+              <div class="field">
+                <label for="marriedBrothers" data-label="marriedBrothers"
+                  >Married Brothers</label
+                ><select id="marriedBrothers" name="marriedBrothers"></select>
+              </div>
+              <div class="field">
+                <label for="sisters" data-label="sisters">No. of Sisters</label
+                ><select id="sisters" name="sisters"></select>
+              </div>
+              <div class="field">
+                <label for="marriedSisters" data-label="marriedSisters"
+                  >Married Sisters</label
+                ><select id="marriedSisters" name="marriedSisters"></select>
+              </div>
+            </div>
+          </fieldset>
+          <div class="field full" style="margin-top: 20px">
+            <label for="aboutFamily" data-label="aboutFamily"
+              >More About Family</label
+            ><textarea
+              id="aboutFamily"
+              name="aboutFamily"
+              data-placeholder="aboutFamily"
+              placeholder="A short introduction, interests and values"
+            ></textarea>
+          </div>
+        </section>
+        <section class="card">
+          <div class="section-head">
+            <div class="section-emoji">💍</div>
+            <h2 id="secPartnerPreferences">
+              Partner Preferences <span class="req">*</span>
+            </h2>
+          </div>
+          <div class="grid">
+            <div class="field full">
+              <!-- <label for="partnerPreferences" data-label="partnerPreferences"
                   >Partner preferences</label
                 > --><textarea
-                  id="partnerPreferences"
-                  name="partnerPreferences"
-                  data-placeholder="partnerPreferences"
-                  placeholder="What you are looking for in a life partner"
-                  required
-                ></textarea>
-              </div>
+                id="partnerPreferences"
+                name="partnerPreferences"
+                data-placeholder="partnerPreferences"
+                placeholder="What you are looking for in a life partner"
+                required
+              ></textarea>
             </div>
-          </section>
-          <section class="card">
-            <div class="section-head">
-              <div class="section-emoji">📞</div>
-              <h2 id="secContactDetails">Contact Details</h2>
-            </div>
-            <div class="grid">
-              <div class="field">
-                <label for="contactNumber" data-label="contactNumber"
-                  >contactNumber</label
-                >
-                <input
-                  id="contactNumber"
-                  name="contactNumber"
-                  data-placeholder="contactNumber"
-                  placeholder="contactNumber"
-                />
-              </div>
-              <div class="field">
-                <label for="whatsappNumber" data-label="whatsappNumber"
-                  >whatsappNumber</label
-                >
-                <input
-                  id="whatsappNumber"
-                  name="whatsappNumber"
-                  data-placeholder="whatsappNumber"
-                  placeholder="whatsappNumber"
-                />
-              </div>
-              <div class="field" style="grid-column: 1 / -1">
-                <label for="postalAddress" data-label="postalAddress"
-                  >postalAddress</label
-                >
-                <textarea
-                  id="postalAddress"
-                  name="postalAddress"
-                  data-placeholder="postalAddress"
-                  placeholder="postalAddress"
-                  minlength="20"
-                  maxlength="200"
-                ></textarea>
-              </div>
-              <div class="field">
-                <label for="emailId" data-label="emailId">emailId</label>
-                <input
-                  id="emailId"
-                  name="emailId"
-                  data-placeholder="emailId"
-                  placeholder="emailId"
-                />
-              </div>
-              <div class="field">
-                <label for="facebookProfile" data-label="facebookProfile"
-                  >facebookProfile</label
-                >
-                <input
-                  id="facebookProfile"
-                  name="facebookProfile"
-                  data-placeholder="facebookProfile"
-                  placeholder="facebookProfile"
-                />
-              </div>
-              <div class="field">
-                <label for="instagramProfile" data-label="instagramProfile"
-                  >instagramProfile</label
-                >
-                <input
-                  id="instagramProfile"
-                  name="instagramProfile"
-                  data-placeholder="instagramProfile"
-                  placeholder="instagramProfile"
-                />
-              </div>
-              <div class="field">
-                <label for="linkedinProfile" data-label="linkedinProfile"
-                  >linkedinProfile</label
-                >
-                <input
-                  id="linkedinProfile"
-                  name="linkedinProfile"
-                  data-placeholder="linkedinProfile"
-                  placeholder="linkedinProfile"
-                />
-              </div>
-            </div>
-          </section>
-          <section class="card">
-            <div class="section-head">
-              <div class="section-emoji">🪄</div>
-              <h2 id="profileFormatsTitle">Create a profile</h2>
-            </div>
-            <!-- <p id="requiredNote" class="help">
-              * Required fields apply to every profile format.
-            </p> -->
-            <div class="form-action-buttons">
-              <button
-                class="primary"
-                type="button"
-                id="genAnonymousPost"
-              ></button>
-              <button class="primary" type="button" id="genShortPost"></button>
-              <button
-                class="primary"
-                type="button"
-                id="genStandardPost"
-              ></button>
-              <button
-                class="primary"
-                type="button"
-                id="genProfileFormat1"
-              ></button>
-              <button
-                class="primary"
-                type="button"
-                id="genProfileFormat2"
-              ></button>
-              <button class="secondary" type="reset" id="resetForm"></button>
-            </div>
-          </section>
-          <div class="grid three bottom">
-            <div class="field">
-              <select
-                id="profileFormatBottom"
-                name="profileFormatBottom"
-              ></select>
-            </div>
-            <button
-              class="primary"
-              type="button"
-              id="generateProfileBottom"
-            ></button>
-            <button
-              class="secondary"
-              type="reset"
-              id="resetFormBottom"
-            ></button>
           </div>
-        </form>
-      </div>
-      <section
-        class="card hidden"
-        id="outputView"
-        aria-labelledby="outputTitle"
-      >
-        <div class="section-head">
-          <div class="section-emoji" aria-hidden="true">💌</div>
-          <h2 id="outputTitle">Your profile</h2>
+        </section>
+        <section class="card">
+          <div class="section-head">
+            <div class="section-emoji">📞</div>
+            <h2 id="secContactDetails">Contact Details</h2>
+          </div>
+          <div class="grid">
+            <div class="field">
+              <label for="contactNumber" data-label="contactNumber"
+                >contactNumber</label
+              >
+              <input
+                id="contactNumber"
+                name="contactNumber"
+                data-placeholder="contactNumber"
+                placeholder="contactNumber"
+              />
+            </div>
+            <div class="field">
+              <label for="whatsappNumber" data-label="whatsappNumber"
+                >whatsappNumber</label
+              >
+              <input
+                id="whatsappNumber"
+                name="whatsappNumber"
+                data-placeholder="whatsappNumber"
+                placeholder="whatsappNumber"
+              />
+            </div>
+            <div class="field" style="grid-column: 1 / -1">
+              <label for="postalAddress" data-label="postalAddress"
+                >postalAddress</label
+              >
+              <textarea
+                id="postalAddress"
+                name="postalAddress"
+                data-placeholder="postalAddress"
+                placeholder="postalAddress"
+                minlength="20"
+                maxlength="200"
+              ></textarea>
+            </div>
+            <div class="field">
+              <label for="emailId" data-label="emailId">emailId</label>
+              <input
+                id="emailId"
+                name="emailId"
+                data-placeholder="emailId"
+                placeholder="emailId"
+              />
+            </div>
+            <div class="field">
+              <label for="facebookProfile" data-label="facebookProfile"
+                >facebookProfile</label
+              >
+              <input
+                id="facebookProfile"
+                name="facebookProfile"
+                data-placeholder="facebookProfile"
+                placeholder="facebookProfile"
+              />
+            </div>
+            <div class="field">
+              <label for="instagramProfile" data-label="instagramProfile"
+                >instagramProfile</label
+              >
+              <input
+                id="instagramProfile"
+                name="instagramProfile"
+                data-placeholder="instagramProfile"
+                placeholder="instagramProfile"
+              />
+            </div>
+            <div class="field">
+              <label for="linkedinProfile" data-label="linkedinProfile"
+                >linkedinProfile</label
+              >
+              <input
+                id="linkedinProfile"
+                name="linkedinProfile"
+                data-placeholder="linkedinProfile"
+                placeholder="linkedinProfile"
+              />
+            </div>
+          </div>
+        </section>
+        <section
+          class="card hidden"
+          id="outputView"
+          aria-labelledby="outputTitle"
+        >
+          <div class="section-head">
+            <div class="section-emoji" aria-hidden="true">💌</div>
+            <h2 id="outputTitle">Your profile</h2>
+          </div>
+          <div id="profileOutput"></div>
+          <p id="outputStatus" role="status" aria-live="polite"></p>
+          <div class="output-actions">
+            <button class="secondary" type="button" id="printProfileBtn">
+              Print / Save as PDF
+            </button>
+          </div>
+        </section>
+        <div class="grid bottom form-controls">
+          <div class="field">
+            <select
+              id="profileFormatBottom"
+              name="profileFormatBottom"
+            ></select>
+          </div>
+          <button
+            class="primary"
+            type="button"
+            id="generateProfileBottom"
+          ></button>
+          <button class="secondary" type="reset" id="resetFormBottom"></button>
+          <!-- <button class="primary" type="button" id="copyProfileBottom"></button> -->
+          <button class="primary" type="button" id="saveProfileBottom"></button>
+          <button
+            class="secondary"
+            type="button"
+            id="updateProfileBottom"
+          ></button>
         </div>
-        <div id="profileOutput"></div>
-        <p id="outputStatus" role="status" aria-live="polite"></p>
-        <div class="output-actions">
-          <button class="primary" type="button" id="copyProfileBtn">
-            Copy profile
-          </button>
-          <button class="secondary" type="button" id="printProfileBtn">
-            Print / Save as PDF
-          </button>
-          <button class="secondary" type="button" id="editProfileBtn">
-            Edit details
-          </button>
-        </div>
-      </section>
+      </form>
     </main>
 
     <footer>
@@ -1475,8 +1545,8 @@
           category: 1,
           religion: 1,
           maritalStatus: 1,
-          childrenGirls: 0,
-          childrenBoys: 0,
+          childrenGirls: "0",
+          childrenBoys: "0",
           currentCity: "Amritsar",
           currentState: "Punjab",
           currentCountry: "India",
@@ -2218,8 +2288,11 @@
             secondSelect: "Seconds",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            generateProfile: "Generate Profile",
-            resetForm: "Reset Form",
+            generateProfile: "🌟 Generate Profile",
+            resetForm: "🔄 Reset Form",
+            copyProfile: "📋 Copy",
+            saveProfile: "💾 Save",
+            updateProfile: "✏️ Update Profile",
             profileFormatsTitle: "Matrimony Profile Formats",
             anonymousProfile: "Create Anonymous Profile",
             generateBio: "Generate AI bio",
@@ -2248,7 +2321,8 @@
             copySuccess: "Profile copied.",
             copyFailure:
               "Could not copy the profile. Select and copy the text manually.",
-            copyProfile: "Copy profile",
+            pngSuccess: "Profile saved as a PNG image.",
+            pngFailure: "Could not save the profile as a PNG image.",
             printProfile: "Print / Save as PDF",
             editProfile: "Edit details",
             reset: "Clear form",
@@ -2564,8 +2638,11 @@
             secondSelect: "सेकंड",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            generateProfile: "प्रोफ़ाइल बनाएँ",
-            resetForm: "फॉर्म साफ (रीसेट) करें",
+            generateProfile: "🌟 प्रोफ़ाइल बनाएँ",
+            resetForm: "🔄 फॉर्म साफ (रीसेट) करें",
+            copyProfile: "📋 कॉपी करें",
+            saveProfile: "💾 सुरक्षित (सेव) करें",
+            updateProfile: "✏️ जानकारी बदलें",
             profileFormatsTitle: "मैट्रिमोनी प्रोफ़ाइल फॉर्मेट",
             anonymousProfile: "अनाम प्रोफ़ाइल बनाएँ",
             generateBio: "AI बायो बनाएँ",
@@ -2594,7 +2671,9 @@
             copySuccess: "प्रोफ़ाइल कॉपी हो गई।",
             copyFailure:
               "प्रोफ़ाइल कॉपी नहीं हो सकी। टेक्स्ट चुनकर स्वयं कॉपी करें।",
-            copyProfile: "प्रोफ़ाइल कॉपी करें",
+            pngSuccess: "प्रोफ़ाइल PNG इमेज के रूप में सेव हो गई।",
+            pngFailure: "प्रोफ़ाइल को PNG इमेज के रूप में सेव नहीं किया जा सका।",
+
             printProfile: "प्रिंट / PDF के रूप में सेव करें",
             editProfile: "विवरण बदलें",
             reset: "फ़ॉर्म साफ़ करें",
@@ -2908,8 +2987,11 @@
             secondSelect: "ਸਕਿੰਟ",
             amPmSelect: "AM/PM",
             amPm: ["AM", "PM"],
-            generateProfile: "ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
-            resetForm: "ਫਾਰਮ ਸਾਫ਼ (ਰੀਸੈੱਟ) ਕਰੋ",
+            generateProfile: "🌟 ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
+            resetForm: "🔄 ਫਾਰਮ ਸਾਫ਼ (ਰੀਸੈੱਟ) ਕਰੋ",
+            copyProfile: "📋 ਕਾਪੀ ਕਰੋ",
+            saveProfile: "💾 ਸੁਰੱਖਿਅਤ (ਸੇਵ) ਕਰੋ",
+            updateProfile: "✏️ ਜਾਣਕਾਰੀ ਬਦਲੋ",
             profileFormatsTitle: "ਮੈਟਰੀਮੋਨੀ ਪ੍ਰੋਫਾਈਲ ਫਾਰਮੈਟ",
             anonymousProfile: "ਗੁਮਨਾਮ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
             generateBio: "AI ਬਾਇਓ ਬਣਾਓ",
@@ -2937,7 +3019,8 @@
             surname: "ਉਪਨਾਮ",
             copySuccess: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਹੋ ਗਈ।",
             copyFailure: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਨਹੀਂ ਹੋਈ। ਟੈਕਸਟ ਚੁਣ ਕੇ ਖੁਦ ਕਾਪੀ ਕਰੋ।",
-            copyProfile: "ਪ੍ਰੋਫ਼ਾਈਲ ਕਾਪੀ ਕਰੋ",
+            pngSuccess: "ਪ੍ਰੋਫ਼ਾਈਲ PNG ਚਿੱਤਰ ਵਜੋਂ ਸੇਵ ਹੋ ਗਈ।",
+            pngFailure: "ਪ੍ਰੋਫ਼ਾਈਲ PNG ਚਿੱਤਰ ਵਜੋਂ ਸੇਵ ਨਹੀਂ ਹੋ ਸਕੀ।",
             printProfile: "ਪ੍ਰਿੰਟ / PDF ਵਜੋਂ ਸੇਵ ਕਰੋ",
             editProfile: "ਵੇਰਵੇ ਸੋਧੋ",
             reset: "ਫਾਰਮ ਸਾਫ਼ ਕਰੋ",
@@ -3341,17 +3424,20 @@
           setOptions("sisters", null, siblingCounts);
           updateMarriedSiblingOptions("brothers", "marriedBrothers");
           updateMarriedSiblingOptions("sisters", "marriedSisters");
-          $("profileFormatsTitle").textContent = t.profileFormatsTitle;
           setOptions("profileFormatTop", null, t.profileFormatOptions);
           setOptions("profileFormatBottom", null, t.profileFormatOptions);
           $("generateProfileTop").textContent = t.generateProfile;
-          $("generateProfileBottom").textContent = t.generateProfile;
           $("resetFormTop").textContent = t.resetForm;
+          // $("copyProfileTop").textContent = t.copyProfile;
+          $("saveProfileTop").textContent = t.saveProfile;
+          $("updateProfileTop").textContent = t.updateProfile;
+          $("generateProfileBottom").textContent = t.generateProfile;
           $("resetFormBottom").textContent = t.resetForm;
+          // $("copyProfileBottom").textContent = t.copyProfile;
+          $("saveProfileBottom").textContent = t.saveProfile;
+          $("updateProfileBottom").textContent = t.updateProfile;
 
-          $("copyProfileBtn").textContent = t.copyProfile;
           $("printProfileBtn").textContent = t.printProfile;
-          $("editProfileBtn").textContent = t.editProfile;
           $("outputTitle").textContent = t.outputTitle.replace(
             "XXXX",
             $("name").value || "XXXX",
@@ -3483,16 +3569,19 @@
           updateBirthDays(trans[getSelectedLanguage()] || trans.en),
         );
         function toggleChildren() {
-          const show = $("maritalStatus").selectedIndex > 1;
-          if (!show) {
-            $("childrenGirls").value = "";
-            $("childrenBoys").value = "";
-          }
+          let girlCount = "0";
+          let boyCount = "0";
+          const $girls = $("childrenGirls");
+          const $boys = $("childrenBoys");
 
-          // $("childrenGirls").disabled = !show;
-          // $("childrenBoys").disabled = !show;
-          // $("childrenGirls").required = show;
-          // $("childrenBoys").required = show;
+          if ($("maritalStatus").selectedIndex > 1) {
+            girlCount = $girls.value === "" ? "0" : $girls.value;
+            boyCount = $boys.value === "" ? "0" : $boys.value;
+          }
+          $girls.value = girlCount;
+          $girls.dispatchEvent(new Event("change", { bubbles: true }));
+          $boys.value = boyCount;
+          $boys.dispatchEvent(new Event("change", { bubbles: true }));
         }
         $("maritalStatus").addEventListener("change", toggleChildren);
 
@@ -3756,7 +3845,7 @@
           return { ...values };
         }
 
-        function formatProfile(mode) {
+        function formatProfile(format) {
           const t = trans[getSelectedLanguage()] || trans.en;
           const entries = readProfileEntries();
 
@@ -3772,7 +3861,7 @@
                 : t.outputGroups[group.translationIndex ?? index] ||
                   group.title;
               const lines = items.map(({ emoji, label, value }) =>
-                mode === "format2"
+                format === "1"
                   ? `${emoji} ${label}: ${value}`
                   : `${label}: ${value}`,
               );
@@ -3782,13 +3871,83 @@
             .join("\n\n");
         }
 
-        function renderProfileOutput(mode) {
+        function renderBioProfile(output, entries, t) {
+          output.classList.add("profile-output-bio");
+          const hero = document.createElement("header");
+          hero.className = "profile-output-bio-hero";
+          const kicker = document.createElement("p");
+          kicker.className = "profile-output-bio-kicker";
+          kicker.textContent = t.profileModeTitles.detailed;
+          const name = document.createElement("h3");
+          name.textContent = entries.get("name")?.value || "";
+          const badges = document.createElement("div");
+          badges.className = "profile-output-bio-badges";
+          ["profileFor", "gender", "maritalStatusParsed"].forEach((id) => {
+            const item = entries.get(id);
+            if (!item) return;
+            const badge = document.createElement("span");
+            badge.className = "profile-output-bio-badge";
+            badge.textContent = `${item.label}: ${item.value}`;
+            badges.appendChild(badge);
+          });
+          hero.append(kicker, name, badges);
+          output.appendChild(hero);
+
+          profileFieldGroups.forEach((group, index) => {
+            const items = group.ids
+              .map((id) => entries.get(id))
+              .filter(
+                (item) =>
+                  item &&
+                  ![
+                    "name",
+                    "profileFor",
+                    "gender",
+                    "maritalStatusParsed",
+                  ].includes(item.id),
+              );
+            if (!items.length) return;
+
+            const section = document.createElement("section");
+            section.className = "profile-output-bio-section";
+            const heading = document.createElement("h4");
+            heading.textContent = group.titleKey
+              ? t[group.titleKey]
+              : t.outputGroups[group.translationIndex ?? index] || group.title;
+            section.appendChild(heading);
+
+            if (group.withoutLabel) {
+              const content = document.createElement("p");
+              content.className = "profile-output-bio-narrative";
+              content.textContent = items.map((item) => item.value).join("\n");
+              section.appendChild(content);
+            } else {
+              const fields = document.createElement("dl");
+              fields.className = "profile-output-bio-fields";
+              items.forEach((item) => {
+                const field = document.createElement("div");
+                field.className = "profile-output-bio-field";
+                const label = document.createElement("dt");
+                label.textContent = item.label;
+                const value = document.createElement("dd");
+                value.textContent = `${item.emoji ? `${item.emoji} ` : ""}${item.value}`;
+                field.append(label, value);
+                fields.appendChild(field);
+              });
+              section.appendChild(fields);
+            }
+            output.appendChild(section);
+          });
+        }
+
+        function renderProfileOutput(format) {
           const t = trans[getSelectedLanguage()] || trans.en;
           const output = $("profileOutput");
           output.replaceChildren();
-          if (mode === "format1" || mode === "format2") {
-            output.classList.toggle("profile-output-grid", mode === "format1");
-            output.classList.toggle("profile-output-print", mode === "format2");
+          output.classList.remove("profile-output-bio");
+          if (format === "0" || format === "1") {
+            output.classList.toggle("profile-output-grid", format === "0");
+            output.classList.toggle("profile-output-print", format === "1");
             const entries = readProfileEntries();
             profileFieldGroups.forEach((group, index) => {
               const items = group.ids
@@ -3837,7 +3996,7 @@
                 const itemLabel = document.createElement("strong");
                 itemLabel.className = "profile-output-item-label";
                 itemLabel.append(itemEmoji, document.createTextNode(label));
-                if (mode === "format2") {
+                if (format === "1") {
                   const itemValue = document.createElement("span");
                   itemValue.className = "profile-output-item-value";
                   itemValue.textContent = value;
@@ -3850,10 +4009,14 @@
               });
               output.appendChild(section);
             });
+          } else if (format === "2") {
+            output.classList.remove("profile-output-grid");
+            output.classList.remove("profile-output-print");
+            renderBioProfile(output, readProfileEntries(), t);
           } else {
             output.classList.remove("profile-output-grid");
             output.classList.remove("profile-output-print");
-            output.textContent = formatProfile(mode);
+            output.textContent = formatProfile(format);
           }
           $("outputTitle").textContent = t.outputTitle.replace(
             "XXXX",
@@ -3862,10 +4025,7 @@
         }
 
         function createProfile(mode) {
-          const form = $("profileForm");
-          $("formError").style.display = "none";
-          if (!form.reportValidity()) {
-            $("formError").style.display = "block";
+          if (!$("profileForm").reportValidity()) {
             return;
           }
           activeProfileMode = mode;
@@ -3873,42 +4033,264 @@
           renderProfileOutput(mode);
           outputStatusKey = null;
           $("outputStatus").textContent = "";
-          $("formView").style.display = "none";
+          // $("formView").style.display = "none";
           $("outputView").classList.remove("hidden");
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
+        $("profileForm").addEventListener("reset", resetForm);
         function resetForm() {
           setTimeout(() => {
             toggleChildren();
-            $("formError").style.display = "none";
           }, 0);
         }
 
-        $("genAnonymousPost").addEventListener("click", function () {
-          generateBio({
-            format: trans.en.buttons.anonymousPost,
+        function toggleView(isFormView) {
+          document.querySelectorAll(".grid.form-controls").forEach((el) => {
+            isFormView
+              ? el.classList.remove("three")
+              : el.classList.add("three");
+            el.querySelector("[id^=generateProfile]").style.display = isFormView
+              ? "block"
+              : "none";
+            el.querySelector("[id^=resetForm]").style.display = isFormView
+              ? "block"
+              : "none";
+            el.querySelector(".field").style.display = !isFormView
+              ? "block"
+              : "none";
+            // el.querySelector("[id^=copyProfile]").style.display = !isFormView
+            //   ? "block"
+            //   : "none";
+            el.querySelector("[id^=saveProfile]").style.display = !isFormView
+              ? "block"
+              : "none";
+            el.querySelector("[id^=updateProfile]").style.display = !isFormView
+              ? "block"
+              : "none";
           });
-        });
-        $("genShortPost").addEventListener("click", function () {
-          generateBio({
-            format: trans.en.buttons.shortPost,
-          });
-        });
-        $("genStandardPost").addEventListener("click", function () {
-          generateBio({
-            format: trans.en.buttons.standardPost,
-          });
-        });
-        $("genProfileFormat1").addEventListener("click", () =>
-          createProfile("format1"),
-        );
-        $("genProfileFormat2").addEventListener("click", () =>
-          createProfile("format2"),
-        );
-        $("profileForm").addEventListener("reset", resetForm);
+          isFormView
+            ? $("profileForm").classList.remove("hide-fields")
+            : $("profileForm").classList.add("hide-fields");
+          isFormView
+            ? $("outputView").classList.add("hidden")
+            : $("outputView").classList.remove("hidden");
 
-        $("copyProfileBtn").addEventListener("click", async () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        async function saveProfileAsPNG() {
+          const t = trans[getSelectedLanguage()] || trans.en;
+          const outputView = $("outputView");
+          if (outputView.classList.contains("hidden")) return;
+
+          const saveButtons = [
+            $("saveProfileTop"),
+            $("saveProfileBottom"),
+          ];
+          saveButtons.forEach((button) => {
+            button.disabled = true;
+          });
+
+          try {
+            const sourceRect = outputView.getBoundingClientRect();
+            const clone = outputView.cloneNode(true);
+            const sourceElements = [
+              outputView,
+              ...outputView.querySelectorAll("*"),
+            ];
+            const cloneElements = [clone, ...clone.querySelectorAll("*")];
+
+            sourceElements.forEach((source, index) => {
+              const computedStyle = getComputedStyle(source);
+              const targetStyle = cloneElements[index].style;
+              for (let i = 0; i < computedStyle.length; i += 1) {
+                const property = computedStyle.item(i);
+                targetStyle.setProperty(
+                  property,
+                  computedStyle.getPropertyValue(property),
+                  computedStyle.getPropertyPriority(property),
+                );
+              }
+            });
+
+            clone.querySelector("#outputStatus")?.remove();
+            clone.querySelector(".output-actions")?.remove();
+            clone.removeAttribute("id");
+            clone.style.width = `${sourceRect.width}px`;
+            clone.style.height = "auto";
+            clone.style.minHeight = "0";
+
+            const staging = document.createElement("div");
+            staging.setAttribute("aria-hidden", "true");
+            staging.inert = true;
+            staging.style.cssText =
+              "position:fixed;left:-100000px;top:0;z-index:-1;";
+            staging.appendChild(clone);
+            document.body.appendChild(staging);
+
+            const width = Math.ceil(clone.getBoundingClientRect().width);
+            const height = Math.ceil(clone.scrollHeight);
+            staging.remove();
+            if (!width || !height) {
+              throw new Error("The profile has no visible content to export.");
+            }
+
+            const scale = Math.min(
+              window.devicePixelRatio || 1,
+              2,
+              8192 / width,
+              8192 / height,
+            );
+            const svg = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "svg",
+            );
+            svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+            svg.setAttribute("width", String(width));
+            svg.setAttribute("height", String(height));
+            svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+            const foreignObject = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "foreignObject",
+            );
+            foreignObject.setAttribute("width", "100%");
+            foreignObject.setAttribute("height", "100%");
+            const html = document.createElementNS(
+              "http://www.w3.org/1999/xhtml",
+              "div",
+            );
+            html.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
+            html.appendChild(clone);
+            foreignObject.appendChild(html);
+            svg.appendChild(foreignObject);
+
+            const svgUrl = URL.createObjectURL(
+              new Blob([new XMLSerializer().serializeToString(svg)], {
+                type: "image/svg+xml;charset=utf-8",
+              }),
+            );
+            try {
+              const image = new Image();
+              const loadedImage = new Promise((resolve, reject) => {
+                image.onload = () => resolve(image);
+                image.onerror = () =>
+                  reject(new Error("The profile image could not be rendered."));
+              });
+              image.src = svgUrl;
+              await loadedImage;
+
+              const canvas = document.createElement("canvas");
+              canvas.width = Math.ceil(width * scale);
+              canvas.height = Math.ceil(height * scale);
+              const context = canvas.getContext("2d");
+              if (!context) {
+                throw new Error("The browser could not create an image canvas.");
+              }
+              context.scale(scale, scale);
+              context.drawImage(image, 0, 0, width, height);
+
+              const png = await new Promise((resolve, reject) => {
+                canvas.toBlob((blob) => {
+                  if (blob) resolve(blob);
+                  else reject(new Error("The browser could not encode the PNG."));
+                }, "image/png");
+              });
+              const pngUrl = URL.createObjectURL(png);
+              const link = document.createElement("a");
+              const profileName = $("name").value
+                .trim()
+                .replace(/[<>:"/\\|?*\u0000-\u001f]/g, "-")
+                .replace(/\s+/g, "-")
+                .replace(/-+/g, "-")
+                .replace(/^[-.]+|[-.]+$/g, "");
+              link.href = pngUrl;
+              link.download = `matrimonial-profile${profileName ? `-${profileName}` : ""}.png`;
+              document.body.appendChild(link);
+              link.click();
+              link.remove();
+              setTimeout(() => URL.revokeObjectURL(pngUrl), 1000);
+
+              outputStatusKey = "pngSuccess";
+              $("outputStatus").textContent = t.pngSuccess;
+            } finally {
+              URL.revokeObjectURL(svgUrl);
+            }
+          } catch (error) {
+            console.error("Could not save the profile as a PNG.", error);
+            outputStatusKey = "pngFailure";
+            $("outputStatus").textContent = t.pngFailure;
+          } finally {
+            saveButtons.forEach((button) => {
+              button.disabled = false;
+            });
+          }
+        }
+
+        $("saveProfileTop").addEventListener("click", () => saveProfileAsPNG());
+        $("saveProfileBottom").addEventListener("click", () =>
+          saveProfileAsPNG(),
+        );
+
+        $("updateProfileTop").addEventListener("click", () => toggleView(true));
+        $("updateProfileBottom").addEventListener("click", () =>
+          toggleView(true),
+        );
+
+        function generateProfile() {
+          if (!$("profileForm").reportValidity()) {
+            return;
+          }
+
+          toggleView();
+
+          const profileFormatTop = $("profileFormatTop");
+
+          if (profileFormatTop.value === "") {
+            profileFormatTop.value = "0";
+            profileFormatTop.dispatchEvent(
+              new Event("change", { bubbles: true }),
+            );
+          }
+
+          createProfile(profileFormatTop.value);
+        }
+
+        $("generateProfileTop").addEventListener("click", generateProfile);
+        $("generateProfileBottom").addEventListener("click", generateProfile);
+
+        $("profileFormatTop").addEventListener("change", (evt) => {
+          $("profileFormatBottom").value = evt.target.value;
+          createProfile(evt.target.value);
+        });
+        $("profileFormatBottom").addEventListener("change", (evt) => {
+          $("profileFormatTop").value = evt.target.value;
+          createProfile(evt.target.value);
+        });
+
+        // $("genAnonymousPost").addEventListener("click", function () {
+        //   generateBio({
+        //     format: trans.en.buttons.anonymousPost,
+        //   });
+        // });
+        // $("genShortPost").addEventListener("click", function () {
+        //   generateBio({
+        //     format: trans.en.buttons.shortPost,
+        //   });
+        // });
+        // $("genStandardPost").addEventListener("click", function () {
+        //   generateBio({
+        //     format: trans.en.buttons.standardPost,
+        //   });
+        // });
+        //  $("genProfileFormat1").addEventListener("click", () =>
+        //   createProfile("format1"),
+        // );
+        // $("genProfileFormat2").addEventListener("click", () =>
+        //   createProfile("format2"),
+        // );
+
+        const handleProfileCopy = async () => {
           const t = trans[getSelectedLanguage()] || trans.en;
           let clipboardError;
           try {
@@ -3955,15 +4337,12 @@
             outputStatusKey = "copyFailure";
             $("outputStatus").textContent = t.copyFailure;
           }
-        });
+        };
+        // $("copyProfileTop").addEventListener("click", handleProfileCopy);
+        // $("copyProfileBottom").addEventListener("click", handleProfileCopy);
+
         $("printProfileBtn").addEventListener("click", () => window.print());
-        $("editProfileBtn").addEventListener("click", () => {
-          $("outputView").classList.add("hidden");
-          $("formView").style.display = "block";
-          outputStatusKey = null;
-          $("outputStatus").textContent = "";
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+
         updateLanguage();
 
         const WORKER_URL = "https://profile-1xq.v8187.workers.dev";
@@ -3972,10 +4351,7 @@
           format = trans.en.buttons.anonymousPost,
           title = format,
         }) {
-          const form = $("profileForm");
-          $("formError").style.display = "none";
-          if (!form.reportValidity()) {
-            $("formError").style.display = "block";
+          if (!$("profileForm").reportValidity()) {
             return;
           }
 
@@ -4020,7 +4396,7 @@
             );
             outputStatusKey = null;
             $("outputStatus").textContent = "";
-            $("formView").style.display = "none";
+            // $("formView").style.display = "none";
             $("outputView").classList.remove("hidden");
             window.scrollTo({ top: 0, behavior: "smooth" });
           } catch (error) {
