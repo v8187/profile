@@ -5,36 +5,22 @@ const ALLOWED_ORIGINS = new Set([
   "https://dash.cloudflare.com",
 ]);
 const SYSTEM_INSTRUCTIONS = `You are an expert matrimonial profile writer.
-Write concise, natural profiles without unnecessary wording or repetition. Avoid repetitive first-person openings such as "I am," "I was," "I have," and "I enjoy." Combine related details naturally, vary sentence structures, and eliminate unnecessary pronouns and filler.
+Write one concise, natural matrimonial profile in the requested language and its native script: English, Hindi (Devanagari), or Punjabi (Gurmukhi). Do not follow the language of the input data.
 
-<SupportedLanguages>
-EN: Natural, grammatically correct English.
-HI: Natural Hindi in Devanagari script.
-PA: Natural Punjabi in Gurmukhi script.
-Use the requested language consistently.
-</SupportedLanguages>
+Follow the requested format exactly:
+- Anonymous: omit name, exact birth date, salary, specific employer/business, contact details, social handles, full address, and other identifying details. A birth year or broad profession is allowed.
+- Short: maximum 3 lines.
+- Standard: one engaging paragraph.
+- Non-anonymous formats: use the supplied name and relevant facts.
 
-<PronounAndGenderRules>
-- Self-introduction: Use first person.
-- Third-person reference: Use he/she and gender-appropriate grammar based on the profile gender; default to male if unavailable.
-- Partner expectations: Use the opposite gender (girl for male, boy for female); default to girl if profile gender is unavailable.
-- Maintain consistent, natural gender agreement throughout.
-</PronounAndGenderRules>
+Use profileFor to identify who the profile is about and choose perspective: Self means first person; otherwise write about the candidate in third person (use “our son/daughter/sibling” only when that relationship is specified, otherwise “the candidate”). Use gender—not profileFor—to determine pronouns and grammatical gender. For partner preferences, use the gender-appropriate opposite-gender term.
 
-<SupportedFormats>
-**Anonymous Social Media Post:** Create a privacy-conscious matrimonial post without the person's name, full date of birth, salary, specific job or business details, or other personally identifying information (PII). Year of birth may be included. Use only suitable, non-identifying details provided.
-**Short Social Media Post:** Create a concise post of no more than 2–3 lines using the available profile information.
-**Standard Social Media Post:** Create a natural, engaging narrative paragraph using the available profile information.
-</SupportedFormats>
-
-Adapt the writing style and length to the requested language and format. Preserve supplied facts accurately, omit unavailable details, never invent or assume information.
-
-Generate exactly TWO distinct profile options. Return only the final profiles, labeled "Option 1" and "Option 2" without explanations, analysis, or extra commentary.`;
+Preserve facts, omit missing details, and never infer or invent. Return only the finished profile.`;
 
 export default {
   async fetch(request, env) {
     const origin = request.headers.get("Origin");
-    // console.log("origin = ", origin);
+
     const headers = new Headers({
       "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "no-store",
@@ -76,14 +62,20 @@ export default {
 
     try {
       const body = await request.json();
-      // console.log("body = ", body);
+      const languages = {
+        en: "English",
+        hi: "Hindi (Devanagari)",
+        pa: "Punjabi (Gurmukhi)",
+      };
+      const language = languages[body.language] || languages.en;
       const messages = [
         { role: "system", content: SYSTEM_INSTRUCTIONS },
         {
           role: "user",
-          content: `Write a ${body.format || "Standard Social Media Post"} matrimonial profile in ${body.language || "English"} for ${body.profile.profileFor || "Self"}.
+          content: `Format: ${body.format || "Standard Social Media Post"}
+Language: ${language}
 
-Profile:
+Profile facts (JSON):
 ${JSON.stringify(body.profile)}`,
         },
       ];
@@ -99,8 +91,6 @@ ${JSON.stringify(body.profile)}`,
           chat_template_kwargs: { enable_thinking: false },
         },
       );
-
-      // console.log("result.response = ", result)
 
       return Response.json(
         { success: true, aiResponse: result },
