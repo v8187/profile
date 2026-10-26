@@ -26,6 +26,7 @@
       }
       body {
         margin: 0;
+        padding-bottom: 96px;
         background: linear-gradient(145deg, #f4f8f6, #edf4f0 55%, #f8f5ef);
         color: var(--ink);
         font:
@@ -358,9 +359,155 @@
       .grid.four {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
-      .form-controls {
+      .actions-wrapper {
         width: fit-content;
         margin: 0 auto;
+      }
+      .sticky-actions {
+        position: fixed;
+        z-index: 20;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+        border-top: 1px solid var(--line);
+        background: #ffffffed;
+        box-shadow: 0 -8px 24px #20312e18;
+        backdrop-filter: blur(12px);
+      }
+      .sticky-action-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: min(100%, 1040px);
+      }
+      .sticky-action-inner .field {
+        display: block;
+        flex: 1 1 220px;
+        min-width: 150px;
+      }
+      .sticky-action-inner select {
+        width: 100%;
+      }
+      .sticky-action-inner button {
+        flex: 0 1 auto;
+        white-space: nowrap;
+      }
+      .settings-backdrop {
+        position: fixed;
+        z-index: 29;
+        inset: 0;
+        background: #17252166;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .settings-drawer {
+        position: fixed;
+        z-index: 30;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(390px, 100%);
+        padding: 22px;
+        padding-bottom: calc(22px + env(safe-area-inset-bottom));
+        overflow-y: auto;
+        border-left: 1px solid var(--line);
+        background: var(--paper);
+        box-shadow: -12px 0 36px #17252124;
+        transform: translateX(105%);
+        transition:
+          transform 0.28s ease,
+          visibility 0.28s ease;
+        visibility: hidden;
+      }
+      .settings-drawer.open {
+        transform: translateX(0);
+        visibility: visible;
+      }
+      .settings-drawer.open + .settings-backdrop {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .drawer-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+      .drawer-heading h2 {
+        line-height: 1.3;
+      }
+      .drawer-close,
+      .drawer-back {
+        padding: 8px 12px;
+        background: var(--brand2);
+        color: var(--brand);
+      }
+      .drawer-settings {
+        display: grid;
+        gap: 22px;
+      }
+      .drawer-settings .language-switcher,
+      .drawer-settings .theme-switcher {
+        display: grid;
+        justify-items: start;
+        gap: 8px;
+        margin: 0;
+      }
+      .drawer-settings .language-options {
+        justify-content: flex-start;
+      }
+      .drawer-settings .theme-options {
+        gap: 12px;
+      }
+      .drawer-settings legend {
+        margin-bottom: 0;
+        color: var(--ink);
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+      .drawer-settings .language-option {
+        border-color: var(--line);
+        background: var(--brand2);
+        color: var(--brand);
+      }
+      .drawer-settings .language-option.selected {
+        border-color: var(--brand);
+        background: var(--brand);
+        color: #fff;
+      }
+      .drawer-links {
+        display: grid;
+        gap: 10px;
+      }
+      .drawer-links button {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 48px;
+        text-align: left;
+      }
+      .drawer-links button span:first-child {
+        width: 24px;
+        text-align: center;
+      }
+      .drawer-info {
+        line-height: 1.7;
+      }
+      .drawer-info .drawer-back {
+        margin-bottom: 18px;
+      }
+      .drawer-info h3 {
+        margin: 0 0 10px;
+        color: var(--brand);
+        font-size: 1.15rem;
+      }
+      .drawer-info p {
+        margin: 0;
+        color: var(--muted);
       }
       .grid.top {
         margin-bottom: 16px;
@@ -368,12 +515,12 @@
       .grid.bottom {
         margin-top: 16px;
       }
-      .form-controls .field,
-      /* .form-controls [id^="copyProfile"], */
-      /* .form-controls [id^="saveProfile"], */
-      .form-controls [id^="saveAsImage"],
-      .form-controls [id^="saveAsPDF"],
-      .form-controls [id^="updateProfile"] {
+      .actions-wrapper .field,
+      /* .actions-wrapper [id^="copyProfile"], */
+      /* .actions-wrapper [id^="saveProfile"], */
+      .actions-wrapper [id^="saveAsImage"],
+      .actions-wrapper [id^="saveAsPDF"],
+      .actions-wrapper [id^="updateProfile"] {
         display: none;
       }
       .grid > .fields-group-wrapper {
@@ -520,6 +667,7 @@
         border-radius: 12px;
         padding: 7px 18px;
         font: inherit;
+        font-size: 0.85rem;
         font-weight: 750;
         cursor: pointer;
         transition:
@@ -809,7 +957,7 @@
         }
       }
       @media (max-width: 820px) {
-        .grid,
+        .grid:not(.actions-wrapper),
         .grid.three,
         .multiple-groups-row {
           grid-template-columns: 1fr;
@@ -820,9 +968,6 @@
         .privacy {
           width: 100%;
           margin-left: 0;
-        }
-        .full {
-          grid-column: auto;
         }
         .card {
           border-radius: 14px;
@@ -837,6 +982,34 @@
         header {
           padding-top: 26px;
         }
+        body {
+          padding-bottom: 170px;
+        }
+        .sticky-action-inner {
+          flex-wrap: wrap;
+        }
+      }
+      @media (max-width: 650px) {
+        .sticky-actions {
+          padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+        }
+        .sticky-action-inner {
+          flex-wrap: wrap;
+          gap: 7px;
+        }
+        .sticky-action-inner .field {
+          flex: 1 0 100%;
+        }
+        .sticky-action-inner button {
+          flex: 1 1 auto;
+          min-width: 0;
+          padding: 8px 9px;
+          font-size: 0.76rem;
+        }
+        .settings-drawer {
+          padding: 18px;
+          padding-bottom: calc(18px + env(safe-area-inset-bottom));
+        }
       }
       @media print {
         @page {
@@ -847,9 +1020,13 @@
           background: #fff;
           color: #172521;
           font-size: 11pt;
+          padding-bottom: 0;
         }
         header,
-        #profileForm > .form-controls,
+        #profileForm > .actions-wrapper,
+        .sticky-actions,
+        .settings-drawer,
+        .settings-backdrop,
         #profileForm > section,
         footer,
         .notice,
@@ -948,99 +1125,10 @@
             Matrimonial Profile Maker — Free & Private
           </div>
         </div>
-        <fieldset class="language-switcher">
-          <div class="language-options">
-            <label class="language-option selected">
-              <input type="radio" name="languageChoice" value="en" checked />
-              English
-            </label>
-            <label class="language-option">
-              <input type="radio" name="languageChoice" value="hi" />
-              हिन्दी
-            </label>
-            <label class="language-option">
-              <input type="radio" name="languageChoice" value="pa" />
-              ਪੰਜਾਬੀ
-            </label>
-          </div>
-        </fieldset>
-        <fieldset class="theme-switcher">
-          <div class="theme-options">
-            <label class="theme-swatch" title="Rose">
-              <input
-                type="radio"
-                name="themeChoice"
-                value="rose"
-                aria-label="Rose"
-                checked
-              />
-              <span style="--swatch-color: #a63f63" aria-hidden="true"></span>
-            </label>
-            <label class="theme-swatch" title="Ruby">
-              <input
-                type="radio"
-                name="themeChoice"
-                value="ruby"
-                aria-label="Ruby"
-              />
-              <span style="--swatch-color: #a72f4d" aria-hidden="true"></span>
-            </label>
-            <label class="theme-swatch" title="Plum">
-              <input
-                type="radio"
-                name="themeChoice"
-                value="plum"
-                aria-label="Plum"
-              />
-              <span style="--swatch-color: #75416f" aria-hidden="true"></span>
-            </label>
-            <label class="theme-swatch" title="Teal">
-              <input
-                type="radio"
-                name="themeChoice"
-                value="teal"
-                aria-label="Teal"
-              />
-              <span style="--swatch-color: #286f70" aria-hidden="true"></span>
-            </label>
-            <label class="theme-swatch" title="Saffron">
-              <input
-                type="radio"
-                name="themeChoice"
-                value="saffron"
-                aria-label="Saffron"
-              />
-              <span style="--swatch-color: #9a6329" aria-hidden="true"></span>
-            </label>
-          </div>
-          <div class="page-links">
-            <a href="#helpTitle">❓</a>
-            <a href="#disclaimerTitle">🛡️</a>
-          </div>
-        </fieldset>
       </div>
     </header>
     <main>
       <form id="profileForm">
-        <div class="grid top form-controls">
-          <div class="field">
-            <select id="profileFormatTop" name="profileFormatTop"></select>
-          </div>
-          <button
-            class="primary"
-            type="button"
-            id="generateProfileTop"
-          ></button>
-          <button class="secondary" type="reset" id="resetFormTop"></button>
-          <!-- <button class="primary" type="button" id="copyProfileTop"></button> -->
-          <button class="primary" type="button" id="saveAsImageTop"></button>
-          <button class="primary" type="button" id="saveAsPDFTop"></button>
-          <button
-            class="secondary"
-            type="button"
-            id="updateProfileTop"
-          ></button>
-        </div>
         <section class="card">
           <div class="section-head">
             <div class="section-emoji">💖</div>
@@ -1551,47 +1639,162 @@
           </div>
           <div id="profileOutput"></div>
         </section>
-        <div class="grid bottom form-controls">
-          <div class="field">
-            <select
-              id="profileFormatBottom"
-              name="profileFormatBottom"
-            ></select>
+        <div class="sticky-actions">
+          <div class="grid bottom actions-wrapper sticky-action-inner">
+            <div class="field">
+              <select
+                id="profileFormatBottom"
+                name="profileFormatBottom"
+              ></select>
+            </div>
+            <button
+              class="primary"
+              type="button"
+              id="generateProfileBottom"
+            ></button>
+            <button
+              class="secondary"
+              type="reset"
+              id="resetFormBottom"
+            ></button>
+            <button
+              class="primary"
+              type="button"
+              id="saveAsImageBottom"
+            ></button>
+            <button class="primary" type="button" id="saveAsPDFBottom"></button>
+            <button
+              class="secondary"
+              type="button"
+              id="updateProfileBottom"
+            ></button>
+            <button
+              class="secondary settings-trigger"
+              type="button"
+              id="settingsTrigger"
+              aria-label="Open settings"
+              aria-controls="settingsDrawer"
+              aria-expanded="false"
+            >
+              ☰
+            </button>
           </div>
-          <button
-            class="primary"
-            type="button"
-            id="generateProfileBottom"
-          ></button>
-          <button class="secondary" type="reset" id="resetFormBottom"></button>
-          <!-- <button class="primary" type="button" id="copyProfileBottom"></button> -->
-          <button class="primary" type="button" id="saveAsImageBottom"></button>
-          <button class="primary" type="button" id="saveAsPDFBottom"></button>
-          <button
-            class="secondary"
-            type="button"
-            id="updateProfileBottom"
-          ></button>
         </div>
       </form>
     </main>
-
-    <footer>
-      <section class="card">
-        <div class="section-head">
-          <div class="section-emoji">❓</div>
-          <h2 id="helpTitle"></h2>
-        </div>
-        <p id="helpContent"></p>
-      </section>
-      <section class="card">
-        <div class="section-head">
-          <div class="section-emoji">🛡️</div>
-          <h2 id="disclaimerTitle"></h2>
-        </div>
-        <p id="disclaimerContent"></p>
-      </section>
-    </footer>
+    <aside
+      class="settings-drawer"
+      id="settingsDrawer"
+      aria-labelledby="settingsTitle"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="drawer-heading">
+        <h2 id="settingsTitle">Settings</h2>
+        <button
+          class="drawer-close"
+          id="closeSettings"
+          type="button"
+          aria-label="Close settings"
+        >
+          ✕
+        </button>
+      </div>
+      <div class="drawer-settings" id="settingsView">
+        <fieldset class="language-switcher">
+          <legend id="languageLabel">Language</legend>
+          <div class="language-options">
+            <label class="language-option selected">
+              <input type="radio" name="languageChoice" value="en" checked />
+              English
+            </label>
+            <label class="language-option">
+              <input type="radio" name="languageChoice" value="hi" />
+              हिन्दी
+            </label>
+            <label class="language-option">
+              <input type="radio" name="languageChoice" value="pa" />
+              ਪੰਜਾਬੀ
+            </label>
+          </div>
+        </fieldset>
+        <fieldset class="theme-switcher">
+          <legend id="themeLabel">Theme</legend>
+          <div class="theme-options">
+            <label class="theme-swatch" title="Rose">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="rose"
+                aria-label="Rose"
+                checked
+              />
+              <span style="--swatch-color: #a63f63" aria-hidden="true"></span>
+            </label>
+            <label class="theme-swatch" title="Ruby">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="ruby"
+                aria-label="Ruby"
+              />
+              <span style="--swatch-color: #a72f4d" aria-hidden="true"></span>
+            </label>
+            <label class="theme-swatch" title="Plum">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="plum"
+                aria-label="Plum"
+              />
+              <span style="--swatch-color: #75416f" aria-hidden="true"></span>
+            </label>
+            <label class="theme-swatch" title="Teal">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="teal"
+                aria-label="Teal"
+              />
+              <span style="--swatch-color: #286f70" aria-hidden="true"></span>
+            </label>
+            <label class="theme-swatch" title="Saffron">
+              <input
+                type="radio"
+                name="themeChoice"
+                value="saffron"
+                aria-label="Saffron"
+              />
+              <span style="--swatch-color: #9a6329" aria-hidden="true"></span>
+            </label>
+          </div>
+        </fieldset>
+        <nav class="drawer-links" aria-label="Information">
+          <button class="secondary" id="showHelp" type="button">
+            <span aria-hidden="true">❓</span><span>How to Use</span>
+          </button>
+          <button class="secondary" id="showDisclaimer" type="button">
+            <span aria-hidden="true">🛡️</span
+            ><span>Disclaimer &amp; Data Privacy</span>
+          </button>
+        </nav>
+      </div>
+      <div class="drawer-info hidden" id="drawerInfo">
+        <button class="drawer-back" id="backToSettings" type="button">
+          ← <span id="backToSettingsLabel">Settings</span>
+        </button>
+        <section id="helpInfo" class="hidden">
+          <h3 id="helpTitle"></h3>
+          <p id="helpContent"></p>
+        </section>
+        <section id="disclaimerInfo" class="hidden">
+          <h3 id="disclaimerTitle"></h3>
+          <p id="disclaimerContent"></p>
+        </section>
+      </div>
+    </aside>
+    <div class="settings-backdrop" id="settingsBackdrop"></div>
     <script>
       (function () {
         const mockValues = {
@@ -2137,6 +2340,14 @@
         const trans = {
           en: {
             brandTitle: "Matrimonial Profile Maker — Free & Private",
+            settingsTitle: "Settings",
+            languageLabel: "Language",
+            themeLabel: "Theme",
+            howToUse: "How to Use",
+            disclaimerAction: "Disclaimer & Data Privacy",
+            backToSettings: "Back to settings",
+            closeSettings: "Close settings",
+            openSettings: "Open settings",
             helpTitle: "How to Use",
             helpContent:
               "Create a standard matrimonial profile in a few simple steps, even if you’re unsure what details to include or how to present them. Most form fields have ready-made dropdown options, so you only need to type a little. Fill in the relevant details, choose your preferred profile format, and generate your profile. Most formats are created directly in your browser without sending your information to a server. AI-assisted formats use an AI service to help turn your details into a well-written profile. Once ready, you can save your profile as an image or PDF. You may also select and copy the text if your device and browser support it.",
@@ -2358,11 +2569,11 @@
             noBrother: "No brother",
             brother: "Brother",
             brothers: "Brothers",
-            marriedBrothers: "Married Brothers",
+            marriedBrothers: "Married",
             noSister: "No sister",
             sister: "Sister",
             sisters: "Sisters",
-            marriedSisters: "Married Sisters",
+            marriedSisters: "Married",
             married: "Married",
             educationPlaceholder: "Highest qualification",
             occupationPlaceholder: "Profession / role",
@@ -2477,6 +2688,14 @@
           },
           hi: {
             brandTitle: "शादी के लिए बायोडाटा बनाएँ - निःशुल्क और सुरक्षित",
+            settingsTitle: "सेटिंग्स",
+            languageLabel: "भाषा",
+            themeLabel: "थीम",
+            howToUse: "कैसे उपयोग करें",
+            disclaimerAction: "अस्वीकरण और डेटा की गोपनीयता",
+            backToSettings: "सेटिंग्स पर वापस जाएँ",
+            closeSettings: "सेटिंग्स बंद करें",
+            openSettings: "सेटिंग्स खोलें",
             helpTitle: "कैसे उपयोग करें",
             helpContent:
               "कुछ आसान चरणों में अपनी वैवाहिक प्रोफ़ाइल बनाएँ, भले ही आपको यह पता न हो कि उसमें कौन-सी जानकारी शामिल करनी चाहिए या उसे सही तरीके से कैसे लिखना चाहिए। फ़ॉर्म में अधिकांश विकल्प ड्रॉपडाउन मेनू में दिए गए हैं, इसलिए आपको बहुत कम जानकारी टाइप करनी होगी। आवश्यक विवरण भरें, अपनी पसंद का प्रोफ़ाइल फ़ॉर्मेट चुनें और प्रोफ़ाइल तैयार करें। अधिकांश फ़ॉर्मेट सीधे आपके ब्राउज़र में तैयार होते हैं और आपकी जानकारी किसी सर्वर पर नहीं भेजी जाती। AI-सहायता वाले फ़ॉर्मेट आपकी जानकारी को बेहतर ढंग से लिखी गई प्रोफ़ाइल में बदलने के लिए AI सेवा का उपयोग करते हैं। प्रोफ़ाइल तैयार होने के बाद, आप उसे इमेज या PDF के रूप में सेव कर सकते हैं। यदि आपका डिवाइस और ब्राउज़र अनुमति देता है, तो आप टेक्स्ट को चुनकर कॉपी भी कर सकते हैं।",
@@ -2701,11 +2920,11 @@
             noBrother: "कोई भाई नहीं",
             brother: "भाई",
             brothers: "भाई",
-            marriedBrothers: "विवाहित भाई",
+            marriedBrothers: "विवाहित",
             noSister: "कोई बहन नहीं",
             sister: "बहन",
             sisters: "बहनें",
-            marriedSisters: "विवाहित बहनें",
+            marriedSisters: "विवाहित",
             married: "विवाहित",
             educationPlaceholder: "उच्चतम शैक्षणिक योग्यता",
             occupation: "पेशा",
@@ -2764,7 +2983,7 @@
             hourSelect: "घंटा",
             amPm: ["AM", "PM"],
             generateProfile: "🌟 प्रोफ़ाइल बनाएँ",
-            resetForm: "🔄 फॉर्म साफ (रीसेट) करें",
+            resetForm: "🔄 फॉर्म रीसेट करें",
             copyProfile: "📋 कॉपी करें",
             saveProfile: "💾 सुरक्षित (सेव) करें",
             saveAsImage: "📸 स्क्रीनशॉट लें",
@@ -2825,6 +3044,14 @@
           },
           pa: {
             brandTitle: "ਵਿਆਹ ਲਈ ਪ੍ਰੋਫਾਈਲ ਬਣਾਓ - ਮੁਫ਼ਤ ਅਤੇ ਸੁਰੱਖਿਅਤ",
+            settingsTitle: "ਸੈਟਿੰਗਾਂ",
+            languageLabel: "ਭਾਸ਼ਾ",
+            themeLabel: "ਥੀਮ",
+            howToUse: "ਵਰਤੋਂ ਕਿਵੇਂ ਕਰੀਏ",
+            disclaimerAction: "ਬੇਦਾਅਵਾ ਅਤੇ ਡਾਟਾ ਦੀ ਨਿੱਜਤਾ",
+            backToSettings: "ਸੈਟਿੰਗਾਂ 'ਤੇ ਵਾਪਸ ਜਾਓ",
+            closeSettings: "ਸੈਟਿੰਗਾਂ ਬੰਦ ਕਰੋ",
+            openSettings: "ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ",
             helpTitle: "ਵਰਤੋਂ ਕਿਵੇਂ ਕਰੀਏ",
             helpContent:
               "ਕੁਝ ਸੌਖੇ ਕਦਮਾਂ ਵਿੱਚ ਆਪਣੀ ਵਿਆਹ ਲਈ ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ, ਭਾਵੇਂ ਤੁਹਾਨੂੰ ਇਹ ਪਤਾ ਨਾ ਹੋਵੇ ਕਿ ਇਸ ਵਿੱਚ ਕਿਹੜੀ ਜਾਣਕਾਰੀ ਸ਼ਾਮਲ ਕਰਨੀ ਹੈ ਜਾਂ ਉਸ ਨੂੰ ਸਹੀ ਢੰਗ ਨਾਲ ਕਿਵੇਂ ਲਿਖਣਾ ਹੈ। ਫਾਰਮ ਵਿੱਚ ਜ਼ਿਆਦਾਤਰ ਵਿਕਲਪ ਡ੍ਰੌਪਡਾਊਨ ਮੀਨੂ ਵਿੱਚ ਦਿੱਤੇ ਗਏ ਹਨ, ਇਸ ਲਈ ਤੁਹਾਨੂੰ ਬਹੁਤ ਘੱਟ ਜਾਣਕਾਰੀ ਟਾਈਪ ਕਰਨੀ ਪਵੇਗੀ। ਲੋੜੀਂਦੇ ਵੇਰਵੇ ਭਰੋ, ਆਪਣਾ ਪਸੰਦੀਦਾ ਪ੍ਰੋਫ਼ਾਈਲ ਫਾਰਮੈਟ ਚੁਣੋ ਅਤੇ ਪ੍ਰੋਫ਼ਾਈਲ ਤਿਆਰ ਕਰੋ। ਜ਼ਿਆਦਾਤਰ ਫਾਰਮੈਟ ਸਿੱਧੇ ਤੁਹਾਡੇ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਤਿਆਰ ਹੁੰਦੇ ਹਨ ਅਤੇ ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਕਿਸੇ ਸਰਵਰ 'ਤੇ ਨਹੀਂ ਭੇਜੀ ਜਾਂਦੀ। AI ਦੀ ਮਦਦ ਨਾਲ ਬਣਨ ਵਾਲੇ ਫਾਰਮੈਟ ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ ਨੂੰ ਵਧੀਆ ਢੰਗ ਨਾਲ ਲਿਖੀ ਪ੍ਰੋਫ਼ਾਈਲ ਵਿੱਚ ਬਦਲਣ ਲਈ AI ਸੇਵਾ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਨ। ਪ੍ਰੋਫ਼ਾਈਲ ਤਿਆਰ ਹੋਣ ਤੋਂ ਬਾਅਦ, ਤੁਸੀਂ ਇਸ ਨੂੰ ਇਮੇਜ ਜਾਂ PDF ਦੇ ਰੂਪ ਵਿੱਚ ਸੇਵ ਕਰ ਸਕਦੇ ਹੋ। ਜੇ ਤੁਹਾਡਾ ਡਿਵਾਈਸ ਅਤੇ ਬ੍ਰਾਊਜ਼ਰ ਇਜਾਜ਼ਤ ਦਿੰਦੇ ਹਨ, ਤਾਂ ਤੁਸੀਂ ਟੈਕਸਟ ਨੂੰ ਚੁਣ ਕੇ ਕਾਪੀ ਵੀ ਕਰ ਸਕਦੇ ਹੋ।",
@@ -3049,11 +3276,11 @@
             noBrother: "ਕੋਈ ਭਰਾ ਨਹੀਂ",
             brother: "ਭਰਾ",
             brothers: "ਭਰਾ",
-            marriedBrothers: "ਵਿਆਹੇ ਭਰਾ",
+            marriedBrothers: "ਵਿਆਹੇ",
             noSister: "ਕੋਈ ਭੈਣ ਨਹੀਂ",
             sister: "ਭੈਣ",
             sisters: "ਭੈਣਾਂ",
-            marriedSisters: "ਵਿਆਹੀਆਂ ਭੈਣਾਂ",
+            marriedSisters: "ਵਿਆਹੀਆਂ",
             married: "ਸ਼ਾਦੀਸ਼ੁਦਾ",
             educationPlaceholder: "ਸਭ ਤੋਂ ਉੱਚੀ ਵਿੱਦਿਅਕ ਯੋਗਤਾ",
             occupationPlaceholder: "ਕਿੱਤਾ / ਭੂਮਿਕਾ",
@@ -3111,7 +3338,7 @@
             hourSelect: "ਘੰਟਾ",
             amPm: ["AM", "PM"],
             generateProfile: "🌟 ਪ੍ਰੋਫ਼ਾਈਲ ਬਣਾਓ",
-            resetForm: "🔄 ਫਾਰਮ ਸਾਫ਼ (ਰੀਸੈੱਟ) ਕਰੋ",
+            resetForm: "🔄 ਫਾਰਮ ਰੀਸੈੱਟ ਕਰੋ",
             copyProfile: "📋 ਕਾਪੀ ਕਰੋ",
             saveProfile: "💾 ਸੁਰੱਖਿਅਤ (ਸੇਵ) ਕਰੋ",
             saveAsImage: "📸 ਸਕ੍ਰੀਨਸ਼ਾਟ ਲਓ",
@@ -3218,9 +3445,9 @@
           father: "👱🏻‍♂️",
           siblings: "👫🏻",
           brothers: "🙋🏻",
-          marriedBrothers: "🙋🏻💍",
+          marriedBrothers: "💍",
           sisters: "🙋🏻‍♀️",
-          marriedSisters: "🙋🏻‍♀️💍",
+          marriedSisters: "💍",
           familyType: "🏡",
           familyStatus: "💎",
           education: "🎓",
@@ -3385,6 +3612,9 @@
           document.title = t.brandTitle;
           [
             "brandTitle",
+            "settingsTitle",
+            "languageLabel",
+            "themeLabel",
             "helpTitle",
             "helpContent",
             "disclaimerTitle",
@@ -3399,6 +3629,13 @@
             "secPartnerPreferences",
             "secContactDetails",
           ].forEach((id) => $(id) && ($(id).textContent = t[id]));
+          $("showHelp").querySelector("span:last-child").textContent =
+            t.howToUse;
+          $("showDisclaimer").querySelector("span:last-child").textContent =
+            t.disclaimerAction;
+          $("backToSettingsLabel").textContent = t.backToSettings;
+          $("closeSettings").setAttribute("aria-label", t.closeSettings);
+          $("settingsTrigger").setAttribute("aria-label", t.openSettings);
           document.querySelectorAll("[data-label]").forEach((el) => {
             const k = el.dataset.label;
             const required = el.querySelector(".req");
@@ -3513,19 +3750,9 @@
           setOptions("sisters", null, siblingCounts);
           updateMarriedSiblingOptions("brothers", "marriedBrothers");
           updateMarriedSiblingOptions("sisters", "marriedSisters");
-          setOptions("profileFormatTop", null, t.profileFormatOptions);
           setOptions("profileFormatBottom", null, t.profileFormatOptions);
-          $("generateProfileTop").textContent = t.generateProfile;
-          $("resetFormTop").textContent = t.resetForm;
-          // $("copyProfileTop").textContent = t.copyProfile;
-          // $("saveProfileTop").textContent = t.saveProfile;
-          $("saveAsImageTop").textContent = t.saveAsImage;
-          $("saveAsPDFTop").textContent = t.saveAsPDF;
-          $("updateProfileTop").textContent = t.updateProfile;
           $("generateProfileBottom").textContent = t.generateProfile;
           $("resetFormBottom").textContent = t.resetForm;
-          // $("copyProfileBottom").textContent = t.copyProfile;
-          // $("saveProfileBottom").textContent = t.saveProfile;
           $("saveAsImageBottom").textContent = t.saveAsImage;
           $("saveAsPDFBottom").textContent = t.saveAsPDF;
           $("updateProfileBottom").textContent = t.updateProfile;
@@ -4096,6 +4323,75 @@
           );
         }
 
+        function showSettingsView() {
+          $("settingsView").classList.remove("hidden");
+          $("drawerInfo").classList.add("hidden");
+          $("helpInfo").classList.add("hidden");
+          $("disclaimerInfo").classList.add("hidden");
+        }
+
+        function openSettings() {
+          showSettingsView();
+          $("settingsDrawer").classList.add("open");
+          $("settingsDrawer").setAttribute("aria-hidden", "false");
+          $("settingsTrigger").setAttribute("aria-expanded", "true");
+          $("closeSettings").focus();
+        }
+
+        function closeSettings() {
+          $("settingsDrawer").classList.remove("open");
+          $("settingsDrawer").setAttribute("aria-hidden", "true");
+          $("settingsTrigger").setAttribute("aria-expanded", "false");
+          $("settingsTrigger").focus();
+        }
+
+        function showDrawerInfo(infoId) {
+          $("settingsView").classList.add("hidden");
+          $("drawerInfo").classList.remove("hidden");
+          $("helpInfo").classList.toggle("hidden", infoId !== "helpInfo");
+          $("disclaimerInfo").classList.toggle(
+            "hidden",
+            infoId !== "disclaimerInfo",
+          );
+          $("backToSettings").focus();
+        }
+
+        $("settingsTrigger").addEventListener("click", openSettings);
+        $("closeSettings").addEventListener("click", closeSettings);
+        $("settingsBackdrop").addEventListener("click", closeSettings);
+        $("showHelp").addEventListener("click", () =>
+          showDrawerInfo("helpInfo"),
+        );
+        $("showDisclaimer").addEventListener("click", () =>
+          showDrawerInfo("disclaimerInfo"),
+        );
+        $("backToSettings").addEventListener("click", () => {
+          showSettingsView();
+          $("closeSettings").focus();
+        });
+        document.addEventListener("keydown", (event) => {
+          if (!$("settingsDrawer").classList.contains("open")) return;
+          if (event.key === "Escape") {
+            closeSettings();
+            return;
+          }
+          if (event.key !== "Tab") return;
+          const focusable = [
+            ...$("settingsDrawer").querySelectorAll(
+              "button:not([disabled]), input:not([disabled])",
+            ),
+          ].filter((el) => el.offsetParent !== null);
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        });
+
         function createProfile() {
           if (!$("profileForm").reportValidity()) {
             return;
@@ -4119,7 +4415,7 @@
             screenMode = -1;
           }
 
-          document.querySelectorAll(".grid.form-controls").forEach((el) => {
+          document.querySelectorAll(".grid.actions-wrapper").forEach((el) => {
             isFormView ? el.classList.remove("four") : el.classList.add("four");
             el.querySelector("[id^=generateProfile]").style.display = isFormView
               ? "block"
@@ -4227,13 +4523,10 @@
             .from(profile)
             .save();
         }
-        $("saveAsImageTop").addEventListener("click", () => saveAsImage());
         $("saveAsImageBottom").addEventListener("click", () => saveAsImage());
 
-        $("saveAsPDFTop").addEventListener("click", () => saveAsPDF());
         $("saveAsPDFBottom").addEventListener("click", () => saveAsPDF());
 
-        $("updateProfileTop").addEventListener("click", () => toggleView(true));
         $("updateProfileBottom").addEventListener("click", () =>
           toggleView(true),
         );
@@ -4245,26 +4538,24 @@
 
           toggleView();
 
-          const profileFormatTop = $("profileFormatTop");
+          const profileFormatBottom = $("profileFormatBottom");
 
-          if (profileFormatTop.value === "") {
-            profileFormatTop.value = "0";
+          if (profileFormatBottom.value === "") {
+            profileFormatBottom.value = "0";
             screenMode = 0;
-            profileFormatTop.dispatchEvent(
+            profileFormatBottom.dispatchEvent(
               new Event("change", { bubbles: true }),
             );
           } else {
-            screenMode = Number(profileFormatTop.value);
+            screenMode = Number(profileFormatBottom.value);
           }
 
           screenMode <= 2 ? createProfile() : generateAIProfile();
         }
 
-        $("generateProfileTop").addEventListener("click", generateProfile);
         $("generateProfileBottom").addEventListener("click", generateProfile);
 
         function handleProfileFormatChange(evt) {
-          $("profileFormatTop").value = evt.target.value;
           $("profileFormatBottom").value = evt.target.value;
 
           screenMode = Number(evt.target.value);
@@ -4275,10 +4566,6 @@
           screenMode <= 2 ? createProfile() : generateAIProfile();
         }
 
-        $("profileFormatTop").addEventListener(
-          "change",
-          handleProfileFormatChange,
-        );
         $("profileFormatBottom").addEventListener(
           "change",
           handleProfileFormatChange,
